@@ -22,6 +22,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 - Cabeçalho só com Início, Sobre, Definições. Início tem quatro blocos: Treinar (`/treinar` → Teste `/teste`, Atividade `/treino`, Código `/codigo`), Professor (`/professor`), Tutorial (`/tutorial`, saltável, aviso na primeira visita) e Observatório.
 - O cenário (redação/laboratório) escolhe-se no briefing de cada atividade e no ecrã de início de cada teste ou prova (`src/componentes/SeletorContexto.tsx`), não no cabeçalho.
+- Painel: `criarTarefas(parametros, rotulos)` + `sortearTarefas(config)`; cada tarefa tem `repor` (estado aplicado ao começar, para nunca começar cumprida). O interruptor do Ágora chama onChange de forma diferida com o valor antigo: o invólucro `Interruptor` calcula o novo valor a partir de `checked`.
 - Sessões de professor sem servidor próprio: `src/codigo/codigo.ts` codifica nível, atividades, tempo alargado e identificação no código `XXXX·YYYYYY` (alfabeto sem 0/O/1/I/L, carácter de verificação). `src/paginas/Professor.tsx` cria o código e regista a sessão no ponto de recolha (hash do token privado + email opcional, confirmado por ligação); a ligação privada `/professor/resultados#s=…&t=…` lê os resultados. `src/paginas/Codigo.tsx` é o lado do aluno (identificação, cenário, sequência). As tentativas levam `codigo` e `aluno` na telemetria; o Apps Script envia emails (MailApp) por tentativa ou em resumo diário.
 - `Sequencia` e `PrimeiraPagina` (`src/paginas/Teste.tsx`) servem o teste por ciclo e a prova do professor.
 - Vídeo da página Sobre: `VITE_VIDEO_SOBRE` (embed YouTube/Vimeo ou .mp4); vazio mostra um espaço reservado.
@@ -36,6 +37,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ### Motor de atividades
 
+- Aleatoriedade: `src/motor/aleatorio.ts` (`escolher`, `misturar`, `amostra`, `baralharOpcoes`, `semente` para testes). **Todas as atividades variam por tentativa**: tarefas/alvos (Painel), cópias com erros geradas (Revisão, `gerarCopia`), árvores de pastas, separadores, histórico e artigos (Arquivo), pessoa fictícia (Cartão), itens (Fecho, Simulador), textos alternativos (Notícia, Paginação, Encontra, Matemática). Conteúdo extra só entra na avaliação, nunca na prática (para não se repetir). Cada gerador tem um teste com várias sementes.
 - Contratos em `src/motor/tipos.ts`: `Nivel` 1–5, `Ciclo` (c1, c2, c3, es → nível 1–4), `Dominio`, `DefinicaoAtividade<C>` (`niveis: Record<Nivel, C>`, `pratica(c)`, `Componente`, `dica(metricas)`), faixas e estrelas.
 - `src/motor/Atividade.tsx` corre as etapas intro → prática → avaliação → resultado e grava a tentativa. O percurso do teste (`src/paginas/Teste.tsx`) reutiliza-o com `aoConcluir`.
 - Cada atividade é uma pasta em `src/atividades/<slug>/` com configuração dos 5 níveis, componente e pontuação pura testável. Registo em `src/atividades/index.ts`. Atividades por fazer ficam em `embreve.tsx` com `disponivel: false`.
@@ -56,7 +58,7 @@ Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às
 
 ## Estado (2026-10-02)
 
-- v0.1.0: fase 1 feita e alargada (7 atividades × 5 níveis, teste por ciclo, treino, dois contextos, dois formatos com tema claro/escuro, resultados locais, telemetria anónima + Observatório + `/admin`, páginas de texto). Ágora carregado dinamicamente.
-- Por fazer: atividades `arquivo`, `cartao`, `fecho`, `simulador`; códigos de turma sem servidor (configuração codificada no código; agregados por código); auditoria WCAG e piloto. Contas, certificados e Supabase **removidos do plano**. Lovable não usado: o projeto foi criado localmente e ligado ao GitHub diretamente.
+- v1.1.0 (2026-10-02): as 11 atividades jogáveis a 5 níveis e com variabilidade; carimbos e cartão (`/cartao`, `src/paginas/CartaoCarimbos.tsx`); auditoria `npm run a11y` (Playwright + axe-core, usa o Chrome do sistema; relatório em `docs/AUDITORIA_A11Y.md`, 0 violações); protocolo `docs/PILOTO.md`; `scripts/recalibrar.mjs` (lê o CSV da folha `tentativa`, escreve `docs/RECALIBRACAO.md`). O Simulador conta a dobrar no resultado do teste.
+- Por fazer: piloto em escolas e recalibração com dados reais; revisão manual com leitor de ecrã. A auditoria automática só vê o primeiro ecrã de cada atividade.
 - Para publicar: configurar o Apps Script (telemetria/README.md), pôr o URL em `.env`, `npm run build`, copiar `dist/` para o alojamento com fallback SPA para `index.html`.
 - Limiares e alvos de pontuação são estimativas iniciais; recalibrar com piloto.

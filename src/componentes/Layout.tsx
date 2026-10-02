@@ -57,6 +57,7 @@ export function Layout() {
             Ensaio às Competências Digitais · v{VERSAO} · Ferramenta gratuita desenvolvida por {AUTORIA} para uso pelo Estado Português · <NavLink to="/licenca">Licença</NavLink>
           </span>
           <NavLink to="/resultados">Os meus resultados</NavLink>
+          <NavLink to="/cartao">O meu cartão</NavLink>
           <NavLink to="/tutorial">Tutorial</NavLink>
           <NavLink to="/privacidade">Privacidade</NavLink>
           <NavLink to="/acessibilidade">Acessibilidade</NavLink>

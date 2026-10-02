@@ -225,7 +225,9 @@ export function Tutorial() {
       </section>
       <div className="flex items-center gap-2 justify-center" role="tablist" aria-label="Passos do tutorial">
         {PASSOS.map((p, k) => (
-          <button key={p.titulo} type="button" role="tab" aria-selected={k === i} aria-label={`Passo ${k + 1}: ${p.titulo}`} onClick={() => setI(k)} style={{ width: k === i ? 28 : 12, height: 12, borderRadius: 99, border: 0, cursor: "pointer", background: k === i ? "var(--acento)" : "var(--tecla-borda)", padding: 0, transition: "width .2s" }} />
+          <button key={p.titulo} type="button" role="tab" aria-selected={k === i} aria-label={`Passo ${k + 1}: ${p.titulo}`} onClick={() => setI(k)} style={{ minWidth: 28, height: 28, border: 0, cursor: "pointer", background: "transparent", padding: 0, display: "grid", placeItems: "center" }}>
+            <span aria-hidden="true" style={{ display: "block", width: k === i ? 28 : 12, height: 12, borderRadius: 99, background: k === i ? "var(--acento)" : "var(--tecla-borda)", transition: "width .2s" }} />
+          </button>
         ))}
       </div>
       <div className="flex gap-3 flex-wrap justify-between">

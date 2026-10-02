@@ -1,4 +1,4 @@
-export const VERSAO = "1.0.0";
+export const VERSAO = "1.1.0";
 export const DATA_VERSAO = "2026-10-02";
 export const AUTORIA = "Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)";
 /** Repositório público do código-fonte. Vazio = a ligação não aparece. */

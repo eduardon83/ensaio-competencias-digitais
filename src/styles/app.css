@@ -40,7 +40,7 @@
 
 /* ── Tokens do formato Mosaico (Ágora Design System, gov.pt) ─────────────── */
 :root[data-formato="mosaico"] {
-  --fundo: #f7f8fa; --superficie: #ffffff; --tinta: #2b363c; --suave: #64718b; --linha: #e1e4ea;
+  --fundo: #f7f8fa; --superficie: #ffffff; --tinta: #2b363c; --suave: #4f5b70; --linha: #e1e4ea;
   --acento: #034ad8; --acento-tinta: #ffffff; --acento-suave: #e5eeff;
   --marca: #fff3bf; --marca-tinta: #3a2f00;
   --tecla: #f1f3f8; --tecla-borda: #bac0cc;
@@ -184,7 +184,7 @@ mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; bord
 .simulado { border: 1px solid var(--linha); border-radius: var(--raio); overflow: hidden; background: var(--superficie); }
 .simulado .topo { display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--linha); background: var(--tecla); flex-wrap: wrap; }
 .separador { padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; background: transparent; font: inherit; color: var(--tinta); cursor: pointer; min-height: 44px; }
-.separador[aria-selected="true"] { border-bottom-color: var(--acento); font-weight: 700; color: var(--acento); }
+.separador[aria-selected="true"], .separador[data-ativo="true"] { border-bottom-color: var(--acento); font-weight: 700; color: var(--acento); }
 .modal-fundo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 50; padding: 16px; }
 .modal { background: var(--superficie); border-radius: var(--raio); padding: 20px; max-width: 480px; width: 100%; border: 1px solid var(--linha); color: var(--tinta); }
 .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--tinta); color: var(--fundo); padding: 10px 16px; border-radius: 10px; display: flex; gap: 12px; align-items: center; z-index: 60; max-width: calc(100vw - 32px); }
@@ -222,6 +222,16 @@ table.tabela th { font-family: var(--fonte-titulo); font-size: .8rem; letter-spa
    navegação e as ligações clicadas com o rato. Mantemos o contorno só para quem navega com teclado. */
 :root :focus:not(:focus-visible) { outline: none; }
 :root main[tabindex="-1"]:focus { outline: none; }
+
+/* Ligações dentro de texto distinguem-se também pelo sublinhado, não só pela cor (WCAG 1.4.1). */
+a { text-decoration: underline; text-underline-offset: 2px; }
+a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header a.no-underline { text-decoration: none; }
+
+/* Mosaico em tema escuro: os campos do Ágora mantêm texto escuro; forçamos as cores dos tokens. */
+:root[data-formato="mosaico"][data-tema="escuro"] :is(input, select, textarea) { color: var(--tinta); background-color: var(--superficie); }
+@media (prefers-color-scheme: dark) {
+  :root[data-formato="mosaico"][data-tema="auto"] :is(input, select, textarea) { color: var(--tinta); background-color: var(--superficie); }
+}
 
 /* Mosaico: deixar os componentes Ágora mandar nos controlos */
 :root[data-formato="mosaico"] body { font-size: 1rem; }

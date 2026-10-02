@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.1.0 · outubro de 2026
 
 
 O QUE É
@@ -51,7 +51,14 @@ Disponíveis, cada uma com cinco níveis:
 - Encontra no Texto / Encontra no Manual: procurar factos num texto longo, com títulos, índice, tabela e procura.
 - Escrita Matemática: escrever no computador frações, potências, raízes, desigualdades, índices, somatórios e integrais, e reconhecer notações.
 
-Em preparação: O Arquivo (pastas e navegação), Cartão de Imprensa (formulários), Fecho de Edição (gestão do tempo) e Simulador de Prova.
+- O Arquivo: abrir, mover e mudar o nome de ficheiros em pastas, mudar e fechar separadores, usar o histórico e chegar ao fim de uma página longa.
+- Cartão de Imprensa / Cartão de Acesso: preencher um formulário a partir de uma ficha, com formatos portugueses, e corrigir os erros de validação.
+- Fecho de Edição / Fim da Sessão: muitas perguntas curtas com relógio global e tempo sugerido por secção (mede o ritmo).
+- Simulador de Prova: uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora e confirmação antes de submeter. No teste, conta a dobrar.
+
+Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repetir não seja decorar.
+
+Carimbos: cada competência dá um carimbo a partir de 85 pontos. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".
 
 Cada atividade começa com um briefing e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (50, 75 e 90 pontos) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
 
@@ -61,7 +68,8 @@ ACESSIBILIDADE
 - Dois aspetos à escolha em Definições: Mosaico (predefinido), o Ágora Design System da AMA usado nos serviços públicos digitais, e Original (editorial). Ambos têm tema claro e escuro.
 - Texto grande, tempo alargado (×1,25, ×1,5 ou ×2, registado como acomodação) e funcionamento completo só com teclado.
 - Tudo o que se arrasta tem alternativa por toque ou teclado.
-- Objetivo: WCAG 2.2 nível AA (EN 301 549). A página Acessibilidade tem um guia para quem desenvolve e para quem encomenda provas digitais.
+- Objetivo: WCAG 2.2 nível AA (EN 301 549). A auditoria automática (npm run a11y) passa sem problemas em todas as páginas e atividades, nos dois aspetos e nos dois temas. Falta a revisão manual com leitor de ecrã.
+- A página Acessibilidade tem um guia para quem desenvolve e para quem encomenda provas digitais.
 
 
 DADOS E PRIVACIDADE
@@ -92,6 +100,10 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm run typecheck    verificação de tipos
   npm test             testes das pontuações, conteúdos, códigos e notação matemática
   npm run build        ficheiros finais em dist/
+  npm run a11y         auditoria de acessibilidade (com npm run dev a correr); relatório em docs/AUDITORIA_A11Y.md
+  node scripts/recalibrar.mjs tentativa.csv   sugestões de recalibração a partir da folha de estatísticas
+
+Piloto em escolas: protocolo em docs/PILOTO.md.
 
 Arquitetura, convenções e estado do projeto: AGENTS.md. Resumo da especificação: docs/ESPECIFICACAO.md.
 

@@ -223,7 +223,9 @@ export function PrimeiraPagina({ tentativas, ciclo, titulo, nivel, codigo, aluno
     const d = porSlug(t.atividade)?.dominio ?? "todas";
     porDominio[d] = t.pontuacao;
   }
-  const global = limitar(tentativas.reduce((s, t) => s + t.pontuacao, 0) / Math.max(1, tentativas.length));
+  // Média das atividades; o Simulador de Prova conta a dobrar, porque combina as outras competências.
+  const peso = (t: Tentativa) => (t.atividade === "simulador" ? 2 : 1);
+  const global = limitar(tentativas.reduce((s, t) => s + peso(t) * t.pontuacao, 0) / Math.max(1, tentativas.reduce((s, t) => s + peso(t), 0)));
   const faixa = faixaDe(global);
   const guardado = useMemo(() => repositorioLocal.guardarTeste({ ciclo, pontuacaoGlobal: global, faixa: faixa.nome, porDominio, tentativas: tentativas.map((t) => t.id), codigo, aluno }), []); // eslint-disable-line react-hooks/exhaustive-deps
   const maisFraca = Object.entries(porDominio).sort((a, b) => a[1] - b[1])[0];

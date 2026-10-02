@@ -108,7 +108,7 @@ export function Acessibilidade() {
       <section className="cartao p-5 grid gap-2">
         <h2 className="text-xl">Declaração de acessibilidade deste sítio</h2>
         <p className="m-0 text-sm">
-          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. Auditoria e passagem com leitor de ecrã previstas para a fase final. Problemas de acessibilidade: contactar a Kendir Studios. O aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Original usa componentes próprios com os mesmos requisitos. Ambos têm tema claro e escuro.
+          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. A auditoria automática (axe-core, regras WCAG 2.2 A e AA) não encontrou problemas nas páginas e atividades, nos dois aspetos e nos dois temas; falta a revisão manual com leitor de ecrã. Problemas de acessibilidade: contactar a Kendir Studios. O aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Original usa componentes próprios com os mesmos requisitos. Ambos têm tema claro e escuro.
         </p>
       </section>
     </div>
@@ -150,9 +150,9 @@ export function Sobre() {
       <section className="grid gap-2">
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
-          <li>Versão atual: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
-          <li>Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados.</li>
-          <li>Backlog: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa, auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
+          <li>Versão atual: motor de atividades, as 11 atividades jogáveis a 5 níveis, com tarefas, textos e alvos sorteados em cada tentativa, teste por ciclo, treino, carimbos e cartão de imprensa, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados; auditoria automática de acessibilidade (WCAG 2.2 AA); protocolo de piloto e script de recalibração dos limiares.</li>
+          <li>Backlog: piloto em escolas, recalibração dos limiares com os dados do piloto, revisão manual de acessibilidade com leitor de ecrã.</li>
         </ul>
       </section>
       <p className="m-0">

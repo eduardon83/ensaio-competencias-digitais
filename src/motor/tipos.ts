@@ -27,10 +27,10 @@ export interface DefCiclo {
   atividades: string[]; // slugs, pela ordem do percurso
 }
 export const CICLOS: DefCiclo[] = [
-  { id: "c1", nome: "1.º ciclo", anos: "1.º a 4.º ano", nivel: 1, duracao: "≈ 15 min", atividades: ["painel", "paginacao", "noticia", "revisao", "encontra"] },
-  { id: "c2", nome: "2.º ciclo", anos: "5.º e 6.º ano", nivel: 2, duracao: "≈ 20 min", atividades: ["painel", "noticia", "paginacao", "teclas", "encontra", "matematica"] },
-  { id: "c3", nome: "3.º ciclo", anos: "7.º a 9.º ano", nivel: 3, duracao: "≈ 30 min", atividades: ["noticia", "painel", "revisao", "paginacao", "teclas", "encontra", "matematica"] },
-  { id: "es", nome: "Ensino Superior", anos: "Licenciatura, mestrado", nivel: 4, duracao: "≈ 35 min", atividades: ["noticia", "painel", "revisao", "paginacao", "teclas", "encontra", "matematica"] },
+  { id: "c1", nome: "1.º ciclo", anos: "1.º a 4.º ano", nivel: 1, duracao: "≈ 20 min", atividades: ["painel", "paginacao", "noticia", "revisao", "encontra", "simulador"] },
+  { id: "c2", nome: "2.º ciclo", anos: "5.º e 6.º ano", nivel: 2, duracao: "≈ 30 min", atividades: ["painel", "noticia", "cartao", "paginacao", "teclas", "encontra", "matematica", "simulador"] },
+  { id: "c3", nome: "3.º ciclo", anos: "7.º a 9.º ano", nivel: 3, duracao: "≈ 45 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "simulador"] },
+  { id: "es", nome: "Ensino Superior", anos: "Licenciatura, mestrado", nivel: 4, duracao: "≈ 50 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "simulador"] },
 ];
 export function cicloPorId(id: string): DefCiclo | undefined {
   return CICLOS.find((c) => c.id === id);

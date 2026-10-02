@@ -434,7 +434,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
         )}
         <nav aria-label="Secções" className="flex gap-1 px-3 pt-2 flex-wrap">
           {rot.secoes.map((s) => (
-            <button key={s.id} type="button" className="separador" aria-selected={estado.secao === s.id && !estado.artigoAberto} role="tab" onClick={() => alterar({ secao: s.id, artigoAberto: false, usouCaminho: false })}>
+            <button key={s.id} type="button" className="separador" aria-current={estado.secao === s.id && !estado.artigoAberto ? "page" : undefined} data-ativo={estado.secao === s.id && !estado.artigoAberto} onClick={() => alterar({ secao: s.id, artigoAberto: false, usouCaminho: false })}>
               {s.nome}
             </button>
           ))}

@@ -1,6 +1,6 @@
 {
   "name": "ensaio-competencias-digitais",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -10,7 +10,8 @@
     "build": "tsc --noEmit -p . && vite build",
     "preview": "vite preview --port 5180",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit -p ."
+    "typecheck": "tsc --noEmit -p .",
+    "a11y": "node scripts/auditoria-a11y.mjs"
   },
   "dependencies": {
     "@ama-pt/agora-design-system": "^4.0.1",

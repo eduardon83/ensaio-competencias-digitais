@@ -143,7 +143,7 @@ export function Treinar() {
         ))}
       </nav>
       <p className="text-center text-sm m-0" style={{ color: "var(--suave)" }}>
-        Primeira vez? Vê o <Link to="/tutorial">tutorial</Link>.
+        Primeira vez? Vê o <Link to="/tutorial">tutorial</Link>. Os teus carimbos estão no <Link to="/cartao">cartão</Link>.
       </p>
     </div>
   );

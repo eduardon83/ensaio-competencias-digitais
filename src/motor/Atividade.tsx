@@ -202,6 +202,11 @@ function Resultado({
           <h2 id="res-t" className="text-2xl">
             {tentativa.pontuacao >= CARIMBO_MINIMO ? `Ganhaste o ${ctx.resultado.carimbo} de ${NOME_DOMINIO[definicao.dominio].toLowerCase()}.` : tentativa.pontuacao >= 50 ? "Bom trabalho." : "Um bom começo."}
           </h2>
+          {tentativa.pontuacao >= CARIMBO_MINIMO && (
+            <p className="m-0">
+              <Link to="/cartao">Ver o meu {ctx.resultado.cartao}</Link>
+            </p>
+          )}
           {recorde && melhorAnterior && <p className="m-0 font-bold" style={{ color: "var(--certo)" }}>Novo recorde pessoal (antes: {melhorAnterior.pontuacao}).</p>}
           <p className="m-0">
             <strong>Dica:</strong> {dica}
