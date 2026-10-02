@@ -6,6 +6,46 @@ import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao, useTemporizador } from "../../motor/util";
 import { Botao, BotaoRadio } from "../../ui";
 import { corresponde } from "./normalizar";
+import { amostra, baralharOpcoes } from "../../motor/aleatorio";
+
+/** Itens extra por nível: juntam-se aos do nível e em cada tentativa sorteia-se o mesmo número de itens. */
+const EXTRA: Record<1 | 2 | 3 | 4 | 5, Item[]> = {
+  1: [
+    { tipo: "escrever", mostrar: "15 + 6 = 21", aceita: ["15+6=21"] },
+    { tipo: "escrever", mostrar: "8 × 3 = 24", aceita: ["8×3=24", "8*3=24"] },
+    { tipo: "escrever", mostrar: "3,75", aceita: ["3,75"] },
+    { tipo: "escrever", mostrar: "18 ÷ 3 = 6", aceita: ["18÷3=6", "18/3=6", "18:3=6"] },
+    { tipo: "escolher", pergunta: "Que símbolo usas para multiplicar, se não tiveres ×?", opcoes: ["*", "x", "+"], correta: 0 },
+  ],
+  2: [
+    { tipo: "escrever", mostrar: "frac{2}{5}", aceita: ["2/5"] },
+    { tipo: "escrever", mostrar: "10^{2} = 100", aceita: ["10^2=100", "10²=100"] },
+    { tipo: "escrever", mostrar: "sqrt{49} = 7", aceita: ["sqrt(49)=7", "√49=7", "√(49)=7"] },
+    { tipo: "escrever", mostrar: "12,5 %", aceita: ["12,5%"] },
+    { tipo: "escolher", pergunta: "Como se escreve “metade” em fração, num teclado?", opcoes: ["1/2", "1:2:", "½/"], correta: 0 },
+  ],
+  3: [
+    { tipo: "escrever", mostrar: "3x − 7 = 2x + 1", aceita: ["3x-7=2x+1"] },
+    { tipo: "escrever", mostrar: "x ≥ −2", aceita: ["x>=-2", "x≥-2"] },
+    { tipo: "escrever", mostrar: "frac{x}{4} = 3", aceita: ["x/4=3"] },
+    { tipo: "escrever", mostrar: "(a + b)^{2}", aceita: ["(a+b)^2", "(a+b)²"] },
+    { tipo: "escolher", pergunta: "Que símbolo significa «diferente de»?", opcoes: ["≠", "≈", "≡"], correta: 0 },
+  ],
+  4: [
+    { tipo: "escrever", mostrar: "frac{1}{x + 1}", aceita: ["1/(x+1)"] },
+    { tipo: "escrever", mostrar: "2^{n + 1}", aceita: ["2^(n+1)"] },
+    { tipo: "escrever", mostrar: "cos(θ) = frac{√3}{2}", aceita: ["cos(theta)=sqrt(3)/2", "cos(θ)=√3/2", "cos(theta)=√3/2", "cos(θ)=sqrt(3)/2"] },
+    { tipo: "escrever", mostrar: "y_{n} = 2y_{n−1}", aceita: ["y_n=2y_(n-1)"] },
+    { tipo: "escolher", pergunta: "Qual é a escrita linear de «2 elevado a n mais 1» (o expoente é n+1)?", opcoes: ["2^(n+1)", "2^n+1", "2(n+1)"], correta: 0 },
+  ],
+  5: [
+    { tipo: "escrever", mostrar: "∑_{k=0}^{10} k^{2}", aceita: ["sum_(k=0)^10k^2", "sum(k=0,10)k^2", "∑_(k=0)^(10)k^2", "sum_{k=0}^{10}k^2"] },
+    { tipo: "escrever", mostrar: "f'(x) = 2x", aceita: ["f'(x)=2x"] },
+    { tipo: "escrever", mostrar: "lim_{n → ∞} frac{1}{n} = 0", aceita: ["lim_(n->inf)1/n=0", "lim(n->inf)1/n=0", "lim_(n->∞)1/n=0"] },
+    { tipo: "escrever", mostrar: "x ∈ ]−1, 1[", aceita: ["x in ]-1,1[", "x∈]-1,1[", "x in (-1,1)", "x∈(-1,1)"] },
+    { tipo: "escolher", pergunta: "Qual destas notações representa o intervalo aberto de 0 a 1?", opcoes: ["]0, 1[", "[0, 1]", "[0, 1["], correta: 0 },
+  ],
+};
 
 type Item =
   | { tipo: "escrever"; mostrar: string; aceita: string[]; ajuda?: string }
@@ -156,7 +196,12 @@ function render(s: string): ReactNode[] {
   return saida;
 }
 
-function Matematica({ config, extensaoTempo, aoTerminar }: PropsAtividade<ConfigMatematica>) {
+function Matematica({ config, nivel, modo, extensaoTempo, aoTerminar }: PropsAtividade<ConfigMatematica>) {
+  // Na avaliação, sorteia o mesmo número de itens do nível a partir dos itens do nível + extra, por ordem aleatória.
+  const [itens] = useState<Item[]>(() => {
+    const pool = modo === "avaliacao" ? [...config.itens, ...(EXTRA[nivel] ?? [])] : config.itens;
+    return amostra(pool, config.itens.length).map((it) => (it.tipo === "escolher" ? { ...it, ...baralharOpcoes(it.opcoes, it.correta) } : it));
+  });
   const [indice, setIndice] = useState(0);
   const [valor, setValor] = useState("");
   const [escolha, setEscolha] = useState<number | null>(null);
@@ -167,7 +212,7 @@ function Matematica({ config, extensaoTempo, aoTerminar }: PropsAtividade<Config
   const [terminou, setTerminou] = useState(false);
   const campo = useRef<HTMLInputElement>(null);
   const { decorridoExato } = useTemporizador(!terminou, null);
-  const item = config.itens[indice];
+  const item = itens[indice];
   const [mostrarAjuda, setMostrarAjuda] = useState(false);
 
   useEffect(() => {
@@ -183,11 +228,11 @@ function Matematica({ config, extensaoTempo, aoTerminar }: PropsAtividade<Config
       setEscolha(null);
       setTentativa(0);
       const prox = indice + 1;
-      if (prox >= config.itens.length) {
+      if (prox >= itens.length) {
         setTerminou(true);
         const ms = decorridoExato();
         const fator = Math.min(1, (config.tempoReferenciaSeg * 1000 * extensaoTempo) / Math.max(1, ms));
-        aoTerminar({ pontuacao: limitar(100 * (0.8 * (certos.current / config.itens.length) + 0.2 * fator)), duracaoMs: ms, metricas: { certos: certos.current, itens: config.itens.length, usouPaleta: usouPaleta.current, segundos: Math.round(ms / 1000) } });
+        aoTerminar({ pontuacao: limitar(100 * (0.8 * (certos.current / itens.length) + 0.2 * fator)), duracaoMs: ms, metricas: { certos: certos.current, itens: itens.length, usouPaleta: usouPaleta.current, segundos: Math.round(ms / 1000) } });
         return;
       }
       setIndice(prox);
@@ -234,7 +279,7 @@ function Matematica({ config, extensaoTempo, aoTerminar }: PropsAtividade<Config
 
   return (
     <div className="grid gap-4">
-      <Instrucao numero={indice + 1} total={config.itens.length}>
+      <Instrucao numero={indice + 1} total={itens.length}>
         {feedback === "certo" ? "Certo." : feedback === "errado" && tentativa === 1 && item.tipo === "escrever" ? "Ainda não. Tens mais uma tentativa." : feedback === "errado" ? "Errado. Passamos ao seguinte." : item.tipo === "escrever" ? "Escreve esta expressão no campo, em notação de teclado." : item.pergunta}
       </Instrucao>
 

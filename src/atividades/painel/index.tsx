@@ -8,7 +8,11 @@ import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
 import { Botao, BotaoRadio, CaixaVerificacao, ForcarClaro, Interruptor, Seletor } from "../../ui";
 
 export interface ConfigPainel {
-  tarefas: string[]; // ids em TAREFAS
+  /** Tarefas possíveis neste nível; em cada tentativa sorteiam-se `n`, por ordem aleatória, uma por grupo de controlo. */
+  pool: string[];
+  n: number;
+  /** Nível mais alto: instruções sem pistas (sem "☰", sem indicar onde fica o controlo). */
+  dificil?: boolean;
 }
 
 export interface Estado {
@@ -67,7 +71,7 @@ interface Rotulos {
   sitio: string;
   secoes: { id: string; nome: string }[];
   separadores: { id: string; nome: string }[];
-  artigo: string;
+  artigos: string[]; // título do artigo aberto em cada secção (índices 1..3)
   distritoRotulo: string;
   acordeoes: { id: string; titulo: string; texto: string }[];
   menu: string[];
@@ -90,14 +94,15 @@ const ROTULOS: Record<Contexto, Rotulos> = {
       { id: "cultura", nome: "Cultura" },
       { id: "opiniao", nome: "Opinião" },
     ],
-    artigo: "Torneio de futebol: final no sábado",
+    artigos: ["", "Torneio de futebol: final no sábado", "Concerto de primavera esgota bilhetes", "Novo horário da cantina a partir de segunda"],
     distritoRotulo: "Distrito da escola",
     acordeoes: [
       { id: "horario", titulo: "Horário", texto: "A redação abre às 13h30 e fecha às 17h00." },
       { id: "entregas", titulo: "Entregas", texto: "Os textos entram até quinta-feira." },
       { id: "fotos", titulo: "Fotografias", texto: "Fotos em JPG, mínimo 1200 px." },
+      { id: "assinaturas", titulo: "Assinaturas", texto: "Todos os textos levam o nome do autor." },
     ],
-    menu: ["Início", "Edições", "Contactos", "Sobre o jornal"],
+    menu: ["Início", "Edições", "Contactos", "Arquivo", "Sobre o jornal"],
     rascunho: "Rascunho: Visita ao museu",
     pesquisaAlvo: "horário",
     volumeRotulo: "Volume do podcast",
@@ -115,14 +120,15 @@ const ROTULOS: Record<Contexto, Rotulos> = {
       { id: "cultura", nome: "Resultados" },
       { id: "opiniao", nome: "Notas" },
     ],
-    artigo: "Amostra A-104: leitura concluída",
+    artigos: ["", "Amostra A-104: leitura concluída", "Ensaio de pH: resultados da semana", "Microscópio MX-200 de volta à bancada"],
     distritoRotulo: "Distrito do laboratório",
     acordeoes: [
       { id: "horario", titulo: "Horário", texto: "O laboratório abre às 9h00 e fecha às 18h00." },
       { id: "entregas", titulo: "Reagentes", texto: "Pedidos até quarta-feira." },
       { id: "fotos", titulo: "Segurança", texto: "Bata e óculos obrigatórios." },
+      { id: "assinaturas", titulo: "Resíduos", texto: "Cada resíduo vai para o contentor da sua cor." },
     ],
-    menu: ["Início", "Sessões", "Contactos", "Sobre o laboratório"],
+    menu: ["Início", "Sessões", "Contactos", "Inventário", "Sobre o laboratório"],
     rascunho: "Rascunho: Registo da amostra B-7",
     pesquisaAlvo: "horário",
     volumeRotulo: "Volume do alarme",
@@ -131,90 +137,150 @@ const ROTULOS: Record<Contexto, Rotulos> = {
 
 export interface Tarefa {
   id: string;
-  instrucao: (r: Rotulos) => string;
-  preparar?: (e: Estado) => Estado;
+  instrucao: string;
+  /** Estado aplicado ao começar a tarefa, para que nunca comece já cumprida (os controlos são partilhados). */
+  repor: Partial<Estado>;
   verificar: (e: Estado) => boolean;
 }
 
-export const TAREFAS: Record<string, Tarefa> = {
-  notificacoes: { id: "notificacoes", instrucao: () => "Ativa as notificações.", verificar: (e) => e.notificacoes },
-  distrito: { id: "distrito", instrucao: () => "Escolhe o distrito do Porto.", verificar: (e) => e.distrito === "porto" },
-  fechar: { id: "fechar", instrucao: () => "Fecha esta janela.", preparar: (e) => ({ ...e, janelaAberta: true }), verificar: (e) => !e.janelaAberta },
-  pagina3: { id: "pagina3", instrucao: () => "Vai para a página 3 dos resultados.", preparar: (e) => ({ ...e, pagina: 1 }), verificar: (e) => e.pagina === 3 },
-  caminho: {
-    id: "caminho",
-    instrucao: (r) => `Volta à secção ${r.secoes[1].nome} usando o caminho no topo (o "rasto" de ligações).`,
-    preparar: (e) => ({ ...e, secao: "desporto", artigoAberto: true, usouCaminho: false }),
-    verificar: (e) => e.usouCaminho && !e.artigoAberto && e.secao === "desporto",
-  },
-  newsletter: { id: "newsletter", instrucao: () => "Marca a opção para receber a newsletter.", verificar: (e) => e.newsletter },
-  tamanho: { id: "tamanho", instrucao: () => "Escolhe o tamanho de texto Grande.", verificar: (e) => e.tamanho === "grande" },
-  separador: { id: "separador", instrucao: (r) => `Abre o separador ${r.separadores[1].nome}.`, preparar: (e) => ({ ...e, separador: "noticias" }), verificar: (e) => e.separador === "cultura" },
-  menu: { id: "menu", instrucao: () => "Abre o menu (☰) e escolhe Contactos.", preparar: (e) => ({ ...e, menuAberto: false, menuEscolha: null }), verificar: (e) => e.menuEscolha === "Contactos" },
-  acordeao: { id: "acordeao", instrucao: () => "Nas perguntas frequentes, abre a secção Horário.", preparar: (e) => ({ ...e, acordeao: null }), verificar: (e) => e.acordeao === "horario" },
-  enviar: {
-    id: "enviar",
-    instrucao: () => "Carrega em Enviar. Se não conseguires, descobre porquê e resolve.",
-    preparar: (e) => ({ ...e, termos: false, enviado: false, tentouEnviarBloqueado: false }),
-    verificar: (e) => e.enviado,
-  },
-  desfazer: {
-    id: "desfazer",
-    instrucao: () => "Apaga o rascunho e depois anula a ação com o botão da mensagem que aparece.",
-    preparar: (e) => ({ ...e, rascunhoApagado: false, desfeito: false }),
-    verificar: (e) => e.desfeito,
-  },
-  volume: { id: "volume", instrucao: (r) => `Põe o ${r.volumeRotulo.toLowerCase()} em 50 (entre 45 e 55 conta).`, preparar: (e) => ({ ...e, volume: 20 }), verificar: (e) => e.volume >= 45 && e.volume <= 55 },
-  pesquisar: { id: "pesquisar", instrucao: (r) => `Pesquisa "${r.pesquisaAlvo}" na caixa de pesquisa e carrega em Enter.`, preparar: (e) => ({ ...e, pesquisa: "", pesquisaEnviada: null }), verificar: (e) => (e.pesquisaEnviada ?? "").toLowerCase().includes("hor") },
-  ligacao: { id: "ligacao", instrucao: (r) => `Abre a ligação "${r.menu[3]}" no rodapé (é uma ligação, não um botão).`, preparar: (e) => ({ ...e, ligacaoAberta: null }), verificar: (e) => e.ligacaoAberta === "sobre" },
-  data: { id: "data", instrucao: () => "No campo de data, escolhe o dia 15 de qualquer mês.", preparar: (e) => ({ ...e, data: "" }), verificar: (e) => /-15$/.test(e.data) },
-};
+const DISTRITOS = ["Aveiro", "Braga", "Coimbra", "Faro", "Lisboa", "Porto", "Setúbal", "Viseu"].map((d) => ({ valor: d.toLowerCase(), texto: d }));
+const SEPARADORES = ["noticias", "cultura", "opiniao"];
+const SECOES = ["inicio", "desporto", "cultura", "escola"];
+const ACORDEOES = ["horario", "entregas", "fotos", "assinaturas"];
+export const BLOCOS_DEFINICOES = ["notificacoes", "distrito", "tamanho", "newsletter", "volume", "data"];
+const NOME_TAMANHO: Record<string, string> = { pequeno: "Pequeno", medio: "Médio", grande: "Grande" };
 
-export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
-  1: { tarefas: ["notificacoes", "fechar", "newsletter", "pagina3", "separador", "tamanho", "notificacoes_off", "volume"] },
-  2: { tarefas: ["notificacoes", "distrito", "fechar", "pagina3", "tamanho", "separador", "caminho", "newsletter", "acordeao", "volume"] },
-  3: { tarefas: ["notificacoes", "distrito", "fechar", "pagina3", "caminho", "tamanho", "separador", "acordeao", "enviar", "data", "pesquisar", "volume", "newsletter", "ligacao"] },
-  4: { tarefas: ["menu", "distrito", "fechar", "pagina3", "caminho", "tamanho", "separador", "acordeao", "enviar", "desfazer", "data", "pesquisar", "volume", "ligacao", "newsletter", "notificacoes"] },
-  5: { tarefas: ["menu", "desfazer", "enviar", "caminho", "data", "pesquisar", "acordeao", "distrito", "fechar", "pagina3", "separador", "ligacao", "volume", "tamanho", "notificacoes", "newsletter", "menu_sobre", "notificacoes_off"] },
-};
-
-// Variantes ligeiras
-TAREFAS.notificacoes_off = { id: "notificacoes_off", instrucao: () => "Desativa as notificações.", preparar: (e) => ({ ...e, notificacoes: true }), verificar: (e) => !e.notificacoes };
-TAREFAS.menu_sobre = { id: "menu_sobre", instrucao: (r) => `Abre o menu (☰) e escolhe "${r.menu[3]}".`, preparar: (e) => ({ ...e, menuAberto: false, menuEscolha: null }), verificar: (e) => e.menuEscolha?.startsWith("Sobre") === true };
-
-/** Estado que garante que a tarefa NÃO começa já cumprida (os controlos são partilhados entre tarefas). */
-const REPOR: Record<string, Partial<Estado>> = {
-  notificacoes: { notificacoes: false },
-  notificacoes_off: { notificacoes: true },
-  distrito: { distrito: "" },
-  fechar: { janelaAberta: true },
-  pagina3: { pagina: 1 },
-  caminho: { secao: "desporto", artigoAberto: true, usouCaminho: false },
-  newsletter: { newsletter: false },
-  tamanho: { tamanho: "medio" },
-  separador: { separador: "noticias" },
-  menu: { menuAberto: false, menuEscolha: null },
-  menu_sobre: { menuAberto: false, menuEscolha: null },
-  acordeao: { acordeao: null },
-  enviar: { termos: false, enviado: false },
-  desfazer: { rascunhoApagado: false, desfeito: false },
-  volume: { volume: 20 },
-  pesquisar: { pesquisa: "", pesquisaEnviada: null },
-  ligacao: { ligacaoAberta: null },
-  data: { data: "" },
-};
-export function prepararTarefa(t: Tarefa | undefined, e: Estado): Estado {
-  if (!t) return e;
-  let n = t.preparar ? t.preparar(e) : e;
-  if (t.verificar(n)) n = { ...n, ...(REPOR[t.id] ?? {}) };
-  return n;
+/** Alvos e disposição sorteados em cada tentativa. */
+export interface Parametros {
+  distrito: number;
+  pagina: number; // 2..5
+  tamanho: "pequeno" | "grande";
+  separador: 1 | 2;
+  acordeao: number; // 0..3
+  volume: number;
+  secao: 1 | 2 | 3;
+  menu: number; // 1..4
+  dia: number;
+  pesquisa: number; // índice da pergunta frequente cujo título se pesquisa
+  trocarColunas: boolean;
+  ordemDefinicoes: string[];
+  ordemFaq: number[];
 }
 
-const DISTRITOS = ["Aveiro", "Braga", "Coimbra", "Faro", "Lisboa", "Porto", "Setúbal", "Viseu"].map((d) => ({ valor: d.toLowerCase(), texto: d }));
+function escolher<T>(l: readonly T[], r: () => number): T {
+  return l[Math.floor(r() * l.length)];
+}
+function baralharCom<T>(l: T[], r: () => number): T[] {
+  const a = [...l];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(r() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+export function gerarParametros(r: () => number = Math.random): Parametros {
+  return {
+    distrito: Math.floor(r() * DISTRITOS.length),
+    pagina: escolher([2, 3, 4, 5], r),
+    tamanho: escolher(["pequeno", "grande"] as const, r),
+    separador: escolher([1, 2] as const, r),
+    acordeao: Math.floor(r() * 4),
+    volume: escolher([40, 50, 60, 70, 80], r),
+    secao: escolher([1, 2, 3] as const, r),
+    menu: escolher([1, 2, 3, 4], r),
+    dia: escolher([3, 8, 12, 15, 21, 27], r),
+    pesquisa: Math.floor(r() * 4),
+    trocarColunas: r() < 0.5,
+    ordemDefinicoes: baralharCom(BLOCOS_DEFINICOES, r),
+    ordemFaq: baralharCom([0, 1, 2, 3], r),
+  };
+}
+
+function semAcentos(t: string): string {
+  return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+}
+
+/** Tarefas desta tentativa: alvos vêm dos parâmetros; nomes vêm do cenário; `dificil` retira as pistas. */
+export function criarTarefas(p: Parametros, r: Rotulos, dificil = false): Record<string, Tarefa> {
+  const d = DISTRITOS[p.distrito];
+  const menu = r.menu[p.menu];
+  const pesquisa = r.acordeoes[p.pesquisa].titulo;
+  const t = (id: string, repor: Partial<Estado>, verificar: (e: Estado) => boolean, instrucao: string): Tarefa => ({ id, repor, verificar, instrucao });
+  return {
+    termos: t("termos", { termos: false }, (e) => e.termos, "Marca a caixa “Li e aceito os termos”."),
+    notificacoes: t("notificacoes", { notificacoes: false }, (e) => e.notificacoes, "Ativa as notificações."),
+    notificacoes_off: t("notificacoes_off", { notificacoes: true }, (e) => !e.notificacoes, "Desativa as notificações."),
+    distrito: t("distrito", { distrito: "" }, (e) => e.distrito === d.valor, `Escolhe o distrito de ${d.texto}.`),
+    fechar: t("fechar", { janelaAberta: true }, (e) => !e.janelaAberta, dificil ? "Fecha a janela que apareceu." : "Fecha esta janela (procura o botão Fechar ou clica fora dela)."),
+    pagina: t("pagina", { pagina: 1 }, (e) => e.pagina === p.pagina, `Vai para a página ${p.pagina} dos resultados.`),
+    caminho: t(
+      "caminho",
+      { secao: SECOES[p.secao], artigoAberto: true, usouCaminho: false },
+      (e) => e.usouCaminho && !e.artigoAberto && e.secao === SECOES[p.secao],
+      dificil ? `Volta à lista da secção ${r.secoes[p.secao].nome} sem usar as secções do topo.` : `Volta à secção ${r.secoes[p.secao].nome} usando o caminho por cima do artigo (o “rasto” de ligações).`,
+    ),
+    newsletter: t("newsletter", { newsletter: false }, (e) => e.newsletter, "Marca a opção para receber a newsletter."),
+    newsletter_off: t("newsletter_off", { newsletter: true }, (e) => !e.newsletter, "Deixa de receber a newsletter."),
+    tamanho: t("tamanho", { tamanho: "medio" }, (e) => e.tamanho === p.tamanho, `Escolhe o tamanho de texto ${NOME_TAMANHO[p.tamanho]}.`),
+    separador: t("separador", { separador: "noticias" }, (e) => e.separador === SEPARADORES[p.separador], `Abre o separador ${r.separadores[p.separador].nome}.`),
+    menu: t("menu", { menuAberto: false, menuEscolha: null }, (e) => e.menuEscolha === menu, dificil ? `Usa o menu principal para abrir “${menu}”.` : `Abre o menu (☰) e escolhe “${menu}”.`),
+    acordeao: t("acordeao", { acordeao: null }, (e) => e.acordeao === ACORDEOES[p.acordeao], `Nas perguntas frequentes, abre a secção “${r.acordeoes[p.acordeao].titulo}”.`),
+    enviar: t("enviar", { termos: false, enviado: false }, (e) => e.enviado, dificil ? "Envia o formulário dos termos." : "Carrega em Enviar. Se não conseguires, descobre porquê e resolve."),
+    desfazer: t("desfazer", { rascunhoApagado: false, desfeito: false }, (e) => e.desfeito, dificil ? "Apaga o rascunho e anula a ação." : "Apaga o rascunho e depois anula a ação com o botão da mensagem que aparece."),
+    volume: t("volume", { volume: 20 }, (e) => Math.abs(e.volume - p.volume) <= 5, `Põe o ${r.volumeRotulo.toLowerCase()} em ${p.volume} (até 5 a mais ou a menos conta).`),
+    pesquisar: t(
+      "pesquisar",
+      { pesquisa: "", pesquisaEnviada: null },
+      (e) => semAcentos(e.pesquisaEnviada ?? "").includes(semAcentos(pesquisa).slice(0, 4)),
+      `Pesquisa “${pesquisa.toLowerCase()}” na caixa de pesquisa e carrega em Enter.`,
+    ),
+    ligacao: t("ligacao", { ligacaoAberta: null }, (e) => e.ligacaoAberta === "sobre", dificil ? `Abre “${r.menu[4]}” no fundo da página.` : `Abre a ligação “${r.menu[4]}” no rodapé (é uma ligação, não um botão).`),
+    data: t("data", { data: "" }, (e) => new RegExp(`-${String(p.dia).padStart(2, "0")}$`).test(e.data), `No campo de data, escolhe o dia ${p.dia} de qualquer mês.`),
+  };
+}
+
+/** Tarefas que usam o mesmo controlo: só sai uma de cada grupo por tentativa. */
+const GRUPOS: Record<string, string> = { notificacoes_off: "notificacoes", newsletter_off: "newsletter", termos: "enviar" };
+
+export function sortearTarefas(c: ConfigPainel, r: () => number = Math.random): string[] {
+  const escolhidas: string[] = [];
+  const grupos = new Set<string>();
+  for (const id of baralharCom(c.pool, r)) {
+    const g = GRUPOS[id] ?? id;
+    if (grupos.has(g)) continue;
+    grupos.add(g);
+    escolhidas.push(id);
+    if (escolhidas.length >= c.n) break;
+  }
+  return escolhidas;
+}
+
+const BASE1 = ["notificacoes", "notificacoes_off", "fechar", "newsletter", "newsletter_off", "pagina", "separador", "tamanho", "volume", "acordeao"];
+const BASE2 = [...BASE1, "distrito", "caminho"];
+const BASE3 = [...BASE2, "enviar", "data", "pesquisar", "ligacao"];
+const BASE4 = [...BASE3, "menu", "desfazer"];
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
+  1: { pool: BASE1, n: 6 },
+  2: { pool: BASE2, n: 9 },
+  3: { pool: BASE3, n: 12 },
+  4: { pool: BASE4, n: 14 },
+  5: { pool: BASE4, n: 16, dificil: true },
+};
+
+export function prepararTarefa(t: Tarefa | undefined, e: Estado): Estado {
+  return t ? { ...e, ...t.repor } : e;
+}
 
 function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) {
   const rot = ROTULOS[contexto];
-  const tarefas = useMemo(() => config.tarefas.map((id) => TAREFAS[id]).filter(Boolean), [config.tarefas]);
+  // Alvos, ordem das tarefas e disposição sorteados uma vez por tentativa.
+  const [param] = useState(() => gerarParametros());
+  const [ids] = useState(() => sortearTarefas(config));
+  const tarefas = useMemo(() => {
+    const mapa = criarTarefas(param, rot, !!config.dificil);
+    return ids.map((id) => mapa[id]).filter(Boolean);
+  }, [param, rot, ids, config.dificil]);
   const [indice, setIndice] = useState(0);
   const [estado, setEstadoReact] = useState<Estado>(() => prepararTarefa(tarefas[0], INICIAL));
   // Estado atual numa ref, para verificar a tarefa fora do "updater" do React (que corre duas vezes em StrictMode).
@@ -276,6 +342,40 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
 
   if (!tarefa) return null;
 
+  const blocosDefinicoes: Record<string, React.ReactNode> = {
+    notificacoes: (
+      <Interruptor id="sim-notif" rotulo="Notificações" checked={estado.notificacoes} onChange={(e) => alterar({ notificacoes: e.target.checked })} />
+    ),
+    distrito: (
+      <Seletor id="sim-distrito" rotulo={rot.distritoRotulo} opcoes={DISTRITOS} vazio="Escolhe um distrito" value={estado.distrito} onChange={(e) => alterar({ distrito: e.target.value })} />
+    ),
+    tamanho: (
+      <fieldset className="grid gap-1 border-0 p-0 m-0">
+                    <legend className="font-bold text-sm">Tamanho do texto</legend>
+                    {["pequeno", "medio", "grande"].map((t) => (
+                      <BotaoRadio key={t} id={`sim-tam-${t}`} name="sim-tam" rotulo={t === "medio" ? "Médio" : t[0].toUpperCase() + t.slice(1)} checked={estado.tamanho === t} onChange={() => alterar({ tamanho: t })} />
+                    ))}
+                  </fieldset>
+    ),
+    newsletter: (
+      <CaixaVerificacao id="sim-news" rotulo="Quero receber a newsletter" checked={estado.newsletter} onChange={(e) => alterar({ newsletter: e.target.checked })} />
+    ),
+    volume: (
+      <div className="campo">
+                    <label htmlFor="sim-vol">
+                      {rot.volumeRotulo}: {estado.volume}
+                    </label>
+                    <input id="sim-vol" type="range" min={0} max={100} step={5} value={estado.volume} onChange={(e) => setEstado((s) => ({ ...s, volume: Number(e.target.value) }))} onPointerUp={() => alterar({})} onKeyUp={() => alterar({})} />
+                  </div>
+    ),
+    data: (
+      <div className="campo">
+                    <label htmlFor="sim-data">Data</label>
+                    <input id="sim-data" type="date" value={estado.data} onChange={(e) => alterar({ data: e.target.value })} />
+                  </div>
+    ),
+  };
+  const artigo = rot.artigos[Math.max(1, SECOES.indexOf(estado.secao))];
   const endereco = contexto === "laboratorio" ? "laboratorio3.escola.pt/consola" : "orecreio.escola.pt";
   return (
     <div className="grid gap-4">
@@ -288,7 +388,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
         </div>
         <div className="text-xl font-bold flex items-center gap-3" style={{ fontFamily: "var(--fonte-titulo)" }}>
           <span aria-hidden="true">{feedback ? "✓" : "→"}</span>
-          <span>{feedback ?? tarefa.instrucao(rot)}</span>
+          <span>{feedback ?? tarefa.instrucao}</span>
         </div>
       </div>
 
@@ -352,12 +452,12 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
                 </button>
               </>
             )}
-            {estado.artigoAberto && <> › {rot.artigo}</>}
+            {estado.artigoAberto && <> › {artigo}</>}
           </nav>
 
           {estado.artigoAberto ? (
             <article className="cartao p-4">
-              <h3 className="text-xl">{rot.artigo}</h3>
+              <h3 className="text-xl">{artigo}</h3>
               <p>Texto do artigo. Para voltar à secção, usa o caminho no topo.</p>
             </article>
           ) : (
@@ -370,31 +470,15 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
                 ))}
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                <section className="grid gap-3" aria-label="Definições">
+                <section className="grid gap-3 content-start" aria-label="Definições" style={{ order: param.trocarColunas ? 2 : 1 }}>
                   <h3 className="text-base">Definições</h3>
-                  <Interruptor id="sim-notif" rotulo="Notificações" checked={estado.notificacoes} onChange={(e) => alterar({ notificacoes: e.target.checked })} />
-                  <Seletor id="sim-distrito" rotulo={rot.distritoRotulo} opcoes={DISTRITOS} vazio="Escolhe um distrito" value={estado.distrito} onChange={(e) => alterar({ distrito: e.target.value })} />
-                  <fieldset className="grid gap-1 border-0 p-0 m-0">
-                    <legend className="font-bold text-sm">Tamanho do texto</legend>
-                    {["pequeno", "medio", "grande"].map((t) => (
-                      <BotaoRadio key={t} id={`sim-tam-${t}`} name="sim-tam" rotulo={t === "medio" ? "Médio" : t[0].toUpperCase() + t.slice(1)} checked={estado.tamanho === t} onChange={() => alterar({ tamanho: t })} />
-                    ))}
-                  </fieldset>
-                  <CaixaVerificacao id="sim-news" rotulo="Quero receber a newsletter" checked={estado.newsletter} onChange={(e) => alterar({ newsletter: e.target.checked })} />
-                  <div className="campo">
-                    <label htmlFor="sim-vol">
-                      {rot.volumeRotulo}: {estado.volume}
-                    </label>
-                    <input id="sim-vol" type="range" min={0} max={100} step={5} value={estado.volume} onChange={(e) => setEstado((s) => ({ ...s, volume: Number(e.target.value) }))} onPointerUp={() => alterar({})} onKeyUp={() => alterar({})} />
-                  </div>
-                  <div className="campo">
-                    <label htmlFor="sim-data">Data</label>
-                    <input id="sim-data" type="date" value={estado.data} onChange={(e) => alterar({ data: e.target.value })} />
-                  </div>
+                  {param.ordemDefinicoes.map((b) => (
+                    <div key={b}>{blocosDefinicoes[b]}</div>
+                  ))}
                 </section>
-                <section className="grid gap-3" aria-label="Conteúdo">
+                <section className="grid gap-3 content-start" aria-label="Conteúdo" style={{ order: param.trocarColunas ? 1 : 2 }}>
                   <h3 className="text-base">Perguntas frequentes</h3>
-                  {rot.acordeoes.map((a) => (
+                  {param.ordemFaq.map((i) => rot.acordeoes[i]).map((a) => (
                     <div key={a.id} className="cartao">
                       <h4 className="m-0">
                         <button type="button" className="w-full text-left p-3 font-bold" style={{ background: "transparent", border: 0, color: "inherit", font: "inherit", minHeight: 44, cursor: "pointer" }} aria-expanded={estado.acordeao === a.id} aria-controls={`sim-ac-${a.id}`} onClick={() => alterar({ acordeao: estado.acordeao === a.id ? null : a.id })}>
@@ -457,7 +541,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
               alterar({ ligacaoAberta: "sobre" });
             }}
           >
-            {rot.menu[3]}
+            {rot.menu[4]}
           </a>
           <button type="button" className="ligacao-simples" onClick={() => alterar({ ligacaoAberta: "botao" })}>
             Contactar
@@ -510,7 +594,7 @@ export const definicao = definir<ConfigPainel>({
   duracao: "3 a 5 min",
   disponivel: true,
   niveis: NIVEIS,
-  pratica: () => ({ tarefas: ["notificacoes", "pagina3"] }),
+  pratica: () => ({ pool: ["termos"], n: 1 }),
   Componente: Painel,
   dica: (m) => {
     if (Number(m.penalizacaoTempo) >= 4) return "Quando não encontras um controlo, lê os rótulos de cima para baixo: menus, separadores e caminho no topo, definições ao lado.";

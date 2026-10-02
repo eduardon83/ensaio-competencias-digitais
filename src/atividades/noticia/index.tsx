@@ -12,7 +12,7 @@ export interface ConfigNoticia {
   segundos: number;
   alvoWpm: number;
   /** Ronda de teclado numérico (níveis 3+): valores a introduzir numa tabela. */
-  teclado?: { valores: string[]; segundos: number };
+  teclado?: { quantidade: number; decimais?: boolean; negativos?: boolean; segundos: number };
 }
 
 // [conteúdo Kendir] textos provisórios; substituir por notícias curtas / excertos com direitos tratados.
@@ -65,7 +65,7 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
         "A planta B recebeu 30% mais luz do que a A (8 h por dia). Ao fim de 14 dias media 9,5 cm (custo do ensaio: 0,80 €). Relatório para bio@escola.pt, até sexta.",
       ],
     },
-    teclado: { valores: ["12", "45", "308", "7", "1250", "64", "99", "410", "23", "875"], segundos: 60 },
+    teclado: { quantidade: 10, segundos: 60 },
   },
   4: {
     segundos: 180,
@@ -82,7 +82,7 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
         "Conforme Duarte e Neves (2024, p. 15), o pH ideal é 7,2 ± 0,2. A calibração do equipamento fica registada em https://lab.campus.pt/calibracao e as falhas devem ser comunicadas a tecnico@campus.pt.",
       ],
     },
-    teclado: { valores: ["12,5", "308", "45,75", "7", "1250", "64,2", "99", "410,1", "23", "875", "0,5", "19", "2024", "33,3", "8"], segundos: 75 },
+    teclado: { quantidade: 15, decimais: true, segundos: 75 },
   },
   5: {
     segundos: 180,
@@ -99,9 +99,22 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
         "“O caderno é a memória da experiência”, insistiu Cardoso (2023). Regra: data, hora (hh:mm), operador e lote em cada página; 98,5% dos registos de 2025 cumpriram-na. Modelo em caderno_modelo.pdf; dúvidas para qualidade@lab.campus.pt.",
       ],
     },
-    teclado: { valores: ["12,5", "-308", "45,75", "7", "1250", "-64,2", "99", "410,1", "23", "875", "0,5", "19", "2024", "33,3", "8", "-1,25", "600", "72", "4,04", "91"], segundos: 90 },
+    teclado: { quantidade: 20, decimais: true, negativos: true, segundos: 90 },
   },
 };
+
+/** Valores aleatórios para a ronda de teclado numérico (novos em cada tentativa, sem repetidos). */
+export function gerarValoresTeclado(c: NonNullable<ConfigNoticia["teclado"]>, r: () => number = Math.random): string[] {
+  const vistos = new Set<string>();
+  while (vistos.size < c.quantidade) {
+    const digitos = 1 + Math.floor(r() * 4);
+    let v = String(Math.floor(r() * 10 ** digitos));
+    if (c.decimais && r() < 0.45) v += "," + String(1 + Math.floor(r() * 99)).replace(/0$/, "");
+    if (c.negativos && r() < 0.25 && v !== "0") v = "-" + v;
+    vistos.add(v);
+  }
+  return [...vistos];
+}
 
 type Etapa = "texto" | "pergunta_teclado" | "teclado";
 
@@ -236,7 +249,8 @@ function RondaTeclado({
   aoResponderPergunta: (temTecladoNumerico: boolean) => void;
   aoTerminar: (corretos: number, total: number, ms: number, usouNumpad: boolean) => void;
 }) {
-  const [valores, setValores] = useState<string[]>(() => config.valores.map(() => ""));
+  const [alvos] = useState(() => gerarValoresTeclado(config));
+  const [valores, setValores] = useState<string[]>(() => alvos.map(() => ""));
   const [primeiraTecla, setPrimeiraTecla] = useState<"numpad" | "linha" | null>(null);
   const [pergunta, setPergunta] = useState(false);
   const [terminou, setTerminou] = useState(false);
@@ -252,14 +266,14 @@ function RondaTeclado({
   function terminar() {
     if (terminou) return;
     setTerminou(true);
-    const corretos = valores.filter((v, i) => v.trim().replace(".", ",") === config.valores[i]).length;
-    aoTerminar(corretos, config.valores.length, decorridoExato(), primeiraTecla === "numpad");
+    const corretos = valores.filter((v, i) => v.trim().replace(".", ",") === alvos[i]).length;
+    aoTerminar(corretos, alvos.length, decorridoExato(), primeiraTecla === "numpad");
   }
 
   if (perguntar) {
     return (
       <div className="grid gap-4">
-        <Instrucao>Segunda ronda: introduzir {config.valores.length} valores numa tabela com o teclado numérico.</Instrucao>
+        <Instrucao>Segunda ronda: introduzir {alvos.length} valores numa tabela com o teclado numérico.</Instrucao>
         <div className="cartao p-4 grid gap-3">
           <p>Vais precisar do teclado numérico (as teclas à direita, com os números em bloco). Tens esse teclado?</p>
           <div className="flex gap-3 flex-wrap">
@@ -301,7 +315,7 @@ function RondaTeclado({
           </tr>
         </thead>
         <tbody>
-          {config.valores.map((v, i) => (
+          {alvos.map((v, i) => (
             <tr key={i}>
               <td className="tabular-nums" style={{ fontFamily: "var(--fonte-mono)" }}>
                 {v}

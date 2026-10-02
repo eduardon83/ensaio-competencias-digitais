@@ -7,6 +7,7 @@ import { TECLA_CTRL } from "../../preferencias/preferencias";
 import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao, useTemporizador } from "../../motor/util";
 import { Botao, BotaoRadio } from "../../ui";
+import { baralharOpcoes, escolher, misturar } from "../../motor/aleatorio";
 
 interface Secao {
   titulo: string;
@@ -256,9 +257,142 @@ function realcar(texto: string, termo: string): ReactNode {
   return partes.map((p, i) => (p.toLowerCase() === termo.toLowerCase() ? <mark key={i}>{p}</mark> : p));
 }
 
-function Encontra({ config, contexto, extensaoTempo, aoTerminar }: PropsAtividade<ConfigEncontra>) {
-  const texto = config.texto[contexto];
-  const perguntas = config.perguntas[contexto];
+// Textos alternativos por nível e cenário: em cada tentativa (avaliação) sorteia-se entre o principal e estes.
+type Variante = { texto: Texto; perguntas: Pergunta[] };
+const EXTRA: Partial<Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Variante[]>>> = {
+  1: {
+    jornal: [
+      {
+        texto: {
+          titulo: "A visita à quinta",
+          secoes: [
+            { titulo: "A viagem", paragrafos: ["Na sexta-feira, a turma do 2.º B foi visitar uma quinta. Foram de autocarro e a viagem demorou meia hora."] },
+            { titulo: "Os animais", paragrafos: ["Na quinta viram vacas, ovelhas e um cavalo branco chamado Trovão. O Tomé deu cenouras aos coelhos."] },
+            { titulo: "O regresso", paragrafos: ["Antes de voltar, cada aluno plantou uma alface. A Diretora Graça vai escrever sobre a visita no jornal."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Em que dia foi a visita?", opcoes: ["Sexta-feira", "Segunda-feira", "Sábado"], correta: 0 },
+          { pergunta: "Como se chama o cavalo?", opcoes: ["Relâmpago", "Trovão", "Branco"], correta: 1 },
+          { pergunta: "Quem deu cenouras aos coelhos?", opcoes: ["A Lia", "O Tomé", "A Diretora Graça"], correta: 1 },
+          { pergunta: "O que plantou cada aluno?", opcoes: ["Uma alface", "Uma árvore", "Uma flor"], correta: 0 },
+        ],
+      },
+    ],
+    laboratorio: [
+      {
+        texto: {
+          titulo: "A experiência das cores",
+          secoes: [
+            { titulo: "O material", paragrafos: ["Usámos três copos com água, corante azul, corante amarelo e uma colher para cada copo."] },
+            { titulo: "O que fizemos", paragrafos: ["No primeiro copo pusemos azul. No segundo pusemos amarelo. No terceiro juntámos os dois corantes."] },
+            { titulo: "O que vimos", paragrafos: ["A água do terceiro copo ficou verde. A Doutora Inês disse que o azul e o amarelo fazem verde."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Quantos copos usámos?", opcoes: ["Dois", "Três", "Quatro"], correta: 1 },
+          { pergunta: "Que corante foi para o primeiro copo?", opcoes: ["Amarelo", "Azul", "Vermelho"], correta: 1 },
+          { pergunta: "De que cor ficou o terceiro copo?", opcoes: ["Verde", "Laranja", "Roxo"], correta: 0 },
+          { pergunta: "Quem explicou a mistura das cores?", opcoes: ["O Rui", "A Marta", "A Doutora Inês"], correta: 2 },
+        ],
+      },
+    ],
+  },
+  2: {
+    jornal: [
+      {
+        texto: {
+          titulo: "Regras do clube de fotografia",
+          secoes: [
+            { titulo: "Encontros", paragrafos: ["O clube reúne às terças e quintas, das 14h00 às 15h30, na sala 8. Em dias de chuva, as saídas são trocadas por aulas de edição."] },
+            { titulo: "Material", paragrafos: ["A escola empresta 4 máquinas fotográficas. Cada sócio pode levar uma máquina por 3 dias. Os cartões de memória devem ser devolvidos vazios."] },
+            { titulo: "Concurso", paragrafos: ["Em maio há um concurso com o tema “A minha rua”. Cada sócio pode enviar até 2 fotografias. O prémio é uma visita a uma redação de jornal."] },
+            { titulo: "Responsável", paragrafos: ["O clube é coordenado pelo professor Artur. As inscrições fazem-se na biblioteca até ao fim de outubro."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Em que dias reúne o clube?", opcoes: ["Segundas e quartas", "Terças e quintas", "Sextas"], correta: 1 },
+          { pergunta: "Quantas máquinas empresta a escola?", opcoes: ["2", "3", "4"], correta: 2 },
+          { pergunta: "Por quantos dias se pode levar uma máquina?", opcoes: ["3 dias", "1 semana", "2 dias"], correta: 0 },
+          { pergunta: "Qual é o tema do concurso?", opcoes: ["A minha escola", "A minha rua", "A natureza"], correta: 1 },
+          { pergunta: "Onde se fazem as inscrições?", opcoes: ["Na secretaria", "Na sala 8", "Na biblioteca"], correta: 2 },
+        ],
+      },
+    ],
+    laboratorio: [
+      {
+        texto: {
+          titulo: "Guia da horta da escola",
+          secoes: [
+            { titulo: "Canteiros", paragrafos: ["A horta tem 6 canteiros. Cada turma cuida de um canteiro durante o ano letivo. O canteiro 6 é das ervas aromáticas."] },
+            { titulo: "Rega", paragrafos: ["No verão rega-se ao fim da tarde. No inverno rega-se só duas vezes por semana. Cada canteiro precisa de 10 litros por rega."] },
+            { titulo: "Ferramentas", paragrafos: ["As ferramentas estão no armário verde. Depois de usadas, lavam-se com água e guardam-se secas."] },
+            { titulo: "Colheita", paragrafos: ["Os legumes colhidos vão para a cantina. O técnico Rui regista o peso de cada colheita no caderno da horta."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Quantos canteiros tem a horta?", opcoes: ["4", "6", "10"], correta: 1 },
+          { pergunta: "Quando se rega no verão?", opcoes: ["De manhã", "Ao fim da tarde", "Ao meio-dia"], correta: 1 },
+          { pergunta: "Quantos litros precisa cada canteiro por rega?", opcoes: ["6 litros", "10 litros", "2 litros"], correta: 1 },
+          { pergunta: "Onde estão as ferramentas?", opcoes: ["No armário verde", "Na cantina", "No caderno da horta"], correta: 0 },
+          { pergunta: "Para onde vão os legumes colhidos?", opcoes: ["Para casa", "Para a cantina", "Para o laboratório"], correta: 1 },
+        ],
+      },
+    ],
+  },
+  3: {
+    jornal: [
+      {
+        texto: {
+          titulo: "Programa do festival de cinema escolar",
+          secoes: [
+            { titulo: "Apresentação", paragrafos: ["O festival vai na 5.ª edição e decorre no auditório da escola de 3 a 7 de março. Este ano foram recebidas 46 curtas-metragens de 12 escolas do distrito."] },
+            { titulo: "Sessões", paragrafos: ["Há duas sessões por dia, às 10h00 e às 15h00. A sessão de quarta-feira à tarde é dedicada a filmes de animação."], tabela: { cabecalho: ["Dia", "Tema da sessão das 15h00"], linhas: [["Segunda", "Documentário"], ["Terça", "Ficção"], ["Quarta", "Animação"], ["Quinta", "Filmes de telemóvel"], ["Sexta", "Cerimónia de prémios"]] } },
+            { titulo: "Júri", paragrafos: ["O júri tem 5 membros: dois professores, dois alunos do secundário e uma realizadora convidada, Marta Lobo."] },
+            { titulo: "Regras", paragrafos: ["Cada filme pode ter no máximo 8 minutos. A entrada é gratuita, mas os lugares são limitados a 120 por sessão. Reservas: festival@escola.pt."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Que edição do festival é esta?", opcoes: ["3.ª", "5.ª", "12.ª"], correta: 1 },
+          { pergunta: "Quantas curtas-metragens foram recebidas?", opcoes: ["46", "12", "120"], correta: 0 },
+          { pergunta: "Qual é o tema da sessão de quinta às 15h00? (ver tabela)", opcoes: ["Ficção", "Filmes de telemóvel", "Documentário"], correta: 1 },
+          { pergunta: "Quantos membros tem o júri?", opcoes: ["3", "5", "8"], correta: 1 },
+          { pergunta: "Qual é a duração máxima de cada filme?", opcoes: ["5 minutos", "8 minutos", "10 minutos"], correta: 1 },
+          { pergunta: "Para que endereço se fazem as reservas?", opcoes: ["festival@escola.pt", "cinema@escola.pt", "reservas@escola.pt"], correta: 0 },
+        ],
+      },
+    ],
+    laboratorio: [
+      {
+        texto: {
+          titulo: "Manual da balança digital BD-500",
+          secoes: [
+            { titulo: "Descrição", paragrafos: ["A BD-500 pesa até 500 g com resolução de 0,01 g. Funciona com o transformador de 9 V ou com 4 pilhas AA."] },
+            { titulo: "Unidades", paragrafos: ["A tecla MODE muda a unidade. A balança arranca sempre em gramas."], tabela: { cabecalho: ["Unidade", "Símbolo", "Peso máximo"], linhas: [["Grama", "g", "500 g"], ["Onça", "oz", "17,6 oz"], ["Quilate", "ct", "2500 ct"]] } },
+            { titulo: "Utilização", paragrafos: ["Coloca a balança numa superfície plana e espera 30 segundos depois de a ligar. Para descontar o recipiente, carrega na tecla TARA antes de juntar a substância."] },
+            { titulo: "Avisos", paragrafos: ["Se aparecer “Err”, o peso passou o máximo. Se aparecer “Lo”, é preciso trocar as pilhas. A calibração anual é feita pelo técnico Rui."] },
+          ],
+        },
+        perguntas: [
+          { pergunta: "Qual é a resolução da balança?", opcoes: ["0,1 g", "0,01 g", "1 g"], correta: 1 },
+          { pergunta: "Quantas pilhas usa?", opcoes: ["2", "4", "9"], correta: 1 },
+          { pergunta: "Qual é o peso máximo em onças? (ver tabela)", opcoes: ["500 oz", "17,6 oz", "2500 oz"], correta: 1 },
+          { pergunta: "Quanto tempo se espera depois de ligar?", opcoes: ["10 segundos", "30 segundos", "1 minuto"], correta: 1 },
+          { pergunta: "Que tecla desconta o recipiente?", opcoes: ["MODE", "TARA", "Err"], correta: 1 },
+          { pergunta: "O que significa “Lo”?", opcoes: ["Peso acima do máximo", "Pilhas a acabar", "Calibração em falta"], correta: 1 },
+        ],
+      },
+    ],
+  },
+};
+
+function Encontra({ config, contexto, nivel, modo, extensaoTempo, aoTerminar }: PropsAtividade<ConfigEncontra>) {
+  // Texto sorteado (na avaliação) e perguntas/opções por ordem aleatória em cada tentativa.
+  const [{ texto, perguntas }] = useState(() => {
+    const opcoes: Variante[] = [{ texto: config.texto[contexto], perguntas: config.perguntas[contexto] }, ...(modo === "avaliacao" ? (EXTRA[nivel]?.[contexto] ?? []) : [])];
+    const v = escolher(opcoes);
+    return { texto: v.texto, perguntas: misturar(v.perguntas).map((q) => ({ ...q, ...baralharOpcoes(q.opcoes, q.correta) })) };
+  });
   const [respostas, setRespostas] = useState<(number | null)[]>(() => perguntas.map(() => null));
   const [procura, setProcura] = useState("");
   const usouProcurar = useRef(false);

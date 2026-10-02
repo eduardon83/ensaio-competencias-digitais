@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { E_MAC, TECLA_CTRL } from "../../preferencias/preferencias";
 import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao } from "../../motor/util";
+import { misturar } from "../../motor/aleatorio";
 import { Botao, BotaoRadio } from "../../ui";
 
 type BotaoEdicao = "copiar" | "colar" | "cortar" | "desfazer" | "refazer" | "selecionarTudo" | "apagar";
@@ -102,7 +103,9 @@ function Teclas({ config, aoTerminar }: PropsAtividade<ConfigTeclas>) {
   const pontos = useRef(0);
   const detalhe = useRef({ atalho: 0, rato: 0, falhou: 0 });
   const inicio = useRef(performance.now());
-  const tarefa = config.tarefas[indice];
+  // Ordem das tarefas diferente em cada tentativa (as perguntas de reconhecimento ficam no fim).
+  const [lista] = useState(() => [...misturar(config.tarefas.filter((t) => t.tipo !== "reconhecer")), ...misturar(config.tarefas.filter((t) => t.tipo === "reconhecer"))]);
+  const tarefa = lista[indice];
 
   function concluir(p: 1 | 0.5 | 0) {
     pontos.current += p;
@@ -110,8 +113,8 @@ function Teclas({ config, aoTerminar }: PropsAtividade<ConfigTeclas>) {
     else if (p === 0.5) detalhe.current.rato++;
     else detalhe.current.falhou++;
     const prox = indice + 1;
-    if (prox >= config.tarefas.length) {
-      aoTerminar({ pontuacao: limitar((100 * pontos.current) / config.tarefas.length), duracaoMs: performance.now() - inicio.current, metricas: { ...detalhe.current, tarefas: config.tarefas.length } });
+    if (prox >= lista.length) {
+      aoTerminar({ pontuacao: limitar((100 * pontos.current) / lista.length), duracaoMs: performance.now() - inicio.current, metricas: { ...detalhe.current, tarefas: lista.length } });
       return;
     }
     setIndice(prox);
@@ -119,9 +122,9 @@ function Teclas({ config, aoTerminar }: PropsAtividade<ConfigTeclas>) {
 
   return (
     <div className="grid gap-4">
-      {tarefa.tipo === "editar" && <TarefaEditar key={indice} numero={indice + 1} total={config.tarefas.length} t={tarefa} aoConcluir={concluir} />}
-      {tarefa.tipo === "foco" && <TarefaFoco key={indice} numero={indice + 1} total={config.tarefas.length} t={tarefa} aoConcluir={concluir} />}
-      {tarefa.tipo === "reconhecer" && <TarefaReconhecer key={indice} numero={indice + 1} total={config.tarefas.length} t={tarefa} aoConcluir={concluir} />}
+      {tarefa.tipo === "editar" && <TarefaEditar key={indice} numero={indice + 1} total={lista.length} t={tarefa} aoConcluir={concluir} />}
+      {tarefa.tipo === "foco" && <TarefaFoco key={indice} numero={indice + 1} total={lista.length} t={tarefa} aoConcluir={concluir} />}
+      {tarefa.tipo === "reconhecer" && <TarefaReconhecer key={indice} numero={indice + 1} total={lista.length} t={tarefa} aoConcluir={concluir} />}
     </div>
   );
 }
@@ -301,7 +304,7 @@ function TarefaFoco({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tip
 function TarefaReconhecer({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "reconhecer" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0) => void }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const [feito, setFeito] = useState(false);
-  const ordem = useMemo(() => [0, 1, 2].sort(() => (t.pergunta.length % 2 ? -1 : 1)), [t.pergunta]);
+  const ordem = useMemo(() => misturar(t.opcoes.map((_, i) => i)), [t.opcoes]);
   return (
     <div className="grid gap-3">
       <Instrucao numero={numero} total={total}>

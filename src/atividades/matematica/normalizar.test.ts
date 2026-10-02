@@ -31,3 +31,12 @@ describe("corresponde", () => {
     expect(corresponde("∑_(i=1)^n i", ["sum_(i=1)^n i"])).toBe(true);
   });
 });
+
+import { corresponde as corr } from "./normalizar";
+describe("respostas aceites coerentes", () => {
+  it("formas Unicode e ASCII equivalentes são aceites", () => {
+    expect(corr("y_n = 2y_(n-1)", ["y_n=2y_(n-1)"])).toBe(true);
+    expect(corr("cos(θ)=√3/2", ["cos(θ)=√3/2"])).toBe(true);
+    expect(corr("x ∈ ]-1, 1[", ["x∈]-1,1["])).toBe(true);
+  });
+});

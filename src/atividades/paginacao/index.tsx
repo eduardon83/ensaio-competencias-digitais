@@ -21,6 +21,58 @@ interface Classificar {
 interface Ligar {
   pares: [string, string][]; // [alvo fixo, item a arrastar]
 }
+/** Conjuntos extra para ordenar (por nível e cenário): em cada tentativa sorteia-se um entre estes e o principal. */
+const ORDENAR_EXTRA: Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Ordenar[]>> = {
+  1: {
+    jornal: [
+      { titulo: "Põe a história pela ordem certa", itens: ["O Tomé pega na máquina.", "O Tomé tira a fotografia.", "A Lia escolhe a melhor.", "A fotografia sai no jornal."] },
+      { titulo: "Põe o dia pela ordem certa", itens: ["De manhã.", "Ao almoço.", "À tarde.", "À noite."] },
+    ],
+    laboratorio: [
+      { titulo: "Põe os passos pela ordem certa", itens: ["Encher o vaso com terra.", "Pôr a semente.", "Regar a terra.", "Ver a planta crescer."] },
+      { titulo: "Põe a experiência pela ordem certa", itens: ["Encher o copo.", "Juntar o gelo.", "Esperar um pouco.", "Ver o gelo derreter."] },
+    ],
+  },
+  2: {
+    jornal: [
+      { titulo: "Ordena as frases da notícia", itens: ["Ontem houve torneio de futebol na escola.", "Jogaram oito equipas de vários anos.", "A final foi muito renhida.", "O 6.º A ganhou nos penáltis.", "A taça vai ficar na biblioteca."] },
+      { titulo: "Ordena os passos para escrever uma notícia", itens: ["Escolher o tema.", "Falar com as pessoas.", "Escrever o texto.", "Pedir a alguém para rever.", "Enviar para a Diretora Graça."] },
+    ],
+    laboratorio: [
+      { titulo: "Ordena os passos da experiência", itens: ["Pesa o copo vazio.", "Enche o copo com água.", "Pesa o copo cheio.", "Faz a subtração.", "Regista a massa da água."] },
+      { titulo: "Ordena o ciclo da água", itens: ["A água do mar aquece.", "O vapor sobe.", "Formam-se as nuvens.", "Chove.", "A água volta ao mar."] },
+    ],
+  },
+  3: {
+    jornal: [
+      { titulo: "Ordena os parágrafos da entrevista", itens: ["Título: Dez perguntas à nova diretora.", "Apresentação: Quem é e de onde vem.", "Pergunta sobre os primeiros dias.", "Pergunta sobre os planos para a escola.", "Pergunta sobre os alunos.", "Agradecimento final."] },
+      { titulo: "Ordena as etapas de uma reportagem", itens: ["Definir o ângulo.", "Marcar as entrevistas.", "Ir ao local.", "Recolher dados e imagens.", "Escrever e rever.", "Publicar com fotografias."] },
+    ],
+    laboratorio: [
+      { titulo: "Ordena os passos da titulação", itens: ["Lavar a bureta.", "Encher a bureta com a solução.", "Pôr o indicador no balão.", "Abrir a torneira devagar.", "Parar quando a cor muda.", "Registar o volume gasto."] },
+      { titulo: "Ordena os passos para usar o microscópio", itens: ["Ligar a luz.", "Pôr a lâmina na platina.", "Escolher a objetiva menor.", "Focar com o parafuso grande.", "Afinar com o parafuso pequeno.", "Mudar para a objetiva maior."] },
+    ],
+  },
+  4: {
+    jornal: [
+      { titulo: "Ordena as referências por ordem alfabética do apelido", itens: ["Antunes, P. (2020). Rádio escolar.", "Barros, L. (2022). Redes e notícias.", "Correia, J. (2019). O lead.", "Dias, R. (2024). Fotojornalismo.", "Ferreira, A. (2021). Entrevistar.", "Gomes, S. (2023). Desinformação."] },
+      { titulo: "Ordena as etapas da verificação de factos", itens: ["Identificar a afirmação.", "Procurar a fonte original.", "Contactar quem fez a afirmação.", "Consultar dados oficiais.", "Classificar a afirmação.", "Publicar a verificação."] },
+    ],
+    laboratorio: [
+      { titulo: "Ordena as etapas da preparação de uma solução", itens: ["Calcular a massa de soluto.", "Tarar a balança.", "Pesar o soluto.", "Dissolver num pouco de água.", "Transferir para o balão volumétrico.", "Completar até ao traço."] },
+      { titulo: "Ordena as secções de um artigo científico", itens: ["Resumo", "Introdução", "Métodos", "Resultados", "Discussão", "Referências"] },
+    ],
+  },
+  5: {
+    jornal: [
+      { titulo: "Ordena as etapas de uma investigação jornalística", itens: ["Receber a pista", "Avaliar a credibilidade", "Recolher documentos", "Cruzar fontes", "Ouvir o visado", "Validar com a direção", "Redigir e rever", "Publicar e acompanhar"] },
+    ],
+    laboratorio: [
+      { titulo: "Ordena as etapas de um projeto de investigação", itens: ["Rever a literatura", "Formular a pergunta", "Definir hipóteses", "Planear o método", "Pedir aprovação ética", "Recolher os dados", "Analisar estatisticamente", "Publicar os resultados"] },
+    ],
+  },
+};
+
 export interface ConfigPaginacao {
   ordenar: Record<Contexto, Ordenar>;
   classificar: Record<Contexto, Classificar>;
@@ -98,7 +150,13 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPaginacao> = {
 
 type Ronda = "ordenar" | "classificar" | "ligar";
 
-function Paginacao({ config, contexto, nivel, aoTerminar }: PropsAtividade<ConfigPaginacao>) {
+function Paginacao({ config, contexto, nivel, modo, aoTerminar }: PropsAtividade<ConfigPaginacao>) {
+  // Semente nova em cada tentativa: a ordem baralhada e o conjunto a ordenar mudam sempre.
+  const [sementeBase] = useState(() => 1 + Math.floor(Math.random() * 1e9));
+  const [ordenar] = useState<Ordenar>(() => {
+    const opcoes = [config.ordenar[contexto], ...(modo === "avaliacao" ? (ORDENAR_EXTRA[nivel]?.[contexto] ?? []) : [])];
+    return opcoes[Math.floor(Math.random() * opcoes.length)];
+  });
   const rondas = useMemo<Ronda[]>(() => (config.ligar ? ["ordenar", "classificar", "ligar"] : ["ordenar", "classificar"]), [config.ligar]);
   const [ri, setRi] = useState(0);
   const acertos = useRef(0);
@@ -125,13 +183,13 @@ function Paginacao({ config, contexto, nivel, aoTerminar }: PropsAtividade<Confi
   }
 
   const ronda = rondas[ri];
-  const semente = nivel * 7 + ri;
+  const semente = sementeBase + ri;
   return (
     <div className="grid gap-4">
       <div className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--suave)" }}>
         Ronda {ri + 1} de {rondas.length}
       </div>
-      {ronda === "ordenar" && <RondaOrdenar key="o" dados={config.ordenar[contexto]} semente={semente} aoConcluir={proxima} />}
+      {ronda === "ordenar" && <RondaOrdenar key="o" dados={ordenar} semente={semente} aoConcluir={proxima} />}
       {ronda === "classificar" && <RondaClassificar key="c" dados={config.classificar[contexto]} semente={semente} aoConcluir={proxima} />}
       {ronda === "ligar" && config.ligar && <RondaLigar key="l" dados={config.ligar[contexto]} semente={semente} aoConcluir={proxima} />}
     </div>
@@ -140,7 +198,12 @@ function Paginacao({ config, contexto, nivel, aoTerminar }: PropsAtividade<Confi
 
 // ── Ronda 1: ordenar (lista ordenável) ───────────────────────────────────────
 function RondaOrdenar({ dados, semente, aoConcluir }: { dados: Ordenar; semente: number; aoConcluir: (certos: number, n: number, movs: number) => void }) {
-  const [ordem, setOrdem] = useState(() => baralhar(dados.itens.map((_, i) => i), semente));
+  const [ordem, setOrdem] = useState(() => {
+    // Nunca começa já na ordem certa.
+    let o = baralhar(dados.itens.map((_, i) => i), semente);
+    for (let k = 1; o.every((v, i) => v === i) && k < 10; k++) o = baralhar(o, semente + k);
+    return o;
+  });
   const [movs, setMovs] = useState(0);
   const [confirmado, setConfirmado] = useState(false);
   const sensores = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
