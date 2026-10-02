@@ -136,7 +136,7 @@ const INFOS: Record<Contexto, [string, string, string][]> = {
     ["a próxima sessão de segurança", "Formação", "Próxima sessão de segurança: terça-feira, às 14h30, sala 2."],
   ],
 };
-const PUBLICIDADE = ["Promoção! Ganha um tablet", "Oferta imperdível — clica já", "Parabéns, foste selecionado!"];
+const PUBLICIDADE = ["Promoção! Ganha um tablet", "Oferta imperdível: clica já", "Parabéns, foste selecionado!"];
 
 export function gerarSeparadores(ctx: Contexto, n: number, r: Gerador = Math.random) {
   const infos = amostra(INFOS[ctx], Math.max(1, n - 1), r);

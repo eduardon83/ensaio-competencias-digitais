@@ -77,7 +77,9 @@ const trocarMes: Mutacao = (w, r) => {
 const virgulaPonto: Mutacao = (w) => (/\d,\d/.test(w) ? w.replace(/(\d),(\d)/, "$1.$2") : null);
 
 /** Mutações por ordem de preferência para uma palavra (as específicas primeiro). */
-function mutacoesPara(w: string, avancado: boolean): Mutacao[] {
+function mutacoesPara(w: string, avancado: boolean, ortografia = false): Mutacao[] {
+  // Só ortografia: números, meses e emails ficariam frases ainda corretas (6.º A → 4.º A), por isso não se mexem.
+  if (ortografia && (/\d/.test(w) || w.includes("@") || MESES.includes(w.replace(/[.,;:]$/, "").toLowerCase()))) return [];
   if (w.includes("@")) return [tirarLetraEmail];
   if (MESES.includes(w.replace(/[.,;:]$/, "").toLowerCase())) return [trocarMes];
   if (/\d/.test(w)) return avancado ? [trocarDigitos, mudarDigito, virgulaPonto] : [trocarDigitos, mudarDigito];
@@ -86,15 +88,15 @@ function mutacoesPara(w: string, avancado: boolean): Mutacao[] {
   return [tirarAcento, trocarLetras, repetirLetra];
 }
 
-/** Gera uma cópia com exatamente `n` palavras diferentes do original. */
-export function gerarCopia(original: string, n: number, avancado: boolean, r: Gerador = Math.random): string {
+/** Gera uma cópia com exatamente `n` palavras diferentes do original. Com `ortografia`, só erros de escrita. */
+export function gerarCopia(original: string, n: number, avancado: boolean, r: Gerador = Math.random, ortografia = false): string {
   const ws = palavras(original);
-  const candidatos = misturar(ws.map((_, i) => i), r).filter((i) => mutacoesPara(ws[i], avancado).length > 0);
+  const candidatos = misturar(ws.map((_, i) => i), r).filter((i) => mutacoesPara(ws[i], avancado, ortografia).length > 0);
   const copia = [...ws];
   let feitas = 0;
   for (const i of candidatos) {
     if (feitas >= n) break;
-    for (const m of misturar(mutacoesPara(ws[i], avancado), r)) {
+    for (const m of misturar(mutacoesPara(ws[i], avancado, ortografia), r)) {
       const novo = m(ws[i], r);
       if (novo && novo !== ws[i] && !/\s/.test(novo)) {
         copia[i] = novo;

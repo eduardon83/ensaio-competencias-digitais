@@ -54,7 +54,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigTeclas> = {
   },
   4: {
     tarefas: [
-      { tipo: "editar", instrucao: `Seleciona a primeira palavra só com o teclado (${C}+Shift+→) e apaga-a.`, inicial: "Rápido jornal digital", esperado: ["jornal digital", " jornal digital"], atalhos: [`${C}+Shift+ArrowRight`, "Shift+ArrowRight", "Shift+End"], botoes: ["apagar"] },
+      { tipo: "editar", instrucao: `Seleciona a primeira palavra só com o teclado (${C}+Shift+→) e apaga-a.`, inicial: "Novo jornal digital", esperado: ["jornal digital", " jornal digital"], atalhos: [`${C}+Shift+ArrowRight`, "Shift+ArrowRight", "Shift+End"], botoes: ["apagar"] },
       { tipo: "editar", instrucao: `Escreve azul no fim, desfaz (${C}+Z) e volta a refazer (${C}+Y ou ${C}+Shift+Z).`, inicial: "Mar ", esperado: "Mar azul", atalhos: [`${C}+Y`, `${C}+Shift+Z`], exigeAlteracao: true, botoes: ["desfazer", "refazer"] },
       { tipo: "editar", instrucao: "Vai ao início do texto com a tecla Home e escreve Hoje e um espaço.", inicial: "o jornal sai.", esperado: "Hoje o jornal sai.", atalhos: ["Home", `${C}+Home`], botoes: [] },
       { tipo: "editar", instrucao: "Vai ao fim do texto com a tecla End e escreve um ponto final.", inicial: "A edição fechou", esperado: "A edição fechou.", atalhos: ["End", `${C}+End`], botoes: [] },

@@ -74,7 +74,7 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
       jornal: [
         "Segundo Silva (2024, p. 12), a leitura em ecrã exige estratégias próprias. A reportagem completa está em https://gazeta.campus.pt/leitura e as dúvidas podem ser enviadas para redacao@campus.pt até 30/06.",
         "De acordo com Almeida e Rocha (2023, pp. 40-41), 62% dos estudantes leem notícias no telemóvel. O inquérito da Gazeta está aberto em https://gazeta.campus.pt/inquerito até 15/07; contacto: inqueritos@campus.pt.",
-        "Como notou Teixeira (2025, p. 8), “verificar é mais lento do que publicar”. A oficina de fact-checking decorre a 3/10, na sala 2.14 (inscrições em https://gazeta.campus.pt/oficina ou oficinas@campus.pt).",
+        "Como notou Teixeira (2025, p. 8), “verificar é mais lento do que publicar”. A oficina de verificação de factos decorre a 3/10, na sala 2.14 (inscrições em https://gazeta.campus.pt/oficina ou oficinas@campus.pt).",
       ],
       laboratorio: [
         "O ensaio seguiu o método de Costa & Pires (2023, p. 47): 3 réplicas por amostra, 25 °C ± 0,5. Os dados estão em https://lab.campus.pt/dados; questões para inves@campus.pt até 30/06.",
@@ -91,7 +91,7 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
       jornal: [
         "“Não há jornalismo sem verificação”, escreveu Marques (2025), citando 3 fontes (duas anónimas; uma oficial). O inquérito teve 1 024 respostas: 57% em telemóvel, 38% em portátil e 5% em tablet. Ver anexo_A.pdf & anexo_B.xlsx.",
         "“Uma correção publicada vale mais do que um erro escondido”, defendeu Sousa (2024, p. 77). Em 2025, a Gazeta publicou 312 artigos e 9 erratas (2,9%); o relatório anual está em relatorio_2025.pdf & dados_2025.csv.",
-        "“O leitor merece saber de onde vem cada número”, lembrou Pereira (2023). O novo guia exige 2 fontes por dado (mínimo) e links permanentes; modelo em guia_fontes_v3.docx; sugestões para editor@gazeta.campus.pt (até 31/12).",
+        "“O leitor merece saber de onde vem cada número”, lembrou Pereira (2023). O novo guia exige 2 fontes por dado (no mínimo) e ligações permanentes; modelo em guia_fontes_v3.docx; sugestões para editor@gazeta.campus.pt (até 31/12).",
       ],
       laboratorio: [
         "“Sem controlo, não há conclusão”, lembrou Ferreira (2025). Protocolo: 5 réplicas; pH 7,4 ± 0,1; 37 °C. Resultados em amostra_01.csv e amostra_02.csv: 1 024 leituras, 57% válidas, 38% repetidas & 5% rejeitadas.",

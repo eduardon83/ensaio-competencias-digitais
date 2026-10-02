@@ -96,7 +96,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
     itens: [
       { tipo: "escrever", mostrar: "x^{2} − 5x + 6 = 0", aceita: ["x^2-5x+6=0"] },
       { tipo: "escrever", mostrar: "2(x + 3) = 10", aceita: ["2(x+3)=10"] },
-      { tipo: "escrever", mostrar: "x ≤ 4", aceita: ["x<=4", "x≤4"], ajuda: "“Menor ou igual” escreve-se ≤ (paleta) ou <= ." },
+      { tipo: "escrever", mostrar: "x ≤ 4", aceita: ["x<=4", "x≤4"], ajuda: "“Menor ou igual” escreve-se ≤ (paleta) ou <=." },
       { tipo: "escrever", mostrar: "y ≠ 0", aceita: ["y!=0", "y≠0", "y<>0"] },
       { tipo: "escrever", mostrar: "f(x) = 3x + 1", aceita: ["f(x)=3x+1"] },
       { tipo: "escrever", mostrar: "frac{a}{b} + frac{1}{2}", aceita: ["a/b+1/2"] },

@@ -42,7 +42,8 @@ function Fecho({ config, contexto, extensaoTempo, aoTerminar }: PropsAtividade<C
   const ctx = defContexto(contexto);
   const [secoes] = useState<Secao[]>(() => {
     const dupla = config.pesos !== "nenhum" ? Math.floor(Math.random() * config.secoes) : -1;
-    return NOMES[contexto].slice(0, config.secoes).map((nome, i) => ({ nome, peso: i === dupla ? 2 : 1, itens: gerarSecao(contexto, config.itensPorSecao) }));
+    const usados = new Set<string>(); // temas já usados nesta tentativa, partilhados entre secções
+    return NOMES[contexto].slice(0, config.secoes).map((nome, i) => ({ nome, peso: i === dupla ? 2 : 1, itens: gerarSecao(contexto, config.itensPorSecao, Math.random, usados) }));
   });
   const totalMs = config.minutos * 60_000 * extensaoTempo;
   const sugeridoMs = totalMs / config.secoes;
