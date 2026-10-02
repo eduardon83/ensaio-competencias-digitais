@@ -6,7 +6,7 @@
   --acento: #0f6b73; --acento-tinta: #ffffff; --acento-suave: #e0f0f0;
   --marca: #ffe36e; --marca-tinta: #3a2f00;
   --tecla: #eef2f5; --tecla-borda: #b9c5ce;
-  --certo: #3f8f5a; --errado: #c44f3c; --aviso: #d89b1d;
+  --certo: #2f7a49; --errado: #b3402e; --aviso: #8a5a00;
   --b1: #c44f3c; --b2: #d89b1d; --b3: #3f8f5a; --b4: #0f6b73;
   --fonte-titulo: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
@@ -44,7 +44,7 @@
   --acento: #034ad8; --acento-tinta: #ffffff; --acento-suave: #e5eeff;
   --marca: #fff3bf; --marca-tinta: #3a2f00;
   --tecla: #f1f3f8; --tecla-borda: #bac0cc;
-  --certo: #0f8a4b; --errado: #c0392b; --aviso: #b7791f;
+  --certo: #0b7a41; --errado: #b3332a; --aviso: #8a5a00;
   --b1: #c0392b; --b2: #b7791f; --b3: #0f8a4b; --b4: #034ad8;
   --fonte-titulo: "Noto Sans", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: "Noto Sans", "Segoe UI", system-ui, sans-serif;

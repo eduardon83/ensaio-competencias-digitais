@@ -3,7 +3,7 @@
 // Validação como nos sítios reais: erros junto ao campo e resumo no topo com ligações.
 // score = 100 × (0,7 × campos certos / campos + 0,2 × erros corrigidos / erros mostrados + 0,1 × [≤ 2 submissões])
 import { useEffect, useMemo, useRef, useState } from "react";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao } from "../../motor/util";
 import { misturar } from "../../motor/aleatorio";
 import { Botao, ForcarClaro } from "../../ui";
@@ -104,7 +104,24 @@ function Cartao({ config, contexto, aoTerminar }: PropsAtividade<ConfigCartao>) 
       return x ? iguais(x, valores[id] ?? "", esperado(x, pessoa)) : false;
     }).length;
     const pontuacao = limitar(100 * (0.7 * (certos / contados.length) + 0.2 * (mostrados.length ? corrigidos / mostrados.length : 1) + 0.1 * (submissoes.current <= 2 ? 1 : 0)));
+    const mostrar = (x: Campo, v: string) => (x.tipo === "checkbox" ? (v === "sim" ? "Marcada" : "Não marcada") : x.tipo === "telefone" ? formatarTelefone(v) : v);
+    const relatorio: LinhaRelatorio[] = contados.map((x) => {
+      const v = valores[x.id] ?? "";
+      const e = esperado(x, pessoa);
+      const ok = iguais(x, v, e);
+      let feedback: string | undefined;
+      if (!ok) {
+        if (x.tipo === "opcional") feedback = "Este campo era opcional e devia ficar vazio: a ficha não tem observações.";
+        else if (plantado && x.id === plantado.id) feedback = "Este campo já vinha preenchido com um erro. Confirma sempre os campos pré-preenchidos contra a ficha.";
+        else if (x.tipo === "ficheiro") feedback = "A fotografia certa é a que tem o teu primeiro nome.";
+        else feedback = "Copia exatamente o valor da ficha, com o mesmo formato.";
+      }
+      return { tarefa: x.rotulo.replace(" (opcional)", ""), resultado: ok ? "certo" : "errado", resposta: mostrar(x, v), certa: x.tipo === "opcional" ? "(deixar vazio)" : mostrar(x, e), feedback };
+    });
+    if (mostrados.length > 0) relatorio.push({ tarefa: "Corrigir os erros assinalados pelo formulário", resultado: corrigidos === mostrados.length ? "certo" : corrigidos > 0 ? "parcial" : "errado", resposta: `${corrigidos} de ${mostrados.length} corrigidos`, feedback: corrigidos < mostrados.length ? "Usa o resumo de erros no topo: cada ligação leva ao campo e explica o que está mal." : undefined });
+    relatorio.push({ tarefa: "Submeter no máximo duas vezes", resultado: submissoes.current <= 2 ? "certo" : "errado", resposta: `${submissoes.current} ${submissoes.current === 1 ? "submissão" : "submissões"}`, feedback: submissoes.current > 2 ? "Antes de submeter, revê os campos com atenção aos formatos (data, código postal, telemóvel)." : undefined });
     aoTerminar({
+      relatorio,
       pontuacao,
       duracaoMs: performance.now() - inicio.current,
       metricas: { certos, campos: contados.length, errosMostrados: mostrados.length, errosCorrigidos: corrigidos, submissoes: submissoes.current, sessaoRenovada: renovacoes.current > 0, erroPlantadoCorrigido: plantado ? iguais(campos.find((k) => k.id === plantado.id)!, valores[plantado.id] ?? "", esperado(campos.find((k) => k.id === plantado.id)!, pessoa)) : "nao_aplicavel" },
@@ -115,7 +132,7 @@ function Cartao({ config, contexto, aoTerminar }: PropsAtividade<ConfigCartao>) 
     setValores((s) => ({ ...s, [id]: c(id, v) }));
     if (erros[id]) setErros((e) => { const n = { ...e }; delete n[id]; return n; });
   };
-  const ficheiros = useMemo(() => misturar([`foto_${pessoa.primeiro.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()}.jpg`, "fundo_ecra.png", "documento_digitalizado.pdf", "foto_grupo_turma.jpg"]), [pessoa]);
+  const ficheiros = useMemo(() => misturar([`foto_${pessoa.primeiro.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}.jpg`, "fundo_ecra.png", "documento_digitalizado.pdf", "foto_grupo_turma.jpg"]), [pessoa]);
 
   const fichaCampos = useMemo(() => {
     const ids = new Set(campos.map((x) => x.id));

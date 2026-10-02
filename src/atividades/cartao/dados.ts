@@ -58,7 +58,7 @@ export interface Pessoa {
 }
 
 function semAcentos(t: string) {
-  return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 export function gerarPessoa(ctx: Contexto, adulto: boolean, r: Gerador = Math.random): Pessoa {
@@ -75,7 +75,8 @@ export function gerarPessoa(ctx: Contexto, adulto: boolean, r: Gerador = Math.ra
     primeiro,
     nascimento: `${String(dia).padStart(2, "0")}/${String(mes).padStart(2, "0")}/${ano}`,
     idade: 2026 - ano - (mes > 10 ? 1 : 0),
-    turma: escolher(TURMAS, r),
+    // Ano de escolaridade coerente com a idade (aos 11 anos, 6.º ano), dentro do 5.º ao 9.º.
+    turma: `${Math.min(9, Math.max(5, 2026 - ano - (mes > 10 ? 1 : 0) - 5))}.º ${escolher(["A", "B"], r)}`,
     email: `${semAcentos(primeiro)}.${semAcentos(apelidos[1])}@${dominio}`,
     telefone: `9${escolher(["1", "2", "3", "6"], r)}${String(inteiro(1000000, 9999999, r))}`,
     rua: `${escolher(RUAS, r)}, ${inteiro(2, 180, r)}`,
@@ -148,7 +149,7 @@ export function camposDoNivel(nivel: number, ctx: Contexto): Campo[] {
       { id: "idade", rotulo: "Idade", tipo: "numero", passo: 1 },
       { id: "turma", rotulo: "Turma", tipo: "select", passo: 1, opcoes: TURMAS },
       { id: "cor", rotulo: "Cor preferida", tipo: "radio", passo: 1, opcoes: CORES },
-      { ...aceito, rotulo: "Aceito as regras do evento" },
+      { ...aceito, rotulo: ctx === "jornal" ? "Aceito as regras do evento" : "Aceito as regras de segurança" },
     ];
   if (nivel === 2)
     return [

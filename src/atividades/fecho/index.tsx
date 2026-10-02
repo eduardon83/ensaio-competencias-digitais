@@ -5,7 +5,7 @@
 //               + 0,1 × [nenhuma secção acima de 1,5 × o tempo sugerido])
 import { useEffect, useMemo, useRef, useState } from "react";
 import { contexto as defContexto } from "../../contextos";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { BarraTempo, formatarTempo, useTemporizador } from "../../motor/util";
 import { escolher } from "../../motor/aleatorio";
 import { Botao, BotaoRadio } from "../../ui";
@@ -96,9 +96,27 @@ function Fecho({ config, contexto, extensaoTempo, aoTerminar }: PropsAtividade<C
       if (respondidas > 0) alcancadas++;
     });
     const excedeu = tempoSecao.current.some((t) => t > 1.5 * sugeridoMs);
+    const dicaItem = (pergunta: string) =>
+      pergunta.startsWith("Qual destas palavras") ? "Repara nos acentos e nas letras duplas." : pergunta.startsWith("Escolhe a frase") ? "Compara as frases palavra a palavra: só uma não tem erros." : pergunta.includes("legenda") ? "A legenda tem de dizer o que a fotografia mostra." : pergunta.startsWith("Em que unidade") ? "Massa em gramas, volume em mililitros, temperatura em graus Celsius." : "Faz a conta com calma antes de responder.";
+    const relatorio: LinhaRelatorio[] = [];
+    secoes.forEach((s, i) => {
+      s.itens.forEach((it, j) => {
+        const r = respostas[`${i}:${j}`];
+        relatorio.push({
+          tarefa: `${s.nome}${s.peso === 2 ? " (vale o dobro)" : ""}: ${it.pergunta.replace(/^\S+\s(?=A fotografia)/u, "")}`,
+          resultado: r === undefined ? "saltado" : r === it.correta ? "certo" : "errado",
+          resposta: r === undefined ? undefined : it.opcoes[r],
+          certa: it.opcoes[it.correta],
+          feedback: r === undefined ? "Não chegaste a responder: numa prova, responde primeiro ao que é rápido em todas as secções." : r === it.correta ? undefined : dicaItem(it.pergunta),
+        });
+      });
+      if (tempoSecao.current[i] > 1.5 * sugeridoMs)
+        relatorio.push({ tarefa: `Tempo na secção ${s.nome}`, resultado: "errado", resposta: formatarTempo(tempoSecao.current[i]), certa: `Até ${formatarTempo(1.5 * sugeridoMs)}`, feedback: "Ficaste demasiado tempo nesta secção. Quando passares o tempo sugerido, marca “Rever mais tarde” e avança." });
+    });
     aoTerminar({
       pontuacao: limitar(100 * (0.6 * (certo / total) + 0.3 * (alcancadas / secoes.length) + 0.1 * (excedeu ? 0 : 1))),
       duracaoMs: totalMs - (restanteMs ?? 0),
+      relatorio,
       metricas: { certoPonderado: certo, totalPonderado: total, secoesAlcancadas: alcancadas, secoes: secoes.length, excedeuTempoSecao: excedeu, marcadosParaRever: rever.size, porResponder: secoes.reduce((s, x, i) => s + x.itens.filter((_, j) => respostas[`${i}:${j}`] === undefined).length, 0) },
     });
   }

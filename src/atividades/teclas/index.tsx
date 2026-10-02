@@ -3,7 +3,7 @@
 // Atalhos reservados pelo navegador (Ctrl+W, Ctrl+T, Alt+Tab) nunca são pedidos: aparecem como perguntas de reconhecimento.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { E_MAC, TECLA_CTRL } from "../../preferencias/preferencias";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao } from "../../motor/util";
 import { misturar } from "../../motor/aleatorio";
 import { Botao, BotaoRadio } from "../../ui";
@@ -106,15 +106,29 @@ function Teclas({ config, aoTerminar }: PropsAtividade<ConfigTeclas>) {
   // Ordem das tarefas diferente em cada tentativa (as perguntas de reconhecimento ficam no fim).
   const [lista] = useState(() => [...misturar(config.tarefas.filter((t) => t.tipo !== "reconhecer")), ...misturar(config.tarefas.filter((t) => t.tipo === "reconhecer"))]);
   const tarefa = lista[indice];
+  const relatorio = useRef<LinhaRelatorio[]>([]);
 
-  function concluir(p: 1 | 0.5 | 0) {
+  function concluir(p: 1 | 0.5 | 0, escolha?: string) {
     pontos.current += p;
+    const legivel = (a: string) => a.replace("ArrowRight", "→").replace("ArrowLeft", "←");
+    if (tarefa.tipo === "reconhecer") {
+      relatorio.current.push({ tarefa: tarefa.pergunta, resultado: p === 1 ? "certo" : "errado", resposta: escolha, certa: tarefa.opcoes[tarefa.correta], feedback: p === 1 ? undefined : `Memoriza: ${tarefa.opcoes[tarefa.correta]}.` });
+    } else {
+      const atalhos = tarefa.atalhos.map(legivel).join(" ou ");
+      relatorio.current.push({
+        tarefa: tarefa.instrucao,
+        resultado: p === 1 ? "certo" : p === 0.5 ? "parcial" : "saltado",
+        resposta: p === 1 ? "Feito com o teclado" : p === 0.5 ? "Feito com o rato ou os botões" : "Saltada",
+        certa: atalhos,
+        feedback: p === 1 ? undefined : `Experimenta ${atalhos}: é mais rápido do que o rato e funciona em quase todos os programas.`,
+      });
+    }
     if (p === 1) detalhe.current.atalho++;
     else if (p === 0.5) detalhe.current.rato++;
     else detalhe.current.falhou++;
     const prox = indice + 1;
     if (prox >= lista.length) {
-      aoTerminar({ pontuacao: limitar((100 * pontos.current) / lista.length), duracaoMs: performance.now() - inicio.current, metricas: { ...detalhe.current, tarefas: lista.length } });
+      aoTerminar({ pontuacao: limitar((100 * pontos.current) / lista.length), duracaoMs: performance.now() - inicio.current, metricas: { ...detalhe.current, tarefas: lista.length }, relatorio: relatorio.current });
       return;
     }
     setIndice(prox);
@@ -129,7 +143,7 @@ function Teclas({ config, aoTerminar }: PropsAtividade<ConfigTeclas>) {
   );
 }
 
-function TarefaEditar({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "editar" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0) => void }) {
+function TarefaEditar({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "editar" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0, escolha?: string) => void }) {
   const area = useRef<HTMLTextAreaElement>(null);
   const atalhoVisto = useRef(false);
   const botaoUsado = useRef(false);
@@ -239,7 +253,7 @@ function TarefaEditar({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { t
       </label>
       <textarea id="caixa-teclas" ref={area} rows={4} className="cartao p-4 w-full" style={{ fontFamily: "var(--fonte-mono)", fontSize: "1.1rem" }} defaultValue={t.inicial} onKeyDown={aoTecla} onInput={aoInput} spellCheck={false} autoCapitalize="off" disabled={feito} />
       {t.botoes.length > 0 && (
-        <div className="flex gap-2 flex-wrap" aria-label="Alternativa com o rato">
+        <div className="flex gap-2 flex-wrap" role="group" aria-label="Alternativa com o rato">
           {t.botoes.map((b) => (
             <Botao key={b} variante="contorno" onClick={() => botao(b)} disabled={feito}>
               {ROTULO[b]}
@@ -256,7 +270,7 @@ function TarefaEditar({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { t
   );
 }
 
-function TarefaFoco({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "foco" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0) => void }) {
+function TarefaFoco({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "foco" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0, escolha?: string) => void }) {
   const a = useRef<HTMLInputElement>(null);
   const b = useRef<HTMLInputElement>(null);
   const atalho = useRef(false);
@@ -301,7 +315,7 @@ function TarefaFoco({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tip
   );
 }
 
-function TarefaReconhecer({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "reconhecer" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0) => void }) {
+function TarefaReconhecer({ t, numero, total, aoConcluir }: { t: Extract<Tarefa, { tipo: "reconhecer" }>; numero: number; total: number; aoConcluir: (p: 1 | 0.5 | 0, escolha?: string) => void }) {
   const [escolha, setEscolha] = useState<number | null>(null);
   const [feito, setFeito] = useState(false);
   const ordem = useMemo(() => misturar(t.opcoes.map((_, i) => i)), [t.opcoes]);
@@ -321,7 +335,7 @@ function TarefaReconhecer({ t, numero, total, aoConcluir }: { t: Extract<Tarefa,
           disabled={escolha === null || feito}
           onClick={() => {
             setFeito(true);
-            window.setTimeout(() => aoConcluir(escolha === t.correta ? 1 : 0), 900);
+            window.setTimeout(() => aoConcluir(escolha === t.correta ? 1 : 0, escolha === null ? undefined : t.opcoes[escolha]), 900);
           }}
         >
           Responder

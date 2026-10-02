@@ -2,10 +2,10 @@
 // Dois painéis: o original e a cópia digital. Clica-se em cada palavra da cópia que difere.
 import { useMemo, useState } from "react";
 import type { Contexto } from "../../preferencias/preferencias";
-import { definir, type PropsAtividade } from "../../motor/tipos";
+import { definir, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { BarraTempo, Instrucao, palavras, useTemporizador } from "../../motor/util";
 import { Botao } from "../../ui";
-import { diferencas, gerarCopia, pontuarRevisao } from "./pontuacao";
+import { diferencas, gerarCopia, pontuarRevisao, tipoDiferenca } from "./pontuacao";
 import { escolher } from "../../motor/aleatorio";
 
 export interface ConfigRevisao {
@@ -128,6 +128,22 @@ function Revisao({ config, contexto, nivel, extensaoTempo, aoTerminar }: PropsAt
       pontuacao: pontuarRevisao({ encontradas, errados, total: certas.size, fracaoTempoRestante: fracao }),
       duracaoMs: decorridoExato(),
       metricas: { encontradas, errados, total: certas.size },
+      relatorio: [
+        ...[...certas].sort((a, b) => a - b).map<LinhaRelatorio>((i) => ({
+          tarefa: `Diferença em “${palavrasC[i]}”`,
+          resultado: marcadas.has(i) ? "certo" : "errado",
+          resposta: marcadas.has(i) ? "Encontrada" : "Não encontrada",
+          certa: `Original: “${palavrasO[i]}”`,
+          feedback: tipoDiferenca(palavrasO[i], palavrasC[i]),
+        })),
+        ...[...marcadas].filter((i) => !certas.has(i)).map<LinhaRelatorio>((i) => ({
+          tarefa: `Clique em “${palavrasC[i]}”`,
+          resultado: "errado",
+          resposta: "Marcada como diferente",
+          certa: "Estava igual ao original",
+          feedback: "Cada clique errado desconta meio ponto: marca só quando tiveres a certeza.",
+        })),
+      ],
     });
   }
 

@@ -34,7 +34,7 @@ for (const [formato, tema] of VARIANTES) {
     localStorage.setItem("ecd.preferencias.v1", JSON.stringify({ formato: f, tema: t, contexto: "jornal", tamanho: "normal", extensaoTempo: 1, nome: "", telemetria: false }));
     localStorage.setItem("ecd.tutorial.visto.v1", "1");
   }, [formato, tema]);
-  const alvos = [...PAGINAS, ...ATIVIDADES.map((a) => [`/atividades/${a}/3`, `Atividade: ${a}`])];
+  const alvos = [...PAGINAS, ...ATIVIDADES.map((a) => [`/atividades/${a}/3`, `Atividade: ${a}`]), ["/atividades/revisao/2#resultado", "Resultado com relatório (Revisão)"]];
   for (const [rota, nome] of alvos) {
     const page = await ctx.newPage();
     await page.goto(BASE + rota, { waitUntil: "networkidle" });
@@ -44,6 +44,12 @@ for (const [formato, tema] of VARIANTES) {
       const comecar = page.getByRole("button", { name: "Começar" });
       if (await comecar.count()) await comecar.first().click().catch(() => {});
       await page.waitForTimeout(300);
+      if (rota.endsWith("#resultado")) {
+        // Ecrã de resultado com o relatório: marca uma palavra e termina.
+        await page.locator('section[aria-label="Cópia digital"] button.palavra').first().click().catch(() => {});
+        await page.getByRole("button", { name: "Terminei" }).click().catch(() => {});
+        await page.waitForTimeout(400);
+      }
     }
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
     // Verificação própria (o axe não a faz): rótulos tapados por um campo opaco por cima (texto invisível).

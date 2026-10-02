@@ -107,3 +107,18 @@ export function gerarCopia(original: string, n: number, avancado: boolean, r: Ge
   }
   return copia.join(" ");
 }
+
+/** Descreve o tipo de diferença entre a palavra original e a da cópia (para o relatório). */
+export function tipoDiferenca(original: string, copia: string): string {
+  const so = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (original.includes("@")) return "Email com uma letra a menos: confirma letra a letra antes do @.";
+  if (MESES.includes(original.replace(/[.,;:]$/, "").toLowerCase())) return "Mês trocado.";
+  if (/\d,\d/.test(original) && copia.includes(".")) return "Vírgula decimal trocada por ponto (em Portugal usa-se a vírgula).";
+  if (/\d/.test(original)) {
+    const a = original.replace(/\D/g, ""), b = copia.replace(/\D/g, "");
+    return a.length === b.length && [...a].sort().join() === [...b].sort().join() ? "Algarismos trocados de lugar." : "Um algarismo diferente.";
+  }
+  if (so(original) === so(copia)) return "Acento em falta.";
+  if (copia.length > original.length) return "Letra repetida.";
+  return "Letras trocadas de lugar.";
+}

@@ -3,7 +3,7 @@
 // histórico (retroceder/avançar) e fim de uma página longa. Tudo é gerado em cada tentativa.
 // Pontuação por tarefa: sucesso × min(1, ações ótimas / ações feitas). Resultado = média × 100.
 import { useMemo, useRef, useState } from "react";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao } from "../../motor/util";
 import { Botao, BotaoRadio, ForcarClaro } from "../../ui";
 import { gerarArtigo, gerarArvore, gerarHistorico, gerarSeparadores, type No } from "./gerar";
@@ -28,7 +28,18 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigArquivo> = {
   5: { profundidade: 5, procurar: true, moverRenomear: true, extensoes: true, separadores: 4, fecharSeparador: true, historico: 6, avancar: true, paragrafos: 12 },
 };
 
-type Resultado = { tarefa: string; pontos: number };
+type Resultado = { tarefa: string; pontos: number; linha: LinhaRelatorio };
+
+/** Linha do relatório a partir dos pontos de uma tarefa (1 = certo pelo caminho mais curto). */
+function linha(texto: string, pontos: number, acoes: number, otimo: number, sucesso: boolean, dica: string): LinhaRelatorio {
+  return {
+    tarefa: texto,
+    resultado: !sucesso ? "errado" : pontos >= 1 ? "certo" : "parcial",
+    resposta: sucesso ? `Feito em ${acoes} ${acoes === 1 ? "ação" : "ações"}` : "Não feito",
+    certa: `Mínimo: ${otimo} ${otimo === 1 ? "ação" : "ações"}`,
+    feedback: !sucesso || pontos < 1 ? dica : undefined,
+  };
+}
 
 function Arquivo({ config, contexto, aoTerminar }: PropsAtividade<ConfigArquivo>) {
   const [ronda, setRonda] = useState(0);
@@ -44,6 +55,7 @@ function Arquivo({ config, contexto, aoTerminar }: PropsAtividade<ConfigArquivo>
         pontuacao: limitar((100 * total) / resultados.current.length),
         duracaoMs: performance.now() - inicio.current,
         metricas: Object.fromEntries(resultados.current.map((r) => [r.tarefa, Math.round(r.pontos * 100)])),
+        relatorio: resultados.current.map((r) => r.linha),
       });
       return;
     }
@@ -125,7 +137,13 @@ function RondaPastas({ config, contexto, endereco, aoConcluir }: { config: Confi
   const acao = () => (acoes.current += 1);
   function concluir(sucesso: boolean) {
     const pontos = sucesso ? Math.min(1, tarefa.otimo / Math.max(1, acoes.current)) : 0;
-    resultados.current.push({ tarefa: tarefa.id, pontos });
+    const DICAS: Record<string, string> = {
+      abrir: "Abre as pastas pela ordem do caminho e faz duplo clique no ficheiro (ou seleciona e carrega em Abrir). A procura também ajuda.",
+      mover: "Seleciona o ficheiro, carrega em “Mover para…”, escolhe a pasta e confirma.",
+      renomear: "Seleciona o ficheiro, carrega em “Mudar o nome”, escreve o novo nome e carrega em Enter.",
+      recente: "Usa “Ordenar por data”: o mais recente fica em primeiro lugar.",
+    };
+    resultados.current.push({ tarefa: tarefa.id, pontos, linha: linha(tarefa.texto, pontos, acoes.current, tarefa.otimo, sucesso, DICAS[tarefa.id]) });
     setFeedback(sucesso ? (pontos >= 1 ? "Certo, pelo caminho mais curto." : "Certo.") : "Tarefa passada.");
     window.setTimeout(() => {
       setFeedback(null);
@@ -310,7 +328,8 @@ function RondaSeparadores({ config, contexto, aoConcluir }: { config: ConfigArqu
   const total = config.fecharSeparador ? 2 : 1;
 
   function concluir(id: string, sucesso: boolean) {
-    resultados.current.push({ tarefa: id, pontos: sucesso ? Math.min(1, 1 / Math.max(1, acoes.current)) : 0 });
+    const pts = sucesso ? Math.min(1, 1 / Math.max(1, acoes.current)) : 0;
+    resultados.current.push({ tarefa: id, pontos: pts, linha: linha(id === "separador" ? `Mudar para o separador com ${dados.pedido}` : "Fechar o separador de publicidade", pts, acoes.current, 1, sucesso, id === "separador" ? "Lê o título de cada separador antes de clicar: um clique no certo chega." : "Cada separador tem o seu ×; fecha o da publicidade sem fechar os outros.") });
     acoes.current = 0;
     setFeedback(sucesso ? "Certo." : "Tarefa passada.");
     window.setTimeout(() => {
@@ -379,7 +398,8 @@ function RondaHistorico({ config, contexto, aoConcluir }: { config: ConfigArquiv
     else if (fase === "frente" && atual === alvoFrente.id) concluir("avancar", true, dados.alvoFrente - dados.alvoAtras);
   }
   function concluir(id: string, sucesso: boolean, otimo = 1) {
-    resultados.current.push({ tarefa: id, pontos: sucesso ? Math.min(1, otimo / Math.max(1, acoes.current)) : 0 });
+    const pts = sucesso ? Math.min(1, otimo / Math.max(1, acoes.current)) : 0;
+    resultados.current.push({ tarefa: id, pontos: pts, linha: linha(id === "retroceder" ? `Voltar à página “${alvoAtras.titulo}”` : `Avançar até à página “${alvoFrente.titulo}”`, pts, acoes.current, otimo, sucesso, id === "retroceder" ? "Conta quantas páginas tens de recuar e carrega em ← esse número de vezes." : "O botão → refaz o caminho que já fizeste, uma página de cada vez.") });
     acoes.current = 0;
     setFeedback(sucesso ? "Certo." : "Tarefa passada.");
     window.setTimeout(() => {
@@ -432,7 +452,7 @@ function RondaFim({ config, contexto, endereco, aoConcluir }: { config: ConfigAr
     <div className="grid gap-3">
       <Instrucao numero={1} total={1}>{feito ? (escolha === art.correta ? "Certo." : `Não. A última palavra era “${art.correta}”.`) : "Qual é a última palavra deste artigo? Desce até ao fim da página para descobrir."}</Instrucao>
       <Janela endereco={endereco}>
-        <div style={{ maxHeight: 320, overflowY: "auto" }} tabIndex={0} aria-label="Artigo (área com deslocamento)">
+        <div style={{ maxHeight: 320, overflowY: "auto" }} tabIndex={0} role="region" aria-label="Artigo (área com deslocamento)">
           <div className="px-6 py-3 font-bold" style={{ position: "sticky", top: 0, background: "var(--tecla)", borderBottom: "1px solid var(--linha)", zIndex: 1 }}>
             {contexto === "laboratorio" ? "Caderno de Laboratório · Reunião da equipa" : "O Recreio · Reunião da redação"}
           </div>
@@ -446,7 +466,7 @@ function RondaFim({ config, contexto, endereco, aoConcluir }: { config: ConfigAr
         {art.opcoes.map((o) => <BotaoRadio key={o} id={`fim-${o}`} name="fim" rotulo={o} checked={escolha === o} disabled={feito} onChange={() => setEscolha(o)} />)}
       </fieldset>
       <div>
-        <Botao disabled={!escolha || feito} onClick={() => { setFeito(true); window.setTimeout(() => aoConcluir([{ tarefa: "fim_pagina", pontos: escolha === art.correta ? 1 : 0 }]), 1000); }}>Responder</Botao>
+        <Botao disabled={!escolha || feito} onClick={() => { setFeito(true); window.setTimeout(() => aoConcluir([{ tarefa: "fim_pagina", pontos: escolha === art.correta ? 1 : 0, linha: { tarefa: "Encontrar a última palavra do artigo", resultado: escolha === art.correta ? "certo" : "errado", resposta: escolha ?? "", certa: art.correta, feedback: escolha === art.correta ? undefined : "Desce com a barra de deslocamento (ou a roda do rato) até não haver mais texto. O cabeçalho fixo não faz parte do artigo." } }]), 1000); }}>Responder</Botao>
       </div>
     </div>
   );

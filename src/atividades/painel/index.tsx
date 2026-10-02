@@ -4,7 +4,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Contexto } from "../../preferencias/preferencias";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Botao, BotaoRadio, CaixaVerificacao, ForcarClaro, Interruptor, Seletor } from "../../ui";
 
 export interface ConfigPainel {
@@ -198,7 +198,7 @@ export function gerarParametros(r: () => number = Math.random): Parametros {
 }
 
 function semAcentos(t: string): string {
-  return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
 
 /** Tarefas desta tentativa: alvos vêm dos parâmetros; nomes vêm do cenário; `dificil` retira as pistas. */
@@ -268,6 +268,29 @@ export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
   5: { pool: BASE4, n: 16, dificil: true },
 };
 
+/** Onde está o controlo de cada tarefa (para o relatório). */
+const ONDE: Record<string, string> = {
+  termos: "A caixa “Li e aceito os termos” está junto ao botão Enviar.",
+  notificacoes: "O interruptor Notificações está nas Definições.",
+  notificacoes_off: "O interruptor Notificações está nas Definições; ligado fica colorido.",
+  distrito: "O distrito escolhe-se na lista pendente das Definições.",
+  fechar: "As janelas fecham-se no botão Fechar ou clicando fora delas.",
+  pagina: "Os números das páginas estão por baixo dos resultados.",
+  caminho: "O caminho (“rasto”) fica por cima do artigo: Início › Secção.",
+  newsletter: "A caixa da newsletter está nas Definições.",
+  newsletter_off: "Para deixar de receber, desmarca a caixa da newsletter.",
+  tamanho: "O tamanho do texto escolhe-se com os botões de opção nas Definições.",
+  separador: "Os separadores estão por baixo do caminho, em linha.",
+  menu: "O menu principal abre-se no botão ☰, no canto superior esquerdo.",
+  acordeao: "As perguntas frequentes abrem-se clicando no título de cada uma.",
+  enviar: "O botão Enviar só fica ativo depois de marcares “Li e aceito os termos”.",
+  desfazer: "Depois de apagar, aparece uma mensagem em baixo com o botão Anular.",
+  volume: "O volume ajusta-se arrastando o cursor ou com as setas do teclado.",
+  pesquisar: "A caixa de pesquisa está no canto superior direito; carrega em Enter no fim.",
+  ligacao: "As ligações do rodapé ficam no fundo da página, sublinhadas.",
+  data: "No campo de data, escolhe o dia no calendário ou escreve-o.",
+};
+
 export function prepararTarefa(t: Tarefa | undefined, e: Estado): Estado {
   return t ? { ...e, ...t.repor } : e;
 }
@@ -291,6 +314,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
   };
   const [erros, setErros] = useState(0);
   const pontos = useRef(0);
+  const relatorio = useRef<LinhaRelatorio[]>([]);
   const penalizacao = useRef(0);
   const inicioTarefa = useRef(performance.now());
   const inicioTudo = useRef(performance.now());
@@ -315,6 +339,12 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
     const p = erros === 0 ? 1 : erros === 1 ? 0.5 : 0;
     pontos.current += p;
     if (dur > 20) penalizacao.current = Math.min(10, penalizacao.current + Math.min(2, (dur - 20) / 10));
+    relatorio.current.push({
+      tarefa: tarefa.instrucao,
+      resultado: p === 1 ? "certo" : p === 0.5 ? "parcial" : "errado",
+      resposta: erros === 0 ? `À primeira (${Math.round(dur)} s)` : `${erros + 1} tentativas (${Math.round(dur)} s)`,
+      feedback: p === 1 && dur <= 20 ? undefined : (dur > 20 ? `Demoraste mais de 20 segundos. ` : "") + (ONDE[tarefa.id] ?? ""),
+    });
     setFeedback(p === 1 ? "Certo à primeira." : p === 0.5 ? "Certo à segunda." : "Concluído, mas com várias tentativas.");
     window.setTimeout(() => {
       concluindo.current = false;
@@ -326,6 +356,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
           pontuacao: limitar(100 * (pontos.current / tarefas.length) - penalizacao.current),
           duracaoMs: performance.now() - inicioTudo.current,
           metricas: { pontos: pontos.current, tarefas: tarefas.length, penalizacaoTempo: Math.round(penalizacao.current) },
+          relatorio: relatorio.current,
         });
         return;
       }

@@ -2,7 +2,7 @@
 // Escrever expressões matemáticas num campo de texto (notação linear + paleta de símbolos) e reconhecer
 // notações corretas. Mede a competência de "escrever matemática no teclado" que as provas digitais exigem.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao, useTemporizador } from "../../motor/util";
 import { Botao, BotaoRadio } from "../../ui";
 import { corresponde } from "./normalizar";
@@ -134,10 +134,30 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
   },
 };
 
+/** Versão em texto simples da marcação (para o relatório). */
+function legivel(m: string): string {
+  return m
+    .replace(/frac\{([^}]*)\}\{([^}]*)\}/g, "($1)/($2)")
+    .replace(/sqrt\{([^}]*)\}/g, "√($1)")
+    .replace(/\^\{([^}]*)\}/g, "^$1")
+    .replace(/_\{([^}]*)\}/g, "_$1");
+}
+
+/** Dica de notação a partir do que a expressão contém. */
+function dicaNotacao(m: string): string {
+  if (m.includes("frac")) return "Fração: numerador / denominador; se houver somas, põe-nas entre parênteses.";
+  if (m.includes("sqrt")) return "Raiz quadrada: √ da paleta ou sqrt( ), com o que está dentro entre parênteses.";
+  if (m.includes("^")) return "Expoente: escreve ^ (acento circunflexo) e depois o expoente, por exemplo x^2.";
+  if (m.includes("_")) return "Índice: escreve _ (underscore) e depois o índice, por exemplo x_1.";
+  if (/[≤≥≠]/.test(m)) return "Desigualdades: ≤ escreve-se <=, ≥ escreve-se >= e ≠ escreve-se !=.";
+  if (m.includes(",")) return "Em Portugal a parte decimal separa-se com vírgula.";
+  return "Copia a expressão símbolo a símbolo; os espaços não contam.";
+}
+
 /** Renderiza a marcação mínima de `mostrar` para HTML legível (sup, sub, fração, raiz). */
 export function Formula({ texto }: { texto: string }) {
   return (
-    <span className="formula" aria-label={texto.replace(/frac\{([^}]*)\}\{([^}]*)\}/g, "($1) a dividir por ($2)").replace(/sqrt\{([^}]*)\}/g, "raiz quadrada de $1").replace(/\^\{([^}]*)\}/g, " elevado a $1").replace(/_\{([^}]*)\}/g, " índice $1")}>
+    <span className="formula" role="img" aria-label={texto.replace(/frac\{([^}]*)\}\{([^}]*)\}/g, "($1) a dividir por ($2)").replace(/sqrt\{([^}]*)\}/g, "raiz quadrada de $1").replace(/\^\{([^}]*)\}/g, " elevado a $1").replace(/_\{([^}]*)\}/g, " índice $1")}>
       {render(texto)}
     </span>
   );
@@ -219,8 +239,20 @@ function Matematica({ config, nivel, modo, extensaoTempo, aoTerminar }: PropsAti
     campo.current?.focus();
   }, [indice]);
 
+  const relatorio = useRef<LinhaRelatorio[]>([]);
   function avancar(certo: boolean) {
     if (certo) certos.current++;
+    if (item.tipo === "escrever") {
+      relatorio.current.push({
+        tarefa: `Escrever ${legivel(item.mostrar)}`,
+        resultado: certo ? (tentativa === 0 ? "certo" : "parcial") : "errado",
+        resposta: valor,
+        certa: item.aceita[0],
+        feedback: certo && tentativa === 0 ? undefined : item.ajuda ?? dicaNotacao(item.mostrar),
+      });
+    } else {
+      relatorio.current.push({ tarefa: item.pergunta, resultado: certo ? "certo" : "errado", resposta: escolha === null ? undefined : item.opcoes[escolha], certa: item.opcoes[item.correta], feedback: certo ? undefined : "Abre a legenda “Como se escreve matemática no teclado” para rever as notações." });
+    }
     setFeedback(certo ? "certo" : "errado");
     window.setTimeout(() => {
       setFeedback(null);
@@ -232,7 +264,7 @@ function Matematica({ config, nivel, modo, extensaoTempo, aoTerminar }: PropsAti
         setTerminou(true);
         const ms = decorridoExato();
         const fator = Math.min(1, (config.tempoReferenciaSeg * 1000 * extensaoTempo) / Math.max(1, ms));
-        aoTerminar({ pontuacao: limitar(100 * (0.8 * (certos.current / itens.length) + 0.2 * fator)), duracaoMs: ms, metricas: { certos: certos.current, itens: itens.length, usouPaleta: usouPaleta.current, segundos: Math.round(ms / 1000) } });
+        aoTerminar({ pontuacao: limitar(100 * (0.8 * (certos.current / itens.length) + 0.2 * fator)), duracaoMs: ms, metricas: { certos: certos.current, itens: itens.length, usouPaleta: usouPaleta.current, segundos: Math.round(ms / 1000) }, relatorio: relatorio.current });
         return;
       }
       setIndice(prox);
@@ -293,7 +325,7 @@ function Matematica({ config, nivel, modo, extensaoTempo, aoTerminar }: PropsAti
               {item.ajuda}
             </p>
           )}
-          <div className="paleta" aria-label="Paleta de símbolos">
+          <div className="paleta" role="group" aria-label="Paleta de símbolos">
             {config.paleta.map((s) => (
               <button key={s} type="button" onClick={() => inserir(s)} aria-label={`Inserir ${s}`} disabled={feedback !== null}>
                 {s}

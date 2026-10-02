@@ -72,7 +72,7 @@ export function Treino() {
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl">Treino de competências</h1>
-        <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: 1 estrela a partir de 50 pontos, 2 estrelas a partir de 75 e 3 estrelas a partir de 90.</p>
+        <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: abaixo de 50 pontos convém tentar novamente; de 50 a 74, 1 estrela; de 75 a 90, 2 estrelas; de 91 a 100, 3 estrelas.</p>
       </header>
       <div role="tablist" aria-label="Nível de dificuldade" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
         {NIVEIS.map((n) => (
@@ -90,13 +90,13 @@ export function Treino() {
             <Cartao key={a.slug} className="grid gap-2 content-start">
               <div className="flex gap-2 items-baseline">
                 <h2 className="text-xl">{a.titulo[prefs.contexto]}</h2>
-                <span className="ml-auto text-lg" aria-label={`${estrelas} de 3 estrelas`}>
+                <span className="ml-auto text-lg" role="img" aria-label={`${estrelas} de 3 estrelas`}>
                   {"★".repeat(estrelas)}
-                  <span style={{ color: "var(--linha)" }}>{"★".repeat(3 - estrelas)}</span>
+                  <span aria-hidden="true" style={{ color: "var(--suave)" }}>{"☆".repeat(3 - estrelas)}</span>
                 </span>
               </div>
               <Etiqueta>{NOME_DOMINIO[a.dominio]}</Etiqueta>
-              <div className="grid grid-cols-5 gap-1 mt-1" aria-label="Melhor por nível">
+              <div className="grid grid-cols-5 gap-1 mt-1" role="group" aria-label="Melhor por nível">
                 {NIVEIS.map((k) => {
                   const m = repositorioLocal.melhor(a.slug, k);
                   return (

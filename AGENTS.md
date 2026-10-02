@@ -38,6 +38,8 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 ### Motor de atividades
 
 - Aleatoriedade: `src/motor/aleatorio.ts` (`escolher`, `misturar`, `amostra`, `baralharOpcoes`, `semente` para testes). **Todas as atividades variam por tentativa**: tarefas/alvos (Painel), cópias com erros geradas (Revisão, `gerarCopia`), árvores de pastas, separadores, histórico e artigos (Arquivo), pessoa fictícia (Cartão), itens (Fecho, Simulador), textos alternativos (Notícia, Paginação, Encontra, Matemática). Conteúdo extra só entra na avaliação, nunca na prática (para não se repetir). Cada gerador tem um teste com várias sementes.
+- Relatório da atividade: cada atividade devolve `relatorio: LinhaRelatorio[]` em `aoTerminar` (tarefa, resultado certo/parcial/errado/saltado, resposta, certa, feedback). O ecrã de resultado (`src/motor/Relatorio.tsx`) mostra o resumo (pontuação, estrelas, pontos para a estrela seguinte, indicações) e a tabela. O relatório não vai na telemetria nem fica guardado.
+- Estrelas: `LIMIARES_ESTRELAS` = 50 / 75 / 91 (abaixo de 50, tentar novamente; 50–74 uma; 75–90 duas; 91–100 três).
 - Contratos em `src/motor/tipos.ts`: `Nivel` 1–5, `Ciclo` (c1, c2, c3, es → nível 1–4), `Dominio`, `DefinicaoAtividade<C>` (`niveis: Record<Nivel, C>`, `pratica(c)`, `Componente`, `dica(metricas)`), faixas e estrelas.
 - `src/motor/Atividade.tsx` corre as etapas intro → prática → avaliação → resultado e grava a tentativa. O percurso do teste (`src/paginas/Teste.tsx`) reutiliza-o com `aoConcluir`.
 - Cada atividade é uma pasta em `src/atividades/<slug>/` com configuração dos 5 níveis, componente e pontuação pura testável. Registo em `src/atividades/index.ts`. Atividades por fazer ficam em `embreve.tsx` com `disponivel: false`.

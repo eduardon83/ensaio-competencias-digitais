@@ -4,7 +4,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Contexto } from "../../preferencias/preferencias";
 import { TECLA_CTRL } from "../../preferencias/preferencias";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao, useTemporizador } from "../../motor/util";
 import { Botao, BotaoRadio } from "../../ui";
 import { baralharOpcoes, escolher, misturar } from "../../motor/aleatorio";
@@ -251,6 +251,19 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigEncontra> = {
   },
 };
 
+/** Indica em que secção do texto (ou tabela) aparece a resposta certa. */
+function ondeEsta(t: Texto, certa: string): string {
+  const norm = (x: string) => x.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const chave = norm(certa).replace(/^(o|a|os|as|no|na|nos|nas|do|da|ao|à) /, "").replace(/[.]/g, "");
+  for (const s of t.secoes) {
+    if (s.tabela && s.tabela.linhas.some((l) => l.some((c) => norm(c).includes(chave) || chave.includes(norm(c)) && norm(c).length > 1))) return `A resposta está na tabela da secção “${s.titulo}”.`;
+    if (s.paragrafos.some((p) => norm(p).includes(chave))) return `A resposta está na secção “${s.titulo}”. Lê os títulos primeiro para saberes onde procurar.`;
+  }
+  const palavra = chave.split(/\s+/).find((w) => w.length > 3);
+  if (palavra) for (const s of t.secoes) if (s.paragrafos.some((p) => norm(p).includes(palavra))) return `Procura “${palavra}”: a resposta está na secção “${s.titulo}”.`;
+  return "Volta a ler a pergunta e procura no texto uma palavra dela.";
+}
+
 function realcar(texto: string, termo: string): ReactNode {
   if (!termo || termo.length < 2) return texto;
   const partes = texto.split(new RegExp(`(${termo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"));
@@ -423,6 +436,25 @@ function Encontra({ config, contexto, nivel, modo, extensaoTempo, aoTerminar }: 
       pontuacao: limitar(100 * (0.8 * (certas / perguntas.length) + 0.2 * fatorTempo)),
       duracaoMs: ms,
       metricas: { certas, perguntas: perguntas.length, usouProcurar: usouProcurar.current, segundos: Math.round(ms / 1000) },
+      relatorio: [
+        ...perguntas.map<LinhaRelatorio>((q, i) => {
+          const r = respostas[i];
+          const certa = q.opcoes[q.correta];
+          return {
+            tarefa: q.pergunta,
+            resultado: r === null ? "saltado" : r === q.correta ? "certo" : "errado",
+            resposta: r === null ? undefined : q.opcoes[r],
+            certa,
+            feedback: r === q.correta ? undefined : ondeEsta(texto, certa),
+          };
+        }),
+        {
+          tarefa: "Usar a procura no texto",
+          resultado: usouProcurar.current ? "certo" : "parcial",
+          resposta: usouProcurar.current ? "Usaste a procura" : "Não usaste a procura",
+          feedback: usouProcurar.current ? undefined : "Em textos longos, Ctrl+F (ou a caixa Procurar) leva-te diretamente à palavra da pergunta.",
+        },
+      ],
     });
   }
 

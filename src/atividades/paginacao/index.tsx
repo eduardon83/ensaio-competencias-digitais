@@ -6,7 +6,7 @@ import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useDraggable,
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Contexto } from "../../preferencias/preferencias";
-import { baralhar, definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { baralhar, definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Feedback, Instrucao } from "../../motor/util";
 import { Botao } from "../../ui";
 
@@ -164,8 +164,10 @@ function Paginacao({ config, contexto, nivel, modo, aoTerminar }: PropsAtividade
   const movimentos = useRef(0);
   const otimo = useRef(0);
   const inicio = useRef(performance.now());
+  const relatorio = useRef<LinhaRelatorio[]>([]);
 
-  function proxima(certos: number, n: number, movs: number) {
+  function proxima(certos: number, n: number, movs: number, linhas: LinhaRelatorio[] = []) {
+    relatorio.current.push(...linhas);
     acertos.current += certos;
     total.current += n;
     movimentos.current += movs;
@@ -176,6 +178,16 @@ function Paginacao({ config, contexto, nivel, modo, aoTerminar }: PropsAtividade
         pontuacao: limitar(100 * (acertos.current / total.current) - 2 * extra),
         duracaoMs: performance.now() - inicio.current,
         metricas: { acertos: acertos.current, total: total.current, movimentos: movimentos.current, movimentosOtimos: otimo.current },
+        relatorio: [
+          ...relatorio.current,
+          {
+            tarefa: "Movimentos",
+            resultado: extra === 0 ? "certo" : "parcial",
+            resposta: `${movimentos.current} movimentos`,
+            certa: `Até ${Math.floor(1.5 * otimo.current)} sem desconto`,
+            feedback: extra > 0 ? "Decide o destino antes de mover: cada movimento a mais desconta 2 pontos." : undefined,
+          },
+        ],
       });
       return;
     }
@@ -197,7 +209,7 @@ function Paginacao({ config, contexto, nivel, modo, aoTerminar }: PropsAtividade
 }
 
 // ── Ronda 1: ordenar (lista ordenável) ───────────────────────────────────────
-function RondaOrdenar({ dados, semente, aoConcluir }: { dados: Ordenar; semente: number; aoConcluir: (certos: number, n: number, movs: number) => void }) {
+function RondaOrdenar({ dados, semente, aoConcluir }: { dados: Ordenar; semente: number; aoConcluir: (certos: number, n: number, movs: number, linhas: LinhaRelatorio[]) => void }) {
   const [ordem, setOrdem] = useState(() => {
     // Nunca começa já na ordem certa.
     let o = baralhar(dados.itens.map((_, i) => i), semente);
@@ -240,7 +252,21 @@ function RondaOrdenar({ dados, semente, aoConcluir }: { dados: Ordenar; semente:
             {certos} de {ordem.length} na posição certa.
           </Feedback>
           <div>
-            <Botao onClick={() => aoConcluir(certos, ordem.length, movs)}>Continuar</Botao>
+            <Botao
+              onClick={() =>
+                aoConcluir(certos, ordem.length, movs, [
+                  {
+                    tarefa: dados.titulo,
+                    resultado: certos === ordem.length ? "certo" : certos >= ordem.length / 2 ? "parcial" : "errado",
+                    resposta: ordem.map((i) => dados.itens[i]).join(" → "),
+                    certa: dados.itens.join(" → "),
+                    feedback: certos === ordem.length ? undefined : "Procura primeiro o início e o fim; depois encaixa o que fica no meio.",
+                  },
+                ])
+              }
+            >
+              Continuar
+            </Botao>
           </div>
         </>
       ) : (
@@ -276,15 +302,19 @@ function ItemOrdenavel({ id, texto, posicao, estado, aoMover, desativado }: { id
 
 // ── Rondas 2 e 3: colocar itens em zonas (classificar) ou em alvos (ligar) ──
 interface Colocacao {
+  resumo: string; // nome da ronda no relatório
+  dica: string;
   zonas: { id: string; nome: string; capacidade: number | null }[];
   itens: { id: string; texto: string; zonaCerta: string }[];
   titulo: string;
 }
 
-function RondaClassificar({ dados, semente, aoConcluir }: { dados: Classificar; semente: number; aoConcluir: (c: number, n: number, m: number) => void }) {
+function RondaClassificar({ dados, semente, aoConcluir }: { dados: Classificar; semente: number; aoConcluir: (c: number, n: number, m: number, linhas: LinhaRelatorio[]) => void }) {
   const col = useMemo<Colocacao>(
     () => ({
       titulo: "Arrasta cada item para a secção certa. Em alternativa, toca no item e depois na secção.",
+      resumo: "Classificar os itens pelas secções",
+      dica: "Lê o nome de todas as secções antes de começar e pergunta-te a qual pertence cada item.",
       zonas: dados.categorias.map((c, i) => ({ id: `z${i}`, nome: c, capacidade: null })),
       itens: baralhar(dados.itens, semente).map((it, i) => ({ id: `i${i}`, texto: it.t, zonaCerta: `z${it.c}` })),
     }),
@@ -293,10 +323,12 @@ function RondaClassificar({ dados, semente, aoConcluir }: { dados: Classificar; 
   return <Colocar col={col} aoConcluir={aoConcluir} />;
 }
 
-function RondaLigar({ dados, semente, aoConcluir }: { dados: Ligar; semente: number; aoConcluir: (c: number, n: number, m: number) => void }) {
+function RondaLigar({ dados, semente, aoConcluir }: { dados: Ligar; semente: number; aoConcluir: (c: number, n: number, m: number, linhas: LinhaRelatorio[]) => void }) {
   const col = useMemo<Colocacao>(
     () => ({
       titulo: "Liga cada descrição ao termo certo: arrasta-a para o termo, ou toca na descrição e depois no termo.",
+      resumo: "Ligar cada descrição ao termo",
+      dica: "Começa pelos pares de que tens a certeza; os que sobram ficam mais fáceis.",
       zonas: dados.pares.map((p, i) => ({ id: `z${i}`, nome: p[0], capacidade: 1 })),
       itens: baralhar(dados.pares.map((p, i) => ({ texto: p[1], z: `z${i}` })), semente).map((it, i) => ({ id: `i${i}`, texto: it.texto, zonaCerta: it.z })),
     }),
@@ -305,7 +337,7 @@ function RondaLigar({ dados, semente, aoConcluir }: { dados: Ligar; semente: num
   return <Colocar col={col} aoConcluir={aoConcluir} />;
 }
 
-function Colocar({ col, aoConcluir }: { col: Colocacao; aoConcluir: (c: number, n: number, m: number) => void }) {
+function Colocar({ col, aoConcluir }: { col: Colocacao; aoConcluir: (c: number, n: number, m: number, linhas: LinhaRelatorio[]) => void }) {
   const [onde, setOnde] = useState<Record<string, string | null>>(() => Object.fromEntries(col.itens.map((i) => [i.id, null])));
   const [selecionado, setSelecionado] = useState<string | null>(null);
   const [movs, setMovs] = useState(0);
@@ -360,7 +392,20 @@ function Colocar({ col, aoConcluir }: { col: Colocacao; aoConcluir: (c: number, 
             {certos} de {col.itens.length} no sítio certo.
           </Feedback>
           <div>
-            <Botao onClick={() => aoConcluir(certos, col.itens.length, movs)}>Continuar</Botao>
+            <Botao
+              onClick={() => {
+                const nomeZona = (id: string | null) => col.zonas.find((z) => z.id === id)?.nome ?? "(sem lugar)";
+                const linhas: LinhaRelatorio[] = [
+                  { tarefa: col.resumo, resultado: certos === col.itens.length ? "certo" : certos >= col.itens.length / 2 ? "parcial" : "errado", resposta: `${certos} de ${col.itens.length} no sítio certo` },
+                  ...col.itens
+                    .filter((i) => onde[i.id] !== i.zonaCerta)
+                    .map<LinhaRelatorio>((i) => ({ tarefa: `“${i.texto}”`, resultado: "errado", resposta: nomeZona(onde[i.id]), certa: nomeZona(i.zonaCerta), feedback: col.dica })),
+                ];
+                aoConcluir(certos, col.itens.length, movs, linhas);
+              }}
+            >
+              Continuar
+            </Botao>
           </div>
         </>
       ) : (

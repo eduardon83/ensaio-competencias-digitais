@@ -53,10 +53,21 @@ export const NOME_DOMINIO: Record<Dominio, string> = {
 
 export type Metricas = Record<string, number | string | boolean>;
 
+/** Uma linha do relatório da atividade (uma por tarefa/pergunta). Fica só no ecrã: não é enviada na telemetria. */
+export type EstadoLinha = "certo" | "parcial" | "errado" | "saltado";
+export interface LinhaRelatorio {
+  tarefa: string; // o que era pedido
+  resultado: EstadoLinha;
+  resposta?: string; // o que o aluno fez/escreveu
+  certa?: string; // resposta ou caminho certo
+  feedback?: string; // indicação concreta para melhorar
+}
+
 export interface ResultadoAtividade {
   pontuacao: number; // inteiro 0..100
   duracaoMs: number;
   metricas: Metricas;
+  relatorio?: LinhaRelatorio[];
 }
 
 export type Modo = "pratica" | "avaliacao";
@@ -112,10 +123,12 @@ export const FAIXAS: Faixa[] = [
 export function faixaDe(p: number): Faixa {
   return FAIXAS.find((f) => p >= f.min && p <= f.max) ?? FAIXAS[0];
 }
+/** Estrelas: abaixo de 50 tentar novamente; 50 a 74 uma; 75 a 90 duas; 91 a 100 três. */
+export const LIMIARES_ESTRELAS = [50, 75, 91] as const;
 export function estrelasDe(p: number): 0 | 1 | 2 | 3 {
-  if (p >= 90) return 3;
-  if (p >= 75) return 2;
-  if (p >= 50) return 1;
+  if (p >= LIMIARES_ESTRELAS[2]) return 3;
+  if (p >= LIMIARES_ESTRELAS[1]) return 2;
+  if (p >= LIMIARES_ESTRELAS[0]) return 1;
   return 0;
 }
 export const CARIMBO_MINIMO = 85;

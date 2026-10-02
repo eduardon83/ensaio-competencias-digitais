@@ -44,6 +44,7 @@ Nenhuma.
 | Atividade: encontra | mosaico | claro | ✓ |
 | Atividade: simulador | mosaico | claro | ✓ |
 | Atividade: matematica | mosaico | claro | ✓ |
+| Resultado com relatório (Revisão) | mosaico | claro | ✓ |
 | Início | mosaico | escuro | ✓ |
 | Treinar | mosaico | escuro | ✓ |
 | Teste | mosaico | escuro | ✓ |
@@ -71,6 +72,7 @@ Nenhuma.
 | Atividade: encontra | mosaico | escuro | ✓ |
 | Atividade: simulador | mosaico | escuro | ✓ |
 | Atividade: matematica | mosaico | escuro | ✓ |
+| Resultado com relatório (Revisão) | mosaico | escuro | ✓ |
 | Início | original | claro | ✓ |
 | Treinar | original | claro | ✓ |
 | Teste | original | claro | ✓ |
@@ -98,6 +100,7 @@ Nenhuma.
 | Atividade: encontra | original | claro | ✓ |
 | Atividade: simulador | original | claro | ✓ |
 | Atividade: matematica | original | claro | ✓ |
+| Resultado com relatório (Revisão) | original | claro | ✓ |
 | Início | original | escuro | ✓ |
 | Treinar | original | escuro | ✓ |
 | Teste | original | escuro | ✓ |
@@ -125,3 +128,4 @@ Nenhuma.
 | Atividade: encontra | original | escuro | ✓ |
 | Atividade: simulador | original | escuro | ✓ |
 | Atividade: matematica | original | escuro | ✓ |
+| Resultado com relatório (Revisão) | original | escuro | ✓ |

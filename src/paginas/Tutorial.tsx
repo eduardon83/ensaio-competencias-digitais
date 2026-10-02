@@ -137,7 +137,7 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Pontuação",
     corpo: (
       <>
-        <p className="m-0">Cada atividade dá uma pontuação de 0 a 100. Ganhas uma estrela aos 50 pontos, duas aos 75 e três aos 90. O teu melhor resultado em cada nível fica guardado neste navegador.</p>
+        <p className="m-0">Cada atividade dá uma pontuação de 0 a 100. Abaixo de 50 pontos, convém tentar novamente. De 50 a 74 ganhas uma estrela, de 75 a 90 duas e de 91 a 100 três. O teu melhor resultado em cada nível fica guardado neste navegador.</p>
         <div className="faixa" role="list">
           {FAIXAS.map((f) => (
             <div key={f.nome} role="listitem">

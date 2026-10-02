@@ -4,7 +4,7 @@
 // níveis altos, duas secções com bloqueio.
 // score = 100 × (0,7 × certos / itens + 0,15 × [abriu o resumo antes de submeter] + 0,15 × [nada por responder])
 import { useEffect, useMemo, useRef, useState } from "react";
-import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
+import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { BarraTempo, useTemporizador } from "../../motor/util";
 import { misturar } from "../../motor/aleatorio";
 import { Botao, BotaoRadio, ForcarClaro } from "../../ui";
@@ -28,7 +28,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigSimulador> = {
 type Resposta = number | string | string[] | undefined;
 
 function semAcentos(t: string) {
-  return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
 function correta(it: ItemProva, r: Resposta): boolean {
   switch (it.tipo) {
@@ -74,7 +74,31 @@ function Simulador({ config, extensaoTempo, aoTerminar }: PropsAtividade<ConfigS
     if (terminou) return;
     setTerminou(true);
     const certos = itens.filter((it, i) => correta(it, respostas[i])).length;
+    const mostrar = (it: ItemProva, r: Resposta): string | undefined => {
+      if (r === undefined) return undefined;
+      if (Array.isArray(r)) return r.join(" → ");
+      if (typeof r === "number" && "opcoes" in it) return it.opcoes[r];
+      return String(r);
+    };
+    const certaDe = (it: ItemProva): string =>
+      it.tipo === "curta" ? it.aceita[0] : it.tipo === "calculo" ? String(it.resultado) : it.tipo === "ordenar" ? it.itens.join(" → ") : it.opcoes[it.correta];
+    const DICA: Record<ItemProva["tipo"], string> = {
+      escolha: "Lê todas as opções antes de escolher.",
+      audio: "Ouve outra vez, ou abre a transcrição se precisares.",
+      curta: "Confirma a ortografia da resposta antes de avançar.",
+      calculo: "Usa a calculadora da prova e confirma o resultado.",
+      ordenar: "Usa ▲▼ até a ordem estar certa; a ordem inicial nunca está certa.",
+      tabela: "Usa o zoom (A+) para ler a tabela sem erros.",
+    };
+    const relatorio: LinhaRelatorio[] = itens.map((it, i) => {
+      const r = respostas[i];
+      const ok = correta(it, r);
+      return { tarefa: it.enunciado, resultado: ok ? "certo" : respondida(it, r) ? "errado" : "saltado", resposta: mostrar(it, r), certa: certaDe(it), feedback: ok ? undefined : respondida(it, r) ? DICA[it.tipo] : undefined };
+    });
+    relatorio.push({ tarefa: "Abrir o resumo antes de submeter", resultado: abriuResumo.current ? "certo" : "errado", feedback: abriuResumo.current ? undefined : "O resumo mostra os itens por responder e os marcados para rever." });
+    relatorio.push({ tarefa: "Submeter sem itens por responder", resultado: porResponder === 0 ? "certo" : "errado", resposta: porResponder === 0 ? "Tudo respondido" : `${porResponder} por responder`, feedback: porResponder === 0 ? undefined : "Antes de submeter, volta aos itens em branco." });
     aoTerminar({
+      relatorio,
       pontuacao: limitar(100 * (0.7 * (certos / itens.length) + 0.15 * (abriuResumo.current ? 1 : 0) + 0.15 * (porResponder === 0 ? 1 : 0))),
       duracaoMs: decorridoExato(),
       metricas: { certos, itens: itens.length, abriuResumo: abriuResumo.current, porResponder, marcados: marcados.size, tempoEsgotado, usouCalculadora: calcUsada.current, usouZoom: zoomUsado.current },

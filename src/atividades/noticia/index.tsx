@@ -4,7 +4,8 @@ import type { Contexto } from "../../preferencias/preferencias";
 import { definir, type PropsAtividade } from "../../motor/tipos";
 import { BarraTempo, Instrucao, useTemporizador } from "../../motor/util";
 import { Botao } from "../../ui";
-import { combinarComTeclado, pontuarDactilografia } from "./pontuacao";
+import { combinarComTeclado, pontuarDactilografia, relatorioTexto } from "./pontuacao";
+import type { LinhaRelatorio } from "../../motor/tipos";
 
 export interface ConfigNoticia {
   /** Vários textos por cenário: em cada tentativa é escolhido um ao acaso, para que repetir não seja decorar. */
@@ -127,7 +128,7 @@ function Noticia({ config, modo, contexto, extensaoTempo, aoTerminar }: PropsAti
   const [digitado, setDigitado] = useState("");
   const [etapa, setEtapa] = useState<Etapa>("texto");
   const [terminouTexto, setTerminouTexto] = useState(false);
-  const resultadoTexto = useRef<{ pontuacao: number; precisao: number; wpm: number; ms: number } | null>(null);
+  const resultadoTexto = useRef<{ pontuacao: number; precisao: number; wpm: number; ms: number; relatorio: LinhaRelatorio[] } | null>(null);
   const area = useRef<HTMLTextAreaElement>(null);
   const { restanteMs, decorridoExato } = useTemporizador(etapa === "texto" && !terminouTexto, limiteMs, () => terminarTexto());
 
@@ -142,11 +143,12 @@ function Noticia({ config, modo, contexto, extensaoTempo, aoTerminar }: PropsAti
     let corretos = 0;
     for (let i = 0; i < fonte.length; i++) if (digitado[i] === fonte[i]) corretos++;
     const r = pontuarDactilografia({ corretos, totalFonte: fonte.length, minutos: ms / 60000, alvoWpm: config.alvoWpm });
-    resultadoTexto.current = { ...r, ms };
+    const relatorio = relatorioTexto(fonte, digitado, r.precisao, r.wpm, config.alvoWpm);
+    resultadoTexto.current = { ...r, ms, relatorio };
     if (config.teclado && modo === "avaliacao") {
       setEtapa("pergunta_teclado");
     } else {
-      aoTerminar({ pontuacao: r.pontuacao, duracaoMs: ms, metricas: { wpm: Math.round(r.wpm), precisao: Math.round(r.precisao * 100), tecladoNumerico: "nao_aplicavel" } });
+      aoTerminar({ pontuacao: r.pontuacao, duracaoMs: ms, metricas: { wpm: Math.round(r.wpm), precisao: Math.round(r.precisao * 100), tecladoNumerico: "nao_aplicavel" }, relatorio });
     }
   }
 
@@ -181,15 +183,16 @@ function Noticia({ config, modo, contexto, extensaoTempo, aoTerminar }: PropsAti
           if (tem) setEtapa("teclado");
           else {
             const rt = resultadoTexto.current!;
-            aoTerminar({ pontuacao: rt.pontuacao, duracaoMs: rt.ms, metricas: { wpm: Math.round(rt.wpm), precisao: Math.round(rt.precisao * 100), tecladoNumerico: "saltado" } });
+            aoTerminar({ pontuacao: rt.pontuacao, duracaoMs: rt.ms, metricas: { wpm: Math.round(rt.wpm), precisao: Math.round(rt.precisao * 100), tecladoNumerico: "saltado" }, relatorio: [...rt.relatorio, { tarefa: "Ronda do teclado numérico", resultado: "saltado", feedback: "Ronda saltada sem penalização (sem teclado numérico)." }] });
           }
         }}
-        aoTerminar={(corretos, total, ms, usouNumpad) => {
+        aoTerminar={(corretos, total, ms, usouNumpad, linhasTeclado) => {
           const rt = resultadoTexto.current!;
           aoTerminar({
             pontuacao: combinarComTeclado(rt.pontuacao, { corretos, total }),
             duracaoMs: rt.ms + ms,
             metricas: { wpm: Math.round(rt.wpm), precisao: Math.round(rt.precisao * 100), tecladoNumerico: usouNumpad ? "usado" : "linha_superior", tecladoCorretos: corretos, tecladoTotal: total },
+            relatorio: [...rt.relatorio, ...linhasTeclado],
           });
         }}
       />
@@ -200,7 +203,7 @@ function Noticia({ config, modo, contexto, extensaoTempo, aoTerminar }: PropsAti
     <div className="grid gap-4">
       <Instrucao>Escreve o texto exatamente como está. Os acentos, as maiúsculas e os sinais contam.</Instrucao>
       {restanteMs !== null && <BarraTempo restanteMs={restanteMs} totalMs={limiteMs} />}
-      <div className="cartao p-4 dactilo" aria-label="Texto a copiar" onClick={() => area.current?.focus()}>
+      <div className="cartao p-4 dactilo" role="region" aria-label="Texto a copiar" onClick={() => area.current?.focus()}>
         {spans}
       </div>
       <label className="sr-only" htmlFor="caixa-dactilo">
@@ -247,7 +250,7 @@ function RondaTeclado({
   extensaoTempo: number;
   perguntar: boolean;
   aoResponderPergunta: (temTecladoNumerico: boolean) => void;
-  aoTerminar: (corretos: number, total: number, ms: number, usouNumpad: boolean) => void;
+  aoTerminar: (corretos: number, total: number, ms: number, usouNumpad: boolean, linhas: LinhaRelatorio[]) => void;
 }) {
   const [alvos] = useState(() => gerarValoresTeclado(config));
   const [valores, setValores] = useState<string[]>(() => alvos.map(() => ""));
@@ -267,7 +270,20 @@ function RondaTeclado({
     if (terminou) return;
     setTerminou(true);
     const corretos = valores.filter((v, i) => v.trim().replace(".", ",") === alvos[i]).length;
-    aoTerminar(corretos, alvos.length, decorridoExato(), primeiraTecla === "numpad");
+    const linhas: LinhaRelatorio[] = [
+      {
+        tarefa: "Ronda do teclado numérico",
+        resultado: corretos === alvos.length ? "certo" : corretos >= alvos.length * 0.7 ? "parcial" : "errado",
+        resposta: `${corretos} de ${alvos.length} valores certos`,
+        feedback: primeiraTecla === "numpad" ? "Usaste o teclado numérico." : "Usaste os números da linha de cima. O teclado numérico é mais rápido para muitos valores seguidos.",
+      },
+      ...valores
+        .map((v, i) => ({ v: v.trim().replace(".", ","), i }))
+        .filter(({ v, i }) => v !== alvos[i])
+        .slice(0, 5)
+        .map(({ v, i }) => ({ tarefa: `Valor ${i + 1}`, resultado: "errado" as const, resposta: v, certa: alvos[i], feedback: v === "" ? "Valor por introduzir." : alvos[i].includes(",") && !v.includes(",") ? "Falta a vírgula decimal (tecla , ou . do teclado numérico)." : "Algarismos trocados ou em falta." })),
+    ];
+    aoTerminar(corretos, alvos.length, decorridoExato(), primeiraTecla === "numpad", linhas);
   }
 
   if (perguntar) {

@@ -7,7 +7,8 @@ import { usePreferencias } from "../preferencias/preferencias";
 import { Botao, Etiqueta, LigacaoBotao } from "../ui";
 import { DISPONIVEIS } from "../atividades";
 import { SeletorContexto } from "../componentes/SeletorContexto";
-import { CARIMBO_MINIMO, NOME_DOMINIO, NOME_NIVEL, estrelasDe, type DefinicaoAtividade, type Nivel, type ResultadoAtividade } from "./tipos";
+import { ResumoRelatorio, TabelaRelatorio } from "./Relatorio";
+import { CARIMBO_MINIMO, NOME_DOMINIO, NOME_NIVEL, estrelasDe, type DefinicaoAtividade, type Nivel, type ResultadoAtividade, type LinhaRelatorio } from "./tipos";
 
 type Etapa = "intro" | "pratica" | "avaliacao" | "resultado";
 
@@ -41,6 +42,7 @@ export function Atividade({
   const [etapa, setEtapa] = useState<Etapa>("intro");
   const [chave, setChave] = useState(0); // força remontagem ao repetir
   const [tentativa, setTentativa] = useState<Tentativa | null>(null);
+  const [relatorio, setRelatorio] = useState<LinhaRelatorio[] | undefined>(undefined);
   const config = definicao.niveis[nivel];
   const configPratica = useMemo(() => definicao.pratica(config), [definicao, config]);
   const melhorAnterior = useMemo(() => repositorioLocal.melhor(definicao.slug, nivel), [definicao.slug, nivel, chave]);
@@ -60,6 +62,7 @@ export function Atividade({
       aluno: etiquetas?.aluno,
     });
     setTentativa(t);
+    setRelatorio(r.relatorio);
     setEtapa("resultado");
   }
 
@@ -142,6 +145,7 @@ export function Atividade({
       {etapa === "resultado" && tentativa && (
         <Resultado
           tentativa={tentativa}
+          relatorio={relatorio}
           definicao={definicao}
           nivel={nivel}
           melhorAnterior={melhorAnterior}
@@ -160,6 +164,7 @@ export function Atividade({
 
 function Resultado({
   tentativa,
+  relatorio,
   definicao,
   nivel,
   melhorAnterior,
@@ -168,6 +173,7 @@ function Resultado({
   rotuloContinuar,
 }: {
   tentativa: Tentativa;
+  relatorio?: LinhaRelatorio[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   definicao: DefinicaoAtividade<any>;
   nivel: Nivel;
@@ -187,20 +193,20 @@ function Resultado({
     <section className="grid gap-4" aria-labelledby="res-t">
       <div className="cartao p-6 grid gap-3 md:grid-cols-[auto_1fr] md:items-center">
         <div className="text-center md:pr-6 md:border-r" style={{ borderColor: "var(--linha)" }}>
-          <div className="text-6xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)", color: "var(--acento)" }} aria-label={`${tentativa.pontuacao} pontos`}>
+          <div className="text-6xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)", color: "var(--acento)" }} role="img" aria-label={`${tentativa.pontuacao} pontos`}>
             {tentativa.pontuacao}
           </div>
           <div className="text-sm" style={{ color: "var(--suave)" }}>
             em 100
           </div>
-          <div className="text-2xl mt-1" aria-label={`${estrelas} de 3 estrelas`}>
+          <div className="text-2xl mt-1" role="img" aria-label={`${estrelas} de 3 estrelas`}>
             {"★".repeat(estrelas)}
-            <span style={{ color: "var(--linha)" }}>{"★".repeat(3 - estrelas)}</span>
+            <span aria-hidden="true" style={{ color: "var(--suave)" }}>{"☆".repeat(3 - estrelas)}</span>
           </div>
         </div>
         <div className="grid gap-2">
           <h2 id="res-t" className="text-2xl">
-            {tentativa.pontuacao >= CARIMBO_MINIMO ? `Ganhaste o ${ctx.resultado.carimbo} de ${NOME_DOMINIO[definicao.dominio].toLowerCase()}.` : tentativa.pontuacao >= 50 ? "Bom trabalho." : "Um bom começo."}
+            {tentativa.pontuacao >= CARIMBO_MINIMO ? `Ganhaste o ${ctx.resultado.carimbo} de ${NOME_DOMINIO[definicao.dominio].toLowerCase()}.` : tentativa.pontuacao >= 75 ? "Bom trabalho." : tentativa.pontuacao >= 50 ? "Vais no bom caminho." : "Tenta novamente: vais conseguir."}
           </h2>
           {tentativa.pontuacao >= CARIMBO_MINIMO && (
             <p className="m-0">
@@ -208,15 +214,14 @@ function Resultado({
             </p>
           )}
           {recorde && melhorAnterior && <p className="m-0 font-bold" style={{ color: "var(--certo)" }}>Novo recorde pessoal (antes: {melhorAnterior.pontuacao}).</p>}
-          <p className="m-0">
-            <strong>Dica:</strong> {dica}
-          </p>
+          <ResumoRelatorio pontuacao={tentativa.pontuacao} linhas={relatorio} dica={dica} />
           <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
             Tempo: {Math.round(tentativa.duracaoMs / 1000)} s · Nível {nivel} ({NOME_NIVEL[nivel]})
             {tentativa.extensaoTempo !== 1 && <> · tempo alargado ×{tentativa.extensaoTempo}</>}
           </p>
         </div>
       </div>
+      {relatorio && relatorio.length > 0 && <TabelaRelatorio linhas={relatorio} />}
       <div className="flex gap-3 flex-wrap">
         {aoContinuar ? (
           <Botao grande onClick={aoContinuar}>

@@ -60,7 +60,9 @@ Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repe
 
 Carimbos: cada competência dá um carimbo a partir de 85 pontos. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".
 
-Cada atividade começa com um briefing e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (50, 75 e 90 pontos) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
+No fim de cada atividade aparece um relatório: para cada tarefa, se ficou certa, em parte ou errada, a resposta dada, a resposta certa e uma indicação para melhorar, além de quantos pontos faltam para a estrela seguinte.
+
+Cada atividade começa com um briefing e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (1 estrela de 50 a 74 pontos, 2 de 75 a 90, 3 de 91 a 100; abaixo de 50, tentar novamente) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
 
 
 ACESSIBILIDADE
