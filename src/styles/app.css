@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ── Tokens do formato Kendir (editorial, jornal da escola) ───────────────── */
+:root {
+  --fundo: #f5f7f9; --superficie: #ffffff; --tinta: #14232e; --suave: #566673; --linha: #d9e1e7;
+  --acento: #0f6b73; --acento-tinta: #ffffff; --acento-suave: #e0f0f0;
+  --marca: #ffe36e; --marca-tinta: #3a2f00;
+  --tecla: #eef2f5; --tecla-borda: #b9c5ce;
+  --certo: #3f8f5a; --errado: #c44f3c; --aviso: #d89b1d;
+  --b1: #c44f3c; --b2: #d89b1d; --b3: #3f8f5a; --b4: #0f6b73;
+  --fonte-titulo: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --fonte-texto: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --fonte-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --raio: 12px;
+  --foco: #0f6b73;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-tema="auto"]:not([data-formato="mosaico"]) {
+    --fundo: #0f1820; --superficie: #16222c; --tinta: #e6edf2; --suave: #9fb0bd; --linha: #2a3a46;
+    --acento: #5cc3c9; --acento-tinta: #06282b; --acento-suave: #163238;
+    --marca: #e8c94a; --marca-tinta: #1b1600;
+    --tecla: #1d2b36; --tecla-borda: #3a4d5b;
+    --certo: #6cc489; --errado: #e57a66; --aviso: #e8b84f;
+    --b1: #e57a66; --b2: #e8b84f; --b3: #6cc489; --b4: #5cc3c9;
+    --foco: #e8c94a;
+    color-scheme: dark;
+  }
+}
+:root[data-tema="escuro"]:not([data-formato="mosaico"]) {
+  --fundo: #0f1820; --superficie: #16222c; --tinta: #e6edf2; --suave: #9fb0bd; --linha: #2a3a46;
+  --acento: #5cc3c9; --acento-tinta: #06282b; --acento-suave: #163238;
+  --marca: #e8c94a; --marca-tinta: #1b1600;
+  --tecla: #1d2b36; --tecla-borda: #3a4d5b;
+  --certo: #6cc489; --errado: #e57a66; --aviso: #e8b84f;
+  --b1: #e57a66; --b2: #e8b84f; --b3: #6cc489; --b4: #5cc3c9;
+  --foco: #e8c94a;
+  color-scheme: dark;
+}
+
+/* ── Tokens do formato Mosaico (Ágora Design System, gov.pt) ─────────────── */
+:root[data-formato="mosaico"] {
+  --fundo: #f7f8fa; --superficie: #ffffff; --tinta: #2b363c; --suave: #64718b; --linha: #e1e4ea;
+  --acento: #034ad8; --acento-tinta: #ffffff; --acento-suave: #e5eeff;
+  --marca: #fff3bf; --marca-tinta: #3a2f00;
+  --tecla: #f1f3f8; --tecla-borda: #bac0cc;
+  --certo: #0f8a4b; --errado: #c0392b; --aviso: #b7791f;
+  --b1: #c0392b; --b2: #b7791f; --b3: #0f8a4b; --b4: #034ad8;
+  --fonte-titulo: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --fonte-texto: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --raio: 8px;
+  --foco: #f408fc;
+  color-scheme: light;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+body {
+  margin: 0; background: var(--fundo); color: var(--tinta);
+  font-family: var(--fonte-texto); font-size: 1.0625rem; line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+:root[data-tamanho="grande"] body { font-size: 1.25rem; }
+h1, h2, h3, h4 { font-family: var(--fonte-titulo); letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+a { color: var(--acento); }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; border-radius: 4px; }
+kbd {
+  font-family: var(--fonte-mono); font-size: .85em; display: inline-block; background: var(--tecla);
+  border: 1px solid var(--tecla-borda); border-bottom-width: 3px; border-radius: 5px; padding: 0 6px; line-height: 1.5; white-space: nowrap;
+}
+mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; border-radius: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ── Componentes do formato Kendir ────────────────────────────────────────── */
+.cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); }
+.botao {
+  font-family: var(--fonte-titulo); font-weight: 700; font-size: 1rem; cursor: pointer; border-radius: 10px;
+  padding: 10px 18px; min-height: 44px; border: 2px solid var(--acento); background: var(--acento); color: var(--acento-tinta);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1.2;
+}
+.botao:hover { filter: brightness(1.08); }
+.botao:disabled { opacity: .5; cursor: not-allowed; filter: none; }
+.botao--contorno { background: transparent; color: var(--acento); }
+.botao--discreto { background: transparent; border-color: transparent; color: var(--acento); }
+.botao--grande { font-size: 1.15rem; padding: 14px 24px; min-height: 56px; }
+.campo { display: grid; gap: 4px; }
+.campo label { font-weight: 700; font-size: .95rem; }
+.campo input, .campo select, .campo textarea {
+  font: inherit; color: var(--tinta); background: var(--superficie); border: 2px solid var(--tecla-borda); border-radius: 8px; padding: 8px 12px; min-height: 44px; width: 100%;
+}
+.campo .ajuda { font-size: .85rem; color: var(--suave); }
+.campo .erro { font-size: .9rem; color: var(--errado); font-weight: 700; }
+.campo--erro input, .campo--erro select { border-color: var(--errado); }
+.opcao { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.opcao input { width: 22px; height: 22px; accent-color: var(--acento); margin: 0; flex: none; }
+.interruptor { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.interruptor input { appearance: none; width: 48px; height: 28px; border-radius: 99px; background: var(--tecla-borda); position: relative; margin: 0; transition: background .2s; cursor: pointer; flex: none; }
+.interruptor input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.interruptor input:checked { background: var(--acento); }
+.interruptor input:checked::after { transform: translateX(20px); }
+.barra { height: 10px; background: var(--tecla); border-radius: 99px; overflow: hidden; border: 1px solid var(--linha); }
+.barra > div { height: 100%; background: var(--acento); transition: width .3s linear; }
+.barra--aviso > div { background: var(--aviso); }
+.barra--errado > div { background: var(--errado); }
+.etiqueta { font-family: var(--fonte-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--acento); background: var(--acento-suave); padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.faixa { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border: 1px solid var(--linha); border-radius: 10px; overflow: hidden; }
+.faixa div { padding: 10px 12px; font-size: .88rem; background: var(--superficie); border-top: 6px solid; }
+.faixa div:nth-child(1){border-color:var(--b1)} .faixa div:nth-child(2){border-color:var(--b2)} .faixa div:nth-child(3){border-color:var(--b3)} .faixa div:nth-child(4){border-color:var(--b4)}
+@media (max-width: 560px) { .faixa { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+/* Dactilografia: caracteres do texto a copiar */
+.dactilo { font-family: var(--fonte-mono); font-size: 1.25rem; line-height: 1.8; word-break: break-word; white-space: pre-wrap; }
+.dactilo span { border-radius: 3px; }
+.dactilo .certo { color: var(--certo); }
+.dactilo .errado { color: var(--errado); background: color-mix(in srgb, var(--errado) 18%, transparent); text-decoration: underline; }
+.dactilo .atual { background: var(--marca); color: var(--marca-tinta); }
+:root[data-tamanho="grande"] .dactilo { font-size: 1.6rem; }
+
+/* Revisão: palavras clicáveis */
+.palavra { cursor: pointer; border-radius: 4px; padding: 0 2px; border: 0; background: transparent; font: inherit; color: inherit; }
+.palavra:hover { background: var(--acento-suave); }
+.palavra[aria-pressed="true"] { background: var(--marca); color: var(--marca-tinta); }
+.palavra--acertou { background: color-mix(in srgb, var(--certo) 25%, transparent) !important; }
+.palavra--falhou { background: color-mix(in srgb, var(--errado) 25%, transparent) !important; text-decoration: line-through; }
+
+/* Zonas de arrastar */
+.zona { min-height: 64px; border: 2px dashed var(--tecla-borda); border-radius: 10px; padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; background: var(--superficie); }
+.zona[data-ativa="true"] { border-color: var(--acento); background: var(--acento-suave); }
+.ficha { border: 1px solid var(--linha); background: var(--superficie); border-radius: 8px; padding: 8px 12px; cursor: grab; touch-action: none; min-height: 44px; display: flex; align-items: center; gap: 8px; font: inherit; color: inherit; text-align: left; }
+.ficha[aria-pressed="true"] { outline: 3px solid var(--acento); background: var(--acento-suave); }
+.ficha--certa { border-color: var(--certo); background: color-mix(in srgb, var(--certo) 15%, transparent); }
+.ficha--errada { border-color: var(--errado); background: color-mix(in srgb, var(--errado) 15%, transparent); }
+
+/* Painel: sítio simulado */
+.simulado { border: 1px solid var(--linha); border-radius: var(--raio); overflow: hidden; background: var(--superficie); }
+.simulado .topo { display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--linha); background: var(--tecla); flex-wrap: wrap; }
+.separador { padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; background: transparent; font: inherit; color: var(--tinta); cursor: pointer; min-height: 44px; }
+.separador[aria-selected="true"] { border-bottom-color: var(--acento); font-weight: 700; color: var(--acento); }
+.modal-fundo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 50; padding: 16px; }
+.modal { background: var(--superficie); border-radius: var(--raio); padding: 20px; max-width: 480px; width: 100%; border: 1px solid var(--linha); color: var(--tinta); }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--tinta); color: var(--fundo); padding: 10px 16px; border-radius: 10px; display: flex; gap: 12px; align-items: center; z-index: 60; max-width: calc(100vw - 32px); }
+.toast button { font: inherit; background: transparent; border: 1px solid currentColor; color: inherit; border-radius: 6px; padding: 4px 10px; cursor: pointer; min-height: 36px; }
+
+/* Primeira página / relatório (ecrã de resultado) */
+.jornal { background: var(--superficie); border: 2px solid var(--tinta); padding: 20px; font-family: var(--fonte-titulo); color: var(--tinta); }
+.jornal .cabecalho { border-bottom: 3px double var(--tinta); padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.jornal .manchete { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.05; }
+.jornal .coluna { font-family: var(--fonte-texto); font-size: .95rem; }
+
+/* Tabela */
+table.tabela { border-collapse: collapse; width: 100%; font-size: .93rem; }
+table.tabela th, table.tabela td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+table.tabela th { font-family: var(--fonte-titulo); font-size: .8rem; letter-spacing: .03em; background: var(--tecla); }
+
+/* Matemática */
+.formula { font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; font-size: 1.6rem; line-height: 1.4; }
+.formula sup, .formula sub { font-size: .65em; }
+.formula .frac { display: inline-grid; grid-template-rows: auto auto; vertical-align: middle; text-align: center; font-size: .9em; margin: 0 .15em; }
+.formula .frac > span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 .2em; }
+.formula .sqrt { display: inline-block; border-top: 1.5px solid currentColor; padding: 0 .2em; margin-left: .05em; }
+.paleta { display: flex; flex-wrap: wrap; gap: 6px; }
+.paleta button { font: inherit; font-size: 1.1rem; min-width: 44px; min-height: 44px; border: 1px solid var(--tecla-borda); border-bottom-width: 3px; border-radius: 6px; background: var(--tecla); color: var(--tinta); cursor: pointer; }
+
+/* Mosaico: deixar os componentes Ágora mandar nos controlos */
+:root[data-formato="mosaico"] body { font-size: 1rem; }

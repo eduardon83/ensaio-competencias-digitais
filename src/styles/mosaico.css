@@ -1,0 +1,4 @@
+/* Carregado apenas quando o formato "Mosaico" (Ágora Design System, AMA) está ativo.
+   Tokens + estilos compilados dos componentes. O preflight e as utilities vêm de app.css. */
+@import "@ama-pt/agora-design-system/theme.css";
+@import "@ama-pt/agora-design-system/index.css";
