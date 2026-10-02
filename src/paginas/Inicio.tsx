@@ -119,9 +119,10 @@ export function Inicio() {
 
 export function Treinar() {
   const opcoes = [
-    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. Concluíndo, tens acesso ao teu perfil de competências.", icone: "☰" },
+    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. No fim, tens acesso ao teu perfil de competências.", icone: "☰" },
     { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior.", icone: "◎" },
     { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova.", icone: "#" },
+    { para: "/jogos", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura e escrita com literatura portuguesa e, em breve, escape room e mistério.", icone: "🎲" },
   ];
   return (
     <div className="grid gap-8">
@@ -129,7 +130,7 @@ export function Treinar() {
         <h1 className="text-4xl">Treinar</h1>
         <p className="m-0 max-w-2xl">Escolhe como queres treinar. Em todas as opções, antes de começar escolhes o cenário.</p>
       </header>
-      <nav aria-label="Modos de treino" className="grid gap-4 md:grid-cols-3 max-w-5xl w-full mx-auto">
+      <nav aria-label="Modos de treino" className="grid gap-4 sm:grid-cols-2 max-w-4xl w-full mx-auto">
         {opcoes.map((b) => (
           <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6 content-start" style={{ color: "var(--tinta)" }}>
             <span aria-hidden="true" className="grid place-items-center rounded-xl text-2xl font-extrabold" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>

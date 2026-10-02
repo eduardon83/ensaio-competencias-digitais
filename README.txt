@@ -56,6 +56,11 @@ Disponíveis, cada uma com cinco níveis:
 - Fecho de Edição / Fim da Sessão: muitas perguntas curtas com relógio global e tempo sugerido por secção (mede o ritmo).
 - Simulador de Prova: uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora e confirmação antes de submeter. No teste, conta a dobrar.
 
+JOGOS (Treinar → Jogos)
+
+- Biblioteca Viva: leitura e escrita com textos de autores portugueses em domínio público (Fernando Pessoa e Alberto Caeiro, Luís de Camões, Florbela Espanca, Eça de Queirós, Almeida Garrett). Em cada nível o texto é mais longo e mais complexo. Rondas: ler com glossário, perguntas de compreensão, palavras em falta, pôr os versos por ordem e ditado. Os excertos estão em ortografia atualizada e devem ser validados contra edições de referência antes de uso em escolas.
+- Propostas para os próximos jogos (descritas em docs/JOGOS.md): A Sala Trancada (escape room), Quem Apagou o Ficheiro? (mistério), Verdade ou Boato?, O Email Desconfiado, Orçamento da Visita de Estudo, O Robô da Bancada e Correio da Redação.
+
 Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repetir não seja decorar.
 
 Carimbos: cada competência dá um carimbo a partir de 85 pontos. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".

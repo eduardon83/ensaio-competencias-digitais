@@ -50,6 +50,7 @@ const JORNAL: DefContexto = {
     encontra: "Chegou um texto enorme. A Diretora Graça só precisa de algumas respostas. Depressa!",
     simulador: "Último desafio: o exame de entrada na redação.",
     matematica: "A infografia da próxima edição tem números e fórmulas. Escreve-os no computador sem enganos.",
+    leitura: "A próxima edição tem uma página literária. Lê o texto, percebe-o bem e ajuda-nos a passá-lo para o computador sem erros.",
   },
 };
 
@@ -74,6 +75,7 @@ const LABORATORIO: DefContexto = {
     encontra: "Chegou o manual do equipamento. A Doutora Inês só precisa de algumas respostas. Depressa!",
     simulador: "Último desafio: a prova de acesso ao laboratório.",
     matematica: "O caderno de cálculos tem fórmulas e medições. Escreve-as no computador sem enganos.",
+    leitura: "Hoje há clube de leitura no laboratório. Lê o texto, percebe-o bem e regista-o no computador sem erros.",
   },
 };
 

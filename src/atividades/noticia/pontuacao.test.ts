@@ -40,3 +40,13 @@ describe("textos da Notícia", () => {
     }
   });
 });
+
+import { explicarErro } from "./pontuacao";
+describe("explicarErro", () => {
+  it("distingue acento, maiúscula, engano pequeno e palavra diferente", () => {
+    expect(explicarErro("também", "tambem")).toContain("acento");
+    expect(explicarErro("Lisboa", "lisboa")).toContain("maiúsculas");
+    expect(explicarErro("jornal", "jornla")).toContain("letra trocada");
+    expect(explicarErro("Porque", "mar")).toContain("palavra diferente");
+  });
+});

@@ -230,14 +230,22 @@ function Resultado({
         ) : (
           <>
             <Botao onClick={aoRepetir}>Repetir</Botao>
-            {proxima && (
-              <LigacaoBotao para={`/atividades/${proxima.slug}/${nivel}`} variante="contorno">
-                Próxima atividade: {proxima.titulo[prefs.contexto]}
-              </LigacaoBotao>
+            {definicao.numero >= 100 ? (
+              <Link to="/jogos" className="botao botao--contorno">
+                Voltar aos jogos
+              </Link>
+            ) : (
+              <>
+                {proxima && (
+                  <LigacaoBotao para={`/atividades/${proxima.slug}/${nivel}`} variante="contorno">
+                    Próxima atividade: {proxima.titulo[prefs.contexto]}
+                  </LigacaoBotao>
+                )}
+                <Link to="/treino" className="botao botao--discreto">
+                  Voltar ao treino
+                </Link>
+              </>
             )}
-            <Link to="/treino" className="botao botao--discreto">
-              Voltar ao treino
-            </Link>
           </>
         )}
         {aoContinuar && (

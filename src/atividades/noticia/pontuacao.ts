@@ -27,7 +27,16 @@ function semAcentos(t: string) {
   return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-/** Explica um erro de uma palavra (acento, maiúscula, símbolo, letra). */
+/** Distância de edição (inserções, remoções, trocas) entre duas palavras. */
+export function distancia(a: string, b: string): number {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+
+/** Explica um erro de uma palavra (acento, maiúscula, símbolo, letra, palavra diferente). */
 export function explicarErro(certa: string, escrita: string): string {
   if (!escrita) return "Não chegaste a escrever esta palavra. Se o tempo acabou, treina primeiro a precisão e a velocidade vem depois.";
   if (semAcentos(certa) === semAcentos(escrita)) return "Falta ou sobra um acento. No teclado português, carrega primeiro na tecla do acento e só depois na letra.";
@@ -35,6 +44,7 @@ export function explicarErro(certa: string, escrita: string): string {
   if (/[@€]/.test(certa) && !/[@€]/.test(escrita)) return "O @ escreve-se com AltGr+2 e o € com AltGr+E.";
   if (/ç/i.test(certa) && !/ç/i.test(escrita)) return "O ç tem tecla própria, à direita do L.";
   if (/[.,;:()]/.test(certa) && certa.replace(/[^.,;:()]/g, "") !== escrita.replace(/[^.,;:()]/g, "")) return "Falta ou sobra um sinal de pontuação.";
+  if (distancia(semAcentos(certa.toLowerCase()), semAcentos(escrita.toLowerCase())) > Math.max(2, Math.floor(certa.length / 2))) return "É uma palavra diferente da que estava no texto.";
   return "Há uma letra trocada, a mais ou em falta. Olha para o texto palavra a palavra.";
 }
 

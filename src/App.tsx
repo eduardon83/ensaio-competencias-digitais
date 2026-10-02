@@ -12,6 +12,7 @@ import { Professor, ResultadosProfessor } from "./paginas/Professor";
 import { Codigo } from "./paginas/Codigo";
 import { Tutorial } from "./paginas/Tutorial";
 import { CartaoCarimbos } from "./paginas/CartaoCarimbos";
+import { JogoPagina, Jogos } from "./paginas/Jogos";
 
 export function App() {
   return (
@@ -32,6 +33,8 @@ export function App() {
         <Route path="observatorio" element={<Observatorio />} />
         <Route path="resultados" element={<Resultados />} />
         <Route path="cartao" element={<CartaoCarimbos />} />
+        <Route path="jogos" element={<Jogos />} />
+        <Route path="jogos/:slug/:nivel" element={<JogoPagina />} />
         <Route path="conta" element={<Navigate to="/resultados" replace />} />
         <Route path="admin" element={<Admin />} />
         <Route path="acessibilidade" element={<Acessibilidade />} />
