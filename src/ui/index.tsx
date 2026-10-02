@@ -152,7 +152,23 @@ export function Interruptor({ id, rotulo, className = "", ...resto }: CaixaProps
   const { prefs, escuro } = useUI();
   if (prefs.formato === "mosaico") {
     const A = agora();
-    return <A.Switch id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
+    // O Switch do Ágora muda o seu estado visual e só depois chama onChange (de forma diferida); nessa altura o
+    // <input> controlado já foi reposto pelo React e e.target.checked vem com o valor antigo. Com `checked`
+    // controlado, o novo valor é simplesmente o inverso do atual.
+    const { onChange, ...outros } = resto;
+    return (
+      <A.Switch
+        id={id}
+        label={rotulo}
+        darkMode={escuro}
+        className={className}
+        {...outros}
+        onChange={(e) => {
+          const valor = typeof outros.checked === "boolean" ? !outros.checked : e.target.checked;
+          onChange?.({ ...e, target: { ...e.target, id, checked: valor }, currentTarget: { ...e.currentTarget, id, checked: valor } } as unknown as React.ChangeEvent<HTMLInputElement>);
+        }}
+      />
+    );
   }
   return (
     <label className={`interruptor ${className}`} htmlFor={id}>
