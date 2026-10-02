@@ -54,7 +54,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPaginacao> = {
   },
   3: {
     ordenar: {
-      jornal: { titulo: "Ordena os parágrafos da reportagem", itens: ["Título: A escola que recicla.", "Lead: Desde setembro, a escola separa todo o lixo.", "Contexto: O projeto nasceu numa aula de Ciências.", "Dados: Já foram recolhidos 400 kg de papel.", "Testemunho: «Foi mais fácil do que pensávamos», diz a Lia.", "Fecho: A próxima meta é o plástico."] },
+      jornal: { titulo: "Ordena os parágrafos da reportagem", itens: ["Título: A escola que recicla.", "Lead: Desde setembro, a escola separa todo o lixo.", "Contexto: O projeto nasceu numa aula de Ciências.", "Dados: Já foram recolhidos 400 kg de papel.", "Testemunho: “Foi mais fácil do que pensávamos”, diz a Lia.", "Fecho: A próxima meta é o plástico."] },
       laboratorio: { titulo: "Ordena as secções do relatório", itens: ["Título e autores", "Objetivo", "Material e método", "Resultados", "Discussão", "Conclusão"] },
     },
     classificar: {

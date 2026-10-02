@@ -21,9 +21,58 @@ export function marcarTutorialVisto() {
   }
 }
 
-function Mini({ titulo, children }: { titulo: string; children: ReactNode }) {
+/** Pequenas ilustrações (HTML, não imagens) para o passo "Treinar: três maneiras". Decorativas: aria-hidden. */
+function IlustracaoTeste() {
+  const barras: [string, number][] = [["Teclado", 82], ["Interfaces", 64], ["Leitura", 91], ["Matemática", 47]];
   return (
-    <div className="cartao p-4 grid gap-1 content-start">
+    <div aria-hidden="true" className="rounded-lg p-3 grid gap-2" style={{ background: "var(--fundo)", border: "1px solid var(--linha)" }}>
+      <div className="flex items-baseline gap-2">
+        <span className="text-3xl font-extrabold tabular-nums" style={{ color: "var(--acento)", fontFamily: "var(--fonte-titulo)" }}>71</span>
+        <span className="text-xs" style={{ color: "var(--suave)" }}>em 100 · Confiante</span>
+      </div>
+      {barras.map(([n, v]) => (
+        <div key={n} className="grid gap-0.5 text-xs">
+          <div className="flex justify-between"><span>{n}</span><span className="tabular-nums">{v}</span></div>
+          <div className="barra" style={{ height: 6 }}><div style={{ width: `${v}%`, background: v >= 85 ? "var(--b4)" : v >= 65 ? "var(--b3)" : v >= 40 ? "var(--b2)" : "var(--b1)" }} /></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+function IlustracaoAtividade() {
+  const fonte = "A turma visitou o museu.";
+  const escritos = 14;
+  return (
+    <div aria-hidden="true" className="rounded-lg p-3 grid gap-2" style={{ background: "var(--fundo)", border: "1px solid var(--linha)" }}>
+      <div className="flex gap-1 flex-wrap">
+        <span className="etiqueta">Teclado</span>
+        <span className="etiqueta">Nível 2 · Base</span>
+      </div>
+      <div className="dactilo" style={{ fontSize: ".95rem", lineHeight: 1.6 }}>
+        {Array.from(fonte).map((c, i) => (
+          <span key={i} className={i < escritos ? (i === 9 ? "errado" : "certo") : i === escritos ? "atual" : ""}>{c}</span>
+        ))}
+      </div>
+      <div className="barra" style={{ height: 6 }}><div style={{ width: "62%" }} /></div>
+      <div className="text-xs" style={{ color: "var(--suave)" }}>★★☆ · melhor 78</div>
+    </div>
+  );
+}
+function IlustracaoCodigo() {
+  return (
+    <div aria-hidden="true" className="rounded-lg p-3 grid gap-2 justify-items-center text-center" style={{ background: "var(--fundo)", border: "1px solid var(--linha)" }}>
+      <span className="text-xs" style={{ color: "var(--suave)" }}>Código do professor</span>
+      <span className="text-2xl font-extrabold tracking-wider" style={{ fontFamily: "var(--fonte-mono)" }}>TEC7·4F7KQ2</span>
+      <span className="text-xs" style={{ color: "var(--suave)" }}>Nível 3 · 4 atividades</span>
+      <span className="botao" style={{ minHeight: 32, padding: "4px 12px", fontSize: ".85rem" }}>Entrar</span>
+    </div>
+  );
+}
+
+function Mini({ titulo, children, figura }: { titulo: string; children: ReactNode; figura?: ReactNode }) {
+  return (
+    <div className="cartao p-4 grid gap-2 content-start">
+      {figura}
       <strong style={{ fontFamily: "var(--fonte-titulo)" }}>{titulo}</strong>
       <span className="text-sm" style={{ color: "var(--suave)" }}>
         {children}
@@ -46,9 +95,9 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Treinar: três maneiras",
     corpo: (
       <div className="grid gap-3 md:grid-cols-3">
-        <Mini titulo="Teste">Uma sequência de atividades para o teu nível de ensino. No fim recebes o teu perfil de competências.</Mini>
-        <Mini titulo="Atividade">Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade.</Mini>
-        <Mini titulo="Código">O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova.</Mini>
+        <Mini titulo="Teste" figura={<IlustracaoTeste />}>Uma sequência de atividades para o teu nível de ensino. No fim recebes o teu perfil de competências.</Mini>
+        <Mini titulo="Atividade" figura={<IlustracaoAtividade />}>Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade.</Mini>
+        <Mini titulo="Código" figura={<IlustracaoCodigo />}>O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova.</Mini>
       </div>
     ),
   },
@@ -107,7 +156,7 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Ajusta à tua medida",
     corpo: (
       <>
-        <p className="m-0">Em Definições podes mudar o aspeto (Kendir ou Mosaico, o estilo dos serviços públicos), o tema claro ou escuro, o tamanho do texto e o tempo alargado, como nas provas reais.</p>
+        <p className="m-0">Em Definições podes mudar o aspeto (Original ou Mosaico), o tema claro ou escuro, o tamanho do texto e o tempo alargado.</p>
         <p className="m-0">Tudo funciona só com o teclado. Quando há arrastar, há sempre outra maneira: tocar no item e depois no destino.</p>
       </>
     ),
@@ -184,14 +233,9 @@ export function Tutorial() {
           Anterior
         </Botao>
         {ultimo ? (
-          <div className="flex gap-3 flex-wrap">
-            <Link to="/treinar" className="botao botao--grande">
-              Começar a treinar
-            </Link>
-            <Link to="/professor" className="botao botao--contorno botao--grande">
-              Sou professor
-            </Link>
-          </div>
+          <Link to="/" className="botao botao--grande">
+            Voltar ao início
+          </Link>
         ) : (
           <Botao onClick={() => setI((x) => x + 1)}>Seguinte</Botao>
         )}
@@ -209,7 +253,7 @@ export function AvisoTutorial() {
   if (!visivel) return null;
   return (
     <div className="cartao p-4 flex flex-wrap items-center gap-3 max-w-4xl w-full mx-auto" role="region" aria-label="Primeira visita" style={{ borderColor: "var(--acento)", borderWidth: 2 }}>
-      <span className="flex-1 min-w-48">Primeira vez por aqui? O tutorial mostra tudo em dois minutos.</span>
+      <span className="flex-1 min-w-48 font-bold">Como funciona o ECD?</span>
       <Link to="/tutorial" className="botao">
         Ver o tutorial
       </Link>

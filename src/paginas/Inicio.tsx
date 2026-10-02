@@ -1,15 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { FAIXAS } from "../motor/tipos";
+import { obterAgregados, telemetriaConfigurada } from "../dados/telemetria";
+import { FAIXAS, faixaDe } from "../motor/tipos";
 import { AvisoTutorial } from "./Tutorial";
 
 const BLOCOS = [
   { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade ou entra com o código do teu professor.", icone: "▶" },
-  { para: "/professor", titulo: "Professor", texto: "Monta uma prova para a turma, recebe um código e acompanha os resultados.", icone: "✎" },
+  { para: "/professor", titulo: "Professor", texto: "Crie uma prova para as suas turmas, para avaliar as suas competências digitais.", icone: "✎" },
   { para: "/tutorial", titulo: "Tutorial", texto: "Vê em dois minutos como funciona tudo. Podes saltar quando quiseres.", icone: "?" },
   { para: "/observatorio", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas.", icone: "◔" },
 ];
 
+/** Média global das pontuações no Observatório (só grupos públicos, com 20 ou mais tentativas). */
+function useMediaGlobal(): { media: number; n: number } | null {
+  const [m, setM] = useState<{ media: number; n: number } | null>(null);
+  useEffect(() => {
+    if (!telemetriaConfigurada) return;
+    obterAgregados().then((r) => {
+      if (!r || "erro" in r) return;
+      const grupos = Object.values(r.por_atividade);
+      const n = grupos.reduce((s, g) => s + g.n, 0);
+      if (n > 0) setM({ media: Math.round(grupos.reduce((s, g) => s + g.media * g.n, 0) / n), n });
+    });
+  }, []);
+  return m;
+}
+
 export function Inicio() {
+  const mediaGlobal = useMediaGlobal();
+  const faixaGlobal = mediaGlobal ? faixaDe(mediaGlobal.media) : null;
   return (
     <div className="grid gap-12">
       <section className="grid gap-4 max-w-3xl mx-auto text-center justify-items-center">
@@ -19,8 +38,8 @@ export function Inicio() {
         <h1 className="text-5xl md:text-6xl font-extrabold leading-none" style={{ letterSpacing: "-.02em" }}>
           Antes da prova, o ecrã.
         </h1>
-        <p className="text-xl m-0">As provas são cada vez mais feitas no computador. Saber a matéria não chega. É preciso escrever no teclado, ler num ecrã, preencher campos e gerir o tempo.</p>
-        <p className="m-0">O Ensaio às Competências Digitais ajuda a treinar estas competências. É gratuito. Não precisa de conta.</p>
+        <p className="text-xl m-0">Treina as tuas competências digitais antes das provas e testes importantes! Podes treinar-te a escrever no teclado, ler num ecrã, preencher campos, gerir o tempo, entre outras competências.</p>
+        <p className="m-0">O Ensaio às Competências Digitais (ECD) ajuda a treinar estas competências. É gratuito. Não é preciso conta nem dados pessoais.</p>
       </section>
 
       <AvisoTutorial />
@@ -66,10 +85,15 @@ export function Inicio() {
       </section>
 
       <section className="grid gap-3">
-        <h2 className="text-2xl">Onde ficas</h2>
+        <h2 className="text-2xl">Nível médio de competências digitais</h2>
+        {mediaGlobal && faixaGlobal && (
+          <p className="m-0">
+            Média de todos os utilizadores: <strong className="tabular-nums">{mediaGlobal.media}</strong> pontos, nível <strong>{faixaGlobal.nome}</strong> ({mediaGlobal.n} atividades concluídas). Mais números no <Link to="/observatorio">Observatório</Link>.
+          </p>
+        )}
         <div className="faixa" role="list">
           {FAIXAS.map((f) => (
-            <div key={f.nome} role="listitem">
+            <div key={f.nome} role="listitem" aria-current={faixaGlobal?.nome === f.nome ? "true" : undefined} style={faixaGlobal?.nome === f.nome ? { outline: "3px solid var(--acento)", outlineOffset: -3 } : undefined}>
               <b className="block" style={{ fontFamily: "var(--fonte-titulo)" }}>
                 {f.nome}
               </b>
@@ -80,7 +104,7 @@ export function Inicio() {
           ))}
         </div>
         <p className="text-sm m-0" style={{ color: "var(--suave)" }}>
-          As pontuações descrevem o desempenho neste jogo. Não são uma certificação DigComp. Os limiares são estimativas iniciais, a recalibrar com um piloto em escolas.
+          As pontuações descrevem o desempenho dos utilizadores nas diferentes atividades do ECD. Não são uma certificação DigComp. Os limiares são estimativas iniciais e poderão ser recalibrados.
         </p>
       </section>
 

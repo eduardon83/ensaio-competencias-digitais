@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { combinarComTeclado, pontuarDactilografia } from "./pontuacao";
+import { NIVEIS } from "./index";
 
 describe("pontuarDactilografia", () => {
   it("dá 100 com precisão total e velocidade acima do alvo", () => {
@@ -23,5 +24,19 @@ describe("combinarComTeclado", () => {
   });
   it("combina 75/25", () => {
     expect(combinarComTeclado(80, { corretos: 5, total: 10 })).toBe(73); // 60 + 12,5 → 73
+  });
+});
+
+describe("textos da Notícia", () => {
+  it("têm três textos por nível e cenário, com aspas curvas e fontes entre parênteses", () => {
+    for (const cfg of Object.values(NIVEIS)) {
+      for (const lista of Object.values(cfg.texto)) {
+        expect(lista.length).toBe(3);
+        for (const t of lista) {
+          expect(t).not.toMatch(/[«»]/);
+          expect(t).not.toMatch(/\[\d{4}\]/);
+        }
+      }
+    }
   });
 });

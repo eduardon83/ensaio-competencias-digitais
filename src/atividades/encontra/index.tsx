@@ -153,7 +153,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigEncontra> = {
         titulo: "Regulamento do Jornal Escolar (excerto)",
         indice: true,
         secoes: [
-          { titulo: "Artigo 1.º — Objeto", paragrafos: ["1. O presente regulamento define a organização do jornal escolar «O Recreio», adiante designado por Jornal.", "2. O Jornal é publicado em formato digital e em papel, com periodicidade mensal durante o ano letivo."] },
+          { titulo: "Artigo 1.º — Objeto", paragrafos: ["1. O presente regulamento define a organização do jornal escolar “O Recreio”, adiante designado por Jornal.", "2. O Jornal é publicado em formato digital e em papel, com periodicidade mensal durante o ano letivo."] },
           { titulo: "Artigo 2.º — Equipa", paragrafos: ["1. A equipa é composta por um coordenador docente, um editor por secção e um número variável de repórteres.", "2. Os editores são eleitos no início de cada ano letivo por maioria simples dos repórteres inscritos.", "3. O mandato dos editores tem a duração de um ano letivo, renovável uma vez."] },
           { titulo: "Artigo 3.º — Conteúdos", paragrafos: ["1. Todos os textos são assinados pelo autor, salvo o editorial, que é da responsabilidade do coordenador.", "2. Não são publicados textos que identifiquem alunos sem autorização escrita do encarregado de educação.", "3. As fotografias de menores exigem a mesma autorização, exceto em planos gerais de eventos públicos da escola."] },
           { titulo: "Artigo 4.º — Prazos", paragrafos: ["1. Os textos são entregues ao editor da secção até ao dia 20 de cada mês.", "2. O fecho da edição ocorre no dia 25; após essa data só o coordenador pode autorizar alterações.", "3. A edição é publicada no primeiro dia útil do mês seguinte."] },

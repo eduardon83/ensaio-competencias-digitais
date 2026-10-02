@@ -1,5 +1,5 @@
 // ─── Camada de UI com dois formatos ──────────────────────────────────────────
-// Cada controlo tem duas implementações: a do formato Kendir (HTML + CSS próprios) e a do formato
+// Cada controlo tem duas implementações: a do formato Original (HTML + CSS próprios) e a do formato
 // Mosaico (componentes do Ágora Design System, AMA, carregados dinamicamente — ver registo-agora.ts).
 // O formato ativo vem das preferências. As atividades usam SEMPRE estes componentes, para que o
 // "sítio simulado" do Painel também mude de aspeto. O tema escuro passa aos componentes Ágora por `darkMode`.

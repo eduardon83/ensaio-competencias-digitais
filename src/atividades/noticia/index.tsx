@@ -7,7 +7,8 @@ import { Botao } from "../../ui";
 import { combinarComTeclado, pontuarDactilografia } from "./pontuacao";
 
 export interface ConfigNoticia {
-  texto: Record<Contexto, string>;
+  /** Vários textos por cenário: em cada tentativa é escolhido um ao acaso, para que repetir não seja decorar. */
+  texto: Record<Contexto, string[]>;
   segundos: number;
   alvoWpm: number;
   /** Ronda de teclado numérico (níveis 3+): valores a introduzir numa tabela. */
@@ -15,29 +16,54 @@ export interface ConfigNoticia {
 }
 
 // [conteúdo Kendir] textos provisórios; substituir por notícias curtas / excertos com direitos tratados.
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
+// Citações e fontes sempre com aspas curvas “ ” e parênteses curvos ( ).
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
   1: {
     segundos: 60,
     alvoWpm: 8,
     texto: {
-      jornal: "sol mar pão bola casa gato rua flor. A escola tem um jornal.",
-      laboratorio: "água sal copo luz pedra folha fogo gelo. O laboratório tem uma lupa.",
+      jornal: [
+        "sol mar pão bola casa gato rua flor. A escola tem um jornal.",
+        "lua céu mesa livro lápis porta sala chão. O jornal sai hoje.",
+        "pato vaca uva maçã pera bolo leite mel. A Lia lê a notícia.",
+      ],
+      laboratorio: [
+        "água sal copo luz pedra folha fogo gelo. O laboratório tem uma lupa.",
+        "areia vidro tubo pó óleo cor lata frio. A Marta mede a água.",
+        "terra vaso feijão raiz sol chuva caule. A planta cresceu muito.",
+      ],
     },
   },
   2: {
     segundos: 90,
     alvoWpm: 15,
     texto: {
-      jornal: "A turma do 5.º B visitou o museu na terça-feira. Viram quadros, estátuas e uma coleção de moedas antigas. No fim, a professora ofereceu um lanche.",
-      laboratorio: "Hoje medimos a temperatura da água em três copos. O copo com gelo ficou a 2 graus. A água da torneira estava a 18 graus e a água quente a 45.",
+      jornal: [
+        "A turma do 5.º B visitou o museu na terça-feira. Viram quadros, estátuas e uma coleção de moedas antigas. No fim, a professora ofereceu um lanche.",
+        "O torneio de andebol começou na quinta-feira. A equipa da escola ganhou o primeiro jogo por 12 a 9. O próximo jogo é no pavilhão, às três da tarde.",
+        "A biblioteca recebeu trinta livros novos. Há banda desenhada, poesia e livros de ciência. Cada aluno pode levar dois livros durante quinze dias.",
+      ],
+      laboratorio: [
+        "Hoje medimos a temperatura da água em três copos. O copo com gelo ficou a 2 graus. A água da torneira estava a 18 graus e a água quente a 45.",
+        "Pusemos sal, açúcar e areia em copos com água. O sal e o açúcar dissolveram-se. A areia ficou no fundo do copo, mesmo depois de mexermos bem.",
+        "O feijão germinou em cinco dias. A raiz apareceu primeiro e depois o caule. Regámos a planta todas as manhãs com vinte mililitros de água.",
+      ],
     },
   },
   3: {
     segundos: 120,
     alvoWpm: 25,
     texto: {
-      jornal: "A feira do livro decorre de 12 a 16 de maio (pavilhão B). Os livros têm 20% de desconto e o bilhete custa 1,50 €. Inscrições para a visita: feira@escola.pt.",
-      laboratorio: "A solução A (50 ml) tem 12% de sal; a B tem 8%. Cada frasco custou 2,30 € e as medições ficam registadas em lab@escola.pt. Repetir 3 vezes.",
+      jornal: [
+        "A feira do livro decorre de 12 a 16 de maio (pavilhão B). Os livros têm 20% de desconto e o bilhete custa 1,50 €. Inscrições para a visita: feira@escola.pt.",
+        "O concerto de Natal tem 3 sessões (18h, 19h30 e 21h). Cada bilhete custa 2 € e as receitas revertem para a viagem de finalistas. Reservas: musica@escola.pt.",
+        "A recolha de tampas já juntou 450 kg (mais 35% do que em 2025). O objetivo é chegar aos 600 kg até junho. Dúvidas para ambiente@escola.pt ou na sala 14.",
+      ],
+      laboratorio: [
+        "A solução A (50 ml) tem 12% de sal; a B tem 8%. Cada frasco custou 2,30 € e as medições ficam registadas em lab@escola.pt. Repetir 3 vezes.",
+        "O pêndulo (fio de 1,20 m) fez 10 oscilações em 22 segundos. A massa usada foi de 150 g. Registar os tempos na folha 3 e enviar para fisica@escola.pt.",
+        "A planta B recebeu 30% mais luz do que a A (8 h por dia). Ao fim de 14 dias media 9,5 cm (custo do ensaio: 0,80 €). Relatório para bio@escola.pt, até sexta.",
+      ],
     },
     teclado: { valores: ["12", "45", "308", "7", "1250", "64", "99", "410", "23", "875"], segundos: 60 },
   },
@@ -45,8 +71,16 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
     segundos: 180,
     alvoWpm: 35,
     texto: {
-      jornal: "Segundo Silva (2024, p. 12), a leitura em ecrã exige estratégias próprias. A reportagem completa está em https://gazeta.campus.pt/leitura e as dúvidas podem ser enviadas para redacao@campus.pt até 30/06.",
-      laboratorio: "O ensaio seguiu o método de Costa & Pires (2023, p. 47): 3 réplicas por amostra, 25 °C ± 0,5. Os dados estão em https://lab.campus.pt/dados; questões para inves@campus.pt até 30/06.",
+      jornal: [
+        "Segundo Silva (2024, p. 12), a leitura em ecrã exige estratégias próprias. A reportagem completa está em https://gazeta.campus.pt/leitura e as dúvidas podem ser enviadas para redacao@campus.pt até 30/06.",
+        "De acordo com Almeida e Rocha (2023, pp. 40-41), 62% dos estudantes leem notícias no telemóvel. O inquérito da Gazeta está aberto em https://gazeta.campus.pt/inquerito até 15/07; contacto: inqueritos@campus.pt.",
+        "Como notou Teixeira (2025, p. 8), “verificar é mais lento do que publicar”. A oficina de fact-checking decorre a 3/10, na sala 2.14 (inscrições em https://gazeta.campus.pt/oficina ou oficinas@campus.pt).",
+      ],
+      laboratorio: [
+        "O ensaio seguiu o método de Costa & Pires (2023, p. 47): 3 réplicas por amostra, 25 °C ± 0,5. Os dados estão em https://lab.campus.pt/dados; questões para inves@campus.pt até 30/06.",
+        "Segundo Lopes (2022, pp. 101-103), a amostra deve repousar 24 h a 4 °C. Os resultados preliminares (n = 18) estão em https://lab.campus.pt/preliminar; dúvidas para amostras@campus.pt.",
+        "Conforme Duarte e Neves (2024, p. 15), o pH ideal é 7,2 ± 0,2. A calibração do equipamento fica registada em https://lab.campus.pt/calibracao e as falhas devem ser comunicadas a tecnico@campus.pt.",
+      ],
     },
     teclado: { valores: ["12,5", "308", "45,75", "7", "1250", "64,2", "99", "410,1", "23", "875", "0,5", "19", "2024", "33,3", "8"], segundos: 75 },
   },
@@ -54,8 +88,16 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
     segundos: 180,
     alvoWpm: 50,
     texto: {
-      jornal: "«Não há jornalismo sem verificação», escreveu Marques [2025], citando 3 fontes (duas anónimas; uma oficial). O inquérito teve 1 024 respostas: 57% em telemóvel, 38% em portátil e 5% em tablet. Ver anexo_A.pdf & anexo_B.xlsx.",
-      laboratorio: "«Sem controlo, não há conclusão», lembrou Ferreira [2025]. Protocolo: 5 réplicas; pH 7,4 ± 0,1; 37 °C. Resultados em {amostra_01.csv; amostra_02.csv}: 1 024 leituras, 57% válidas, 38% repetidas & 5% rejeitadas.",
+      jornal: [
+        "“Não há jornalismo sem verificação”, escreveu Marques (2025), citando 3 fontes (duas anónimas; uma oficial). O inquérito teve 1 024 respostas: 57% em telemóvel, 38% em portátil e 5% em tablet. Ver anexo_A.pdf & anexo_B.xlsx.",
+        "“Uma correção publicada vale mais do que um erro escondido”, defendeu Sousa (2024, p. 77). Em 2025, a Gazeta publicou 312 artigos e 9 erratas (2,9%); o relatório anual está em relatorio_2025.pdf & dados_2025.csv.",
+        "“O leitor merece saber de onde vem cada número”, lembrou Pereira (2023). O novo guia exige 2 fontes por dado (mínimo) e links permanentes; modelo em guia_fontes_v3.docx; sugestões para editor@gazeta.campus.pt (até 31/12).",
+      ],
+      laboratorio: [
+        "“Sem controlo, não há conclusão”, lembrou Ferreira (2025). Protocolo: 5 réplicas; pH 7,4 ± 0,1; 37 °C. Resultados em amostra_01.csv e amostra_02.csv: 1 024 leituras, 57% válidas, 38% repetidas & 5% rejeitadas.",
+        "“Medir duas vezes é metade do método”, escreveu Matos (2024, p. 12). Ensaio LAB-017: 3 lotes (A, B, C); desvio-padrão 0,08; incerteza ± 0,15 mg/L. Dados brutos em lote_A.xlsx & lote_B.xlsx; análise em analise_v2.R.",
+        "“O caderno é a memória da experiência”, insistiu Cardoso (2023). Regra: data, hora (hh:mm), operador e lote em cada página; 98,5% dos registos de 2025 cumpriram-na. Modelo em caderno_modelo.pdf; dúvidas para qualidade@lab.campus.pt.",
+      ],
     },
     teclado: { valores: ["12,5", "-308", "45,75", "7", "1250", "-64,2", "99", "410,1", "23", "875", "0,5", "19", "2024", "33,3", "8", "-1,25", "600", "72", "4,04", "91"], segundos: 90 },
   },
@@ -64,7 +106,10 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigNoticia> = {
 type Etapa = "texto" | "pergunta_teclado" | "teclado";
 
 function Noticia({ config, modo, contexto, extensaoTempo, aoTerminar }: PropsAtividade<ConfigNoticia>) {
-  const fonte = config.texto[contexto];
+  const [fonte] = useState(() => {
+    const lista = config.texto[contexto];
+    return lista[Math.floor(Math.random() * lista.length)];
+  });
   const limiteMs = config.segundos * 1000 * extensaoTempo;
   const [digitado, setDigitado] = useState("");
   const [etapa, setEtapa] = useState<Etapa>("texto");
@@ -313,7 +358,7 @@ export const definicao = definir<ConfigNoticia>({
   duracao: "1 a 3 min",
   disponivel: true,
   niveis: NIVEIS,
-  pratica: (c) => ({ segundos: 60, alvoWpm: c.alvoWpm, texto: { jornal: "O jornal da escola.", laboratorio: "A bancada do laboratório." } }),
+  pratica: (c) => ({ segundos: 60, alvoWpm: c.alvoWpm, texto: { jornal: ["O jornal da escola."], laboratorio: ["A bancada do laboratório."] } }),
   Componente: Noticia,
   dica: (m) => {
     if (Number(m.precisao) < 90) return "Primeiro a precisão, depois a velocidade: olha para o ecrã enquanto escreves e corrige com Backspace assim que vires vermelho.";

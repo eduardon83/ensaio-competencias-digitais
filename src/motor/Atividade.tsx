@@ -93,7 +93,7 @@ export function Atividade({
                 {ctx.personagens.responsavel} · {ctx.publicacao(nivel)}
               </div>
               <p className="text-xl m-0" style={{ fontFamily: "var(--fonte-titulo)" }}>
-                «{ctx.briefs[definicao.slug] ?? definicao.descricao}»
+                “{ctx.briefs[definicao.slug] ?? definicao.descricao}”
               </p>
             </div>
           </div>

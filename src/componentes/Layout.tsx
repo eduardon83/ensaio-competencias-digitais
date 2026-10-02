@@ -53,7 +53,9 @@ export function Layout() {
       </main>
       <footer className="border-t mt-12" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
-          <span>Ensaio às Competências Digitais · v{VERSAO} · Kendir Studios / Worlds4Education</span>
+          <span>
+            Ensaio às Competências Digitais · v{VERSAO} · Ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português · <NavLink to="/licenca">Licença</NavLink>
+          </span>
           <NavLink to="/resultados">Os meus resultados</NavLink>
           <NavLink to="/tutorial">Tutorial</NavLink>
           <NavLink to="/privacidade">Privacidade</NavLink>

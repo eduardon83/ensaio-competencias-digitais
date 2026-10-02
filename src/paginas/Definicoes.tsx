@@ -1,4 +1,4 @@
-// ─── Definições: aspeto (Kendir / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
+// ─── Definições: aspeto (Original / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
 import { CONTEXTOS } from "../contextos";
 import { usePreferencias, type ExtensaoTempo } from "../preferencias/preferencias";
 import { BotaoRadio, CampoTexto, Cartao, Interruptor } from "../ui";
@@ -19,8 +19,8 @@ export function Definicoes() {
         </p>
         <fieldset className="grid gap-2 border-0 p-0 m-0">
           <legend className="sr-only">Aspeto</legend>
-          <BotaoRadio id="fmt-kendir" name="formato" rotulo="Kendir · editorial, inspirado num jornal de escola (Atkinson Hyperlegible, Bricolage Grotesque)" checked={prefs.formato === "kendir"} onChange={() => definir({ formato: "kendir" })} />
-          <BotaoRadio id="fmt-mosaico" name="formato" rotulo="Mosaico · Ágora Design System da AMA, o aspeto dos serviços públicos digitais (gov.pt)" checked={prefs.formato === "mosaico"} onChange={() => definir({ formato: "mosaico" })} />
+          <BotaoRadio id="fmt-original" name="formato" rotulo="Original · editorial, inspirado num jornal de escola" checked={prefs.formato === "original"} onChange={() => definir({ formato: "original" })} />
+          <BotaoRadio id="fmt-mosaico" name="formato" rotulo="Mosaico · Ágora Design System da AMA, o aspeto dos serviços públicos digitais (predefinido)" checked={prefs.formato === "mosaico"} onChange={() => definir({ formato: "mosaico" })} />
         </fieldset>
       </Cartao>
 

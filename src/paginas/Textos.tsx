@@ -57,7 +57,7 @@ export function Acessibilidade() {
           <ul className="grid gap-1 pl-5 m-0">
             <li>Os temporizadores podem ser alargados por aluno, como acomodação (2.2.1).</li>
             <li>Os avisos de tempo são anunciados a leitores de ecrã, não só por cor.</li>
-            <li>Expirar a sessão nunca perde respostas: guardar cada resposta e mostrar «Guardado».</li>
+            <li>Expirar a sessão nunca perde respostas: guardar cada resposta e mostrar “Guardado”.</li>
           </ul>
           <h3 className="text-sm uppercase tracking-wide" style={{ color: "var(--suave)" }}>
             Conteúdo
@@ -108,7 +108,7 @@ export function Acessibilidade() {
       <section className="cartao p-5 grid gap-2">
         <h2 className="text-xl">Declaração de acessibilidade deste sítio</h2>
         <p className="m-0 text-sm">
-          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. Auditoria e passagem com leitor de ecrã previstas para a fase final. Problemas de acessibilidade: contactar a Kendir Studios. O aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Kendir usa componentes próprios com os mesmos requisitos. Ambos têm tema claro e escuro.
+          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. Auditoria e passagem com leitor de ecrã previstas para a fase final. Problemas de acessibilidade: contactar a Kendir Studios. O aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Original usa componentes próprios com os mesmos requisitos. Ambos têm tema claro e escuro.
         </p>
       </section>
     </div>
@@ -141,7 +141,7 @@ export function Sobre() {
       <section className="grid gap-2">
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
-          <li>Feito: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Kendir e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Feito: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
           <li>Feito também: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados.</li>
           <li>Seguinte: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa.</li>
           <li>Final: auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
@@ -173,7 +173,7 @@ export function Privacidade() {
       <p className="m-0">Escrito em linguagem simples. Se algo não ficar claro, pergunta.</p>
       <section className="grid gap-2">
         <h2 className="text-xl">Não há contas</h2>
-        <p className="m-0">Ninguém se regista. Não pedimos nome, email nem idade. Os teus resultados ficam só no teu navegador, para veres a tua evolução; podes exportá-los ou apagá-los em «Os meus resultados». O nome que escreveres nas Definições serve só para aparecer no teu ecrã de resultado e nunca sai do teu computador.</p>
+        <p className="m-0">Ninguém se regista. Não pedimos nome, email nem idade. Os teus resultados ficam só no teu navegador, para veres a tua evolução; podes exportá-los ou apagá-los em “Os meus resultados”. O nome que escreveres nas Definições serve só para aparecer no teu ecrã de resultado e nunca sai do teu computador.</p>
       </section>
       <section className="grid gap-2">
         <h2 className="text-xl">Estatísticas anónimas</h2>
@@ -188,6 +188,39 @@ export function Privacidade() {
         <h2 className="text-xl">Base legal e contacto</h2>
         <p className="m-0">Os dados anónimos não identificam ninguém e são tratados com base no interesse legítimo de melhorar a preparação dos alunos para provas digitais. Dúvidas ou pedidos: Kendir Studios.</p>
       </section>
+    </div>
+  );
+}
+
+export function Licenca() {
+  return (
+    <div className="grid gap-5 max-w-3xl">
+      <h1 className="text-4xl">Licença</h1>
+      <p className="m-0">
+        O Ensaio às Competências Digitais é uma ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português. Qualquer pessoa, escola ou entidade pode usá-la, copiá-la, adaptá-la e publicá-la de graça, desde que mantenha a atribuição:
+      </p>
+      <blockquote className="cartao p-4 m-0 font-bold">“Ensaio às Competências Digitais, desenvolvido por Kendir Studios.”</blockquote>
+      <section className="grid gap-2">
+        <h2 className="text-xl">Código-fonte: Licença MIT</h2>
+        <p className="m-0">Permite usar, alterar e redistribuir o código para qualquer fim, mantendo o aviso de direitos de autor da Kendir Studios em todas as cópias.</p>
+      </section>
+      <section className="grid gap-2">
+        <h2 className="text-xl">Conteúdos: Creative Commons Atribuição 4.0 (CC BY 4.0)</h2>
+        <p className="m-0">
+          Textos das atividades, narrativas, personagens, documentação e design. Podem ser partilhados e adaptados para qualquer fim, desde que se indique a autoria (Kendir Studios), se inclua uma ligação para a licença e se assinale o que foi alterado.{" "}
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.pt" target="_blank" rel="noreferrer">
+            Texto da licença CC BY 4.0
+          </a>
+          .
+        </p>
+      </section>
+      <section className="grid gap-2">
+        <h2 className="text-xl">Componentes de terceiros</h2>
+        <p className="m-0">O Ágora Design System (AMA), React, dnd-kit e as restantes bibliotecas mantêm as suas licenças próprias. As marcas e logótipos da Kendir Studios não estão incluídos nesta licença.</p>
+      </section>
+      <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+        O texto completo está no ficheiro LICENSE do código-fonte.
+      </p>
     </div>
   );
 }

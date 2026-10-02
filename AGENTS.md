@@ -7,7 +7,7 @@ Lê este ficheiro antes de tocar no código. Mantém-no atualizado na mesma alte
 Jogo web gratuito (pt-PT, sem conta) para treinar e medir competências digitais práticas exigidas por provas em computador. Projeto Kendir Studios / Worlds4Education. Especificação de origem: `docs/ESPECIFICACAO.md` (resumo) e o HTML "Ensaio Digital" v0.1 (1 out 2026) que o produto owner guarda; o nome mudou para **Ensaio às Competências Digitais (ECD)**.
 
 Pedidos adicionais do product owner, já implementados na v0.1.0:
-1. **Formato de UI selecionável**: "Kendir" (próprio) ou "Mosaico" (Ágora Design System da AMA, `@ama-pt/agora-design-system`).
+1. **Formato de UI selecionável**: "Original" (próprio; antes chamado "Kendir") ou "Mosaico" (Ágora Design System da AMA, `@ama-pt/agora-design-system`).
 2. **Treino de competências** com **5 níveis por atividade**; atividade específica de **escrita matemática** (notação, anotações) com 5 níveis; segundo **contexto de aprendizagem** (aluno num laboratório de experiências) além do jornalista.
 
 ## Arquitetura
@@ -28,7 +28,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ### Formatos de UI
 
-- Tokens CSS em `src/styles/app.css`: `:root` = Kendir; `:root[data-formato="mosaico"]` redefine os mesmos tokens com a paleta Ágora. Tema escuro só no Kendir.
+- Tokens CSS em `src/styles/app.css`: `:root` = Original; `:root[data-formato="mosaico"]` redefine os mesmos tokens com a paleta Ágora. Mosaico é o formato predefinido.
 - Componentes em `src/ui/index.tsx` têm **duas implementações** (HTML próprio ou componente Ágora) escolhidas por `usePreferencias().prefs.formato`. **As atividades usam sempre estes componentes**, nunca `<button>` com classes Ágora à mão (exceções: controlos muito específicos como separadores, paginação e palavras clicáveis, que usam classes próprias).
 - O módulo Ágora (`src/ui/agora.tsx`, ~540 kB JS) e o seu CSS (~1 MB, com `@layer base` global e `--color-*: initial` no `@theme`) são carregados **só** quando o formato é Mosaico (`carregarAgora()` em `src/ui/registo-agora.ts`, chamado em `src/main.tsx`); `src/ui/index.tsx` obtém os componentes por `agora()`. Por isso trocar de formato recarrega a página. **Não** uses utilitários de cor do Tailwind (`bg-white`, `text-gray-…`): usa `var(--token)`.
 - Tema escuro nos dois formatos: tokens em `app.css` (`[data-tema]`, incluindo `[data-formato="mosaico"]`) e, no Mosaico, a prop `darkMode` passada a cada componente Ágora a partir de `usePreferencias().escuro`.
@@ -42,10 +42,15 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 - Contextos narrativos em `src/contextos/index.ts` (títulos por contexto, briefings, personagens). Conteúdos que dependem do contexto são `Record<Contexto, …>` dentro da configuração do nível.
 - Regras: pontuação inteira 0–100 via `limitar()`; temporizadores multiplicados por `extensaoTempo`; toda a interação por arrasto tem alternativa por teclado e toque; nunca pedir atalhos reservados pelo navegador.
 
+## Licença
+
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Kendir Studios" (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (`src/versao.ts` e `package.json`).
+
 ## Convenções
 
 - Identificadores, comentários, UI e commits em **português de Portugal**. Frases curtas na UI, sem travessões.
 - Acessibilidade é requisito: foco visível, alvos ≥ 44 px, `aria-live` para feedback, nunca só cor.
+- Aspas sempre curvas “ ” (não « ») e fontes/citações sempre entre parênteses curvos (Autor, ano). Os textos da Notícia têm três variantes por nível e cenário (teste em `pontuacao.test.ts`).
 - Conteúdo marcado `[conteúdo Kendir]` é provisório (textos de autor com direitos a tratar).
 - Testes: funções de pontuação e conteúdo com invariantes (ex.: número de diferenças na Revisão) em `*.test.ts`.
 

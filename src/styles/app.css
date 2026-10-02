@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── Tokens do formato Kendir (editorial, jornal da escola) ───────────────── */
+/* ── Tokens do formato Original (editorial, jornal da escola) ───────────────── */
 :root {
   --fundo: #f5f7f9; --superficie: #ffffff; --tinta: #14232e; --suave: #566673; --linha: #d9e1e7;
   --acento: #0f6b73; --acento-tinta: #ffffff; --acento-suave: #e0f0f0;
@@ -97,7 +97,7 @@ kbd {
 mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; border-radius: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-/* ── Componentes do formato Kendir ────────────────────────────────────────── */
+/* ── Componentes do formato Original ────────────────────────────────────────── */
 .cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); }
 .botao {
   font-family: var(--fonte-titulo); font-weight: 700; font-size: 1rem; cursor: pointer; border-radius: 10px;

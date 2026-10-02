@@ -1,12 +1,12 @@
 // ─── Preferências do utilizador (guardadas no navegador) ─────────────────────
-// formato: aspeto da interface ("kendir" editorial ou "mosaico" = Ágora Design System da AMA)
+// formato: aspeto da interface ("original" editorial ou "mosaico" = Ágora Design System da AMA)
 // contexto: narrativa de aprendizagem ("jornal" = redação do jornal da escola, "laboratorio" = laboratório de experiências)
 // tema: claro/escuro/auto · tamanho: texto normal/grande · extensaoTempo: acomodação de tempo (x1, x1.25, x1.5, x2)
 // telemetria: enviar estatísticas anónimas (sem conta, sem identificação) para o ponto de recolha configurado
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type Formato = "kendir" | "mosaico";
+export type Formato = "original" | "mosaico";
 export type Contexto = "jornal" | "laboratorio";
 export type Tema = "auto" | "claro" | "escuro";
 export type Tamanho = "normal" | "grande";
@@ -25,7 +25,7 @@ export interface Preferencias {
 const CHAVE = "ecd.preferencias.v1";
 
 export const PREFERENCIAS_INICIAIS: Preferencias = {
-  formato: "kendir",
+  formato: "mosaico",
   contexto: "jornal",
   tema: "auto",
   tamanho: "normal",
@@ -38,7 +38,9 @@ export function lerPreferencias(): Preferencias {
   try {
     const bruto = localStorage.getItem(CHAVE);
     if (!bruto) return PREFERENCIAS_INICIAIS;
-    return { ...PREFERENCIAS_INICIAIS, ...(JSON.parse(bruto) as Partial<Preferencias>) };
+    const lidas = JSON.parse(bruto) as Partial<Preferencias> & { formato?: string };
+    if (lidas.formato === "original") lidas.formato = "original"; // nome antigo do aspeto Original
+    return { ...PREFERENCIAS_INICIAIS, ...(lidas as Partial<Preferencias>) };
   } catch {
     return PREFERENCIAS_INICIAIS;
   }

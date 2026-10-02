@@ -33,7 +33,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
       { tipo: "escrever", mostrar: "12,5", aceita: ["12,5"], ajuda: "Em Portugal a parte decimal separa-se com vírgula." },
       { tipo: "escrever", mostrar: "7 × 8 = 56", aceita: ["7×8=56", "7*8=56"], ajuda: "Podes usar × da paleta ou o asterisco *." },
       { tipo: "escrever", mostrar: "20 ÷ 4 = 5", aceita: ["20÷4=5", "20/4=5", "20:4=5"] },
-      { tipo: "escolher", pergunta: "Como se escreve «doze e meio» com algarismos, em Portugal?", opcoes: ["12,5", "12.5", "12;5"], correta: 0 },
+      { tipo: "escolher", pergunta: "Como se escreve “doze e meio” com algarismos, em Portugal?", opcoes: ["12,5", "12.5", "12;5"], correta: 0 },
       { tipo: "escrever", mostrar: "9 − 3 = 6", aceita: ["9-3=6"] },
     ],
   },
@@ -46,7 +46,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
       { tipo: "escrever", mostrar: "25 %", aceita: ["25%"] },
       { tipo: "escrever", mostrar: "sqrt{16} = 4", aceita: ["sqrt(16)=4", "√16=4", "sqrt16=4", "√(16)=4"], ajuda: "A raiz quadrada escreve-se √ (paleta) ou sqrt( )." },
       { tipo: "escrever", mostrar: "1,5 kg", aceita: ["1,5kg"] },
-      { tipo: "escolher", pergunta: "Qual destas é a forma correta de escrever «três ao quadrado» num teclado?", opcoes: ["3^2", "3*2", "3_2"], correta: 0 },
+      { tipo: "escolher", pergunta: "Qual destas é a forma correta de escrever “três ao quadrado” num teclado?", opcoes: ["3^2", "3*2", "3_2"], correta: 0 },
       { tipo: "escrever", mostrar: "5^{2} + 1 = 26", aceita: ["5^2+1=26", "5²+1=26"] },
     ],
   },
@@ -56,12 +56,12 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
     itens: [
       { tipo: "escrever", mostrar: "x^{2} − 5x + 6 = 0", aceita: ["x^2-5x+6=0"] },
       { tipo: "escrever", mostrar: "2(x + 3) = 10", aceita: ["2(x+3)=10"] },
-      { tipo: "escrever", mostrar: "x ≤ 4", aceita: ["x<=4", "x≤4"], ajuda: "«Menor ou igual» escreve-se ≤ (paleta) ou <= ." },
+      { tipo: "escrever", mostrar: "x ≤ 4", aceita: ["x<=4", "x≤4"], ajuda: "“Menor ou igual” escreve-se ≤ (paleta) ou <= ." },
       { tipo: "escrever", mostrar: "y ≠ 0", aceita: ["y!=0", "y≠0", "y<>0"] },
       { tipo: "escrever", mostrar: "f(x) = 3x + 1", aceita: ["f(x)=3x+1"] },
       { tipo: "escrever", mostrar: "frac{a}{b} + frac{1}{2}", aceita: ["a/b+1/2"] },
-      { tipo: "escolher", pergunta: "Que símbolo significa «menor ou igual»?", opcoes: ["≤", "≥", "≠"], correta: 0 },
-      { tipo: "escolher", pergunta: "Qual é a escrita correta de «x ao cubo»?", opcoes: ["x^3", "x3", "x*3"], correta: 0 },
+      { tipo: "escolher", pergunta: "Que símbolo significa “menor ou igual”?", opcoes: ["≤", "≥", "≠"], correta: 0 },
+      { tipo: "escolher", pergunta: "Qual é a escrita correta de “x ao cubo”?", opcoes: ["x^3", "x3", "x*3"], correta: 0 },
     ],
   },
   4: {
@@ -88,7 +88,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
       { tipo: "escrever", mostrar: "sqrt{a^{2} + b^{2}}", aceita: ["sqrt(a^2+b^2)", "√(a^2+b^2)"] },
       { tipo: "escrever", mostrar: "e^{iπ} + 1 = 0", aceita: ["e^(ipi)+1=0", "e^(iπ)+1=0", "e^{iπ}+1=0", "e^(i*pi)+1=0"] },
       { tipo: "escrever", mostrar: "x ∈ [0, 1[", aceita: ["x in [0,1[", "x∈[0,1[", "x in [0,1)", "x∈[0,1)"] },
-      { tipo: "escolher", pergunta: "Qual destas notações indica «x pertence aos números reais»?", opcoes: ["x ∈ ℝ", "x ⊂ ℝ", "x ∉ ℝ"], correta: 0 },
+      { tipo: "escolher", pergunta: "Qual destas notações indica “x pertence aos números reais”?", opcoes: ["x ∈ ℝ", "x ⊂ ℝ", "x ∉ ℝ"], correta: 0 },
       { tipo: "escolher", pergunta: "Em notação linear, como se escreve a fração com numerador 1 e denominador x+1?", opcoes: ["1/(x+1)", "1/x+1", "(1/x)+1"], correta: 0 },
     ],
   },
@@ -314,7 +314,7 @@ export const definicao = definir<ConfigMatematica>({
   pratica: () => ({ tempoReferenciaSeg: 30, paleta: PALETA_2, itens: [{ tipo: "escrever", mostrar: "2 + 2 = 4", aceita: ["2+2=4"] }] }),
   Componente: Matematica,
   dica: (m) => {
-    if (Number(m.certos) < Number(m.itens) * 0.6) return "Abre a legenda «Como se escreve matemática no teclado» antes de começar: ^ para expoente, / para fração, sqrt( ) para raiz.";
+    if (Number(m.certos) < Number(m.itens) * 0.6) return "Abre a legenda “Como se escreve matemática no teclado” antes de começar: ^ para expoente, / para fração, sqrt( ) para raiz.";
     if (!m.usouPaleta) return "Usaste só o teclado. Boa. Nota que as provas digitais também costumam ter uma paleta de símbolos: vale a pena conhecer as duas vias.";
     return "Já escreves fórmulas com à-vontade. Treina agora as formas sem paleta: <= para ≤, sqrt( ) para √, pi para π.";
   },

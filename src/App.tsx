@@ -5,7 +5,7 @@ import { EscolherNivel, Percurso } from "./paginas/Teste";
 import { Catalogo, Treino } from "./paginas/Catalogo";
 import { AtividadePagina } from "./paginas/AtividadePagina";
 import { Observatorio, Resultados } from "./paginas/Conta";
-import { Acessibilidade, Privacidade, Sobre } from "./paginas/Textos";
+import { Acessibilidade, Licenca, Privacidade, Sobre } from "./paginas/Textos";
 import { Definicoes } from "./paginas/Definicoes";
 import { Admin } from "./paginas/Admin";
 import { Professor, ResultadosProfessor } from "./paginas/Professor";
@@ -35,6 +35,7 @@ export function App() {
         <Route path="acessibilidade" element={<Acessibilidade />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="privacidade" element={<Privacidade />} />
+        <Route path="licenca" element={<Licenca />} />
         <Route path="definicoes" element={<Definicoes />} />
         <Route
           path="*"

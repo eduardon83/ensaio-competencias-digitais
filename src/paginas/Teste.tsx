@@ -251,7 +251,7 @@ export function PrimeiraPagina({ tentativas, ciclo, titulo, nivel, codigo, aluno
               Por {nome} · {ctx.papel}
             </div>
             <p className="coluna m-0">
-              Nível «{faixa.nome}». {tentativas.length} atividade{tentativas.length === 1 ? "" : "s"} concluída{tentativas.length === 1 ? "" : "s"}. {dica}
+              Nível “{faixa.nome}”. {tentativas.length} atividade{tentativas.length === 1 ? "" : "s"} concluída{tentativas.length === 1 ? "" : "s"}. {dica}
             </p>
           </div>
           <div className="grid gap-2 content-start">

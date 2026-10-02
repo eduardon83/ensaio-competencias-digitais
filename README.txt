@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Kendir Studios / Worlds4Education · versão 0.1.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
 
 
 O QUE É
@@ -58,7 +58,7 @@ Cada atividade começa com um briefing e um item de prática que não conta. Dá
 
 ACESSIBILIDADE
 
-- Dois aspetos à escolha em Definições: Kendir (editorial) e Mosaico, o Ágora Design System da AMA usado nos serviços públicos digitais. Ambos têm tema claro e escuro.
+- Dois aspetos à escolha em Definições: Mosaico (predefinido), o Ágora Design System da AMA usado nos serviços públicos digitais, e Original (editorial). Ambos têm tema claro e escuro.
 - Texto grande, tempo alargado (×1,25, ×1,5 ou ×2, registado como acomodação) e funcionamento completo só com teclado.
 - Tudo o que se arrasta tem alternativa por toque ou teclado.
 - Objetivo: WCAG 2.2 nível AA (EN 301 549). A página Acessibilidade tem um guia para quem desenvolve e para quem encomenda provas digitais.
@@ -94,6 +94,11 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm run build        ficheiros finais em dist/
 
 Arquitetura, convenções e estado do projeto: AGENTS.md. Resumo da especificação: docs/ESPECIFICACAO.md.
+
+
+LICENÇA
+
+Uso livre e gratuito para qualquer pessoa ou entidade, mantendo a atribuição "Ensaio às Competências Digitais, desenvolvido por Kendir Studios". Código-fonte sob a Licença MIT; conteúdos (textos, atividades, narrativas, design) sob Creative Commons Atribuição 4.0 (CC BY 4.0). Texto completo no ficheiro LICENSE.
 
 
 CONTACTO

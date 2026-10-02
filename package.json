@@ -1,7 +1,8 @@
 {
   "name": "ensaio-competencias-digitais",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Ensaio às Competências Digitais (ECD): jogo web gratuito, em pt-PT, para treinar e medir as competências digitais que as provas em computador pressupõem.",
   "scripts": {
