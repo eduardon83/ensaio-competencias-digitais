@@ -52,7 +52,7 @@ export function Admin() {
     return (
       <div className="grid gap-3 max-w-2xl">
         <h1 className="text-4xl">Administração</h1>
-        <p className="m-0">A recolha de estatísticas não está configurada nesta instalação. Define `VITE_TELEMETRIA_URL` (ver `telemetria/README.md`) e volta a fazer o build.</p>
+        <p className="m-0">A recolha de estatísticas não está configurada nesta instalação. Defina `VITE_TELEMETRIA_URL` (ver README.txt), que deve ser implementado num novo deployment.</p>
       </div>
     );
   }

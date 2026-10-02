@@ -7,7 +7,7 @@ import { AvisoTutorial } from "./Tutorial";
 const BLOCOS = [
   { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade ou entra com o código do teu professor.", icone: "▶" },
   { para: "/professor", titulo: "Professor", texto: "Crie uma prova para as suas turmas, para avaliar as suas competências digitais.", icone: "✎" },
-  { para: "/tutorial", titulo: "Tutorial", texto: "Vê em dois minutos como funciona tudo. Podes saltar quando quiseres.", icone: "?" },
+  { para: "/tutorial", titulo: "Tutorial", texto: "O funcionamento do Ensaio às Competências Digitais encontra-se explicado num breve tutorial. Tempo de leitura: 2 minutos.", icone: "?" },
   { para: "/observatorio", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas.", icone: "◔" },
 ];
 

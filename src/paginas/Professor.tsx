@@ -93,7 +93,7 @@ export function Professor() {
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl">Professor</h1>
-        <p className="m-0">Monte uma prova para a turma: escolha o nível e as atividades, obtenha um código e dê-o aos alunos. Não precisa de conta. Se indicar um email, recebe os resultados.</p>
+        <p className="m-0">Monte uma prova para a turma: escolha o nível e as atividades, obtenha um código e dê-o aos alunos. Para receber os resultados dos seus alunos, indique um email.</p>
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
@@ -187,10 +187,10 @@ export function Professor() {
           <Cartao className="grid gap-2">
             <h2 className="text-lg">Como funciona</h2>
             <ol className="m-0 pl-5 grid gap-1 text-sm">
-              <li>Escolhe o nível, as atividades e como os alunos se identificam.</li>
-              <li>Recebe um código e um QR para projetar.</li>
-              <li>Os alunos vão a Treinar → Código, escrevem o código e fazem a prova.</li>
-              <li>Os resultados chegam por email e ficam numa página privada, com exportação CSV.</li>
+              <li>Deve escolher o nível, as atividades e como os alunos se identificam.</li>
+              <li>Irá receber um código alfanumérico e um código QR para projetar.</li>
+              <li>Os alunos deverão aceder ao site, selecionar a opção Treinar → Código, inserir o código e executar a prova.</li>
+              <li>Os resultados serão enviados por email e ficam numa página privada, sendo possível a sua exportação em formato CSV.</li>
             </ol>
           </Cartao>
           {sessoes.length > 0 && (

@@ -139,7 +139,7 @@ export function Observatorio() {
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl">Observatório</h1>
-        <p className="m-0">Estatísticas anónimas sobre as competências avaliadas por todas as pessoas que usaram a aplicação. Qualquer grupo com menos de {remoto?.limiar ?? 20} tentativas fica oculto. Nada aqui identifica alguém.</p>
+        <p className="m-0">Neste ecrã são apresentadas estatísticas anónimas sobre as competências avaliadas por todas as pessoas que usaram a aplicação, de forma anónima.</p>
       </header>
 
       {estado === "a_carregar" && <p className="m-0" style={{ color: "var(--suave)" }}>A obter os agregados…</p>}

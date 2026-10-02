@@ -44,7 +44,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ## Licença
 
-Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Kendir Studios" (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (`src/versao.ts` e `package.json`).
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (`src/versao.ts` e `package.json`).
 
 ## Convenções
 

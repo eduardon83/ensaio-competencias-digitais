@@ -2,7 +2,7 @@
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import { usePreferencias } from "../preferencias/preferencias";
-import { VERSAO } from "../versao";
+import { AUTORIA, VERSAO } from "../versao";
 
 const LIGACOES = [
   { para: "/", texto: "Início" },
@@ -20,7 +20,7 @@ export function Layout() {
   }, [local.pathname]);
 
   return (
-    <div className="min-h-screen grid" style={{ gridTemplateRows: "auto 1fr auto" }}>
+    <div className="min-h-screen flex flex-col">
       <a href="#conteudo" className="sr-only focus:not-sr-only" style={{ position: "absolute", top: 8, left: 8, zIndex: 100, background: "var(--acento)", color: "var(--acento-tinta)", padding: "8px 12px", borderRadius: 8 }}>
         Saltar para o conteúdo
       </a>
@@ -48,13 +48,13 @@ export function Layout() {
           </nav>
         </div>
       </header>
-      <main id="conteudo" tabIndex={-1} className="max-w-6xl w-full mx-auto px-4 py-8 outline-none">
+      <main id="conteudo" tabIndex={-1} className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 outline-none">
         <Outlet />
       </main>
       <footer className="border-t mt-12" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
           <span>
-            Ensaio às Competências Digitais · v{VERSAO} · Ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português · <NavLink to="/licenca">Licença</NavLink>
+            Ensaio às Competências Digitais · v{VERSAO} · Ferramenta gratuita desenvolvida por {AUTORIA} para uso pelo Estado Português · <NavLink to="/licenca">Licença</NavLink>
           </span>
           <NavLink to="/resultados">Os meus resultados</NavLink>
           <NavLink to="/tutorial">Tutorial</NavLink>

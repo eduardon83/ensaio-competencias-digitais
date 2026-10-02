@@ -1,6 +1,6 @@
 // ─── Páginas de texto: guia de acessibilidade, sobre (com espaço para vídeo), privacidade ──
 import { Link } from "react-router";
-import { DATA_VERSAO, VERSAO } from "../versao";
+import { AUTORIA, DATA_VERSAO, REPOSITORIO, VERSAO } from "../versao";
 
 /** URL do vídeo de apresentação (YouTube/Vimeo "embed" ou ficheiro .mp4). Vazio = espaço reservado. */
 const VIDEO_SOBRE: string = (import.meta.env.VITE_VIDEO_SOBRE as string | undefined)?.trim() ?? "";
@@ -135,16 +135,24 @@ export function Sobre() {
       <h1 className="text-4xl">Sobre</h1>
       <Video titulo="Apresentação do Ensaio às Competências Digitais" />
       <p className="m-0">
-        Ensaio às Competências Digitais (ECD), versão {VERSAO} de {DATA_VERSAO}. Um projeto Kendir Studios / Worlds4Education. Jogo web aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática.
+        Ensaio às Competências Digitais (ECD), versão {VERSAO} de {DATA_VERSAO}. Um projeto Eduardo Nunes &amp; Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824).
       </p>
+      <p className="m-0">Plataforma web de código aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática.</p>
       <p className="m-0">Sem contas, sem registos de pessoas e sem base de dados: a aplicação é um conjunto de ficheiros estáticos que qualquer escola ou entidade pode alojar. As estatísticas de uso são anónimas e vão para uma folha de cálculo controlada por quem publica a aplicação.</p>
+      {REPOSITORIO && (
+        <p className="m-0">
+          Código-fonte:{" "}
+          <a href={REPOSITORIO} target="_blank" rel="noreferrer">
+            {REPOSITORIO}
+          </a>
+        </p>
+      )}
       <section className="grid gap-2">
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
-          <li>Feito: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
-          <li>Feito também: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados.</li>
-          <li>Seguinte: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa.</li>
-          <li>Final: auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
+          <li>Versão atual: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados.</li>
+          <li>Backlog: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa, auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
         </ul>
       </section>
       <p className="m-0">
@@ -197,9 +205,9 @@ export function Licenca() {
     <div className="grid gap-5 max-w-3xl">
       <h1 className="text-4xl">Licença</h1>
       <p className="m-0">
-        O Ensaio às Competências Digitais é uma ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português. Qualquer pessoa, escola ou entidade pode usá-la, copiá-la, adaptá-la e publicá-la de graça, desde que mantenha a atribuição:
+        O Ensaio às Competências Digitais é uma ferramenta gratuita desenvolvida por {AUTORIA} para uso pelo Estado Português. Qualquer pessoa, escola ou entidade pode usá-la, copiá-la, adaptá-la e publicá-la de forma gratuita, desde que mantenha a atribuição:
       </p>
-      <blockquote className="cartao p-4 m-0 font-bold">“Ensaio às Competências Digitais, desenvolvido por Kendir Studios.”</blockquote>
+      <blockquote className="cartao p-4 m-0 font-bold">“Ensaio às Competências Digitais, desenvolvido por {AUTORIA}.”</blockquote>
       <section className="grid gap-2">
         <h2 className="text-xl">Código-fonte: Licença MIT</h2>
         <p className="m-0">Permite usar, alterar e redistribuir o código para qualquer fim, mantendo o aviso de direitos de autor da Kendir Studios em todas as cópias.</p>
@@ -207,7 +215,7 @@ export function Licenca() {
       <section className="grid gap-2">
         <h2 className="text-xl">Conteúdos: Creative Commons Atribuição 4.0 (CC BY 4.0)</h2>
         <p className="m-0">
-          Textos das atividades, narrativas, personagens, documentação e design. Podem ser partilhados e adaptados para qualquer fim, desde que se indique a autoria (Kendir Studios), se inclua uma ligação para a licença e se assinale o que foi alterado.{" "}
+          Textos das atividades, narrativas, personagens, documentação e design. Podem ser partilhados e adaptados para qualquer fim, desde que se indique a autoria ({AUTORIA}), se inclua uma ligação para a licença e se assinale o que foi alterado.{" "}
           <a href="https://creativecommons.org/licenses/by/4.0/deed.pt" target="_blank" rel="noreferrer">
             Texto da licença CC BY 4.0
           </a>

@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Kendir Studios para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
 
 
 O QUE É
@@ -98,7 +98,7 @@ Arquitetura, convenções e estado do projeto: AGENTS.md. Resumo da especificaç
 
 LICENÇA
 
-Uso livre e gratuito para qualquer pessoa ou entidade, mantendo a atribuição "Ensaio às Competências Digitais, desenvolvido por Kendir Studios". Código-fonte sob a Licença MIT; conteúdos (textos, atividades, narrativas, design) sob Creative Commons Atribuição 4.0 (CC BY 4.0). Texto completo no ficheiro LICENSE.
+Uso livre e gratuito para qualquer pessoa ou entidade, mantendo a atribuição "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)". Código-fonte sob a Licença MIT; conteúdos (textos, atividades, narrativas, design) sob Creative Commons Atribuição 4.0 (CC BY 4.0). Texto completo no ficheiro LICENSE.
 
 
 CONTACTO
