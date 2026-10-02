@@ -11,7 +11,7 @@ export interface ConfigPainel {
   tarefas: string[]; // ids em TAREFAS
 }
 
-interface Estado {
+export interface Estado {
   notificacoes: boolean;
   distrito: string;
   janelaAberta: boolean;
@@ -37,7 +37,7 @@ interface Estado {
   tentouEnviarBloqueado: boolean;
 }
 
-const INICIAL: Estado = {
+export const INICIAL: Estado = {
   notificacoes: false,
   distrito: "",
   janelaAberta: false,
@@ -129,14 +129,14 @@ const ROTULOS: Record<Contexto, Rotulos> = {
   },
 };
 
-interface Tarefa {
+export interface Tarefa {
   id: string;
   instrucao: (r: Rotulos) => string;
   preparar?: (e: Estado) => Estado;
   verificar: (e: Estado) => boolean;
 }
 
-const TAREFAS: Record<string, Tarefa> = {
+export const TAREFAS: Record<string, Tarefa> = {
   notificacoes: { id: "notificacoes", instrucao: () => "Ativa as notificações.", verificar: (e) => e.notificacoes },
   distrito: { id: "distrito", instrucao: () => "Escolhe o distrito do Porto.", verificar: (e) => e.distrito === "porto" },
   fechar: { id: "fechar", instrucao: () => "Fecha esta janela.", preparar: (e) => ({ ...e, janelaAberta: true }), verificar: (e) => !e.janelaAberta },
@@ -170,7 +170,7 @@ const TAREFAS: Record<string, Tarefa> = {
   data: { id: "data", instrucao: () => "No campo de data, escolhe o dia 15 de qualquer mês.", preparar: (e) => ({ ...e, data: "" }), verificar: (e) => /-15$/.test(e.data) },
 };
 
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
   1: { tarefas: ["notificacoes", "fechar", "newsletter", "pagina3", "separador", "tamanho", "notificacoes_off", "volume"] },
   2: { tarefas: ["notificacoes", "distrito", "fechar", "pagina3", "tamanho", "separador", "caminho", "newsletter", "acordeao", "volume"] },
   3: { tarefas: ["notificacoes", "distrito", "fechar", "pagina3", "caminho", "tamanho", "separador", "acordeao", "enviar", "data", "pesquisar", "volume", "newsletter", "ligacao"] },
@@ -182,13 +182,47 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPainel> = {
 TAREFAS.notificacoes_off = { id: "notificacoes_off", instrucao: () => "Desativa as notificações.", preparar: (e) => ({ ...e, notificacoes: true }), verificar: (e) => !e.notificacoes };
 TAREFAS.menu_sobre = { id: "menu_sobre", instrucao: (r) => `Abre o menu (☰) e escolhe "${r.menu[3]}".`, preparar: (e) => ({ ...e, menuAberto: false, menuEscolha: null }), verificar: (e) => e.menuEscolha?.startsWith("Sobre") === true };
 
+/** Estado que garante que a tarefa NÃO começa já cumprida (os controlos são partilhados entre tarefas). */
+const REPOR: Record<string, Partial<Estado>> = {
+  notificacoes: { notificacoes: false },
+  notificacoes_off: { notificacoes: true },
+  distrito: { distrito: "" },
+  fechar: { janelaAberta: true },
+  pagina3: { pagina: 1 },
+  caminho: { secao: "desporto", artigoAberto: true, usouCaminho: false },
+  newsletter: { newsletter: false },
+  tamanho: { tamanho: "medio" },
+  separador: { separador: "noticias" },
+  menu: { menuAberto: false, menuEscolha: null },
+  menu_sobre: { menuAberto: false, menuEscolha: null },
+  acordeao: { acordeao: null },
+  enviar: { termos: false, enviado: false },
+  desfazer: { rascunhoApagado: false, desfeito: false },
+  volume: { volume: 20 },
+  pesquisar: { pesquisa: "", pesquisaEnviada: null },
+  ligacao: { ligacaoAberta: null },
+  data: { data: "" },
+};
+export function prepararTarefa(t: Tarefa | undefined, e: Estado): Estado {
+  if (!t) return e;
+  let n = t.preparar ? t.preparar(e) : e;
+  if (t.verificar(n)) n = { ...n, ...(REPOR[t.id] ?? {}) };
+  return n;
+}
+
 const DISTRITOS = ["Aveiro", "Braga", "Coimbra", "Faro", "Lisboa", "Porto", "Setúbal", "Viseu"].map((d) => ({ valor: d.toLowerCase(), texto: d }));
 
 function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) {
   const rot = ROTULOS[contexto];
   const tarefas = useMemo(() => config.tarefas.map((id) => TAREFAS[id]).filter(Boolean), [config.tarefas]);
   const [indice, setIndice] = useState(0);
-  const [estado, setEstado] = useState<Estado>(() => (tarefas[0]?.preparar ? tarefas[0].preparar(INICIAL) : INICIAL));
+  const [estado, setEstadoReact] = useState<Estado>(() => prepararTarefa(tarefas[0], INICIAL));
+  // Estado atual numa ref, para verificar a tarefa fora do "updater" do React (que corre duas vezes em StrictMode).
+  const estadoRef = useRef(estado);
+  const setEstado = (f: (e: Estado) => Estado) => {
+    estadoRef.current = f(estadoRef.current);
+    setEstadoReact(estadoRef.current);
+  };
   const [erros, setErros] = useState(0);
   const pontos = useRef(0);
   const penalizacao = useRef(0);
@@ -199,15 +233,12 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
   const tarefa = tarefas[indice];
 
   function alterar(parcial: Partial<Estado>) {
-    setEstado((atual) => {
-      const novo = { ...atual, ...parcial };
-      if (tarefa && tarefa.verificar(novo)) {
-        concluir();
-      } else if (tarefa && !tarefa.verificar(atual)) {
-        setErros((n) => n + 1);
-      }
-      return novo;
-    });
+    const atual = estadoRef.current;
+    const novo = { ...atual, ...parcial };
+    setEstado(() => novo);
+    if (!tarefa || concluindo.current) return;
+    if (tarefa.verificar(novo)) concluir();
+    else if (Object.keys(parcial).length > 0) setErros((n) => n + 1);
   }
 
   const concluindo = useRef(false);
@@ -235,7 +266,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
       setIndice(prox);
       setErros(0);
       inicioTarefa.current = performance.now();
-      setEstado((e) => (tarefas[prox].preparar ? tarefas[prox].preparar(e) : e));
+      setEstado((e) => prepararTarefa(tarefas[prox], e));
     }, 900);
   }
 
