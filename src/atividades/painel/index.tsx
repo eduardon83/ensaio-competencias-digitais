@@ -5,8 +5,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Contexto } from "../../preferencias/preferencias";
 import { definir, limitar, type PropsAtividade } from "../../motor/tipos";
-import { Instrucao } from "../../motor/util";
-import { Botao, BotaoRadio, CaixaVerificacao, Interruptor, Seletor } from "../../ui";
+import { Botao, BotaoRadio, CaixaVerificacao, ForcarClaro, Interruptor, Seletor } from "../../ui";
 
 export interface ConfigPainel {
   tarefas: string[]; // ids em TAREFAS
@@ -246,13 +245,30 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
 
   if (!tarefa) return null;
 
+  const endereco = contexto === "laboratorio" ? "laboratorio3.escola.pt/consola" : "orecreio.escola.pt";
   return (
     <div className="grid gap-4">
-      <Instrucao numero={indice + 1} total={tarefas.length}>
-        {feedback ?? tarefa.instrucao(rot)}
-      </Instrucao>
+      <p className="m-0" style={{ color: "var(--suave)" }}>
+        É apresentada uma interface abaixo. Deverás seguir as instruções corretamente nessa interface para demonstrar conhecimento das instruções e dos diferentes processos de interação.
+      </p>
+      <div className="cartao p-4 grid gap-1" role="status" aria-live="polite" style={{ borderLeft: "6px solid var(--acento)", background: feedback ? "var(--acento-suave)" : undefined }}>
+        <div className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--suave)" }}>
+          Tarefa {indice + 1} de {tarefas.length} · na interface abaixo
+        </div>
+        <div className="text-xl font-bold flex items-center gap-3" style={{ fontFamily: "var(--fonte-titulo)" }}>
+          <span aria-hidden="true">{feedback ? "✓" : "→"}</span>
+          <span>{feedback ?? tarefa.instrucao(rot)}</span>
+        </div>
+      </div>
 
-      <div className="simulado" aria-label="Sítio simulado">
+      <ForcarClaro>
+      <div className="janela-simulada" role="region" aria-label="Interface simulada da tarefa">
+      <div className="janela-barra" aria-hidden="true">
+        <span className="pontos"><span /><span /><span /></span>
+        <span className="endereco">https://{endereco}</span>
+        <span className="etiqueta">Interface simulada</span>
+      </div>
+      <div className="simulado superficie-clara" style={{ border: 0, borderRadius: 0 }}>
         <div className="topo">
           <Botao variante="discreto" aria-label="Abrir menu" aria-expanded={estado.menuAberto} onClick={() => alterar({ menuAberto: !estado.menuAberto })}>
             ☰
@@ -401,8 +417,9 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
             </>
           )}
         </div>
-        <footer className="p-3 border-t text-sm flex gap-4 flex-wrap" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
+        <footer className="px-4 py-2 border-t text-sm flex gap-6 flex-wrap items-center" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
           <a
+            className="ligacao-simples"
             href="#sobre"
             onClick={(e) => {
               e.preventDefault();
@@ -411,15 +428,16 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
           >
             {rot.menu[3]}
           </a>
-          <Botao variante="discreto" onClick={() => alterar({ ligacaoAberta: "botao" })}>
+          <button type="button" className="ligacao-simples" onClick={() => alterar({ ligacaoAberta: "botao" })}>
             Contactar
-          </Botao>
+          </button>
         </footer>
+      </div>
       </div>
 
       {estado.janelaAberta && (
         <div className="modal-fundo" onClick={() => alterar({ janelaAberta: false })}>
-          <div className="modal grid gap-3" role="dialog" aria-modal="true" aria-labelledby="sim-modal-t" onClick={(e) => e.stopPropagation()}>
+          <div className="modal superficie-clara grid gap-3" role="dialog" aria-modal="true" aria-labelledby="sim-modal-t" onClick={(e) => e.stopPropagation()}>
             <h3 id="sim-modal-t" className="text-lg">
               Novidades desta edição
             </h3>
@@ -447,6 +465,7 @@ function Painel({ config, contexto, aoTerminar }: PropsAtividade<ConfigPainel>) 
           </button>
         </div>
       )}
+      </ForcarClaro>
     </div>
   );
 }

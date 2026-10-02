@@ -72,7 +72,7 @@ export function Treino() {
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl">Treino de competências</h1>
-        <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repete à vontade: fica guardado o teu melhor por nível e as estrelas (1 a 50 pontos, 2 a 75, 3 a 90).</p>
+        <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho ficará guardado no teu browser, por nível e as estrelas respetivas. (1 estrela até 50 pontos, 2 estrelas na pontuação entre 51 e 75, 3 estrelas se a tua pontuação for superior a 90).</p>
       </header>
       <div role="tablist" aria-label="Nível de dificuldade" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
         {NIVEIS.map((n) => (

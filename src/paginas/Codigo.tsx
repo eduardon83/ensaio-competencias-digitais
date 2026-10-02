@@ -50,7 +50,7 @@ export function Codigo() {
   return (
     <div className="grid gap-5 max-w-xl">
       <h1 className="text-4xl">Entrar com código</h1>
-      <p className="m-0">O teu professor deu-te um código com duas partes, do tipo <code style={{ fontFamily: "var(--fonte-mono)" }}>TEC7·4F7KQ2</code>. Escreve-o aqui para fazeres a prova que ele montou.</p>
+      <p className="m-0">Insere aqui o código que o teu professor indicou. Terá o formato <code style={{ fontFamily: "var(--fonte-mono)" }}>TEC7·4F7KQ2</code>. APós inserires o código, clica em "Entrar" para começar a prova.</p>
       <form
         className="grid gap-3"
         onSubmit={(e) => {

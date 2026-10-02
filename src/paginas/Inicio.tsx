@@ -119,9 +119,9 @@ export function Inicio() {
 
 export function Treinar() {
   const opcoes = [
-    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. No fim vês o teu perfil de competências.", icone: "☰" },
-    { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. Repete à vontade e bate o teu recorde.", icone: "◎" },
-    { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Escreve-o aqui para fazer a prova que ele montou.", icone: "#" },
+    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. Concluíndo, tens acesso ao teu perfil de competências.", icone: "☰" },
+    { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior.", icone: "◎" },
+    { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova.", icone: "#" },
   ];
   return (
     <div className="grid gap-8">

@@ -157,6 +157,29 @@ mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; bord
 .ficha--certa { border-color: var(--certo); background: color-mix(in srgb, var(--certo) 15%, transparent); }
 .ficha--errada { border-color: var(--errado); background: color-mix(in srgb, var(--errado) 15%, transparent); }
 
+/* Janela simulada (O Painel): moldura de navegador e superfície sempre clara, distinta da aplicação */
+.janela-simulada { border: 2px solid var(--tecla-borda); border-radius: var(--raio); overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.25); }
+.janela-barra { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--tecla); border-bottom: 1px solid var(--linha); flex-wrap: wrap; }
+.janela-barra .pontos { display: flex; gap: 6px; }
+.janela-barra .pontos span { width: 12px; height: 12px; border-radius: 50%; background: var(--tecla-borda); }
+.janela-barra .endereco { flex: 1; min-width: 160px; font-family: var(--fonte-mono); font-size: .8rem; background: var(--superficie); color: var(--suave); border: 1px solid var(--linha); border-radius: 99px; padding: 3px 12px; }
+.superficie-clara {
+  --fundo: #f5f7f9; --superficie: #ffffff; --tinta: #14232e; --suave: #4c5b67; --linha: #d9e1e7;
+  --acento: #0f6b73; --acento-tinta: #ffffff; --acento-suave: #e0f0f0;
+  --tecla: #eef2f5; --tecla-borda: #8c99a4; --certo: #2f7a49; --errado: #b3402e; --aviso: #9a6a0b;
+  --foco: #0f6b73;
+  color-scheme: light; background: var(--superficie); color: var(--tinta);
+}
+:root[data-formato="mosaico"] .superficie-clara {
+  --fundo: #f7f8fa; --tinta: #2b363c; --suave: #475164; --linha: #cdd2dc; --acento: #034ad8; --acento-suave: #e5eeff;
+  --tecla: #f1f3f8; --tecla-borda: #8893aa; --foco: #f408fc;
+}
+/* Botões desativados na janela: legíveis (texto 4,5:1) mas claramente inativos (contorno tracejado) */
+.superficie-clara button:disabled, .superficie-clara .btn:disabled {
+  background: #e1e4ea !important; color: #475164 !important; border: 2px dashed #8893aa !important; opacity: 1 !important; cursor: not-allowed;
+}
+.ligacao-simples { background: none; border: 0; padding: 0; font: inherit; color: var(--acento); text-decoration: underline; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+
 /* Painel: sítio simulado */
 .simulado { border: 1px solid var(--linha); border-radius: var(--raio); overflow: hidden; background: var(--superficie); }
 .simulado .topo { display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--linha); background: var(--tecla); flex-wrap: wrap; }

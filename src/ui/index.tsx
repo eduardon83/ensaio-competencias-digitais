@@ -4,10 +4,22 @@
 // O formato ativo vem das preferências. As atividades usam SEMPRE estes componentes, para que o
 // "sítio simulado" do Painel também mude de aspeto. O tema escuro passa aos componentes Ágora por `darkMode`.
 
-import { forwardRef, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from "react";
+import { createContext, forwardRef, useContext, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from "react";
 import { Link } from "react-router";
 import { usePreferencias } from "../preferencias/preferencias";
 import { agora } from "./registo-agora";
+
+// Dentro de <ForcarClaro> (interface simulada das atividades) os componentes usam sempre o tema claro,
+// para a "janela" se distinguir da aplicação mesmo quando esta está em tema escuro.
+const ClaroCtx = createContext(false);
+export function ForcarClaro({ children }: { children: ReactNode }) {
+  return <ClaroCtx.Provider value={true}>{children}</ClaroCtx.Provider>;
+}
+function useUI() {
+  const v = usePreferencias();
+  const claro = useContext(ClaroCtx);
+  return { prefs: v.prefs, escuro: v.escuro && !claro };
+}
 
 // ── Botão ────────────────────────────────────────────────────────────────────
 export interface BotaoProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,7 +32,7 @@ export const Botao = forwardRef<HTMLButtonElement, BotaoProps>(function Botao(
   { variante = "primario", grande, className = "", children, type = "button", ...resto },
   ref,
 ) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   if (prefs.formato === "mosaico") {
     const A = agora();
     const appearance = variante === "primario" || variante === "perigo" ? "solid" : variante === "contorno" ? "outline" : "link";
@@ -62,7 +74,7 @@ export interface CampoTextoProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const CampoTexto = forwardRef<HTMLInputElement, CampoTextoProps>(function CampoTexto({ id, rotulo, ajuda, erro, obrigatorio, className = "", ...resto }, ref) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   const rotuloCompleto = obrigatorio ? `${rotulo} (obrigatório)` : rotulo;
   if (prefs.formato === "mosaico") {
     const A = agora();
@@ -107,7 +119,7 @@ export interface CaixaProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function CaixaVerificacao({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   if (prefs.formato === "mosaico") {
     const A = agora();
     return <A.Checkbox id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
@@ -122,7 +134,7 @@ export function CaixaVerificacao({ id, rotulo, className = "", ...resto }: Caixa
 
 // ── Botão de opção (rádio) ───────────────────────────────────────────────────
 export function BotaoRadio({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   if (prefs.formato === "mosaico") {
     const A = agora();
     return <A.RadioButton id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
@@ -137,7 +149,7 @@ export function BotaoRadio({ id, rotulo, className = "", ...resto }: CaixaProps)
 
 // ── Interruptor (toggle) ─────────────────────────────────────────────────────
 export function Interruptor({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   if (prefs.formato === "mosaico") {
     const A = agora();
     return <A.Switch id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
@@ -176,7 +188,7 @@ export function Seletor({ id, rotulo, opcoes, vazio, className = "", ...resto }:
 
 // ── Barra de progresso ───────────────────────────────────────────────────────
 export function Barra({ valor, max = 100, rotulo, tom }: { valor: number; max?: number; rotulo: string; tom?: "normal" | "aviso" | "errado" }) {
-  const { prefs, escuro } = usePreferencias();
+  const { prefs, escuro } = useUI();
   const pct = Math.max(0, Math.min(100, (valor / max) * 100));
   if (prefs.formato === "mosaico") {
     const A = agora();
