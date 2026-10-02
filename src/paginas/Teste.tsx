@@ -1,11 +1,12 @@
-// ─── Teste de competências: escolher nível e percorrer a sequência de atividades ──
-import { useMemo, useState } from "react";
+// ─── Teste de competências e sequências de atividades (também usadas pelos códigos do professor) ──
+import { useMemo, useState, type ReactNode } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { porSlug } from "../atividades";
+import { SeletorContexto } from "../componentes/SeletorContexto";
 import { contexto as defContexto } from "../contextos";
-import { guardarPercurso, lerPercurso, repositorioLocal, type Tentativa } from "../dados/repositorio";
+import { guardarPercurso, lerPercurso, repositorioLocal, type Percurso as EstadoPercurso, type Tentativa } from "../dados/repositorio";
 import { Atividade } from "../motor/Atividade";
-import { CICLOS, FAIXAS, NOME_DOMINIO, cicloPorId, faixaDe, limitar, type Dominio } from "../motor/tipos";
+import { CICLOS, FAIXAS, NOME_DOMINIO, cicloPorId, faixaDe, limitar, type Ciclo, type DefinicaoAtividade, type Dominio, type Nivel } from "../motor/tipos";
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao, Cartao, Etiqueta, LigacaoBotao } from "../ui";
 
@@ -34,14 +35,14 @@ export function EscolherNivel() {
                 {atividades.length} atividades: {atividades.map((a) => a!.titulo[prefs.contexto]).join(", ")}.
               </p>
               <div className="flex gap-3 flex-wrap">
-                <LigacaoBotao para={`/teste/${c.id}`}>{progresso ? `Retomar (${progresso.indice}/${atividades.length})` : "Começar"}</LigacaoBotao>
+                <LigacaoBotao para={`/teste/${c.id}`}>{progresso ? `Retomar (${progresso.indice}/${atividades.length})` : "Escolher"}</LigacaoBotao>
               </div>
             </Cartao>
           );
         })}
       </div>
       <p className="text-sm m-0" style={{ color: "var(--suave)" }}>
-        Ensino secundário (10.º a 12.º): usa o percurso do 3.º ciclo ou do Ensino Superior. Para treinar níveis mais altos (até ao nível 5), vai a <Link to="/treino">Treino</Link>.
+        Ensino secundário (10.º a 12.º): usa o percurso do 3.º ciclo ou do Ensino Superior. Para treinar níveis mais altos (até ao nível 5), vai a <Link to="/treino">Atividade</Link>.
       </p>
     </div>
   );
@@ -51,29 +52,74 @@ export function Percurso() {
   const { ciclo: cicloId = "" } = useParams();
   const ciclo = cicloPorId(cicloId);
   const navegar = useNavigate();
-  const { prefs } = usePreferencias();
   const atividades = useMemo(() => (ciclo ? ciclo.atividades.map((s) => porSlug(s)!).filter((a) => a.disponivel) : []), [ciclo]);
-  const [percurso, setPercurso] = useState(() => (ciclo ? lerPercurso(ciclo.id) : null));
-  const [pausa, setPausa] = useState(() => (percurso?.indice ?? 0) > 0);
   const [fim, setFim] = useState<Tentativa[] | null>(null);
-
   if (!ciclo) return <p>Nível desconhecido.</p>;
+  if (fim) return <PrimeiraPagina tentativas={fim} ciclo={ciclo.id} titulo={`o teste do ${ciclo.nome}`} nivel={ciclo.nivel} />;
+  return (
+    <Sequencia
+      chave={ciclo.id}
+      titulo={`Teste · ${ciclo.nome}`}
+      atividades={atividades}
+      nivel={ciclo.nivel}
+      origem="teste"
+      duracao={ciclo.duracao}
+      aoVoltar={() => navegar("/teste")}
+      aoTerminar={setFim}
+    />
+  );
+}
+
+/** Percorre uma lista de atividades com ecrã de início (cenário), pausas entre atividades e retoma no mesmo navegador. */
+export function Sequencia({
+  chave,
+  titulo,
+  atividades,
+  nivel,
+  origem,
+  duracao,
+  extensaoTempo,
+  etiquetas,
+  antesDeComecar,
+  podeComecar = true,
+  aoVoltar,
+  aoTerminar,
+}: {
+  chave: string;
+  titulo: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  atividades: DefinicaoAtividade<any>[];
+  nivel: Nivel;
+  origem: "teste" | "codigo";
+  duracao?: string;
+  extensaoTempo?: number;
+  etiquetas?: { codigo?: string; aluno?: string };
+  /** Conteúdo extra no ecrã de início (ex.: identificação pedida pelo professor). */
+  antesDeComecar?: ReactNode;
+  podeComecar?: boolean;
+  aoVoltar: () => void;
+  aoTerminar: (tentativas: Tentativa[]) => void;
+}) {
+  const { prefs } = usePreferencias();
+  const [percurso, setPercurso] = useState<EstadoPercurso | null>(() => lerPercurso(chave));
+  const [pausa, setPausa] = useState(() => (percurso?.indice ?? 0) > 0);
   const indice = percurso?.indice ?? 0;
 
   function iniciar() {
-    const p = { ciclo: ciclo!.id, indice: 0, tentativas: [], iniciadoEm: new Date().toISOString() };
+    const p = { ciclo: chave, indice: 0, tentativas: [], iniciadoEm: new Date().toISOString() };
     guardarPercurso(p);
     setPercurso(p);
     setPausa(false);
   }
 
   function concluiu(t: Tentativa) {
-    const novo = { ...(percurso ?? { ciclo: ciclo!.id, indice: 0, tentativas: [], iniciadoEm: new Date().toISOString() }), indice: indice + 1, tentativas: [...(percurso?.tentativas ?? []), t.id] };
+    const base = percurso ?? { ciclo: chave, indice: 0, tentativas: [], iniciadoEm: new Date().toISOString() };
+    const novo = { ...base, indice: indice + 1, tentativas: [...base.tentativas, t.id] };
     if (novo.indice >= atividades.length) {
       const todas = repositorioLocal.listarTentativas().filter((x) => novo.tentativas.includes(x.id));
       guardarPercurso(null);
       setPercurso(null);
-      setFim(todas);
+      aoTerminar(todas);
       return;
     }
     guardarPercurso(novo);
@@ -81,23 +127,27 @@ export function Percurso() {
     setPausa(true);
   }
 
-  if (fim) return <ResultadoFinal tentativas={fim} cicloId={ciclo.id} />;
-
   if (!percurso) {
     return (
       <div className="grid gap-5 max-w-3xl">
-        <h1 className="text-4xl">Teste · {ciclo.nome}</h1>
+        <h1 className="text-4xl">{titulo}</h1>
         <p className="m-0">
-          Vais fazer {atividades.length} atividades, pela ordem: {atividades.map((a) => a.titulo[prefs.contexto]).join(" → ")}. Cada uma começa com um briefing e um item de prática.
+          Vais fazer {atividades.length} atividade{atividades.length === 1 ? "" : "s"}, pela ordem: {atividades.map((a) => a.titulo[prefs.contexto]).join(" → ")}. Cada uma começa com um briefing e um item de prática que não conta.
         </p>
-        <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-          Duração estimada {ciclo.duracao}. O progresso fica guardado neste navegador: podes pausar entre atividades.
-        </p>
-        <div className="flex gap-3">
-          <Botao grande onClick={iniciar}>
-            Começar o teste
+        {duracao && (
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+            Duração estimada {duracao}. O progresso fica guardado neste navegador: podes pausar entre atividades.
+          </p>
+        )}
+        {antesDeComecar}
+        <div className="cartao p-5">
+          <SeletorContexto />
+        </div>
+        <div className="flex gap-3 flex-wrap">
+          <Botao grande onClick={iniciar} disabled={!podeComecar}>
+            Começar
           </Botao>
-          <Botao variante="contorno" onClick={() => navegar("/teste")}>
+          <Botao variante="contorno" onClick={aoVoltar}>
             Voltar
           </Botao>
         </div>
@@ -110,7 +160,7 @@ export function Percurso() {
     return (
       <div className="grid gap-5 max-w-3xl">
         <h1 className="text-3xl">Pausa</h1>
-        <div className="barra" role="progressbar" aria-valuemin={0} aria-valuemax={atividades.length} aria-valuenow={indice} aria-label="Progresso do teste">
+        <div className="barra" role="progressbar" aria-valuemin={0} aria-valuemax={atividades.length} aria-valuenow={indice} aria-label="Progresso">
           <div style={{ width: `${(100 * indice) / atividades.length}%` }} />
         </div>
         <p className="m-0">
@@ -143,21 +193,31 @@ export function Percurso() {
     <div className="grid gap-4">
       <div className="text-sm flex gap-3 items-center" style={{ color: "var(--suave)" }}>
         <span>
-          Teste {ciclo.nome} · atividade {indice + 1} de {atividades.length}
+          {titulo} · atividade {indice + 1} de {atividades.length}
         </span>
         <div className="barra flex-1" aria-hidden="true">
           <div style={{ width: `${(100 * indice) / atividades.length}%` }} />
         </div>
       </div>
-      <Atividade key={`${ciclo.id}-${indice}`} definicao={atual} nivel={ciclo.nivel} origem="teste" aoConcluir={concluiu} rotuloContinuar={indice + 1 >= atividades.length ? "Ver o resultado do teste" : "Continuar o teste"} />
+      <Atividade
+        key={`${chave}-${indice}`}
+        definicao={atual}
+        nivel={nivel}
+        origem={origem}
+        aoConcluir={concluiu}
+        escolherContexto={false}
+        extensaoTempo={extensaoTempo}
+        etiquetas={etiquetas}
+        rotuloContinuar={indice + 1 >= atividades.length ? "Ver o resultado" : "Continuar"}
+      />
     </div>
   );
 }
 
-function ResultadoFinal({ tentativas, cicloId }: { tentativas: Tentativa[]; cicloId: string }) {
+/** Ecrã final: "primeira página" (jornal) ou "relatório da experiência" (laboratório). */
+export function PrimeiraPagina({ tentativas, ciclo, titulo, nivel, codigo, aluno }: { tentativas: Tentativa[]; ciclo: Ciclo | "codigo"; titulo: string; nivel: Nivel; codigo?: string; aluno?: string }) {
   const { prefs } = usePreferencias();
   const ctx = defContexto(prefs.contexto);
-  const ciclo = cicloPorId(cicloId)!;
   const porDominio: Record<string, number> = {};
   for (const t of tentativas) {
     const d = porSlug(t.atividade)?.dominio ?? "todas";
@@ -165,11 +225,11 @@ function ResultadoFinal({ tentativas, cicloId }: { tentativas: Tentativa[]; cicl
   }
   const global = limitar(tentativas.reduce((s, t) => s + t.pontuacao, 0) / Math.max(1, tentativas.length));
   const faixa = faixaDe(global);
-  const guardado = useMemo(() => repositorioLocal.guardarTeste({ ciclo: ciclo.id, pontuacaoGlobal: global, faixa: faixa.nome, porDominio, tentativas: tentativas.map((t) => t.id) }), []); // eslint-disable-line react-hooks/exhaustive-deps
+  const guardado = useMemo(() => repositorioLocal.guardarTeste({ ciclo, pontuacaoGlobal: global, faixa: faixa.nome, porDominio, tentativas: tentativas.map((t) => t.id), codigo, aluno }), []); // eslint-disable-line react-hooks/exhaustive-deps
   const maisFraca = Object.entries(porDominio).sort((a, b) => a[1] - b[1])[0];
   const defFraca = maisFraca ? tentativas.find((t) => porSlug(t.atividade)?.dominio === maisFraca[0]) : undefined;
   const dica = defFraca ? porSlug(defFraca.atividade)!.dica(defFraca.metricas, defFraca.pontuacao) : "";
-  const nome = prefs.nome.trim() || ctx.papelAnonimo;
+  const nome = aluno?.trim() || prefs.nome.trim() || ctx.papelAnonimo;
   const data = new Date(guardado.concluidoEm).toLocaleDateString("pt-PT", { day: "numeric", month: "long", year: "numeric" });
 
   return (
@@ -177,21 +237,21 @@ function ResultadoFinal({ tentativas, cicloId }: { tentativas: Tentativa[]; cicl
       <h1 className="text-3xl">{ctx.resultado.titulo}</h1>
       <article className="jornal grid gap-4" aria-label={ctx.resultado.titulo}>
         <div className="cabecalho">
-          <span className="font-extrabold text-2xl">{ctx.publicacao(ciclo.nivel)}</span>
+          <span className="font-extrabold text-2xl">{ctx.publicacao(nivel)}</span>
           <span className="text-sm self-end" style={{ fontFamily: "var(--fonte-mono)" }}>
-            {data} · edição especial
+            {data} · edição especial{codigo ? ` · sessão ${codigo}` : ""}
           </span>
         </div>
         <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
           <div className="grid gap-2">
             <div className="manchete">
-              {nome} termina o teste do {ciclo.nome} com {global} pontos
+              {nome} termina {titulo} com {global} pontos
             </div>
             <div className="text-sm" style={{ color: "var(--suave)" }}>
               Por {nome} · {ctx.papel}
             </div>
             <p className="coluna m-0">
-              Nível «{faixa.nome}». {tentativas.length} atividades concluídas. {dica}
+              Nível «{faixa.nome}». {tentativas.length} atividade{tentativas.length === 1 ? "" : "s"} concluída{tentativas.length === 1 ? "" : "s"}. {dica}
             </p>
           </div>
           <div className="grid gap-2 content-start">
@@ -225,8 +285,8 @@ function ResultadoFinal({ tentativas, cicloId }: { tentativas: Tentativa[]; cicl
         <LigacaoBotao para="/treino" variante="contorno">
           Treinar a competência mais fraca
         </LigacaoBotao>
-        <LigacaoBotao para="/teste" variante="discreto">
-          Outro nível
+        <LigacaoBotao para="/treinar" variante="discreto">
+          Voltar a Treinar
         </LigacaoBotao>
       </div>
     </div>

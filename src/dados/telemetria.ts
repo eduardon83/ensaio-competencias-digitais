@@ -48,6 +48,60 @@ export interface Agregados {
   completo: boolean; // true quando a chave de administração foi aceite
 }
 
+// ─── Sessões de professor ────────────────────────────────────────────────────
+async function postarJson<T>(dados: Record<string, unknown>): Promise<T | { erro: string }> {
+  if (!telemetriaConfigurada) return { erro: "nao_configurado" };
+  try {
+    const r = await fetch(URL_TELEMETRIA, { method: "POST", body: JSON.stringify(dados), headers: { "Content-Type": "text/plain;charset=utf-8" }, redirect: "follow" });
+    return (await r.json()) as T;
+  } catch (e) {
+    return { erro: e instanceof Error ? e.message : "falha de rede" };
+  }
+}
+async function obterJson<T>(params: Record<string, string>): Promise<T | { erro: string }> {
+  if (!telemetriaConfigurada) return { erro: "nao_configurado" };
+  const url = new URL(URL_TELEMETRIA);
+  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
+  try {
+    const r = await fetch(url.toString(), { redirect: "follow" });
+    if (!r.ok) return { erro: `HTTP ${r.status}` };
+    return (await r.json()) as T;
+  } catch (e) {
+    return { erro: e instanceof Error ? e.message : "falha de rede" };
+  }
+}
+
+export async function sha256Hex(texto: string): Promise<string> {
+  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
+  return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+export function registarSessao(d: { sessao: string; codigo: string; config: unknown; tokenHash: string; email: string; frequencia: "cada" | "diario" | "nenhum"; urlResultados: string }) {
+  return postarJson<{ ok: boolean; email?: boolean; erro?: string }>({ evento: "sessao", ...d });
+}
+export function fecharSessao(sessao: string, token: string) {
+  return postarJson<{ ok: boolean; erro?: string }>({ evento: "fechar", sessao, token });
+}
+export function estadoSessao(sessao: string) {
+  return obterJson<{ existe: boolean; fechada: boolean }>({ estado: sessao });
+}
+
+export interface ResultadosSessao {
+  sessao: string;
+  codigo: string;
+  config: unknown;
+  email: string;
+  confirmado: boolean;
+  frequencia: string;
+  fechada: boolean;
+  criadoEm: string;
+  tentativas: { recebidoEm: string; aluno: string; atividade: string; nivel: number; pontuacao: number; duracaoS: number; dispositivo: string; contexto: string }[];
+  testes: { recebidoEm: string; aluno: string; pontuacaoGlobal: number; faixa: string }[];
+}
+export function obterResultadosSessao(sessao: string, token: string) {
+  return obterJson<ResultadosSessao>({ sessao, token });
+}
+
 /** Obtém agregados do ponto de recolha. Sem chave: versão pública. Devolve null se não configurado ou em erro. */
 export async function obterAgregados(chave?: string): Promise<Agregados | { erro: string } | null> {
   if (!telemetriaConfigurada) return null;

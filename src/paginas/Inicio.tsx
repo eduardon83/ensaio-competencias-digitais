@@ -1,10 +1,18 @@
-import { LigacaoBotao } from "../ui";
+import { Link } from "react-router";
 import { FAIXAS } from "../motor/tipos";
+import { AvisoTutorial } from "./Tutorial";
+
+const BLOCOS = [
+  { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade ou entra com o código do teu professor.", icone: "▶" },
+  { para: "/professor", titulo: "Professor", texto: "Monta uma prova para a turma, recebe um código e acompanha os resultados.", icone: "✎" },
+  { para: "/tutorial", titulo: "Tutorial", texto: "Vê em dois minutos como funciona tudo. Podes saltar quando quiseres.", icone: "?" },
+  { para: "/observatorio", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas.", icone: "◔" },
+];
 
 export function Inicio() {
   return (
     <div className="grid gap-12">
-      <section className="grid gap-5 max-w-3xl">
+      <section className="grid gap-4 max-w-3xl mx-auto text-center justify-items-center">
         <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--suave)", fontFamily: "var(--fonte-mono)" }}>
           Gratuito · pt-PT · sem conta
         </div>
@@ -13,21 +21,26 @@ export function Inicio() {
         </h1>
         <p className="text-xl m-0">As provas são cada vez mais feitas no computador. Saber a matéria não chega. É preciso escrever no teclado, ler num ecrã, preencher campos e gerir o tempo.</p>
         <p className="m-0">O Ensaio às Competências Digitais ajuda a treinar estas competências. É gratuito. Não precisa de conta.</p>
-        <div className="flex flex-wrap gap-3 mt-2">
-          <LigacaoBotao para="/teste" grande>
-            Fazer o teste
-          </LigacaoBotao>
-          <LigacaoBotao para="/codigo" variante="contorno" grande>
-            Tenho um código
-          </LigacaoBotao>
-          <LigacaoBotao para="/treino" variante="contorno" grande>
-            Treinar uma atividade
-          </LigacaoBotao>
-        </div>
       </section>
 
+      <AvisoTutorial />
+
+      <nav aria-label="Entradas principais" className="grid gap-4 sm:grid-cols-2 max-w-4xl w-full mx-auto">
+        {BLOCOS.map((b) => (
+          <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6" style={{ color: "var(--tinta)" }}>
+            <span aria-hidden="true" className="grid place-items-center rounded-xl text-2xl font-extrabold" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
+              {b.icone}
+            </span>
+            <span className="text-3xl font-extrabold" style={{ fontFamily: "var(--fonte-titulo)" }}>
+              {b.titulo}
+            </span>
+            <span style={{ color: "var(--suave)" }}>{b.texto}</span>
+          </Link>
+        ))}
+      </nav>
+
       <section className="grid gap-4 md:grid-cols-3">
-        <div className="cartao p-5 grid gap-2">
+        <div className="cartao p-5 grid gap-2 content-start">
           <h2 className="text-xl">Porquê</h2>
           <p className="m-0 text-sm">
             Desde 2025, as provas ModA do 4.º e 6.º anos e as provas finais do 9.º ano são feitas em suporte digital. O IAVE criou provas-ensaio para que todos os alunos cheguem à prova em situação de equidade.<sup>1</sup>
@@ -39,13 +52,13 @@ export function Inicio() {
             Usar o telemóvel todos os dias não ensina a usar um formulário ou um teclado completo. No estudo ICILS 2023, cerca de um terço dos alunos portugueses do 8.º ano ficou abaixo do nível 2 de literacia digital.<sup>4</sup>
           </p>
         </div>
-        <div className="cartao p-5 grid gap-2">
+        <div className="cartao p-5 grid gap-2 content-start">
           <h2 className="text-xl">Como funciona</h2>
           <p className="m-0 text-sm">Escolhes o teu nível. Fazes atividades curtas, como num jogo. Cada uma dá uma pontuação de 0 a 100. No fim vês o que já dominas e o que podes treinar.</p>
-          <p className="m-0 text-sm">Há dois cenários à escolha: a redação do jornal da escola, ou um laboratório de experiências. E dois aspetos: o editorial Kendir ou o Mosaico, o design system dos serviços públicos portugueses.</p>
-          <p className="m-0 text-sm">Os professores podem criar um código para a turma e receber os resultados por email.</p>
+          <p className="m-0 text-sm">Antes de começar escolhes o cenário: a redação do jornal da escola, ou um laboratório de experiências.</p>
+          <p className="m-0 text-sm">Os professores montam uma prova, dão o código à turma e veem os resultados por código.</p>
         </div>
-        <div className="cartao p-5 grid gap-2">
+        <div className="cartao p-5 grid gap-2 content-start">
           <h2 className="text-xl">Os teus dados</h2>
           <p className="m-0 text-sm">Não há contas nem registos de pessoas. Os teus resultados ficam no teu navegador. Para estatísticas, cada atividade envia um registo anónimo que serve para perceber que competências faltam e a quantas pessoas. Podes desligar isso nas Definições.</p>
           <p className="m-0 text-sm">Sem endereço IP, sem impressão digital do dispositivo, sem analítica de terceiros. Por isso não há aviso de cookies.</p>
@@ -73,9 +86,41 @@ export function Inicio() {
 
       <section className="text-xs" style={{ color: "var(--suave)" }}>
         <p className="m-0">
-          1. IAVE, Preparar o Digit@l, 2025. 2. Backes e Cowan, Harvard EdLabs, 2019. 3. Kröhne e Martens, 2011; Lindner et al., 2024. 4. IAVE, Relatório Nacional ICILS 2023. Ligações completas em <a href="/sobre">Sobre</a>.
+          1. IAVE, Preparar o Digit@l, 2025. 2. Backes e Cowan, Harvard EdLabs, 2019. 3. Kröhne e Martens, 2011; Lindner et al., 2024. 4. IAVE, Relatório Nacional ICILS 2023. Ligações completas em <Link to="/sobre">Sobre</Link>.
         </p>
       </section>
+    </div>
+  );
+}
+
+export function Treinar() {
+  const opcoes = [
+    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. No fim vês o teu perfil de competências.", icone: "☰" },
+    { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. Repete à vontade e bate o teu recorde.", icone: "◎" },
+    { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Escreve-o aqui para fazer a prova que ele montou.", icone: "#" },
+  ];
+  return (
+    <div className="grid gap-8">
+      <header className="grid gap-2 text-center justify-items-center">
+        <h1 className="text-4xl">Treinar</h1>
+        <p className="m-0 max-w-2xl">Escolhe como queres treinar. Em todas as opções, antes de começar escolhes o cenário.</p>
+      </header>
+      <nav aria-label="Modos de treino" className="grid gap-4 md:grid-cols-3 max-w-5xl w-full mx-auto">
+        {opcoes.map((b) => (
+          <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6 content-start" style={{ color: "var(--tinta)" }}>
+            <span aria-hidden="true" className="grid place-items-center rounded-xl text-2xl font-extrabold" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
+              {b.icone}
+            </span>
+            <span className="text-3xl font-extrabold" style={{ fontFamily: "var(--fonte-titulo)" }}>
+              {b.titulo}
+            </span>
+            <span style={{ color: "var(--suave)" }}>{b.texto}</span>
+          </Link>
+        ))}
+      </nav>
+      <p className="text-center text-sm m-0" style={{ color: "var(--suave)" }}>
+        Primeira vez? Vê o <Link to="/tutorial">tutorial</Link>.
+      </p>
     </div>
   );
 }

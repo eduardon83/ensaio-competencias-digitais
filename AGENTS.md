@@ -16,6 +16,16 @@ SPA estática: Vite 7 + React 19 + TypeScript + Tailwind v4 + react-router 7 (ro
 
 Comandos: `npm run dev` (porta 5180) · `npm run typecheck` · `npm test` (Vitest) · `npm run build`.
 
+Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerado com `python scripts/gerar-readme-pdf.py`). Escritos para escolas, ARTE e EduQA, não só para quem programa: quando mudares funcionalidades, atualiza o `.txt` e regenera o `.pdf` no mesmo commit. Não voltes a criar `README.md`.
+
+### Navegação e fluxos
+
+- Cabeçalho só com Início, Sobre, Definições. Início tem quatro blocos: Treinar (`/treinar` → Teste `/teste`, Atividade `/treino`, Código `/codigo`), Professor (`/professor`), Tutorial (`/tutorial`, saltável, aviso na primeira visita) e Observatório.
+- O cenário (redação/laboratório) escolhe-se no briefing de cada atividade e no ecrã de início de cada teste ou prova (`src/componentes/SeletorContexto.tsx`), não no cabeçalho.
+- Sessões de professor sem servidor próprio: `src/codigo/codigo.ts` codifica nível, atividades, tempo alargado e identificação no código `XXXX·YYYYYY` (alfabeto sem 0/O/1/I/L, carácter de verificação). `src/paginas/Professor.tsx` cria o código e regista a sessão no ponto de recolha (hash do token privado + email opcional, confirmado por ligação); a ligação privada `/professor/resultados#s=…&t=…` lê os resultados. `src/paginas/Codigo.tsx` é o lado do aluno (identificação, cenário, sequência). As tentativas levam `codigo` e `aluno` na telemetria; o Apps Script envia emails (MailApp) por tentativa ou em resumo diário.
+- `Sequencia` e `PrimeiraPagina` (`src/paginas/Teste.tsx`) servem o teste por ciclo e a prova do professor.
+- Vídeo da página Sobre: `VITE_VIDEO_SOBRE` (embed YouTube/Vimeo ou .mp4); vazio mostra um espaço reservado.
+
 ### Formatos de UI
 
 - Tokens CSS em `src/styles/app.css`: `:root` = Kendir; `:root[data-formato="mosaico"]` redefine os mesmos tokens com a paleta Ágora. Tema escuro só no Kendir.

@@ -1,29 +1,36 @@
 import { Navigate, Route, Routes } from "react-router";
 import { Layout } from "./componentes/Layout";
-import { Inicio } from "./paginas/Inicio";
+import { Inicio, Treinar } from "./paginas/Inicio";
 import { EscolherNivel, Percurso } from "./paginas/Teste";
 import { Catalogo, Treino } from "./paginas/Catalogo";
 import { AtividadePagina } from "./paginas/AtividadePagina";
 import { Observatorio, Resultados } from "./paginas/Conta";
-import { Acessibilidade, Codigo, Privacidade, Professor, Sobre } from "./paginas/Textos";
+import { Acessibilidade, Privacidade, Sobre } from "./paginas/Textos";
 import { Definicoes } from "./paginas/Definicoes";
 import { Admin } from "./paginas/Admin";
+import { Professor, ResultadosProfessor } from "./paginas/Professor";
+import { Codigo } from "./paginas/Codigo";
+import { Tutorial } from "./paginas/Tutorial";
 
 export function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Inicio />} />
+        <Route path="treinar" element={<Treinar />} />
         <Route path="teste" element={<EscolherNivel />} />
         <Route path="teste/:ciclo" element={<Percurso />} />
+        <Route path="treino" element={<Treino />} />
         <Route path="atividades" element={<Catalogo />} />
         <Route path="atividades/:slug/:nivel" element={<AtividadePagina />} />
-        <Route path="treino" element={<Treino />} />
         <Route path="codigo" element={<Codigo />} />
+        <Route path="codigo/:codigo" element={<Codigo />} />
         <Route path="professor" element={<Professor />} />
+        <Route path="professor/resultados" element={<ResultadosProfessor />} />
+        <Route path="tutorial" element={<Tutorial />} />
+        <Route path="observatorio" element={<Observatorio />} />
         <Route path="resultados" element={<Resultados />} />
         <Route path="conta" element={<Navigate to="/resultados" replace />} />
-        <Route path="observatorio" element={<Observatorio />} />
         <Route path="admin" element={<Admin />} />
         <Route path="acessibilidade" element={<Acessibilidade />} />
         <Route path="sobre" element={<Sobre />} />

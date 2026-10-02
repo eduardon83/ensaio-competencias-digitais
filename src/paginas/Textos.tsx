@@ -1,50 +1,32 @@
-// ─── Páginas de texto: código de turma e professor (fase seguinte), guia de acessibilidade, sobre, privacidade ──
-import { useState } from "react";
+// ─── Páginas de texto: guia de acessibilidade, sobre (com espaço para vídeo), privacidade ──
 import { Link } from "react-router";
-import { Botao, CampoTexto } from "../ui";
 import { DATA_VERSAO, VERSAO } from "../versao";
 
-export function Codigo() {
-  const [codigo, setCodigo] = useState("");
-  const [erro, setErro] = useState<string | null>(null);
-  return (
-    <div className="grid gap-5 max-w-xl">
-      <h1 className="text-4xl">Entrar com código</h1>
-      <p className="m-0">O teu professor deu-te um código do tipo <code style={{ fontFamily: "var(--fonte-mono)" }}>TECLA·4F7K</code>. Escreve-o aqui para fazeres as atividades que ele escolheu.</p>
-      <form
-        className="grid gap-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setErro("Os códigos de turma chegam na próxima fase. Por agora podes treinar livremente.");
-        }}
-      >
-        <CampoTexto id="codigo" rotulo="Código da sessão" value={codigo} onChange={(e) => setCodigo(e.target.value.toUpperCase())} autoComplete="off" placeholder="XXXX·XXXX" erro={erro} obrigatorio />
-        <div className="flex gap-3">
-          <Botao type="submit" disabled={codigo.trim().length < 4}>
-            Entrar
-          </Botao>
-          <Link to="/treino" className="botao botao--discreto">
-            Treinar sem código
-          </Link>
-        </div>
-      </form>
-    </div>
-  );
-}
+/** URL do vídeo de apresentação (YouTube/Vimeo "embed" ou ficheiro .mp4). Vazio = espaço reservado. */
+const VIDEO_SOBRE: string = (import.meta.env.VITE_VIDEO_SOBRE as string | undefined)?.trim() ?? "";
 
-export function Professor() {
+export function Video({ titulo }: { titulo: string }) {
+  if (!VIDEO_SOBRE) {
+    return (
+      <div className="video" role="img" aria-label="Espaço reservado para o vídeo de apresentação">
+        <div className="grid gap-1 p-4">
+          <span className="text-4xl" aria-hidden="true">▶</span>
+          <strong>Vídeo de apresentação</strong>
+          <span className="text-sm">Em breve.</span>
+        </div>
+      </div>
+    );
+  }
+  if (/\.(mp4|webm)(\?|$)/i.test(VIDEO_SOBRE)) {
+    return (
+      <div className="video">
+        <video controls preload="metadata" src={VIDEO_SOBRE} aria-label={titulo} />
+      </div>
+    );
+  }
   return (
-    <div className="grid gap-5 max-w-3xl">
-      <h1 className="text-4xl">Sessões de turma</h1>
-      <p className="m-0">Em construção. Sem contas e sem base de dados, o desenho previsto é este:</p>
-      <ol className="grid gap-2 pl-6">
-        <li>O professor escolhe o nível, uma ou mais atividades (ou o teste completo) e a extensão de tempo. A escolha é codificada no próprio código (formato XXXX·XXXX, sem O/0 nem I/1/L) e numa ligação com QR. Nada fica guardado em servidor.</li>
-        <li>Os alunos entram com o código e fazem o conjunto. O resultado aparece no ecrã do aluno (primeira página, imprimível) e, se a recolha anónima estiver ativa, as tentativas vão marcadas com o código.</li>
-        <li>O professor vê os agregados do seu código no Observatório, sem nomes: o identificador por aluno é o que o professor decidir pedir na sala (número de turma, por exemplo).</li>
-      </ol>
-      <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-        Alternativas com email ao professor exigiriam um serviço de envio e verificação de endereços, o que contraria a opção de não ter base de dados. Fica como decisão aberta.
-      </p>
+    <div className="video">
+      <iframe src={VIDEO_SOBRE} title={titulo} loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
     </div>
   );
 }
@@ -151,6 +133,7 @@ export function Sobre() {
   return (
     <div className="grid gap-6 max-w-3xl">
       <h1 className="text-4xl">Sobre</h1>
+      <Video titulo="Apresentação do Ensaio às Competências Digitais" />
       <p className="m-0">
         Ensaio às Competências Digitais (ECD), versão {VERSAO} de {DATA_VERSAO}. Um projeto Kendir Studios / Worlds4Education. Jogo web aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática.
       </p>
@@ -159,10 +142,14 @@ export function Sobre() {
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
           <li>Feito: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Kendir e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
-          <li>Seguinte: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa; códigos de turma sem servidor.</li>
+          <li>Feito também: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados.</li>
+          <li>Seguinte: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa.</li>
           <li>Final: auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
         </ul>
       </section>
+      <p className="m-0">
+        Primeira vez? Vê o <Link to="/tutorial">tutorial</Link>. Estatísticas de uso no <Link to="/observatorio">Observatório</Link>.
+      </p>
       <section className="grid gap-2">
         <h2 className="text-2xl">Fontes</h2>
         <ol className="pl-5 m-0 grid gap-1 text-sm">
@@ -192,6 +179,10 @@ export function Privacidade() {
         <h2 className="text-xl">Estatísticas anónimas</h2>
         <p className="m-0">Para sabermos que competências faltam e a quantas pessoas, cada atividade concluída envia um pequeno registo anónimo: um identificador aleatório criado no teu navegador (não ligado a ti), a atividade, o nível, a pontuação, a duração, algumas medidas da atividade (por exemplo palavras por minuto), o tipo de dispositivo (computador, tablet, telemóvel), o contexto e o aspeto escolhidos, e se usaste tempo alargado. Não enviamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.</p>
         <p className="m-0">Os registos vão para uma folha de cálculo controlada pela entidade que publica a aplicação, na União Europeia, e servem só para estatísticas agregadas. No Observatório, qualquer grupo com menos de 20 tentativas fica oculto. Podes desligar o envio em Definições → Estatísticas anónimas; a aplicação funciona exatamente igual.</p>
+      </section>
+      <section className="grid gap-2">
+        <h2 className="text-xl">Sessões de professor</h2>
+        <p className="m-0">Quando um professor cria uma sessão, guardamos o código, a configuração da prova e, se o professor o indicar, o seu email, para lhe enviar os resultados. O email só é usado depois de confirmado por ligação e é apagado 12 meses após a última tentativa. Nas tentativas feitas com o código vai também o identificador que o professor pediu (número de turma ou alcunha); recomendamos o número de turma em vez do nome.</p>
       </section>
       <section className="grid gap-2">
         <h2 className="text-xl">Base legal e contacto</h2>

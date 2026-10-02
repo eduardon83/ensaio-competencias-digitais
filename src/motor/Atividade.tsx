@@ -6,6 +6,7 @@ import { repositorioLocal, type Origem, type Tentativa } from "../dados/reposito
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao, Etiqueta, LigacaoBotao } from "../ui";
 import { DISPONIVEIS } from "../atividades";
+import { SeletorContexto } from "../componentes/SeletorContexto";
 import { CARIMBO_MINIMO, NOME_DOMINIO, NOME_NIVEL, estrelasDe, type DefinicaoAtividade, type Nivel, type ResultadoAtividade } from "./tipos";
 
 type Etapa = "intro" | "pratica" | "avaliacao" | "resultado";
@@ -16,6 +17,9 @@ export function Atividade({
   origem,
   aoConcluir,
   rotuloContinuar,
+  escolherContexto = true,
+  extensaoTempo: extensaoForcada,
+  etiquetas,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   definicao: DefinicaoAtividade<any>;
@@ -24,9 +28,16 @@ export function Atividade({
   /** Quando presente (percurso de teste), o botão "Continuar" chama-o com a tentativa guardada. */
   aoConcluir?: (t: Tentativa) => void;
   rotuloContinuar?: string;
+  /** Mostra a escolha do cenário no briefing (falso dentro de um teste/sessão, onde já foi escolhido). */
+  escolherContexto?: boolean;
+  /** Tempo alargado imposto pela sessão do professor (sobrepõe-se às definições). */
+  extensaoTempo?: number;
+  /** Marcas da sessão do professor, enviadas com a tentativa. */
+  etiquetas?: { codigo?: string; aluno?: string };
 }) {
   const { prefs } = usePreferencias();
   const ctx = defContexto(prefs.contexto);
+  const extensao = extensaoForcada ?? prefs.extensaoTempo;
   const [etapa, setEtapa] = useState<Etapa>("intro");
   const [chave, setChave] = useState(0); // força remontagem ao repetir
   const [tentativa, setTentativa] = useState<Tentativa | null>(null);
@@ -44,7 +55,9 @@ export function Atividade({
       origem,
       contexto: prefs.contexto,
       formato: prefs.formato,
-      extensaoTempo: prefs.extensaoTempo,
+      extensaoTempo: extensao,
+      codigo: etiquetas?.codigo,
+      aluno: etiquetas?.aluno,
     });
     setTentativa(t);
     setEtapa("resultado");
@@ -86,8 +99,13 @@ export function Atividade({
           </div>
           <p className="m-0" style={{ color: "var(--suave)" }}>
             {definicao.descricao} Primeiro fazes um item de prática que não conta. Depois começa a avaliação.
-            {prefs.extensaoTempo !== 1 && <> Tempo alargado ×{prefs.extensaoTempo} ativo.</>}
+            {extensao !== 1 && <> Tempo alargado ×{extensao} ativo.</>}
           </p>
+          {escolherContexto && (
+            <div className="pt-2 border-t" style={{ borderColor: "var(--linha)" }}>
+              <SeletorContexto compacto />
+            </div>
+          )}
           {melhorAnterior && (
             <p className="m-0 text-sm">
               O teu melhor neste nível: <strong>{melhorAnterior.pontuacao}</strong> pontos.
@@ -106,7 +124,7 @@ export function Atividade({
 
       {etapa === "pratica" && (
         <section aria-label="Prática" className="grid gap-3">
-          <Componente key={`p${chave}`} config={configPratica} modo="pratica" nivel={nivel} contexto={prefs.contexto} extensaoTempo={prefs.extensaoTempo} aoTerminar={() => setEtapa("avaliacao")} />
+          <Componente key={`p${chave}`} config={configPratica} modo="pratica" nivel={nivel} contexto={prefs.contexto} extensaoTempo={extensao} aoTerminar={() => setEtapa("avaliacao")} />
           <div>
             <Botao variante="discreto" onClick={() => setEtapa("avaliacao")}>
               Passar à avaliação
@@ -117,7 +135,7 @@ export function Atividade({
 
       {etapa === "avaliacao" && (
         <section aria-label="Avaliação">
-          <Componente key={`a${chave}`} config={config} modo="avaliacao" nivel={nivel} contexto={prefs.contexto} extensaoTempo={prefs.extensaoTempo} aoTerminar={terminarAvaliacao} />
+          <Componente key={`a${chave}`} config={config} modo="avaliacao" nivel={nivel} contexto={prefs.contexto} extensaoTempo={extensao} aoTerminar={terminarAvaliacao} />
         </section>
       )}
 

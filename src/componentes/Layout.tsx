@@ -1,26 +1,20 @@
-// ─── Estrutura comum: ligação de salto, cabeçalho, navegação, rodapé ─────────
+// ─── Estrutura comum: ligação de salto, cabeçalho curto (Início · Sobre · Definições), rodapé ──
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import { usePreferencias } from "../preferencias/preferencias";
-import { contexto as defContexto } from "../contextos";
 import { VERSAO } from "../versao";
 
 const LIGACOES = [
   { para: "/", texto: "Início" },
-  { para: "/teste", texto: "Teste" },
-  { para: "/treino", texto: "Treino" },
-  { para: "/atividades", texto: "Atividades" },
-  { para: "/observatorio", texto: "Observatório" },
-  { para: "/acessibilidade", texto: "Acessibilidade" },
+  { para: "/sobre", texto: "Sobre" },
+  { para: "/definicoes", texto: "Definições" },
 ];
 
 export function Layout() {
-  const { prefs, definir } = usePreferencias();
-  const ctx = defContexto(prefs.contexto);
+  const { prefs } = usePreferencias();
   const local = useLocation();
 
   useEffect(() => {
-    // Foco no conteúdo a cada navegação (leitores de ecrã) e scroll ao topo.
     document.getElementById("conteudo")?.focus({ preventScroll: true });
     window.scrollTo({ top: 0 });
   }, [local.pathname]);
@@ -51,25 +45,7 @@ export function Layout() {
                 {l.texto}
               </NavLink>
             ))}
-            <NavLink to="/definicoes" className="px-3 py-2 rounded-lg no-underline font-bold text-sm" style={({ isActive }) => ({ color: isActive ? "var(--acento)" : "var(--tinta)", background: isActive ? "var(--acento-suave)" : "transparent", minHeight: 44, display: "inline-flex", alignItems: "center" })} aria-label="Definições: aspeto, contexto, tempo">
-              ⚙ Definições
-            </NavLink>
           </nav>
-        </div>
-        <div className="max-w-6xl mx-auto px-4 pb-2 flex flex-wrap gap-x-4 gap-y-1 text-xs" style={{ color: "var(--suave)" }}>
-          <span>
-            Contexto: <strong>{ctx.nome}</strong>
-          </span>
-          <button type="button" className="underline" style={{ background: "none", border: 0, color: "var(--acento)", cursor: "pointer", font: "inherit", padding: 0 }} onClick={() => definir({ contexto: prefs.contexto === "jornal" ? "laboratorio" : "jornal" })}>
-            Trocar para {prefs.contexto === "jornal" ? "laboratório" : "redação"}
-          </button>
-          <span>·</span>
-          <span>
-            Aspeto: <strong>{prefs.formato === "kendir" ? "Kendir" : "Mosaico"}</strong>
-          </span>
-          <button type="button" className="underline" style={{ background: "none", border: 0, color: "var(--acento)", cursor: "pointer", font: "inherit", padding: 0 }} onClick={() => definir({ formato: prefs.formato === "kendir" ? "mosaico" : "kendir" })}>
-            Trocar para {prefs.formato === "kendir" ? "Mosaico" : "Kendir"}
-          </button>
         </div>
       </header>
       <main id="conteudo" tabIndex={-1} className="max-w-6xl w-full mx-auto px-4 py-8 outline-none">
@@ -79,10 +55,10 @@ export function Layout() {
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
           <span>Ensaio às Competências Digitais · v{VERSAO} · Kendir Studios / Worlds4Education</span>
           <NavLink to="/resultados">Os meus resultados</NavLink>
-          <NavLink to="/sobre">Sobre</NavLink>
+          <NavLink to="/tutorial">Tutorial</NavLink>
           <NavLink to="/privacidade">Privacidade</NavLink>
+          <NavLink to="/acessibilidade">Acessibilidade</NavLink>
           <NavLink to="/admin">Administração</NavLink>
-          <NavLink to="/acessibilidade">Declaração de acessibilidade</NavLink>
           <a href="https://mosaico.gov.pt/ferramentas/agora-design-system" target="_blank" rel="noreferrer">
             Ágora Design System
           </a>

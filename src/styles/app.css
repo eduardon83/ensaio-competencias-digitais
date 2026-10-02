@@ -187,5 +187,13 @@ table.tabela th { font-family: var(--fonte-titulo); font-size: .8rem; letter-spa
 .paleta { display: flex; flex-wrap: wrap; gap: 6px; }
 .paleta button { font: inherit; font-size: 1.1rem; min-width: 44px; min-height: 44px; border: 1px solid var(--tecla-borda); border-bottom-width: 3px; border-radius: 6px; background: var(--tecla); color: var(--tinta); cursor: pointer; }
 
+/* Blocos de entrada (início, treinar) */
+.bloco-entrada { border-width: 2px; transition: transform .15s, border-color .15s, box-shadow .15s; min-height: 180px; }
+.bloco-entrada:hover, .bloco-entrada:focus-visible { border-color: var(--acento); box-shadow: 0 0 0 4px var(--acento-suave); transform: translateY(-2px); }
+
+/* Vídeo (Sobre, Tutorial) */
+.video { aspect-ratio: 16 / 9; width: 100%; border-radius: var(--raio); border: 2px dashed var(--tecla-borda); background: var(--tecla); display: grid; place-items: center; text-align: center; color: var(--suave); overflow: hidden; }
+.video iframe, .video video { width: 100%; height: 100%; border: 0; }
+
 /* Mosaico: deixar os componentes Ágora mandar nos controlos */
 :root[data-formato="mosaico"] body { font-size: 1rem; }

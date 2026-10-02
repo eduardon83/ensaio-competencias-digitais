@@ -23,17 +23,21 @@ export interface Tentativa {
   extensaoTempo: number;
   dispositivo: "desktop" | "tablet" | "telemovel";
   concluidaEm: string; // ISO
+  codigo?: string; // sessão do professor (XXXX), quando a tentativa vem de um código
+  aluno?: string; // identificador pedido pelo professor (número de turma ou alcunha)
 }
 
 export interface ResultadoTeste {
   id: string;
   sessaoId: string;
-  ciclo: Ciclo;
+  ciclo: Ciclo | "codigo";
   pontuacaoGlobal: number;
   faixa: string;
   porDominio: Record<string, number>;
   tentativas: string[]; // ids
   concluidoEm: string;
+  codigo?: string;
+  aluno?: string;
 }
 
 export interface Estatisticas {
@@ -118,6 +122,8 @@ export const repositorioLocal: Repositorio = {
       extensaoTempo: nova.extensaoTempo,
       dispositivo: nova.dispositivo,
       metricas: nova.metricas,
+      codigo: nova.codigo,
+      aluno: nova.aluno,
     });
     return nova;
   },
@@ -134,7 +140,7 @@ export const repositorioLocal: Repositorio = {
     const novo: ResultadoTeste = { ...r, id: uuid(), sessaoId: this.sessaoId(), concluidoEm: new Date().toISOString() };
     todos.push(novo);
     escrever(CHAVE_TESTES, todos);
-    enviar("teste", { sessao: novo.sessaoId, ciclo: novo.ciclo, pontuacaoGlobal: novo.pontuacaoGlobal, faixa: novo.faixa, porDominio: novo.porDominio });
+    enviar("teste", { sessao: novo.sessaoId, ciclo: novo.ciclo, pontuacaoGlobal: novo.pontuacaoGlobal, faixa: novo.faixa, porDominio: novo.porDominio, codigo: novo.codigo, aluno: novo.aluno });
     return novo;
   },
   listarTestes() {
@@ -170,12 +176,12 @@ export const repositorioLocal: Repositorio = {
 
 // ─── Progresso do percurso de teste (pausa/retoma no mesmo dispositivo) ──────
 export interface Percurso {
-  ciclo: Ciclo;
+  ciclo: string; // chave do percurso: ciclo ("c3") ou sessão de professor ("codigo:XXXX")
   indice: number; // próxima atividade
   tentativas: string[]; // ids das tentativas já feitas
   iniciadoEm: string;
 }
-export function lerPercurso(ciclo: Ciclo): Percurso | null {
+export function lerPercurso(ciclo: string): Percurso | null {
   const p = ler<Percurso | null>("ecd.percurso.v1", null);
   return p && p.ciclo === ciclo ? p : null;
 }
