@@ -46,6 +46,21 @@ for (const [formato, tema] of VARIANTES) {
       await page.waitForTimeout(300);
     }
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
+    // Verificação própria (o axe não a faz): rótulos tapados por um campo opaco por cima (texto invisível).
+    const tapados = await page.evaluate(() => {
+      const maus = [];
+      for (const l of document.querySelectorAll("label")) {
+        const b = l.getBoundingClientRect();
+        if (b.width < 2 || b.height < 2 || l.classList.contains("sr-only") || !l.textContent.trim()) continue;
+        const el = document.elementFromPoint(b.left + Math.min(20, b.width / 2), b.top + b.height / 2);
+        if (!el || l.contains(el)) continue;
+        const bg = getComputedStyle(el).backgroundColor;
+        const opaco = !/rgba\(.*,\s*0\)$/.test(bg) && bg !== "transparent";
+        if (el.tagName === "INPUT" && opaco) maus.push(l.textContent.trim().slice(0, 40));
+      }
+      return maus;
+    });
+    if (tapados.length) r.violations.push({ id: "rotulo-tapado", help: "Rótulo tapado por um campo opaco (texto invisível)", impact: "critical", nodes: tapados.map((t) => ({ target: [t] })) });
     for (const v of r.violations) {
       total += v.nodes.length;
       const k = v.id;

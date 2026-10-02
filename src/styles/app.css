@@ -228,10 +228,13 @@ a { text-decoration: underline; text-underline-offset: 2px; }
 a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header a.no-underline { text-decoration: none; }
 
 /* Mosaico em tema escuro: os campos do Ágora mantêm texto escuro; forçamos as cores dos tokens. */
-:root[data-formato="mosaico"][data-tema="escuro"] :is(input, select, textarea) { color: var(--tinta); background-color: var(--superficie); }
+:root[data-formato="mosaico"][data-tema="escuro"] :is(input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not(.inner-input), select, textarea) { color: var(--tinta); background-color: var(--superficie); }
 @media (prefers-color-scheme: dark) {
-  :root[data-formato="mosaico"][data-tema="auto"] :is(input, select, textarea) { color: var(--tinta); background-color: var(--superficie); }
+  :root[data-formato="mosaico"][data-tema="auto"] :is(input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not(.inner-input), select, textarea) { color: var(--tinta); background-color: var(--superficie); }
 }
+
+/* O interruptor do Ágora em modo escuro pinta um bloco azul-marinho atrás do rótulo; fica transparente. */
+:root[data-formato="mosaico"] .agora-switch-wrapper.dark-mode { background-color: transparent; }
 
 /* Mosaico: deixar os componentes Ágora mandar nos controlos */
 :root[data-formato="mosaico"] body { font-size: 1rem; }
