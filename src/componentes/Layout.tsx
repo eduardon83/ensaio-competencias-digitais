@@ -78,8 +78,10 @@ export function Layout() {
       <footer className="border-t mt-12" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
           <span>Ensaio às Competências Digitais · v{VERSAO} · Kendir Studios / Worlds4Education</span>
+          <NavLink to="/resultados">Os meus resultados</NavLink>
           <NavLink to="/sobre">Sobre</NavLink>
           <NavLink to="/privacidade">Privacidade</NavLink>
+          <NavLink to="/admin">Administração</NavLink>
           <NavLink to="/acessibilidade">Declaração de acessibilidade</NavLink>
           <a href="https://mosaico.gov.pt/ferramentas/agora-design-system" target="_blank" rel="noreferrer">
             Ágora Design System

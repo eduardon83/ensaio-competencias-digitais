@@ -53,6 +53,28 @@
   color-scheme: light;
 }
 
+/* Mosaico em tema escuro: paleta neutra do Ágora invertida; os componentes Ágora recebem `darkMode`. */
+:root[data-formato="mosaico"][data-tema="escuro"] {
+  --fundo: #141c21; --superficie: #1e2a31; --tinta: #f1f3f8; --suave: #bac0cc; --linha: #3b4a55;
+  --acento: #5f93fc; --acento-tinta: #021c51; --acento-suave: #1a2a4a;
+  --marca: #e8c94a; --marca-tinta: #1b1600;
+  --tecla: #26333b; --tecla-borda: #475164;
+  --certo: #6cc489; --errado: #e57a66; --aviso: #e8b84f;
+  --b1: #e57a66; --b2: #e8b84f; --b3: #6cc489; --b4: #5f93fc;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-formato="mosaico"][data-tema="auto"] {
+    --fundo: #141c21; --superficie: #1e2a31; --tinta: #f1f3f8; --suave: #bac0cc; --linha: #3b4a55;
+    --acento: #5f93fc; --acento-tinta: #021c51; --acento-suave: #1a2a4a;
+    --marca: #e8c94a; --marca-tinta: #1b1600;
+    --tecla: #26333b; --tecla-borda: #475164;
+    --certo: #6cc489; --errado: #e57a66; --aviso: #e8b84f;
+    --b1: #e57a66; --b2: #e8b84f; --b3: #6cc489; --b4: #5f93fc;
+    color-scheme: dark;
+  }
+}
+
 /* ── Base ─────────────────────────────────────────────────────────────────── */
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {

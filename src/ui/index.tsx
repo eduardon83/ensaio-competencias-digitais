@@ -1,19 +1,13 @@
 // ─── Camada de UI com dois formatos ──────────────────────────────────────────
 // Cada controlo tem duas implementações: a do formato Kendir (HTML + CSS próprios) e a do formato
-// Mosaico (componentes do Ágora Design System, AMA). O formato ativo vem das preferências.
-// As atividades usam SEMPRE estes componentes, para que o "sítio simulado" do Painel também mude de aspeto.
+// Mosaico (componentes do Ágora Design System, AMA, carregados dinamicamente — ver registo-agora.ts).
+// O formato ativo vem das preferências. As atividades usam SEMPRE estes componentes, para que o
+// "sítio simulado" do Painel também mude de aspeto. O tema escuro passa aos componentes Ágora por `darkMode`.
 
 import { forwardRef, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from "react";
-import {
-  Button as AgoraButton,
-  Checkbox as AgoraCheckbox,
-  InputText as AgoraInputText,
-  RadioButton as AgoraRadio,
-  Switch as AgoraSwitch,
-  ProgressBar as AgoraProgressBar,
-} from "@ama-pt/agora-design-system";
 import { Link } from "react-router";
 import { usePreferencias } from "../preferencias/preferencias";
+import { agora } from "./registo-agora";
 
 // ── Botão ────────────────────────────────────────────────────────────────────
 export interface BotaoProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,14 +20,15 @@ export const Botao = forwardRef<HTMLButtonElement, BotaoProps>(function Botao(
   { variante = "primario", grande, className = "", children, type = "button", ...resto },
   ref,
 ) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   if (prefs.formato === "mosaico") {
+    const A = agora();
     const appearance = variante === "primario" || variante === "perigo" ? "solid" : variante === "contorno" ? "outline" : "link";
     const variant = variante === "perigo" ? "danger" : "primary";
     return (
-      <AgoraButton ref={ref} type={type} appearance={appearance} variant={variant} className={className} {...resto}>
+      <A.Button ref={ref} type={type} appearance={appearance} variant={variant} darkMode={escuro} className={className} {...resto}>
         {children}
-      </AgoraButton>
+      </A.Button>
     );
   }
   const classes = ["botao", variante === "contorno" && "botao--contorno", variante === "discreto" && "botao--discreto", grande && "botao--grande", className]
@@ -49,14 +44,6 @@ export const Botao = forwardRef<HTMLButtonElement, BotaoProps>(function Botao(
 
 /** Ligação com aspeto de botão (navegação interna). */
 export function LigacaoBotao({ para, variante = "primario", grande, children, className = "" }: { para: string; variante?: "primario" | "contorno" | "discreto"; grande?: boolean; children: ReactNode; className?: string }) {
-  const { prefs } = usePreferencias();
-  if (prefs.formato === "mosaico") {
-    return (
-      <Link to={para} className={`btn btn--${variante === "primario" ? "primary" : variante === "contorno" ? "outline" : "link"} ${className}`} style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, minHeight: 44, padding: "8px 16px", borderRadius: 8, background: variante === "primario" ? "var(--acento)" : "transparent", color: variante === "primario" ? "#fff" : "var(--acento)", border: variante === "contorno" ? "2px solid var(--acento)" : "2px solid transparent", fontWeight: 600 }}>
-        {children}
-      </Link>
-    );
-  }
   const classes = ["botao", variante === "contorno" && "botao--contorno", variante === "discreto" && "botao--discreto", grande && "botao--grande", className].filter(Boolean).join(" ");
   return (
     <Link to={para} className={classes}>
@@ -75,14 +62,16 @@ export interface CampoTextoProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const CampoTexto = forwardRef<HTMLInputElement, CampoTextoProps>(function CampoTexto({ id, rotulo, ajuda, erro, obrigatorio, className = "", ...resto }, ref) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   const rotuloCompleto = obrigatorio ? `${rotulo} (obrigatório)` : rotulo;
   if (prefs.formato === "mosaico") {
+    const A = agora();
     return (
-      <AgoraInputText
+      <A.InputText
         ref={ref}
         id={id}
         label={rotuloCompleto}
+        darkMode={escuro}
         hasHelperText={!!ajuda}
         helperText={ajuda}
         hasError={!!erro}
@@ -118,9 +107,10 @@ export interface CaixaProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function CaixaVerificacao({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   if (prefs.formato === "mosaico") {
-    return <AgoraCheckbox id={id} label={rotulo} className={className} {...resto} />;
+    const A = agora();
+    return <A.Checkbox id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
   }
   return (
     <label className={`opcao ${className}`} htmlFor={id}>
@@ -132,9 +122,10 @@ export function CaixaVerificacao({ id, rotulo, className = "", ...resto }: Caixa
 
 // ── Botão de opção (rádio) ───────────────────────────────────────────────────
 export function BotaoRadio({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   if (prefs.formato === "mosaico") {
-    return <AgoraRadio id={id} label={rotulo} className={className} {...resto} />;
+    const A = agora();
+    return <A.RadioButton id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
   }
   return (
     <label className={`opcao ${className}`} htmlFor={id}>
@@ -146,9 +137,10 @@ export function BotaoRadio({ id, rotulo, className = "", ...resto }: CaixaProps)
 
 // ── Interruptor (toggle) ─────────────────────────────────────────────────────
 export function Interruptor({ id, rotulo, className = "", ...resto }: CaixaProps) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   if (prefs.formato === "mosaico") {
-    return <AgoraSwitch id={id} label={rotulo} className={className} {...resto} />;
+    const A = agora();
+    return <A.Switch id={id} label={rotulo} darkMode={escuro} className={className} {...resto} />;
   }
   return (
     <label className={`interruptor ${className}`} htmlFor={id}>
@@ -184,10 +176,11 @@ export function Seletor({ id, rotulo, opcoes, vazio, className = "", ...resto }:
 
 // ── Barra de progresso ───────────────────────────────────────────────────────
 export function Barra({ valor, max = 100, rotulo, tom }: { valor: number; max?: number; rotulo: string; tom?: "normal" | "aviso" | "errado" }) {
-  const { prefs } = usePreferencias();
+  const { prefs, escuro } = usePreferencias();
   const pct = Math.max(0, Math.min(100, (valor / max) * 100));
   if (prefs.formato === "mosaico") {
-    return <AgoraProgressBar appearance="slim" variant="percentage" value={Math.round(pct)} max={100} label={rotulo} hideLabel hidePercentageValue hasError={tom === "errado"} />;
+    const A = agora();
+    return <A.ProgressBar appearance="slim" variant="percentage" value={Math.round(pct)} max={100} label={rotulo} hideLabel hidePercentageValue hasError={tom === "errado"} darkMode={escuro} />;
   }
   return (
     <div className={`barra ${tom === "aviso" ? "barra--aviso" : ""} ${tom === "errado" ? "barra--errado" : ""}`} role="progressbar" aria-label={rotulo} aria-valuemin={0} aria-valuemax={max} aria-valuenow={Math.round(valor)}>

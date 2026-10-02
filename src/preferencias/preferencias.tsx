@@ -2,6 +2,7 @@
 // formato: aspeto da interface ("kendir" editorial ou "mosaico" = Ágora Design System da AMA)
 // contexto: narrativa de aprendizagem ("jornal" = redação do jornal da escola, "laboratorio" = laboratório de experiências)
 // tema: claro/escuro/auto · tamanho: texto normal/grande · extensaoTempo: acomodação de tempo (x1, x1.25, x1.5, x2)
+// telemetria: enviar estatísticas anónimas (sem conta, sem identificação) para o ponto de recolha configurado
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
@@ -17,7 +18,8 @@ export interface Preferencias {
   tema: Tema;
   tamanho: Tamanho;
   extensaoTempo: ExtensaoTempo;
-  nome: string; // nome a mostrar na "primeira página" (opcional)
+  nome: string; // nome a mostrar na "primeira página" (opcional, só local)
+  telemetria: boolean;
 }
 
 const CHAVE = "ecd.preferencias.v1";
@@ -29,6 +31,7 @@ export const PREFERENCIAS_INICIAIS: Preferencias = {
   tamanho: "normal",
   extensaoTempo: 1,
   nome: "",
+  telemetria: true,
 };
 
 export function lerPreferencias(): Preferencias {
@@ -60,22 +63,37 @@ export function aplicarNoDocumento(p: Preferencias) {
 interface Valor {
   prefs: Preferencias;
   definir: (parcial: Partial<Preferencias>) => void;
+  /** Verdadeiro quando o tema efetivo é escuro (escolha explícita, ou "auto" com o sistema em escuro). */
+  escuro: boolean;
 }
 
 const Ctx = createContext<Valor | null>(null);
 
+function sistemaEscuro(): boolean {
+  return typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
 export function PreferenciasProvider({ children, iniciais }: { children: ReactNode; iniciais: Preferencias }) {
   const [prefs, setPrefs] = useState<Preferencias>(iniciais);
+  const [sistema, setSistema] = useState(sistemaEscuro);
 
   useEffect(() => {
     aplicarNoDocumento(prefs);
     guardar(prefs);
   }, [prefs]);
 
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const ouvir = (e: MediaQueryListEvent) => setSistema(e.matches);
+    mq.addEventListener("change", ouvir);
+    return () => mq.removeEventListener("change", ouvir);
+  }, []);
+
   const definir = useCallback((parcial: Partial<Preferencias>) => {
     setPrefs((atual) => {
       const novo = { ...atual, ...parcial };
-      // O formato troca folhas de estilo inteiras (Ágora carrega ~1 MB de CSS): recarregar é o caminho limpo.
+      // O formato troca módulos e folhas de estilo inteiras (Ágora): recarregar é o caminho limpo.
       if (parcial.formato && parcial.formato !== atual.formato) {
         guardar(novo);
         window.location.reload();
@@ -84,7 +102,8 @@ export function PreferenciasProvider({ children, iniciais }: { children: ReactNo
     });
   }, []);
 
-  const valor = useMemo(() => ({ prefs, definir }), [prefs, definir]);
+  const escuro = prefs.tema === "escuro" || (prefs.tema === "auto" && sistema);
+  const valor = useMemo(() => ({ prefs, definir, escuro }), [prefs, definir, escuro]);
   return <Ctx.Provider value={valor}>{children}</Ctx.Provider>;
 }
 

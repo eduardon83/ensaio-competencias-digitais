@@ -1,12 +1,14 @@
-// ─── A minha conta (histórico local) e Observatório (estatísticas anónimas) ──
-import { useState } from "react";
+// ─── Os meus resultados (só neste navegador) e Observatório (agregados anónimos) ──
+import { useEffect, useState } from "react";
 import { ATIVIDADES, porSlug } from "../atividades";
 import { repositorioLocal } from "../dados/repositorio";
+import { obterAgregados, telemetriaConfigurada, type Agregados } from "../dados/telemetria";
 import { NOME_DOMINIO, NOME_NIVEL, type Nivel } from "../motor/tipos";
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
+import { Painel } from "./Admin";
 
-export function Conta() {
+export function Resultados() {
   const { prefs } = usePreferencias();
   const [, forcar] = useState(0);
   const tentativas = repositorioLocal.listarTentativas().slice().reverse();
@@ -18,7 +20,7 @@ export function Conta() {
     const blob = new Blob(["﻿" + linhas.join("\n")], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "ecd-tentativas.csv";
+    a.download = "ecd-resultados.csv";
     a.click();
     URL.revokeObjectURL(a.href);
   }
@@ -26,10 +28,8 @@ export function Conta() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
-        <h1 className="text-4xl">O meu histórico</h1>
-        <p className="m-0">
-          Nesta versão o histórico vive só neste navegador, sem conta. As contas (ligação mágica por email, certificados, sincronização) chegam na fase 4. Sessão anónima: <code style={{ fontFamily: "var(--fonte-mono)", fontSize: ".85em" }}>{repositorioLocal.sessaoId().slice(0, 8)}…</code>
-        </p>
+        <h1 className="text-4xl">Os meus resultados</h1>
+        <p className="m-0">Não há contas: os teus resultados ficam só neste navegador, para veres a evolução e os melhores por nível. Podes exportá-los ou apagá-los quando quiseres.</p>
       </header>
 
       {testes.length > 0 && (
@@ -105,7 +105,7 @@ export function Conta() {
         <Botao
           variante="perigo"
           onClick={() => {
-            if (window.confirm("Apagar todo o histórico deste navegador? Não é possível recuperar.")) {
+            if (window.confirm("Apagar todos os resultados guardados neste navegador? Não é possível recuperar.")) {
               repositorioLocal.apagarTudo();
               forcar((n) => n + 1);
             }
@@ -120,72 +120,75 @@ export function Conta() {
 }
 
 export function Observatorio() {
-  const e = repositorioLocal.estatisticas();
-  const MINIMO = 20;
+  const [remoto, setRemoto] = useState<Agregados | null>(null);
+  const [estado, setEstado] = useState<"a_carregar" | "ok" | "erro" | "local">(telemetriaConfigurada ? "a_carregar" : "local");
+
+  useEffect(() => {
+    if (!telemetriaConfigurada) return;
+    obterAgregados().then((r) => {
+      if (r && !("erro" in r)) {
+        setRemoto(r);
+        setEstado("ok");
+      } else setEstado("erro");
+    });
+  }, []);
+
+  const local = repositorioLocal.estatisticas();
+
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <h1 className="text-4xl">Observatório</h1>
-        <p className="m-0">Estatísticas anónimas sobre as competências avaliadas. Na versão publicada, estes números vêm de todas as sessões (agregados no servidor) e qualquer valor com menos de {MINIMO} tentativas fica oculto. Nesta versão local mostram-se apenas os dados deste navegador.</p>
+        <p className="m-0">Estatísticas anónimas sobre as competências avaliadas por todas as pessoas que usaram a aplicação. Qualquer grupo com menos de {remoto?.limiar ?? 20} tentativas fica oculto. Nada aqui identifica alguém.</p>
       </header>
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="cartao p-5">
-          <div className="text-sm" style={{ color: "var(--suave)" }}>
-            Tentativas
-          </div>
-          <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
-            {e.totalTentativas}
-          </div>
-        </div>
-        <div className="cartao p-5">
-          <div className="text-sm" style={{ color: "var(--suave)" }}>
-            Testes completos
-          </div>
-          <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
-            {e.totalTestes}
-          </div>
-        </div>
-        <div className="cartao p-5">
-          <div className="text-sm" style={{ color: "var(--suave)" }}>
-            Por dispositivo
-          </div>
-          <div className="text-sm">{Object.entries(e.porDispositivo).map(([k, v]) => `${k}: ${v}`).join(" · ") || "—"}</div>
-        </div>
-      </div>
-      <section className="grid gap-2">
-        <h2 className="text-2xl">Média por competência</h2>
-        <div className="cartao p-4 grid gap-3">
-          {ATIVIDADES.filter((a) => a.disponivel).map((a) => {
-            const m = e.mediaPorAtividade[a.slug];
-            return (
-              <div key={a.slug} className="grid gap-1 text-sm">
-                <div className="flex justify-between">
-                  <span>{NOME_DOMINIO[a.dominio]}</span>
-                  <span className="tabular-nums" style={{ color: "var(--suave)" }}>
-                    {m ? `${m.media} (n=${m.n})` : "sem dados"}
-                  </span>
-                </div>
-                <div className="barra" aria-hidden="true">
-                  <div style={{ width: `${m?.media ?? 0}%` }} />
-                </div>
+
+      {estado === "a_carregar" && <p className="m-0" style={{ color: "var(--suave)" }}>A obter os agregados…</p>}
+      {estado === "ok" && remoto && <Painel dados={remoto} />}
+      {(estado === "erro" || estado === "local") && (
+        <>
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+            {estado === "erro" ? "Não foi possível obter os agregados globais agora. " : "Esta instalação não tem recolha de estatísticas configurada. "}
+            Mostram-se apenas os dados deste navegador.
+          </p>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="cartao p-5">
+              <div className="text-sm" style={{ color: "var(--suave)" }}>
+                Tentativas neste navegador
               </div>
-            );
-          })}
-        </div>
-      </section>
-      <section className="grid gap-2">
-        <h2 className="text-2xl">Tentativas por nível</h2>
-        <div className="flex gap-3 flex-wrap">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <div key={n} className="cartao p-3 text-center min-w-24">
-              <div className="text-xs" style={{ color: "var(--suave)" }}>
-                Nível {n}
+              <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
+                {local.totalTentativas}
               </div>
-              <div className="text-2xl font-bold tabular-nums">{e.porNivel[n] ?? 0}</div>
             </div>
-          ))}
-        </div>
-      </section>
+            <div className="cartao p-5">
+              <div className="text-sm" style={{ color: "var(--suave)" }}>
+                Testes completos
+              </div>
+              <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
+                {local.totalTestes}
+              </div>
+            </div>
+          </div>
+          <section className="cartao p-4 grid gap-3">
+            <h2 className="text-xl">Média por competência</h2>
+            {ATIVIDADES.filter((a) => a.disponivel).map((a) => {
+              const m = local.mediaPorAtividade[a.slug];
+              return (
+                <div key={a.slug} className="grid gap-1 text-sm">
+                  <div className="flex justify-between">
+                    <span>{NOME_DOMINIO[a.dominio]}</span>
+                    <span className="tabular-nums" style={{ color: "var(--suave)" }}>
+                      {m ? `${m.media} (n=${m.n})` : "sem dados"}
+                    </span>
+                  </div>
+                  <div className="barra" aria-hidden="true">
+                    <div style={{ width: `${m?.media ?? 0}%` }} />
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        </>
+      )}
     </div>
   );
 }

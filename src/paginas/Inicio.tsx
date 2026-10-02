@@ -47,7 +47,7 @@ export function Inicio() {
         </div>
         <div className="cartao p-5 grid gap-2">
           <h2 className="text-xl">Os teus dados</h2>
-          <p className="m-0 text-sm">Guardamos os resultados sem saber quem és. Servem para perceber que competências faltam e a quantas pessoas. Se criares conta, pedimos só o nome e o email.</p>
+          <p className="m-0 text-sm">Não há contas nem registos de pessoas. Os teus resultados ficam no teu navegador. Para estatísticas, cada atividade envia um registo anónimo que serve para perceber que competências faltam e a quantas pessoas. Podes desligar isso nas Definições.</p>
           <p className="m-0 text-sm">Sem endereço IP, sem impressão digital do dispositivo, sem analítica de terceiros. Por isso não há aviso de cookies.</p>
         </div>
       </section>

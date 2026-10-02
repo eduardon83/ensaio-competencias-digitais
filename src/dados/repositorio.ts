@@ -5,6 +5,7 @@
 
 import type { Contexto, Formato } from "../preferencias/preferencias";
 import type { Ciclo, Metricas, Nivel } from "../motor/tipos";
+import { enviar } from "./telemetria";
 
 export type Origem = "teste" | "treino" | "codigo";
 
@@ -105,6 +106,19 @@ export const repositorioLocal: Repositorio = {
     const nova: Tentativa = { ...t, id: uuid(), sessaoId: this.sessaoId(), dispositivo: classeDispositivo(), concluidaEm: new Date().toISOString() };
     todas.push(nova);
     escrever(CHAVE_TENTATIVAS, todas);
+    enviar("tentativa", {
+      sessao: nova.sessaoId,
+      atividade: nova.atividade,
+      nivel: nova.nivel,
+      pontuacao: nova.pontuacao,
+      duracaoS: Math.round(nova.duracaoMs / 1000),
+      origem: nova.origem,
+      contexto: nova.contexto,
+      formato: nova.formato,
+      extensaoTempo: nova.extensaoTempo,
+      dispositivo: nova.dispositivo,
+      metricas: nova.metricas,
+    });
     return nova;
   },
   listarTentativas() {
@@ -120,6 +134,7 @@ export const repositorioLocal: Repositorio = {
     const novo: ResultadoTeste = { ...r, id: uuid(), sessaoId: this.sessaoId(), concluidoEm: new Date().toISOString() };
     todos.push(novo);
     escrever(CHAVE_TESTES, todos);
+    enviar("teste", { sessao: novo.sessaoId, ciclo: novo.ciclo, pontuacaoGlobal: novo.pontuacaoGlobal, faixa: novo.faixa, porDominio: novo.porDominio });
     return novo;
   },
   listarTestes() {

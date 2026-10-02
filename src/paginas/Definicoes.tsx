@@ -1,7 +1,7 @@
 // ─── Definições: aspeto (Kendir / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
 import { CONTEXTOS } from "../contextos";
 import { usePreferencias, type ExtensaoTempo } from "../preferencias/preferencias";
-import { BotaoRadio, CampoTexto, Cartao } from "../ui";
+import { BotaoRadio, CampoTexto, Cartao, Interruptor } from "../ui";
 
 export function Definicoes() {
   const { prefs, definir } = usePreferencias();
@@ -40,7 +40,7 @@ export function Definicoes() {
           <legend className="font-bold text-sm">Tema</legend>
           <BotaoRadio id="tema-auto" name="tema" rotulo="Automático (segue o sistema)" checked={prefs.tema === "auto"} onChange={() => definir({ tema: "auto" })} />
           <BotaoRadio id="tema-claro" name="tema" rotulo="Claro" checked={prefs.tema === "claro"} onChange={() => definir({ tema: "claro" })} />
-          <BotaoRadio id="tema-escuro" name="tema" rotulo="Escuro (só no aspeto Kendir)" checked={prefs.tema === "escuro"} onChange={() => definir({ tema: "escuro" })} />
+          <BotaoRadio id="tema-escuro" name="tema" rotulo="Escuro" checked={prefs.tema === "escuro"} onChange={() => definir({ tema: "escuro" })} />
         </fieldset>
         <fieldset className="grid gap-2 border-0 p-0 m-0">
           <legend className="font-bold text-sm">Tamanho do texto</legend>
@@ -60,6 +60,14 @@ export function Definicoes() {
             <BotaoRadio key={x} id={`ext-${x}`} name="ext" rotulo={x === 1 ? "Normal (×1)" : `×${x}`} checked={prefs.extensaoTempo === x} onChange={() => definir({ extensaoTempo: x })} />
           ))}
         </fieldset>
+      </Cartao>
+
+      <Cartao className="grid gap-3">
+        <h2 className="text-xl">Estatísticas anónimas</h2>
+        <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+          Cada atividade concluída envia um registo anónimo (atividade, nível, pontuação, duração, tipo de dispositivo) para que se saiba que competências faltam e a quantas pessoas. Nunca envia nome, email, IP ou identificação. Ver a página Privacidade.
+        </p>
+        <Interruptor id="telemetria" rotulo={prefs.telemetria ? "A enviar estatísticas anónimas" : "Sem envio de estatísticas"} checked={prefs.telemetria} onChange={(e) => definir({ telemetria: e.target.checked })} />
       </Cartao>
 
       <Cartao className="grid gap-3">

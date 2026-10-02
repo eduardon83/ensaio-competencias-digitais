@@ -1,4 +1,4 @@
-// ─── Páginas de texto: código de turma e professor (fase 3, placeholders), guia de acessibilidade, sobre, privacidade ──
+// ─── Páginas de texto: código de turma e professor (fase seguinte), guia de acessibilidade, sobre, privacidade ──
 import { useState } from "react";
 import { Link } from "react-router";
 import { Botao, CampoTexto } from "../ui";
@@ -15,7 +15,7 @@ export function Codigo() {
         className="grid gap-3"
         onSubmit={(e) => {
           e.preventDefault();
-          setErro("As sessões de turma chegam na fase 3 (códigos, emails ao professor, relatórios). Por agora podes treinar livremente.");
+          setErro("Os códigos de turma chegam na próxima fase. Por agora podes treinar livremente.");
         }}
       >
         <CampoTexto id="codigo" rotulo="Código da sessão" value={codigo} onChange={(e) => setCodigo(e.target.value.toUpperCase())} autoComplete="off" placeholder="XXXX·XXXX" erro={erro} obrigatorio />
@@ -35,17 +35,15 @@ export function Codigo() {
 export function Professor() {
   return (
     <div className="grid gap-5 max-w-3xl">
-      <h1 className="text-4xl">Criar uma sessão de turma</h1>
-      <p className="m-0">Em construção (fase 3 da especificação). O que vai existir aqui:</p>
+      <h1 className="text-4xl">Sessões de turma</h1>
+      <p className="m-0">Em construção. Sem contas e sem base de dados, o desenho previsto é este:</p>
       <ol className="grid gap-2 pl-6">
-        <li>Escolher o nível, uma ou mais atividades (ou o teste completo), extensão de tempo e datas de abertura e fecho.</li>
-        <li>Indicar como os alunos se identificam: número de turma, alcunha ou nada.</li>
-        <li>Email opcional, verificado uma vez. Sem verificação não saem relatórios.</li>
-        <li>Código no formato XXXX·XXXX (sem O/0, I/1/L), com ligação e QR.</li>
-        <li>Email por tentativa ou resumo diário, com a ligação privada de gestão: tabela, CSV, fechar sessão.</li>
+        <li>O professor escolhe o nível, uma ou mais atividades (ou o teste completo) e a extensão de tempo. A escolha é codificada no próprio código (formato XXXX·XXXX, sem O/0 nem I/1/L) e numa ligação com QR. Nada fica guardado em servidor.</li>
+        <li>Os alunos entram com o código e fazem o conjunto. O resultado aparece no ecrã do aluno (primeira página, imprimível) e, se a recolha anónima estiver ativa, as tentativas vão marcadas com o código.</li>
+        <li>O professor vê os agregados do seu código no Observatório, sem nomes: o identificador por aluno é o que o professor decidir pedir na sala (número de turma, por exemplo).</li>
       </ol>
       <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-        Sessões e resultados são apagados 12 meses após a última tentativa.
+        Alternativas com email ao professor exigiriam um serviço de envio e verificação de endereços, o que contraria a opção de não ter base de dados. Fica como decisão aberta.
       </p>
     </div>
   );
@@ -87,7 +85,7 @@ export function Acessibilidade() {
             <li>Funciona a 200 % de zoom e a 320 px de largura sem scroll horizontal (1.4.4, 1.4.10).</li>
             <li>Rótulos e instruções visíveis e ligados aos campos. Os erros dizem o que está mal e como corrigir (3.3.1, 3.3.3).</li>
             <li>Não pedir a mesma informação duas vezes (3.3.7).</li>
-            <li>Início de sessão sem testes de memória ou puzzles; permitir colar e gestores de palavras-passe (3.3.8).</li>
+            <li>Início de sessão, quando existe, sem testes de memória ou puzzles; permitir colar e gestores de palavras-passe (3.3.8).</li>
             <li>Ajuda no mesmo sítio em todos os ecrãs (3.2.6).</li>
             <li>Legendas e transcrições para áudio e vídeo; controlo de repetição nos itens com áudio.</li>
             <li>Respeitar o movimento reduzido e as definições de tipo de letra e espaçamento do utilizador (1.4.12).</li>
@@ -128,7 +126,7 @@ export function Acessibilidade() {
       <section className="cartao p-5 grid gap-2">
         <h2 className="text-xl">Declaração de acessibilidade deste sítio</h2>
         <p className="m-0 text-sm">
-          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. Auditoria e passagem com leitor de ecrã previstas para a fase 6. Problemas de acessibilidade: contactar a Kendir Studios. Nesta versão, o aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Kendir usa componentes próprios com os mesmos requisitos.
+          Estado: em desenvolvimento, versão {VERSAO}. Objetivo: WCAG 2.2 nível AA. Auditoria e passagem com leitor de ecrã previstas para a fase final. Problemas de acessibilidade: contactar a Kendir Studios. O aspeto Mosaico usa componentes do Ágora Design System da AMA; o aspeto Kendir usa componentes próprios com os mesmos requisitos. Ambos têm tema claro e escuro.
         </p>
       </section>
     </div>
@@ -156,15 +154,13 @@ export function Sobre() {
       <p className="m-0">
         Ensaio às Competências Digitais (ECD), versão {VERSAO} de {DATA_VERSAO}. Um projeto Kendir Studios / Worlds4Education. Jogo web aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática.
       </p>
+      <p className="m-0">Sem contas, sem registos de pessoas e sem base de dados: a aplicação é um conjunto de ficheiros estáticos que qualquer escola ou entidade pode alojar. As estatísticas de uso são anónimas e vão para uma folha de cálculo controlada por quem publica a aplicação.</p>
       <section className="grid gap-2">
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
-          <li>Fase 1 (em curso): motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Kendir e Mosaico), dados locais.</li>
-          <li>Fase 2: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa.</li>
-          <li>Fase 3: códigos de turma, emails ao professor, ligação de gestão, CSV.</li>
-          <li>Fase 4: contas por ligação mágica, histórico sincronizado, certificados com verificação.</li>
-          <li>Fase 5: Observatório público com agregação no servidor e limiar de 20 tentativas.</li>
-          <li>Fase 6: auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
+          <li>Feito: motor de atividades, 7 das 11 atividades jogáveis a 5 níveis, teste por ciclo, treino, dois contextos narrativos (redação e laboratório), dois aspetos (Kendir e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Seguinte: O Arquivo, Cartão de Imprensa, Fecho de Edição, Simulador de Prova; carimbos e cartão de imprensa; códigos de turma sem servidor.</li>
+          <li>Final: auditoria WCAG 2.2 AA, piloto em escolas, recalibração dos limiares.</li>
         </ul>
       </section>
       <section className="grid gap-2">
@@ -189,16 +185,17 @@ export function Privacidade() {
       <h1 className="text-4xl">Privacidade</h1>
       <p className="m-0">Escrito em linguagem simples. Se algo não ficar claro, pergunta.</p>
       <section className="grid gap-2">
-        <h2 className="text-xl">O que guardamos sem conta</h2>
-        <p className="m-0">Um identificador aleatório criado no teu navegador e, por cada atividade: nível, atividade, pontuação, duração, algumas medidas (por exemplo palavras por minuto, se usaste a procura), tipo de dispositivo (computador, tablet, telemóvel), contexto e aspeto escolhidos, e se usaste tempo alargado. Não guardamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.</p>
+        <h2 className="text-xl">Não há contas</h2>
+        <p className="m-0">Ninguém se regista. Não pedimos nome, email nem idade. Os teus resultados ficam só no teu navegador, para veres a tua evolução; podes exportá-los ou apagá-los em «Os meus resultados». O nome que escreveres nas Definições serve só para aparecer no teu ecrã de resultado e nunca sai do teu computador.</p>
       </section>
       <section className="grid gap-2">
-        <h2 className="text-xl">Nesta versão</h2>
-        <p className="m-0">Todos os dados ficam apenas no teu navegador. Podes exportá-los em CSV ou apagá-los em «O meu histórico». Quando a versão com servidor estiver ativa, os dados anónimos serão guardados na União Europeia e usados para estatísticas agregadas (Observatório), com base no interesse legítimo de perceber que competências faltam e a quantas pessoas.</p>
+        <h2 className="text-xl">Estatísticas anónimas</h2>
+        <p className="m-0">Para sabermos que competências faltam e a quantas pessoas, cada atividade concluída envia um pequeno registo anónimo: um identificador aleatório criado no teu navegador (não ligado a ti), a atividade, o nível, a pontuação, a duração, algumas medidas da atividade (por exemplo palavras por minuto), o tipo de dispositivo (computador, tablet, telemóvel), o contexto e o aspeto escolhidos, e se usaste tempo alargado. Não enviamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.</p>
+        <p className="m-0">Os registos vão para uma folha de cálculo controlada pela entidade que publica a aplicação, na União Europeia, e servem só para estatísticas agregadas. No Observatório, qualquer grupo com menos de 20 tentativas fica oculto. Podes desligar o envio em Definições → Estatísticas anónimas; a aplicação funciona exatamente igual.</p>
       </section>
       <section className="grid gap-2">
-        <h2 className="text-xl">Contas e sessões de turma (fases seguintes)</h2>
-        <p className="m-0">Com conta, pedimos só nome e email (consentimento). Em Portugal a idade de consentimento digital é 13 anos; abaixo disso, um adulto cria a conta. Nas sessões de turma guardamos o email do professor (verificado) e o identificador que o professor escolher para cada aluno; recomendamos o número de turma em vez do nome. Sessões apagam-se 12 meses após a última tentativa; contas quando o utilizador pedir, ou após 24 meses de inatividade com aviso prévio.</p>
+        <h2 className="text-xl">Base legal e contacto</h2>
+        <p className="m-0">Os dados anónimos não identificam ninguém e são tratados com base no interesse legítimo de melhorar a preparação dos alunos para provas digitais. Dúvidas ou pedidos: Kendir Studios.</p>
       </section>
     </div>
   );

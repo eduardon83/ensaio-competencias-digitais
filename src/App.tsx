@@ -1,12 +1,13 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { Layout } from "./componentes/Layout";
 import { Inicio } from "./paginas/Inicio";
 import { EscolherNivel, Percurso } from "./paginas/Teste";
 import { Catalogo, Treino } from "./paginas/Catalogo";
 import { AtividadePagina } from "./paginas/AtividadePagina";
-import { Conta, Observatorio } from "./paginas/Conta";
+import { Observatorio, Resultados } from "./paginas/Conta";
 import { Acessibilidade, Codigo, Privacidade, Professor, Sobre } from "./paginas/Textos";
 import { Definicoes } from "./paginas/Definicoes";
+import { Admin } from "./paginas/Admin";
 
 export function App() {
   return (
@@ -20,8 +21,10 @@ export function App() {
         <Route path="treino" element={<Treino />} />
         <Route path="codigo" element={<Codigo />} />
         <Route path="professor" element={<Professor />} />
-        <Route path="conta" element={<Conta />} />
+        <Route path="resultados" element={<Resultados />} />
+        <Route path="conta" element={<Navigate to="/resultados" replace />} />
         <Route path="observatorio" element={<Observatorio />} />
+        <Route path="admin" element={<Admin />} />
         <Route path="acessibilidade" element={<Acessibilidade />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="privacidade" element={<Privacidade />} />

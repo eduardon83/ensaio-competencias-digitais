@@ -4,13 +4,14 @@ import { BrowserRouter } from "react-router";
 import "./styles/app.css";
 import { App } from "./App";
 import { PreferenciasProvider, aplicarNoDocumento, lerPreferencias } from "./preferencias/preferencias";
+import { carregarAgora } from "./ui/registo-agora";
 
 async function arrancar() {
   const prefs = lerPreferencias();
   aplicarNoDocumento(prefs);
-  // O formato Mosaico carrega o Ágora Design System (tokens + componentes) só quando está selecionado.
+  // O formato Mosaico carrega o Ágora Design System (componentes + CSS) só quando está selecionado.
   if (prefs.formato === "mosaico") {
-    await import("./styles/mosaico.css");
+    await carregarAgora();
   }
   createRoot(document.getElementById("raiz")!).render(
     <StrictMode>
