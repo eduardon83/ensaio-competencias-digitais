@@ -17,14 +17,15 @@ const PALAVRAS: [string, string, string][] = [
   ["intervalo", "entrevalo", "intrevalo"], ["paralisar", "paralizar", "parallisar"], ["análise", "analize", "análize"], ["frequência", "frequençia", "freqência"],
 ];
 
-const TITULOS: Record<Contexto, string[]> = {
+// Frases completas (artigo, verbo e ponto final): a versão certa tem de estar irrepreensível.
+const FRASES: Record<Contexto, string[]> = {
   jornal: [
-    "Turma do 6.º A vence torneio de andebol", "Biblioteca recebe trinta livros novos", "Concerto de primavera esgota em dois dias", "Horta da escola dá a primeira colheita",
-    "Alunos limpam a praia no fim de semana", "Nova cantina abre na segunda-feira", "Clube de xadrez procura novos jogadores", "Exposição de pintura chega ao átrio",
+    "A turma do 6.º A venceu o torneio de andebol.", "A biblioteca recebeu trinta livros novos.", "O concerto de primavera esgotou em dois dias.", "A horta da escola deu a primeira colheita.",
+    "Os alunos limpam a praia no fim de semana.", "A nova cantina abre na segunda-feira.", "O clube de xadrez procura novos jogadores.", "A exposição de pintura chegou ao átrio da escola.",
   ],
   laboratorio: [
-    "Feijões do ensaio B crescem mais depressa", "Microscópio volta a funcionar na bancada três", "Amostras de água analisadas esta semana", "Estufa atinge a temperatura ideal",
-    "Equipa termina o inventário de reagentes", "Novos óculos de proteção chegam ao laboratório", "Ensaio de pH confirma os resultados", "Relatório mensal entregue a tempo",
+    "Os feijões do ensaio B crescem mais depressa.", "O microscópio voltou a funcionar na bancada três.", "As amostras de água foram analisadas esta semana.", "A estufa atingiu a temperatura ideal.",
+    "A equipa terminou o inventário dos reagentes.", "Os novos óculos de proteção chegaram ao laboratório.", "O ensaio de pH confirmou os resultados.", "O relatório mensal foi entregue a tempo.",
   ],
 };
 
@@ -48,12 +49,12 @@ function itemPalavra(r: Gerador): Item {
   const [certa, ...erradas] = escolher(PALAVRAS, r);
   return { pergunta: "Qual destas palavras está bem escrita?", ...baralharOpcoes([certa, ...erradas], 0, r) };
 }
-function itemTitulo(ctx: Contexto, r: Gerador): Item {
-  const certo = escolher(TITULOS[ctx], r);
+function itemFrase(ctx: Contexto, r: Gerador): Item {
+  const certo = escolher(FRASES[ctx], r);
   const errados = new Set<string>();
   for (let k = 0; errados.size < 2 && k < 20; k++) errados.add(gerarCopia(certo, 1, false, r));
   errados.delete(certo);
-  return { pergunta: "Escolhe o título que está escrito sem erros.", ...baralharOpcoes([certo, ...[...errados].slice(0, 2)], 0, r) };
+  return { pergunta: "Escolhe a frase que está escrita sem erros.", ...baralharOpcoes([certo, ...[...errados].slice(0, 2)], 0, r) };
 }
 function itemLegenda(ctx: Contexto, r: Gerador): Item {
   const [certa, ...outras] = amostra(LEGENDAS[ctx], 3, r);
@@ -72,8 +73,10 @@ function itemUnidade(r: Gerador): Item {
   return { pergunta: `Em que unidade se mede ${grandeza}?`, ...baralharOpcoes([certa, ...erradas], 0, r) };
 }
 
+export { FRASES };
+
 export function gerarItem(ctx: Contexto, r: Gerador = Math.random): Item {
-  const tipos = ctx === "jornal" ? [itemPalavra, itemTitulo, itemLegenda, itemConta] : [itemPalavra, itemTitulo, itemLegenda, itemConta, itemUnidade];
+  const tipos = ctx === "jornal" ? [itemPalavra, itemFrase, itemLegenda, itemConta] : [itemPalavra, itemFrase, itemLegenda, itemConta, itemUnidade];
   const f = escolher(tipos, r);
   return f === itemPalavra || f === itemUnidade ? (f as (r: Gerador) => Item)(r) : (f as (c: Contexto, r: Gerador) => Item)(ctx, r);
 }
