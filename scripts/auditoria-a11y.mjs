@@ -12,7 +12,7 @@ const PAGINAS = [
   ["/", "Início"], ["/treinar", "Treinar"], ["/teste", "Teste"], ["/treino", "Atividade (treino)"], ["/codigo", "Código"],
   ["/professor", "Professor"], ["/tutorial", "Tutorial"], ["/observatorio", "Observatório"], ["/cartao", "Cartão"],
   ["/resultados", "Resultados"], ["/definicoes", "Definições"], ["/sobre", "Sobre"], ["/acessibilidade", "Acessibilidade"],
-  ["/privacidade", "Privacidade"], ["/licenca", "Licença"], ["/admin", "Administração"],
+  ["/privacidade", "Privacidade"], ["/licenca", "Licença"], ["/admin", "Administração"], ["/backoffice", "Backoffice (entrada)"],
   ["/jogos", "Jogos"], ["/seguranca", "Segurança digital"], ["/seguranca/boas-praticas", "Segurança: boas práticas"],
   ["/seguranca/fraude", "Segurança: exemplos de fraude"], ["/seguranca/redes-sociais", "Segurança: redes sociais"],
 ];

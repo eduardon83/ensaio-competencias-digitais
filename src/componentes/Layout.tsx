@@ -3,11 +3,14 @@ import { NavLink, Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import { usePreferencias } from "../preferencias/preferencias";
 import { AUTORIA, VERSAO } from "../versao";
+import { PAGINAS } from "../textos/paginas";
 
-const LIGACOES = [
-  { para: "/", texto: "Início" },
-  { para: "/sobre", texto: "Sobre" },
-  { para: "/definicoes", texto: "Definições" },
+const G = PAGINAS.geral;
+// Lido ao desenhar (e não ao importar), para apanhar os textos editados no backoffice.
+const ligacoes = () => [
+  { para: "/", texto: G.menu.inicio },
+  { para: "/sobre", texto: G.menu.sobre },
+  { para: "/definicoes", texto: G.menu.definicoes },
 ];
 
 export function Layout() {
@@ -22,11 +25,11 @@ export function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
       <a href="#conteudo" className="sr-only focus:not-sr-only" style={{ position: "absolute", top: 8, left: 8, zIndex: 100, background: "var(--acento)", color: "var(--acento-tinta)", padding: "8px 12px", borderRadius: 8 }}>
-        Saltar para o conteúdo
+        {G.saltar}
       </a>
       {prefs.formato === "mosaico" && (
         <div className="text-xs px-4 py-1" style={{ background: "#021c51", color: "#fff" }}>
-          Aspeto Mosaico · Ágora Design System (AMA)
+          {G.faixaMosaico}
         </div>
       )}
       <header className="border-b" style={{ borderColor: "var(--linha)", background: "var(--superficie)" }}>
@@ -36,11 +39,11 @@ export function Layout() {
               E
             </span>
             <span className="font-extrabold text-lg leading-tight" style={{ fontFamily: "var(--fonte-titulo)" }}>
-              Ensaio às Competências Digitais
+              {G.nomeApp}
             </span>
           </NavLink>
           <nav aria-label="Principal" className="flex flex-wrap gap-1 ml-auto">
-            {LIGACOES.map((l) => (
+            {ligacoes().map((l) => (
               <NavLink key={l.para} to={l.para} end={l.para === "/"} className="px-3 py-2 rounded-lg no-underline font-bold text-sm" style={({ isActive }) => ({ color: isActive ? "var(--acento)" : "var(--tinta)", background: isActive ? "var(--acento-suave)" : "transparent", minHeight: 44, display: "inline-flex", alignItems: "center" })}>
                 {l.texto}
               </NavLink>
@@ -54,15 +57,15 @@ export function Layout() {
       <footer className="border-t mt-12" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
           <span>
-            Ensaio às Competências Digitais · v{VERSAO} · Ferramenta gratuita desenvolvida por {AUTORIA} para uso pelo Estado Português · <NavLink to="/licenca">Licença</NavLink>
+            {G.nomeApp} · v{VERSAO} · {G.rodape.replace("{autoria}", AUTORIA)} · <NavLink to="/licenca">{G.ligacoesRodape.licenca}</NavLink>
           </span>
-          <NavLink to="/resultados">Os meus resultados</NavLink>
-          <NavLink to="/cartao">O meu cartão</NavLink>
-          <NavLink to="/seguranca">Segurança digital</NavLink>
-          <NavLink to="/tutorial">Tutorial</NavLink>
-          <NavLink to="/privacidade">Privacidade</NavLink>
-          <NavLink to="/acessibilidade">Acessibilidade</NavLink>
-          <NavLink to="/admin">Administração</NavLink>
+          <NavLink to="/resultados">{G.ligacoesRodape.resultados}</NavLink>
+          <NavLink to="/cartao">{G.ligacoesRodape.cartao}</NavLink>
+          <NavLink to="/seguranca">{G.ligacoesRodape.seguranca}</NavLink>
+          <NavLink to="/tutorial">{G.ligacoesRodape.tutorial}</NavLink>
+          <NavLink to="/privacidade">{G.ligacoesRodape.privacidade}</NavLink>
+          <NavLink to="/acessibilidade">{G.ligacoesRodape.acessibilidade}</NavLink>
+          <NavLink to="/admin">{G.ligacoesRodape.admin}</NavLink>
           <a href="https://mosaico.gov.pt/ferramentas/agora-design-system" target="_blank" rel="noreferrer">
             Ágora Design System
           </a>

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import { Layout } from "./componentes/Layout";
 import { Inicio, Treinar } from "./paginas/Inicio";
@@ -14,6 +15,9 @@ import { Tutorial } from "./paginas/Tutorial";
 import { CartaoCarimbos } from "./paginas/CartaoCarimbos";
 import { JogoPagina, Jogos } from "./paginas/Jogos";
 import { Seguranca, SegurancaTema, SegurancaTeste } from "./paginas/Seguranca";
+
+// Backoffice de textos (temporário): carregado só quando se abre.
+const Backoffice = lazy(() => import("./paginas/Backoffice"));
 
 export function App() {
   return (
@@ -36,6 +40,7 @@ export function App() {
         <Route path="cartao" element={<CartaoCarimbos />} />
         <Route path="jogos" element={<Jogos />} />
         <Route path="jogos/:slug/:nivel" element={<JogoPagina />} />
+        <Route path="backoffice" element={<Suspense fallback={<p>A carregar…</p>}><Backoffice /></Suspense>} />
         <Route path="seguranca" element={<Seguranca />} />
         <Route path="seguranca/:tema" element={<SegurancaTema />} />
         <Route path="seguranca/:tema/teste/:nivel" element={<SegurancaTeste />} />

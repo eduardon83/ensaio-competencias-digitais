@@ -31,7 +31,7 @@ export interface ConfigEncontra {
 }
 
 // [conteúdo Kendir] textos provisórios (regulamento fictício, guia fictício). É aqui que entram os textos de autor.
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigEncontra> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigEncontra> = {
   1: {
     tempoReferenciaSeg: 90,
     texto: {
@@ -272,7 +272,7 @@ function realcar(texto: string, termo: string): ReactNode {
 
 // Textos alternativos por nível e cenário: em cada tentativa (avaliação) sorteia-se entre o principal e estes.
 type Variante = { texto: Texto; perguntas: Pergunta[] };
-const EXTRA: Partial<Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Variante[]>>> = {
+export const EXTRA: Partial<Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Variante[]>>> = {
   1: {
     jornal: [
       {

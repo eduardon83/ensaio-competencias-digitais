@@ -21,7 +21,7 @@ export interface ConfigTeclas {
 
 const C = TECLA_CTRL; // "Ctrl" ou "⌘"
 
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigTeclas> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigTeclas> = {
   1: {
     tarefas: [
       { tipo: "editar", instrucao: "Escreve a letra A maiúscula no fim do texto (usa Shift).", inicial: "casa ", esperado: "casa A", atalhos: ["Shift", "CapsLock"], botoes: [] },

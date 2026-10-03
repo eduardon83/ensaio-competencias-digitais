@@ -1,4 +1,6 @@
 // ─── Catálogo de atividades (por ciclo) e Treino de competências (5 níveis por atividade) ──
+import { Rico } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useState } from "react";
 import { Link } from "react-router";
 import { Caminho } from "../componentes/Caminho";
@@ -16,8 +18,8 @@ export function Catalogo() {
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
         <Caminho itens={[["/treinar", "Treinar"]]} atual="Atividades" />
-        <h1 className="text-4xl">Atividades</h1>
-        <p className="m-0">As atividades do ECD. Escolhe a prova para ver as atividades que entram na preparação e em que nível. Para os cinco níveis de dificuldade, vai a Treino.</p>
+        <h1 className="text-4xl">{PAGINAS.atividades.tituloCatalogo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.atividades.introducaoCatalogo} /></p>
       </header>
       <div role="tablist" aria-label="Prova" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
         {CICLOS.map((c) => (
@@ -74,9 +76,9 @@ export function Treino() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[["/treinar", "Treinar"]]} atual="Atividades" />
-        <h1 className="text-4xl">Treino de competências</h1>
-        <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: abaixo de 50 pontos convém tentar novamente; de 50 a 74, 1 estrela; de 75 a 90, 2 estrelas; de 91 a 100, 3 estrelas.</p>
+        <Caminho itens={[["/treinar", "Treinar"]]} atual={PAGINAS.atividades.caminho} />
+        <h1 className="text-4xl">{PAGINAS.atividades.titulo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.atividades.introducao} /></p>
       </header>
       <div role="tablist" aria-label="Nível de dificuldade" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
         {NIVEIS.map((n) => (

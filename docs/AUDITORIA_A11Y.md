@@ -33,6 +33,7 @@ Nenhuma.
 | Privacidade | mosaico | claro | ✓ |
 | Licença | mosaico | claro | ✓ |
 | Administração | mosaico | claro | ✓ |
+| Backoffice (entrada) | mosaico | claro | ✓ |
 | Jogos | mosaico | claro | ✓ |
 | Segurança digital | mosaico | claro | ✓ |
 | Segurança: boas práticas | mosaico | claro | ✓ |
@@ -76,6 +77,7 @@ Nenhuma.
 | Privacidade | mosaico | escuro | ✓ |
 | Licença | mosaico | escuro | ✓ |
 | Administração | mosaico | escuro | ✓ |
+| Backoffice (entrada) | mosaico | escuro | ✓ |
 | Jogos | mosaico | escuro | ✓ |
 | Segurança digital | mosaico | escuro | ✓ |
 | Segurança: boas práticas | mosaico | escuro | ✓ |
@@ -119,6 +121,7 @@ Nenhuma.
 | Privacidade | original | claro | ✓ |
 | Licença | original | claro | ✓ |
 | Administração | original | claro | ✓ |
+| Backoffice (entrada) | original | claro | ✓ |
 | Jogos | original | claro | ✓ |
 | Segurança digital | original | claro | ✓ |
 | Segurança: boas práticas | original | claro | ✓ |
@@ -162,6 +165,7 @@ Nenhuma.
 | Privacidade | original | escuro | ✓ |
 | Licença | original | escuro | ✓ |
 | Administração | original | escuro | ✓ |
+| Backoffice (entrada) | original | escuro | ✓ |
 | Jogos | original | escuro | ✓ |
 | Segurança digital | original | escuro | ✓ |
 | Segurança: boas práticas | original | escuro | ✓ |

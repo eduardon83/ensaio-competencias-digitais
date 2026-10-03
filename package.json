@@ -1,6 +1,6 @@
 {
   "name": "ensaio-competencias-digitais",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,9 @@
     "preview": "vite preview --port 5180",
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p .",
-    "a11y": "node scripts/auditoria-a11y.mjs"
+    "a11y": "node scripts/auditoria-a11y.mjs",
+    "worker:dev": "vite build && wrangler dev --port 8787",
+    "worker:deploy": "vite build && wrangler deploy"
   },
   "dependencies": {
     "@ama-pt/agora-design-system": "^4.0.1",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@cloudflare/workers-types": "^5.20261003.1",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/node": "^24.0.0",

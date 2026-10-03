@@ -12,7 +12,7 @@ export interface Item {
   tema: string;
 }
 
-const PALAVRAS: [string, string, string][] = [
+export const PALAVRAS: [string, string, string][] = [
   ["exceção", "excessão", "esceção"], ["atrás", "atraz", "àtras"], ["conseguir", "consegir", "comseguir"], ["também", "tambem", "tanbém"],
   ["através", "atravéz", "atraves"], ["necessário", "nessessário", "necesário"], ["obrigado", "obrigádo", "obrigato"], ["experiência", "experiençia", "esperiência"],
   ["próximo", "proximo", "prossimo"], ["infelizmente", "enfelizmente", "infelismente"], ["beneficente", "beneficiente", "benefiscente"], ["intervalo", "entrevalo", "intrevalo"],
@@ -20,7 +20,7 @@ const PALAVRAS: [string, string, string][] = [
 ];
 
 // Frases completas (artigo, verbo e ponto final): a versão certa tem de estar irrepreensível. [tema, frase]
-const FRASES_TEMA: Record<Contexto, [string, string][]> = {
+export const FRASES_TEMA: Record<Contexto, [string, string][]> = {
   jornal: [
     ["andebol", "A turma do 6.º A venceu o torneio de andebol."], ["livros", "A biblioteca recebeu trinta livros novos."], ["concerto", "O concerto de primavera esgotou em dois dias."],
     ["horta", "A horta da escola deu a primeira colheita."], ["praia", "Os alunos limpam a praia no fim de semana."], ["cantina", "A nova cantina abre na segunda-feira."],
@@ -35,7 +35,7 @@ const FRASES_TEMA: Record<Contexto, [string, string][]> = {
 export const FRASES: Record<Contexto, string[]> = { jornal: FRASES_TEMA.jornal.map((f) => f[1]), laboratorio: FRASES_TEMA.laboratorio.map((f) => f[1]) };
 
 // Legendas: [tema, emoji, o que a fotografia mostra, legenda]
-const LEGENDAS: Record<Contexto, [string, string, string, string][]> = {
+export const LEGENDAS: Record<Contexto, [string, string, string, string][]> = {
   jornal: [
     ["futebol", "⚽", "uma bola a entrar na baliza", "Golo decisivo na final do torneio de futebol."], ["leitura", "📖", "uma criança a ler", "Hora do conto na biblioteca da escola."],
     ["violino", "🎻", "um violino", "Ensaio da orquestra da escola."], ["arvores", "🌳", "uma árvore acabada de plantar", "Dia da árvore no recreio."],
@@ -48,7 +48,7 @@ const LEGENDAS: Record<Contexto, [string, string, string, string][]> = {
   ],
 };
 
-const UNIDADES: [string, string, string[]][] = [
+export const UNIDADES: [string, string, string[]][] = [
   ["a massa", "grama (g)", ["litro (l)", "metro (m)"]], ["o volume", "mililitro (ml)", ["grama (g)", "segundo (s)"]], ["a temperatura", "grau Celsius (°C)", ["quilómetro (km)", "litro (l)"]],
   ["o tempo", "segundo (s)", ["grama (g)", "metro (m)"]], ["o comprimento", "metro (m)", ["litro (l)", "grau Celsius (°C)"]],
 ];

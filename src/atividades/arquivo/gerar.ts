@@ -11,7 +11,7 @@ export interface No {
   filhos: No[];
 }
 
-const POOLS: Record<Contexto, { topo: [string, string, string[]][]; eventos: string[]; locais: string[] }> = {
+export const POOLS: Record<Contexto, { topo: [string, string, string[]][]; eventos: string[]; locais: string[] }> = {
   jornal: {
     topo: [
       ["Fotos", "foto", [".png", ".jpg"]],
@@ -122,7 +122,7 @@ export interface Separador {
   conteudo: string;
   publicidade?: boolean;
 }
-const INFOS: Record<Contexto, [string, string, string][]> = {
+export const INFOS: Record<Contexto, [string, string, string][]> = {
   jornal: [
     ["o horário da biblioteca", "Biblioteca escolar", "Horário da biblioteca: das 8h30 às 17h30, de segunda a sexta."],
     ["o resultado do torneio", "Desporto escolar", "Resultado do torneio de andebol: 6.º A 14, 6.º B 11."],
@@ -136,7 +136,7 @@ const INFOS: Record<Contexto, [string, string, string][]> = {
     ["a próxima sessão de segurança", "Formação", "Próxima sessão de segurança: terça-feira, às 14h30, sala 2."],
   ],
 };
-const PUBLICIDADE = ["Promoção! Ganha um tablet", "Oferta imperdível: clica já", "Parabéns, foste selecionado!"];
+export const PUBLICIDADE = ["Promoção! Ganha um tablet", "Oferta imperdível: clica já", "Parabéns, foste selecionado!"];
 
 export function gerarSeparadores(ctx: Contexto, n: number, r: Gerador = Math.random) {
   const infos = amostra(INFOS[ctx], Math.max(1, n - 1), r);
@@ -155,7 +155,7 @@ export interface Pagina {
   titulo: string;
   texto: string;
 }
-const PAGINAS: Record<Contexto, Pagina[]> = {
+export const PAGINAS: Record<Contexto, Pagina[]> = {
   jornal: [
     { id: "inicio", titulo: "Início", texto: "Bem-vindo ao sítio do jornal da escola." },
     { id: "desporto", titulo: "Desporto", texto: "Resultados e calendário dos torneios." },
@@ -184,7 +184,7 @@ export function gerarHistorico(ctx: Contexto, n: number, r: Gerador = Math.rando
 }
 
 /** Artigo longo para a tarefa "fim da página". */
-const PARAGRAFOS: Record<Contexto, string[]> = {
+export const PARAGRAFOS: Record<Contexto, string[]> = {
   jornal: [
     "A redação do jornal reuniu-se na segunda-feira para planear a edição de maio. Em cima da mesa estavam três temas: o torneio de andebol, a feira do livro e a reciclagem.",
     "O Tomé apresentou as fotografias da visita de estudo ao Porto. A Diretora Graça escolheu cinco para a página central e pediu legendas curtas.",

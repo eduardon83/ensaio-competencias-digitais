@@ -1,4 +1,6 @@
 // ─── Definições: aspeto (Original / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
+import { Rico } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { Caminho } from "../componentes/Caminho";
 import { CONTEXTOS } from "../contextos";
 import { usePreferencias, type ExtensaoTempo } from "../preferencias/preferencias";
@@ -9,9 +11,9 @@ export function Definicoes() {
   return (
     <div className="grid gap-6 max-w-3xl">
       <header className="grid gap-2">
-        <Caminho itens={[]} atual="Definições" />
-        <h1 className="text-4xl">Definições</h1>
-        <p className="m-0">Tudo fica guardado neste navegador. Nenhuma destas escolhas afeta a pontuação, exceto o tempo alargado, que fica registado no resultado como acomodação.</p>
+        <Caminho itens={[]} atual={PAGINAS.definicoes.titulo} />
+        <h1 className="text-4xl">{PAGINAS.definicoes.titulo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.definicoes.introducao} /></p>
       </header>
 
       <Cartao className="grid gap-3">

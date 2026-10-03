@@ -7,3 +7,5 @@ dist
 .DS_Store
 coverage
 design/pacote-video-ECD-*.zip
+.dev.vars
+.wrangler

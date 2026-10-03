@@ -1,4 +1,6 @@
 // ─── Motor: corre uma atividade em quatro etapas (intro → prática → avaliação → resultado) ──
+import { Rico, preencher } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useMemo, useState } from "react";
 import { Caminho } from "../componentes/Caminho";
 import { TEMAS } from "../seguranca/conteudo";
@@ -85,10 +87,7 @@ export function Atividade({
           Nível {nivel} · {NOME_NIVEL[nivel]}
         </Etiqueta>
         <span className="text-sm ml-auto" style={{ color: "var(--suave)" }}>
-          {etapa === "intro" && "Briefing"}
-          {etapa === "pratica" && "Prática (não conta)"}
-          {etapa === "avaliacao" && "A contar"}
-          {etapa === "resultado" && "Resultado"}
+          {PAGINAS.atividade.etapas[etapa === "intro" ? "intro" : etapa === "pratica" ? "pratica" : etapa === "avaliacao" ? "avaliacao" : "resultado"]}
         </span>
       </header>
 
@@ -108,8 +107,8 @@ export function Atividade({
             </div>
           </div>
           <p className="m-0" style={{ color: "var(--suave)" }}>
-            {definicao.descricao} Primeiro fazes um item de prática que não conta. Depois começa a avaliação.
-            {extensao !== 1 && <> Tempo alargado ×{extensao} ativo.</>}
+            {definicao.descricao} <Rico texto={PAGINAS.atividade.briefing.pratica} />
+            {extensao !== 1 && <> {preencher(PAGINAS.atividade.briefing.alargado, { x: extensao })}</>}
           </p>
           {escolherContexto && (
             <div className="pt-2 border-t" style={{ borderColor: "var(--linha)" }}>
@@ -118,19 +117,19 @@ export function Atividade({
           )}
           {melhorAnterior && (
             <p className="m-0 text-sm">
-              O teu melhor neste nível: <strong>{melhorAnterior.pontuacao}</strong> pontos.
+              <Rico texto={preencher(PAGINAS.atividade.briefing.melhor, { pontos: melhorAnterior.pontuacao })} />
             </p>
           )}
           <div className="flex gap-3 flex-wrap">
             <Botao grande onClick={() => setEtapa("pratica")}>
-              Começar a prática
+              {PAGINAS.atividade.briefing.comecar}
             </Botao>
             <Botao variante="contorno" onClick={() => setEtapa("avaliacao")}>
-              Saltar a prática
+              {PAGINAS.atividade.briefing.saltar}
             </Botao>
             {typeof window !== "undefined" && "speechSynthesis" in window && (
               <Botao variante="discreto" onClick={() => lerEmVozAlta(`${ctx.briefs[definicao.slug] ?? definicao.descricao} ${definicao.descricao}`)}>
-                <span aria-hidden="true">🔊</span> Ler em voz alta
+                <span aria-hidden="true">🔊</span> {PAGINAS.atividade.briefing.ouvir}
               </Botao>
             )}
           </div>
@@ -218,17 +217,17 @@ function Resultado({
         </div>
         <div className="grid gap-2">
           <h2 id="res-t" className="text-2xl">
-            {tentativa.pontuacao >= CARIMBO_MINIMO ? `Ganhaste o ${ctx.resultado.carimbo} de ${NOME_DOMINIO[definicao.dominio].toLowerCase()}.` : tentativa.pontuacao >= 75 ? "Bom trabalho." : tentativa.pontuacao >= 50 ? "Vais no bom caminho." : "Tenta novamente: vais conseguir."}
+            {tentativa.pontuacao >= CARIMBO_MINIMO ? preencher(PAGINAS.atividade.resultado.carimbo, { carimbo: ctx.resultado.carimbo, dominio: NOME_DOMINIO[definicao.dominio].toLowerCase() }) : tentativa.pontuacao >= 75 ? PAGINAS.atividade.resultado.bom : tentativa.pontuacao >= 50 ? PAGINAS.atividade.resultado.caminho : PAGINAS.atividade.resultado.tenta}
           </h2>
           {tentativa.pontuacao >= CARIMBO_MINIMO && (
             <p className="m-0">
-              <Link to="/cartao">Ver o meu {ctx.resultado.cartao}</Link>
+              <Link to="/cartao">{preencher(PAGINAS.atividade.resultado.verCartao, { cartao: ctx.resultado.cartao })}</Link>
             </p>
           )}
-          {recorde && melhorAnterior && <p className="m-0 font-bold" style={{ color: "var(--certo)" }}>Novo recorde pessoal (antes: {melhorAnterior.pontuacao}).</p>}
+          {recorde && melhorAnterior && <p className="m-0 font-bold" style={{ color: "var(--certo)" }}>{preencher(PAGINAS.atividade.resultado.recorde, { antes: melhorAnterior.pontuacao })}</p>}
           <ResumoRelatorio pontuacao={tentativa.pontuacao} linhas={relatorio} dica={dica} />
           <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-            Tempo: {Math.round(tentativa.duracaoMs / 1000)} s · Nível {nivel} ({NOME_NIVEL[nivel]})
+            {preencher(PAGINAS.atividade.resultado.tempo, { s: Math.round(tentativa.duracaoMs / 1000), nivel, nome: NOME_NIVEL[nivel] })}
             {tentativa.extensaoTempo !== 1 && <> · tempo alargado ×{tentativa.extensaoTempo}</>}
           </p>
         </div>
@@ -241,29 +240,29 @@ function Resultado({
           </Botao>
         ) : (
           <>
-            <Botao onClick={aoRepetir}>Repetir</Botao>
+            <Botao onClick={aoRepetir}>{PAGINAS.atividade.resultado.repetir}</Botao>
             {definicao.numero >= 200 ? (
               <>
                 <Link to={`/seguranca/${definicao.slug}`} className="botao botao--contorno">
-                  Rever as informações
+                  {PAGINAS.atividade.resultado.revInfo}
                 </Link>
                 <Link to="/seguranca" className="botao botao--discreto">
-                  Voltar à segurança
+                  {PAGINAS.atividade.resultado.voltarSeguranca}
                 </Link>
               </>
             ) : definicao.numero >= 100 ? (
               <Link to="/jogos" className="botao botao--contorno">
-                Voltar aos jogos
+                {PAGINAS.atividade.resultado.voltarJogos}
               </Link>
             ) : (
               <>
                 {proxima && (
                   <LigacaoBotao para={`/atividades/${proxima.slug}/${nivel}`} variante="contorno">
-                    Próxima atividade: {proxima.titulo[prefs.contexto]}
+                    {preencher(PAGINAS.atividade.resultado.proxima, { titulo: proxima.titulo[prefs.contexto] })}
                   </LigacaoBotao>
                 )}
                 <Link to="/treino" className="botao botao--discreto">
-                  Voltar ao treino
+                  {PAGINAS.atividade.resultado.voltar}
                 </Link>
               </>
             )}
@@ -271,7 +270,7 @@ function Resultado({
         )}
         {aoContinuar && (
           <Botao variante="discreto" onClick={aoRepetir}>
-            Repetir esta atividade
+            {PAGINAS.atividade.resultado.repetirEsta}
           </Botao>
         )}
       </div>

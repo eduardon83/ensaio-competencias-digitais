@@ -1,4 +1,6 @@
 // ─── Aluno: entrar com o código do professor e fazer a prova montada por ele ──
+import { Rico } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { Caminho } from "../componentes/Caminho";
@@ -50,9 +52,11 @@ export function Codigo() {
 
   return (
     <div className="grid gap-5 max-w-xl">
-      <Caminho itens={[["/treinar", "Treinar"]]} atual="Código" />
-      <h1 className="text-4xl">Entrar com código</h1>
-      <p className="m-0">Insere aqui o código que o teu professor indicou. Terá o formato <code style={{ fontFamily: "var(--fonte-mono)" }}>TEC7·4F7KQ2</code>. Após inserires o código, clica em "Entrar" para começar a prova.</p>
+      <Caminho itens={[["/treinar", "Treinar"]]} atual={PAGINAS.codigo.caminho} />
+      <h1 className="text-4xl">{PAGINAS.codigo.titulo}</h1>
+      <p className="m-0">
+        <Rico texto={PAGINAS.codigo.introducao} />
+      </p>
       <form
         className="grid gap-3"
         onSubmit={(e) => {

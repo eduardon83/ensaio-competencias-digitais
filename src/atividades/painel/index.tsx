@@ -80,7 +80,7 @@ interface Rotulos {
   volumeRotulo: string;
 }
 
-const ROTULOS: Record<Contexto, Rotulos> = {
+export const ROTULOS: Record<Contexto, Rotulos> = {
   jornal: {
     sitio: "O Recreio · jornal da escola",
     secoes: [

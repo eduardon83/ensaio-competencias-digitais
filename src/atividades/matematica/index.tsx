@@ -9,7 +9,7 @@ import { corresponde } from "./normalizar";
 import { amostra, baralharOpcoes } from "../../motor/aleatorio";
 
 /** Itens extra por nível: juntam-se aos do nível e em cada tentativa sorteia-se o mesmo número de itens. */
-const EXTRA: Record<1 | 2 | 3 | 4 | 5, Item[]> = {
+export const EXTRA: Record<1 | 2 | 3 | 4 | 5, Item[]> = {
   1: [
     { tipo: "escrever", mostrar: "15 + 6 = 21", aceita: ["15+6=21"] },
     { tipo: "escrever", mostrar: "8 × 3 = 24", aceita: ["8×3=24", "8*3=24"] },
@@ -64,7 +64,7 @@ const PALETA_4 = [...PALETA_3, "_", "θ", "∞", "→"];
 const PALETA_5 = [...PALETA_4, "∑", "∫", "∈", "ℝ", "[", "]"];
 
 // `mostrar` usa uma marcação mínima: ^{…} expoente, _{…} índice, frac{a}{b} fração, sqrt{…} raiz. O resto é literal.
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigMatematica> = {
   1: {
     tempoReferenciaSeg: 120,
     paleta: PALETA_BASE,

@@ -1,6 +1,8 @@
 // ─── Relatório da atividade (modelo comum, preenchido por cada atividade) ────
 // Resumo (pontuação, estrelas, o que falta para a próxima estrela, contagem de tarefas, indicações para melhorar)
 // e tabela "Tarefa · Resultado · A tua resposta · Resposta certa · Feedback".
+import { preencher } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { LIMIARES_ESTRELAS, estrelasDe, type EstadoLinha, type LinhaRelatorio } from "./tipos";
 
 const ROTULO: Record<EstadoLinha, { icone: string; texto: string; cor: string }> = {
@@ -12,12 +14,12 @@ const ROTULO: Record<EstadoLinha, { icone: string; texto: string; cor: string }>
 
 export function textoEstrelas(p: number): { frase: string; proxima: string } {
   const e = estrelasDe(p);
-  const frase = e === 0 ? "Ainda não ganhaste estrelas: vale a pena tentar novamente." : e === 1 ? "Obtiveste 1 estrela." : `Obtiveste ${e} estrelas.`;
-  if (e === 3) return { frase, proxima: "Tens as três estrelas. Experimenta o nível seguinte." };
+  const R = PAGINAS.atividade.relatorio;
+  const frase = e === 0 ? R.estrelas0 : e === 1 ? R.estrelas1 : preencher(R.estrelasN, { n: e });
+  if (e === 3) return { frase, proxima: R.tres };
   const alvo = LIMIARES_ESTRELAS[e];
   const falta = alvo - p;
-  const nome = e === 0 ? "a primeira estrela" : e === 1 ? "a segunda estrela" : "a terceira estrela";
-  return { frase, proxima: `Para ${nome} precisas de ${alvo} pontos: faltam ${falta}.` };
+  return { frase, proxima: preencher(R.falta, { nome: R.nomes[e], alvo, falta }) };
 }
 
 export function ResumoRelatorio({ pontuacao, linhas, dica }: { pontuacao: number; linhas?: LinhaRelatorio[]; dica: string }) {
@@ -39,7 +41,7 @@ export function ResumoRelatorio({ pontuacao, linhas, dica }: { pontuacao: number
         </p>
       )}
       <div>
-        <strong>Da próxima vez:</strong>
+        <strong>{PAGINAS.atividade.relatorio.proximaVez}</strong>
         <ul className="m-0 pl-5">
           <li>{dica}</li>
           {melhorar.filter((m) => m !== dica).map((m) => (
@@ -56,7 +58,7 @@ export function TabelaRelatorio({ linhas }: { linhas: LinhaRelatorio[] }) {
   const temCerta = linhas.some((l) => l.certa !== undefined);
   return (
     <section className="grid gap-2" aria-labelledby="rel-t">
-      <h3 id="rel-t" className="text-xl">Relatório da atividade</h3>
+      <h3 id="rel-t" className="text-xl">{PAGINAS.atividade.relatorio.titulo}</h3>
       <div className="cartao" style={{ overflowX: "auto" }}>
         <table className="tabela">
           <thead>
@@ -86,7 +88,7 @@ export function TabelaRelatorio({ linhas }: { linhas: LinhaRelatorio[] }) {
                     </td>
                   )}
                   {temCerta && <td style={{ wordBreak: "break-word" }}>{l.resultado === "certo" && l.certa !== undefined && l.certa === l.resposta ? <span style={{ color: "var(--suave)" }}>igual</span> : l.certa}</td>}
-                  <td>{l.feedback ?? (l.resultado === "certo" ? "Bem feito." : l.resultado === "saltado" ? "Por responder: em branco vale zero." : "")}</td>
+                  <td>{l.feedback ?? (l.resultado === "certo" ? PAGINAS.atividade.relatorio.bemFeito : l.resultado === "saltado" ? PAGINAS.atividade.relatorio.porResponder : "")}</td>
                 </tr>
               );
             })}

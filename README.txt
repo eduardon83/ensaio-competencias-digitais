@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.4.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.5.0 · outubro de 2026
 
 
 O QUE É
@@ -114,6 +114,31 @@ Sem o passo 1, a aplicação funciona na mesma: os alunos treinam e veem os resu
 
 A página Administração mostra as estatísticas completas a quem tiver a chave definida no script.
 
+
+PUBLICAR NA CLOUDFLARE E BACKOFFICE DE TEXTOS
+
+A aplicação pode ser publicada como um Worker da Cloudflare (wrangler.jsonc, código em worker/index.ts). O Worker serve os ficheiros da aplicação e guarda, numa base KV, os textos alterados no backoffice.
+
+Backoffice de textos (/backoffice, sem ligação nos menus):
+- Mais de 2300 textos editáveis sem mexer no código: textos das páginas (Início, Treinar, Tutorial, Sobre, Privacidade, Licença, Acessibilidade, Professor, Provas e exames…), cenários e briefings, nomes das competências e dos níveis, frases da primeira página, conteúdos das atividades, da segurança digital e dos jogos.
+- Identificadores, respostas automáticas e valores técnicos (atalhos esperados, notação matemática aceite, palavras-chave de correção) não aparecem, para não estragar a correção.
+- Marcação nos textos: **negrito**, [ligação](/rota), ^1^ (índice superior). Palavras entre chavetas, como {pontos}, são preenchidas pela aplicação e têm de ficar; o backoffice não deixa guardar sem elas.
+- Cada texto mostra o original e pode ser reposto; cada gravação é uma versão (as últimas 40), e pode voltar-se a qualquer uma. "Exportar" gera um ficheiro JSON com todas as alterações, para passar a versão final para o código.
+- Sem Worker (npm run dev ou alojamento estático), a aplicação usa os textos do código e o backoffice avisa que não está disponível.
+
+Chaves (segredos do Worker, nunca no código nem no Git):
+- CHAVE_ADMIN: super admin. Fica sempre.
+- CHAVE_EDICAO: para o professor que adapta os textos. Para fechar a edição, apaga-se este segredo (npx wrangler secret delete CHAVE_EDICAO); o super admin continua a entrar.
+
+Publicar pela primeira vez:
+  npx wrangler login                              (abre o navegador para autorizar a conta Cloudflare)
+  npx wrangler kv namespace create TEXTOS         (colar o "id" devolvido em wrangler.jsonc)
+  npx wrangler secret put CHAVE_ADMIN             (escrever uma frase longa e secreta)
+  npx wrangler secret put CHAVE_EDICAO            (outra frase, para o professor)
+  npm run worker:deploy                           (constrói e publica em https://ecd-ensaio.<conta>.workers.dev)
+Testar localmente com o Worker: copiar .dev.vars.example para .dev.vars e correr npm run worker:dev (http://localhost:8787).
+
+Passar a versão final para o código: exportar no backoffice, entregar o ficheiro a quem desenvolve; as alterações passam para os ficheiros de conteúdo (as chaves indicam o ficheiro e o campo) e o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
 
 PARA QUEM DESENVOLVE
 

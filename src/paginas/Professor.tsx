@@ -2,6 +2,8 @@
 // O código transporta a configuração (src/codigo/codigo.ts). Se a recolha estiver configurada, a sessão é
 // registada no ponto de recolha com o hash de um token privado do professor e, opcionalmente, um email
 // (confirmado por ligação antes de qualquer envio). O token fica neste navegador e na ligação privada.
+import { Rico } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Caminho } from "../componentes/Caminho";
@@ -99,9 +101,9 @@ export function Professor() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[]} atual="Professor" />
-        <h1 className="text-4xl">Professor</h1>
-        <p className="m-0">Monte uma prova para a turma: escolha o nível e as atividades, obtenha um código e dê-o aos alunos. Para receber os resultados dos seus alunos, indique um email.</p>
+        <Caminho itens={[]} atual={PAGINAS.professor.titulo} />
+        <h1 className="text-4xl">{PAGINAS.professor.titulo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.professor.introducao} /></p>
       </header>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
@@ -222,12 +224,12 @@ export function Professor() {
             )}
           </Cartao>
           <Cartao className="grid gap-2">
-            <h2 className="text-lg">Como funciona</h2>
+            <h2 className="text-lg">{PAGINAS.professor.comoFuncionaTitulo}</h2>
             <ol className="m-0 pl-5 grid gap-1 text-sm">
-              <li>Deve escolher o nível, as atividades e como os alunos se identificam.</li>
-              <li>Irá receber um código alfanumérico e um código QR para projetar.</li>
-              <li>Os alunos deverão aceder ao site, selecionar a opção Treinar → Código, inserir o código e executar a prova.</li>
-              <li>Os resultados serão enviados por email e ficam numa página privada, sendo possível a sua exportação em formato CSV.</li>
+              <li><Rico texto={PAGINAS.professor.comoFunciona[0]} /></li>
+              <li><Rico texto={PAGINAS.professor.comoFunciona[1]} /></li>
+              <li><Rico texto={PAGINAS.professor.comoFunciona[2]} /></li>
+              <li><Rico texto={PAGINAS.professor.comoFunciona[3]} /></li>
             </ol>
           </Cartao>
           {sessoes.length > 0 && (
@@ -368,7 +370,9 @@ export function ResultadosProfessor() {
       <div className="grid gap-3 max-w-2xl">
         <Caminho itens={[["/professor", "Professor"]]} atual="Resultados da sessão" />
         <h1 className="text-4xl">Resultados da sessão</h1>
-        <p className="m-0">Abra a ligação privada que recebeu ao criar a sessão (ou no email de confirmação). As sessões criadas neste navegador estão listadas em <Link to="/professor">Professor</Link>.</p>
+        <p className="m-0">
+          <Rico texto={PAGINAS.professor.semLigacao} />
+        </p>
       </div>
     );
   }

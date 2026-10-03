@@ -22,7 +22,7 @@ interface Ligar {
   pares: [string, string][]; // [alvo fixo, item a arrastar]
 }
 /** Conjuntos extra para ordenar (por nível e cenário): em cada tentativa sorteia-se um entre estes e o principal. */
-const ORDENAR_EXTRA: Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Ordenar[]>> = {
+export const ORDENAR_EXTRA: Record<1 | 2 | 3 | 4 | 5, Record<Contexto, Ordenar[]>> = {
   1: {
     jornal: [
       { titulo: "Põe a história pela ordem certa", itens: ["O Tomé pega na máquina.", "O Tomé tira a fotografia.", "A Lia escolhe a melhor.", "A fotografia sai no jornal."] },
@@ -79,7 +79,7 @@ export interface ConfigPaginacao {
   ligar?: Record<Contexto, Ligar>;
 }
 
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPaginacao> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigPaginacao> = {
   1: {
     ordenar: {
       jornal: { titulo: "Põe a história pela ordem certa", itens: ["A Rita acorda.", "A Rita toma o pequeno-almoço.", "A Rita vai para a escola.", "A Rita brinca no recreio."] },

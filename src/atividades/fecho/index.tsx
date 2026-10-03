@@ -27,7 +27,7 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigFecho> = {
   5: { secoes: 4, itensPorSecao: 8, minutos: 7, digitos: true, pesos: "inicio" },
 };
 
-const NOMES: Record<"jornal" | "laboratorio", string[]> = {
+export const NOMES: Record<"jornal" | "laboratorio", string[]> = {
   jornal: ["Primeira página", "Desporto", "Cultura", "Escola"],
   laboratorio: ["Medições", "Registo", "Materiais", "Conclusões"],
 };

@@ -1,4 +1,6 @@
 // ─── Segurança digital: três temas, cada um com informações e um teste de 5 níveis ──
+import { Rico } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { Caminho } from "../componentes/Caminho";
@@ -22,7 +24,7 @@ function Estrelas({ slug, nivel }: { slug: string; nivel: Nivel }) {
 function Ajuda() {
   return (
     <Cartao className="grid gap-3" aria-labelledby="ajuda-t">
-      <h2 id="ajuda-t" className="text-2xl">Onde pedir ajuda</h2>
+      <h2 id="ajuda-t" className="text-2xl">{PAGINAS.seguranca.ajudaTitulo}</h2>
       <ul className="m-0 pl-5 grid gap-2">
         {AJUDA.map((a) => (
           <li key={a.nome}>
@@ -39,9 +41,9 @@ export function Seguranca() {
   return (
     <div className="grid gap-8">
       <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[["/treinar", "Treinar"]]} atual="Segurança digital" />
-        <h1 className="text-4xl">Segurança digital</h1>
-        <p className="m-0">Três temas para estares mais seguro na internet. Em cada um, lê as informações e depois faz o teste, com cinco níveis e um relatório no fim. Os testes de segurança não contam para a preparação de provas nem para os carimbos.</p>
+        <Caminho itens={[["/treinar", "Treinar"]]} atual={PAGINAS.seguranca.titulo} />
+        <h1 className="text-4xl">{PAGINAS.seguranca.titulo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.seguranca.introducao} /></p>
       </header>
 
       <div role="tablist" aria-label="Nível de dificuldade dos testes" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>

@@ -20,7 +20,7 @@ export interface ConfigArquivo {
   paragrafos: number;
 }
 
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigArquivo> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigArquivo> = {
   1: { profundidade: 2, procurar: false, moverRenomear: false, extensoes: false, separadores: 2, fecharSeparador: false, historico: 3, avancar: false, paragrafos: 3 },
   2: { profundidade: 3, procurar: false, moverRenomear: false, extensoes: false, separadores: 3, fecharSeparador: true, historico: 4, avancar: false, paragrafos: 4 },
   3: { profundidade: 4, procurar: true, moverRenomear: true, extensoes: false, separadores: 3, fecharSeparador: true, historico: 5, avancar: true, paragrafos: 6 },

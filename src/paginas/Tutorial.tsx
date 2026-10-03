@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router";
 import { CONTEXTOS } from "../contextos";
 import { FAIXAS } from "../motor/tipos";
 import { Botao } from "../ui";
+import { PAGINAS } from "../textos/paginas";
+import { Rico, preencher } from "../textos/Rico";
 
 const CHAVE_VISTO = "ecd.tutorial.visto.v1";
 export function tutorialVisto(): boolean {
@@ -108,124 +110,107 @@ function Mini({ titulo, children, figura }: { titulo: string; children: ReactNod
   );
 }
 
-const PASSOS: { titulo: string; corpo: ReactNode }[] = [
-  {
-    titulo: "Bem-vindo ao Ensaio às Competências Digitais",
-    corpo: (
-      <>
-        <p className="m-0">As provas são cada vez mais feitas no computador. Aqui treinas o que essas provas pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, arrastar, usar atalhos, procurar num texto longo e escrever matemática. Há também jogos e testes de segurança online.</p>
-        <p className="m-0">É gratuito e não tem contas. Demora dois minutos a ver este tutorial. Podes saltá-lo quando quiseres.</p>
-      </>
-    ),
-  },
-  {
-    titulo: "Treinar: cinco maneiras",
-    corpo: (
-      <div className="grid gap-3 md:grid-cols-3">
-        <Mini titulo="Provas e exames" figura={<IlustracaoTeste />}>Uma preparação para as provas ModA, as provas finais e os exames nacionais, que se fazem no computador. No fim recebes o teu perfil de competências.</Mini>
-        <Mini titulo="Atividade" figura={<IlustracaoAtividade />}>Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade.</Mini>
-        <Mini titulo="Código" figura={<IlustracaoCodigo />}>O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova.</Mini>
-        <Mini titulo="Jogos" figura={<IlustracaoJogos />}>Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô.</Mini>
-        <Mini titulo="Segurança" figura={<IlustracaoSeguranca />}>Três temas: boas práticas online, exemplos de fraude e redes sociais. Em cada um lês as informações e fazes um teste.</Mini>
-      </div>
-    ),
-  },
-  {
-    titulo: "Escolhe o cenário",
-    corpo: (
-      <>
-        <p className="m-0">Antes de começar escolhes onde se passa a história. O cenário muda as personagens, os títulos e os textos das tarefas. As regras e a pontuação são iguais.</p>
-        <div className="grid gap-3 md:grid-cols-2">
-          {Object.values(CONTEXTOS).map((c) => (
-            <Mini key={c.id} titulo={c.nome}>
-              {c.descricao} Personagens: {c.personagens.responsavel}, {c.personagens.ficheiros}, {c.personagens.revisao}, {c.personagens.relogio}.
-            </Mini>
+/** Passos do tutorial, montados ao desenhar (os textos podem ter sido editados no backoffice). */
+function passos(): { titulo: string; corpo: ReactNode }[] {
+  const T = PAGINAS.tutorial;
+  const paragrafos = (l: string[]) => l.map((p, k) => (
+    <p key={k} className="m-0">
+      <Rico texto={p} />
+    </p>
+  ));
+  return [
+    { titulo: T.boasVindas.titulo, corpo: <>{paragrafos(T.boasVindas.paragrafos)}</> },
+    {
+      titulo: T.maneiras.titulo,
+      corpo: (
+        <div className="grid gap-3 md:grid-cols-3">
+          <Mini titulo={T.maneiras.provas.titulo} figura={<IlustracaoTeste />}><Rico texto={T.maneiras.provas.texto} /></Mini>
+          <Mini titulo={T.maneiras.atividade.titulo} figura={<IlustracaoAtividade />}><Rico texto={T.maneiras.atividade.texto} /></Mini>
+          <Mini titulo={T.maneiras.codigo.titulo} figura={<IlustracaoCodigo />}><Rico texto={T.maneiras.codigo.texto} /></Mini>
+          <Mini titulo={T.maneiras.jogos.titulo} figura={<IlustracaoJogos />}><Rico texto={T.maneiras.jogos.texto} /></Mini>
+          <Mini titulo={T.maneiras.seguranca.titulo} figura={<IlustracaoSeguranca />}><Rico texto={T.maneiras.seguranca.texto} /></Mini>
+        </div>
+      ),
+    },
+    {
+      titulo: T.cenario.titulo,
+      corpo: (
+        <>
+          <p className="m-0"><Rico texto={T.cenario.texto} /></p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {Object.values(CONTEXTOS).map((c) => (
+              <Mini key={c.id} titulo={c.nome}>
+                {c.descricao} {T.cenario.personagens}: {c.personagens.responsavel}, {c.personagens.ficheiros}, {c.personagens.revisao}, {c.personagens.relogio}.
+              </Mini>
+            ))}
+          </div>
+        </>
+      ),
+    },
+    {
+      titulo: T.atividade.titulo,
+      corpo: (
+        <ol className="grid gap-3 md:grid-cols-4 list-none m-0 p-0">
+          {T.atividade.etapas.map((e) => (
+            <li key={e.titulo}>
+              <Mini titulo={e.titulo}><Rico texto={e.texto} /></Mini>
+            </li>
+          ))}
+        </ol>
+      ),
+    },
+    {
+      titulo: T.pontuacao.titulo,
+      corpo: (
+        <>
+          <p className="m-0"><Rico texto={T.pontuacao.texto} /></p>
+          <div className="faixa" role="list">
+            {FAIXAS.map((f) => (
+              <div key={f.nome} role="listitem">
+                <b style={{ fontFamily: "var(--fonte-titulo)" }}>{f.nome}</b>
+                <br />
+                <span className="text-xs tabular-nums" style={{ color: "var(--suave)" }}>
+                  {f.min} a {f.max}
+                </span>
+              </div>
+            ))}
+          </div>
+        </>
+      ),
+    },
+    { titulo: T.medida.titulo, corpo: <>{paragrafos(T.medida.paragrafos)}</> },
+    {
+      titulo: T.professores.titulo,
+      corpo: (
+        <div className="grid gap-3 md:grid-cols-3">
+          {[T.professores.montar, T.professores.partilhar, T.professores.acompanhar].map((m) => (
+            <Mini key={m.titulo} titulo={m.titulo}><Rico texto={m.texto} /></Mini>
           ))}
         </div>
-      </>
-    ),
-  },
-  {
-    titulo: "Como corre uma atividade",
-    corpo: (
-      <ol className="grid gap-3 md:grid-cols-4 list-none m-0 p-0">
-        {[
-          ["1. Briefing", "Uma personagem explica a tarefa em uma frase."],
-          ["2. Prática", "Um item curto que não conta, para perceberes o que fazer."],
-          ["3. Avaliação", "A tarefa a sério. Algumas têm um relógio suave."],
-          ["4. Resultado", "Pontuação de 0 a 100, estrelas e uma dica concreta."],
-        ].map(([t, d]) => (
-          <li key={t}>
-            <Mini titulo={t}>{d}</Mini>
-          </li>
-        ))}
-      </ol>
-    ),
-  },
-  {
-    titulo: "Pontuação",
-    corpo: (
-      <>
-        <p className="m-0">Cada atividade dá uma pontuação de 0 a 100. Abaixo de 50 pontos, convém tentar novamente. De 50 a 74 ganhas uma estrela, de 75 a 90 duas e de 91 a 100 três. O teu melhor resultado em cada nível fica guardado neste navegador.</p>
-        <div className="faixa" role="list">
-          {FAIXAS.map((f) => (
-            <div key={f.nome} role="listitem">
-              <b style={{ fontFamily: "var(--fonte-titulo)" }}>{f.nome}</b>
-              <br />
-              <span className="text-xs tabular-nums" style={{ color: "var(--suave)" }}>
-                {f.min} a {f.max}
-              </span>
-            </div>
-          ))}
-        </div>
-      </>
-    ),
-  },
-  {
-    titulo: "Ajusta à tua medida",
-    corpo: (
-      <>
-        <p className="m-0">Em Definições podes mudar o aspeto (Original ou Mosaico), o tema claro ou escuro, o tamanho do texto e o tempo alargado.</p>
-        <p className="m-0">Tudo funciona só com o teclado. Quando há arrastar, há sempre outra maneira: tocar no item e depois no destino.</p>
-      </>
-    ),
-  },
-  {
-    titulo: "Para professores",
-    corpo: (
-      <div className="grid gap-3 md:grid-cols-3">
-        <Mini titulo="Montar">Escolhe o nível, as atividades (também testes de segurança e jogos) e como os alunos se identificam (número de turma, alcunha ou nada).</Mini>
-        <Mini titulo="Partilhar">Recebe um código e um QR para projetar na sala.</Mini>
-        <Mini titulo="Acompanhar">Recebe os resultados por email, se quiser, e consulta-os numa página privada com exportação CSV.</Mini>
-      </div>
-    ),
-  },
-  {
-    titulo: "Os teus dados",
-    corpo: (
-      <>
-        <p className="m-0">Não há contas. Os teus resultados ficam no teu navegador. Cada atividade envia um registo anónimo, sem nome nem IP, para estatísticas sobre as competências que faltam. Podes desligar isso em Definições.</p>
-        <p className="m-0">Os números de todos aparecem no Observatório. Grupos com menos de 20 tentativas ficam ocultos.</p>
-      </>
-    ),
-  },
-];
+      ),
+    },
+    { titulo: T.dados.titulo, corpo: <>{paragrafos(T.dados.paragrafos)}</> },
+  ];
+}
 
 export function Tutorial() {
   const [i, setI] = useState(0);
   const navegar = useNavigate();
-  const ultimo = i === PASSOS.length - 1;
+  const PASSOS = passos();
+  const T = PAGINAS.tutorial;
+  const total = PASSOS.length;
+  const ultimo = i === total - 1;
 
   useEffect(() => {
     function tecla(e: KeyboardEvent) {
       const alvo = e.target as HTMLElement;
       if (alvo.closest("input, textarea, select")) return;
-      if (e.key === "ArrowRight") setI((x) => Math.min(PASSOS.length - 1, x + 1));
+      if (e.key === "ArrowRight") setI((x) => Math.min(total - 1, x + 1));
       if (e.key === "ArrowLeft") setI((x) => Math.max(0, x - 1));
     }
     window.addEventListener("keydown", tecla);
     return () => window.removeEventListener("keydown", tecla);
-  }, []);
+  }, [total]);
 
   useEffect(() => {
     if (ultimo) marcarTutorialVisto();
@@ -238,13 +223,13 @@ export function Tutorial() {
 
   return (
     <div className="grid gap-6 max-w-4xl mx-auto">
-      <Caminho atual="Tutorial" />
+      <Caminho atual={PAGINAS.geral.ligacoesRodape.tutorial} />
       <div className="flex items-center gap-3 flex-wrap">
         <span className="text-sm" style={{ color: "var(--suave)" }}>
-          Tutorial · passo {i + 1} de {PASSOS.length}
+          {preencher(T.progresso, { i: i + 1, n: total })}
         </span>
         <Botao variante="discreto" className="ml-auto" onClick={saltar}>
-          Saltar o tutorial
+          {T.saltar}
         </Botao>
       </div>
       <section className="cartao p-6 md:p-8 grid gap-4" aria-live="polite" aria-labelledby="tut-titulo" style={{ minHeight: 320 }}>
@@ -262,18 +247,18 @@ export function Tutorial() {
       </div>
       <div className="flex gap-3 flex-wrap justify-between">
         <Botao variante="contorno" onClick={() => setI((x) => Math.max(0, x - 1))} disabled={i === 0}>
-          Anterior
+          {T.anterior}
         </Botao>
         {ultimo ? (
           <Link to="/" className="botao botao--grande">
-            Voltar ao início
+            {T.fim}
           </Link>
         ) : (
-          <Botao onClick={() => setI((x) => x + 1)}>Seguinte</Botao>
+          <Botao onClick={() => setI((x) => x + 1)}>{T.seguinte}</Botao>
         )}
       </div>
       <p className="text-center text-xs m-0" style={{ color: "var(--suave)" }}>
-        Podes usar as setas ← → do teclado para mudar de passo.
+        {T.teclas}
       </p>
     </div>
   );
@@ -285,9 +270,9 @@ export function AvisoTutorial() {
   if (!visivel) return null;
   return (
     <div className="cartao p-4 flex flex-wrap items-center gap-3 max-w-4xl w-full mx-auto" role="region" aria-label="Primeira visita" style={{ borderColor: "var(--acento)", borderWidth: 2 }}>
-      <span className="flex-1 min-w-48 font-bold">Como funciona o ECD?</span>
+      <span className="flex-1 min-w-48 font-bold">{PAGINAS.tutorial.aviso.titulo}</span>
       <Link to="/tutorial" className="botao">
-        Ver o tutorial
+        {PAGINAS.tutorial.aviso.ver}
       </Link>
       <Botao
         variante="discreto"
@@ -296,7 +281,7 @@ export function AvisoTutorial() {
           setVisivel(false);
         }}
       >
-        Agora não
+        {PAGINAS.tutorial.aviso.agoraNao}
       </Botao>
     </div>
   );

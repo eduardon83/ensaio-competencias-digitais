@@ -17,7 +17,7 @@ export interface ConfigSimulador {
   seccoes: boolean; // duas secções com bloqueio entre elas
 }
 
-const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigSimulador> = {
+export const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigSimulador> = {
   1: { itens: 6, minutos: 8, calculadora: false, seccoes: false },
   2: { itens: 8, minutos: 10, calculadora: false, seccoes: false },
   3: { itens: 10, minutos: 12, calculadora: true, seccoes: false },

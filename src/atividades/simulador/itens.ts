@@ -11,7 +11,7 @@ export type ItemProva =
   | { tipo: "calculo"; enunciado: string; resultado: number }
   | { tipo: "tabela"; enunciado: string; cabecalho: string[]; linhas: string[][]; opcoes: string[]; correta: number };
 
-const ESCOLHAS: [string, string, string[]][] = [
+export const ESCOLHAS: [string, string, string[]][] = [
   ["Qual é a capital de Portugal?", "Lisboa", ["Porto", "Coimbra"]],
   ["Quantos dias tem uma semana?", "7", ["5", "10"]],
   ["Qual destes animais é um mamífero?", "Golfinho", ["Tubarão", "Sardinha"]],
@@ -26,7 +26,7 @@ const ESCOLHAS: [string, string, string[]][] = [
   ["Qual é o plural de “pão”?", "pães", ["pãos", "pões"]],
 ];
 
-const AUDIOS: [string, string, string, string[]][] = [
+export const AUDIOS: [string, string, string, string[]][] = [
   ["O comboio para Coimbra parte às dez e meia.", "A que horas parte o comboio?", "10h30", ["10h00", "11h30"]],
   ["A reunião foi mudada para a sala doze, no segundo piso.", "Em que sala é a reunião?", "Sala 12", ["Sala 2", "Sala 20"]],
   ["Amanhã a escola abre mais tarde, às nove e um quarto.", "A que horas abre a escola amanhã?", "9h15", ["9h45", "8h15"]],
@@ -34,7 +34,7 @@ const AUDIOS: [string, string, string, string[]][] = [
   ["A biblioteca vai estar fechada na quarta-feira à tarde.", "Quando está fechada a biblioteca?", "Quarta-feira à tarde", ["Quarta-feira de manhã", "Quinta-feira à tarde"]],
 ];
 
-const CURTAS: [string, string[]][] = [
+export const CURTAS: [string, string[]][] = [
   ["Escreve, por extenso, o número 3.", ["três", "tres"]],
   ["Completa: o céu é ___ (cor).", ["azul"]],
   ["Escreve o dia da semana que vem depois de segunda-feira.", ["terça-feira", "terça", "terca-feira", "terca"]],

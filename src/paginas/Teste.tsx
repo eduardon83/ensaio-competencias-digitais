@@ -1,6 +1,8 @@
 // ─── Preparação para provas e exames digitais e sequências de atividades (também usadas pelos códigos do professor) ──
+import { Rico, preencher } from "../textos/Rico";
+import { PAGINAS } from "../textos/paginas";
 import { useMemo, useRef, useState, type ReactNode } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Caminho } from "../componentes/Caminho";
 import { qualquerPorSlug as porSlug } from "../registo";
 import { frase } from "../motor/frases";
@@ -17,9 +19,9 @@ export function EscolherNivel() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[["/treinar", "Treinar"]]} atual="Provas e exames" />
-        <h1 className="text-4xl">Preparação para provas e exames</h1>
-        <p className="m-0">Escolhe a prova para a qual te estás a preparar. A preparação é uma sequência de atividades curtas que treina o que essas provas pedem no computador. Podes pausar entre atividades e retomar neste dispositivo.</p>
+        <Caminho itens={[["/treinar", "Treinar"]]} atual={PAGINAS.provas.caminho} />
+        <h1 className="text-4xl">{PAGINAS.provas.titulo}</h1>
+        <p className="m-0"><Rico texto={PAGINAS.provas.introducao} /></p>
       </header>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {CICLOS.map((c) => {
@@ -28,7 +30,7 @@ export function EscolherNivel() {
           return (
             <Cartao key={c.id} className="grid gap-3">
               <div className="flex items-baseline gap-3 flex-wrap">
-                <h2 className="text-2xl">Preparação {c.nome}</h2>
+                <h2 className="text-2xl">{preencher(PAGINAS.provas.cartao, { nome: c.nome })}</h2>
                 <Etiqueta>{c.anos}</Etiqueta>
                 <span className="ml-auto text-sm" style={{ color: "var(--suave)" }}>
                   {c.duracao}
@@ -36,17 +38,17 @@ export function EscolherNivel() {
               </div>
               <p className="m-0">{c.prova}</p>
               <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-                Nível {c.nivel} · {atividades.length} atividades: {atividades.map((a) => a!.titulo[prefs.contexto]).join(", ")}.
+                {preencher(PAGINAS.provas.atividades, { nivel: c.nivel, n: atividades.length, lista: atividades.map((a) => a!.titulo[prefs.contexto]).join(", ") })}
               </p>
               <div className="flex gap-3 flex-wrap">
-                <LigacaoBotao para={`/teste/${c.id}`}>{progresso ? `Retomar (${progresso.indice}/${atividades.length})` : "Começar a preparação"}</LigacaoBotao>
+                <LigacaoBotao para={`/teste/${c.id}`}>{progresso ? preencher(PAGINAS.provas.retomar, { i: progresso.indice, n: atividades.length }) : PAGINAS.provas.comecar}</LigacaoBotao>
               </div>
             </Cartao>
           );
         })}
       </div>
       <p className="text-sm m-0" style={{ color: "var(--suave)" }}>
-        O ECD não reproduz as provas oficiais nem as substitui: treina as competências digitais de que precisas para as fazer no computador (escrever, ler no ecrã, usar ferramentas, gerir o tempo). Para treinar uma atividade de cada vez, vai a <Link to="/treino">Atividade</Link>.
+        <Rico texto={PAGINAS.provas.nota} />
       </p>
     </div>
   );
