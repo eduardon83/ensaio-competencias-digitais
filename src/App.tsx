@@ -13,6 +13,7 @@ import { Codigo } from "./paginas/Codigo";
 import { Tutorial } from "./paginas/Tutorial";
 import { CartaoCarimbos } from "./paginas/CartaoCarimbos";
 import { JogoPagina, Jogos } from "./paginas/Jogos";
+import { Seguranca, SegurancaTema, SegurancaTeste } from "./paginas/Seguranca";
 
 export function App() {
   return (
@@ -35,6 +36,9 @@ export function App() {
         <Route path="cartao" element={<CartaoCarimbos />} />
         <Route path="jogos" element={<Jogos />} />
         <Route path="jogos/:slug/:nivel" element={<JogoPagina />} />
+        <Route path="seguranca" element={<Seguranca />} />
+        <Route path="seguranca/:tema" element={<SegurancaTema />} />
+        <Route path="seguranca/:tema/teste/:nivel" element={<SegurancaTeste />} />
         <Route path="conta" element={<Navigate to="/resultados" replace />} />
         <Route path="admin" element={<Admin />} />
         <Route path="acessibilidade" element={<Acessibilidade />} />

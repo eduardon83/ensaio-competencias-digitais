@@ -3,14 +3,27 @@
 // teste por ciclo, dos códigos de professor e dos carimbos: são treino livre.
 import type { DefinicaoAtividade } from "../motor/tipos";
 import { definicao as leitura } from "./leitura";
+import { definicao as sala } from "./sala";
+import { definicao as misterio } from "./misterio";
+import { definicao as orcamento } from "./orcamento";
+import { definicao as correio } from "./correio";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const JOGOS: DefinicaoAtividade<any>[] = [leitura];
+export const JOGOS: DefinicaoAtividade<any>[] = [leitura, sala, misterio, orcamento, correio];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function jogoPorSlug(slug: string): DefinicaoAtividade<any> | undefined {
   return JOGOS.find((j) => j.slug === slug);
 }
+
+/** Apresentação de cada jogo na página Jogos. */
+export const META_JOGOS: Record<string, { icone: string; etiquetas: string[]; nota?: string }> = {
+  leitura: { icone: "📚", etiquetas: ["Leitura", "Escrita", "Literatura portuguesa"] },
+  "sala-trancada": { icone: "🔐", etiquetas: ["Navegação", "Atenção ao detalhe", "Segurança"], nota: "Enigmas em ficheiros, emails, documentos e folhas. Mais enigmas e armadilhas a cada nível." },
+  misterio: { icone: "🕵️", etiquetas: ["Pensamento crítico", "Literacia da informação"], nota: "Registos, reservas, mensagens e fotografias. Trocas de lugar e pistas falsas nos níveis altos." },
+  orcamento: { icone: "📊", etiquetas: ["Folhas de cálculo", "Matemática aplicada"], nota: "Fórmulas, SOMA, custo por aluno, descontos, MÁXIMO e MÉDIA." },
+  correio: { icone: "✉️", etiquetas: ["Comunicação digital", "Escrita"], nota: "Para, CC e CCO, assunto, tom formal e anexos." },
+};
 
 /** Jogos propostos (ainda não desenvolvidos). Descrição completa em docs/JOGOS.md. */
 export interface JogoProposto {
@@ -22,45 +35,9 @@ export interface JogoProposto {
 
 export const PROPOSTOS: JogoProposto[] = [
   {
-    titulo: "A Sala Trancada",
-    icone: "🔐",
-    competencias: ["Navegação", "Atenção ao detalhe", "Segurança digital"],
-    descricao: "Escape room numa secretária digital: o código da porta está escondido em ficheiros, propriedades de documentos, separadores e emails. Cada enigma exige uma competência diferente.",
-  },
-  {
-    titulo: "Quem Apagou o Ficheiro?",
-    icone: "🕵️",
-    competencias: ["Literacia da informação", "Pensamento crítico", "Leitura em ecrã"],
-    descricao: "Mistério na redação (ou no laboratório): cruzar pistas em emails, registos de acesso, datas de ficheiros e mensagens para descobrir o culpado e justificar com provas.",
-  },
-  {
-    titulo: "Verdade ou Boato?",
-    icone: "📰",
-    competencias: ["Verificação de factos", "Avaliação de fontes"],
-    descricao: "Notícias, publicações e imagens para classificar: ver o endereço, a data, a fonte, a imagem original e o que dizem outras fontes antes de partilhar.",
-  },
-  {
-    titulo: "O Email Desconfiado",
-    icone: "🎣",
-    competencias: ["Segurança digital", "Privacidade"],
-    descricao: "Caixa de correio com mensagens verdadeiras e tentativas de burla (phishing): reconhecer remetentes falsos, ligações enganadoras e pedidos de dados, e criar palavras-passe fortes.",
-  },
-  {
-    titulo: "Orçamento da Visita de Estudo",
-    icone: "📊",
-    competencias: ["Folhas de cálculo", "Matemática aplicada"],
-    descricao: "Organizar uma visita numa folha de cálculo simulada: somas, médias, percentagens, ordenar e filtrar dados, e fazer um gráfico para apresentar à turma.",
-  },
-  {
     titulo: "O Robô da Bancada",
     icone: "🤖",
     competencias: ["Pensamento computacional", "Resolução de problemas"],
     descricao: "Dar instruções em sequência, com repetições e condições, para um robô cumprir uma tarefa no laboratório ou na redação, com o menor número de passos.",
-  },
-  {
-    titulo: "Correio da Redação",
-    icone: "✉️",
-    competencias: ["Comunicação digital", "Escrita"],
-    descricao: "Escrever e responder a emails formais: assunto, saudação, anexos, destinatários em CC, tom adequado e revisão antes de enviar.",
   },
 ];

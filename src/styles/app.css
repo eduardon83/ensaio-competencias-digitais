@@ -238,3 +238,22 @@ a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header 
 
 /* Mosaico: deixar os componentes Ágora mandar nos controlos */
 :root[data-formato="mosaico"] body { font-size: 1rem; }
+
+/* Jogos: folha de cálculo simulada */
+.folha-grelha { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .93rem; background: var(--superficie); }
+.folha-grelha th { background: var(--tecla); color: var(--suave); font-weight: 700; padding: 2px 6px; border: 1px solid var(--linha); min-width: 2rem; }
+.folha-grelha td { border: 1px solid var(--linha); padding: 0 8px; height: 2.4rem; min-width: 4rem; white-space: nowrap; }
+.folha-grelha td:empty { min-width: 1.5rem; }
+.folha-grelha td.numero { text-align: right; }
+.folha-grelha td.formula-feita { text-align: right; color: var(--suave); }
+.folha-grelha td.tarefa { padding: 0; background: color-mix(in srgb, var(--acento) 8%, var(--superficie)); }
+.folha-grelha td.tarefa input { font: inherit; color: var(--tinta); background: transparent; border: 2px solid transparent; width: 100%; min-width: 6rem; height: 2.4rem; padding: 0 8px; text-align: right; }
+.folha-grelha td.tarefa input:focus { border-color: var(--acento); background: var(--superficie); text-align: left; outline: none; }
+.folha-grelha td.ativa { outline: 2px solid var(--acento); outline-offset: -2px; }
+.barra-formula { display: flex; gap: 8px; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--linha); background: var(--superficie); font-family: var(--fonte-mono); font-size: .9rem; }
+.barra-formula .ref { font-weight: 700; min-width: 3rem; border-right: 1px solid var(--linha); padding-right: 8px; }
+/* Jogos: área de trabalho (escape room, mistério, correio) */
+.app-lista { display: grid; gap: 0; }
+.app-lista > * { border-bottom: 1px solid var(--linha); padding: 8px 12px; }
+.marcar-prova[aria-pressed="true"] { background: color-mix(in srgb, var(--acento) 15%, var(--superficie)); border-color: var(--acento); }
+mark.realce { background: #ffe58a; color: #14232e; }

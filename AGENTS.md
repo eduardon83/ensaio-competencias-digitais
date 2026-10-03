@@ -38,7 +38,8 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 ### Motor de atividades
 
 - Aleatoriedade: `src/motor/aleatorio.ts` (`escolher`, `misturar`, `amostra`, `baralharOpcoes`, `semente` para testes). **Todas as atividades variam por tentativa**: tarefas/alvos (Painel), cópias com erros geradas (Revisão, `gerarCopia`), árvores de pastas, separadores, histórico e artigos (Arquivo), pessoa fictícia (Cartão), itens (Fecho, Simulador), textos alternativos (Notícia, Paginação, Encontra, Matemática). Conteúdo extra só entra na avaliação, nunca na prática (para não se repetir). Cada gerador tem um teste com várias sementes.
-- Jogos (`/jogos`, `src/jogos/`): mesmo motor e contrato das atividades (`DefinicaoAtividade`, `numero` >= 100), mas fora de `ATIVIDADES` (sem teste por ciclo, códigos nem carimbos). Biblioteca Viva em `src/jogos/leitura/`: textos de autores em domínio público em `textos.ts`, a validar contra edições de referência; o teste exige média de palavras crescente por nível e autores mortos há mais de 70 anos. Propostas em `PROPOSTOS` e `docs/JOGOS.md`.
+- Jogos (`/jogos`, `src/jogos/`): mesmo motor e contrato das atividades (`DefinicaoAtividade`, `numero` >= 100), mas fora de `ATIVIDADES` (sem teste por ciclo, códigos nem carimbos). Biblioteca Viva em `src/jogos/leitura/`: textos de autores em domínio público em `textos.ts`, a validar contra edições de referência; o teste exige média de palavras crescente por nível e autores mortos há mais de 70 anos. Também A Sala Trancada (`sala/`), Quem Apagou o Ficheiro? (`misterio/`), Orçamento da Visita de Estudo (`orcamento/`, com avaliador de fórmulas em `formula.ts`) e Correio da Redação (`correio/`, grelha em `avaliar.ts`); geradores puros testados em `src/jogos/jogos.test.ts`. Ícone e etiquetas de cada jogo em `META_JOGOS`. Propostas em `PROPOSTOS` e `docs/JOGOS.md`.
+- Segurança digital (`/seguranca`, `/seguranca/:tema`, `/seguranca/:tema/teste/:nivel`; `src/seguranca/`, página `src/paginas/Seguranca.tsx`): três temas com informações (`conteudo.ts`, contactos de ajuda em `AJUDA`) e um teste cada (`boas-praticas.tsx`, `fraude.tsx` = O Email Desconfiado, `redes.tsx` = Verdade ou Boato?), registados em `TESTES_SEGURANCA`. Usam o motor com `numero` >= 200 (o resultado liga de volta à segurança). Exemplos só com organizações fictícias (o teste verifica marcas reais). Janela simulada partilhada em `src/componentes/Janela.tsx`.
 - Relatório da atividade: cada atividade devolve `relatorio: LinhaRelatorio[]` em `aoTerminar` (tarefa, resultado certo/parcial/errado/saltado, resposta, certa, feedback). O ecrã de resultado (`src/motor/Relatorio.tsx`) mostra o resumo (pontuação, estrelas, pontos para a estrela seguinte, indicações) e a tabela. O relatório não vai na telemetria nem fica guardado.
 - Estrelas: `LIMIARES_ESTRELAS` = 50 / 75 / 91 (abaixo de 50, tentar novamente; 50–74 uma; 75–90 duas; 91–100 três).
 - Contratos em `src/motor/tipos.ts`: `Nivel` 1–5, `Ciclo` (c1, c2, c3, es → nível 1–4), `Dominio`, `DefinicaoAtividade<C>` (`niveis: Record<Nivel, C>`, `pratica(c)`, `Componente`, `dica(metricas)`), faixas e estrelas.
@@ -49,7 +50,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ## Licença
 
-Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (`src/versao.ts` e `package.json`).
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.2.0 (`src/versao.ts` e `package.json`).
 
 ## Convenções
 
@@ -59,7 +60,9 @@ Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às
 - Conteúdo marcado `[conteúdo Kendir]` é provisório (textos de autor com direitos a tratar).
 - Testes: funções de pontuação e conteúdo com invariantes (ex.: número de diferenças na Revisão) em `*.test.ts`.
 
-## Estado (2026-10-02)
+## Estado (2026-10-03)
+
+- v1.2.0 (2026-10-03): Segurança digital (3 temas com informações e testes de 5 níveis) e quatro jogos novos (A Sala Trancada, Quem Apagou o Ficheiro?, Orçamento da Visita de Estudo, Correio da Redação). A auditoria a11y passou a incluir `/jogos`, `/seguranca/*` e o primeiro ecrã de cada jogo e teste (0 violações); corrigido o contraste das palavras do glossário da Biblioteca Viva no tema escuro.
 
 - v1.1.0 (2026-10-02): as 11 atividades jogáveis a 5 níveis e com variabilidade; carimbos e cartão (`/cartao`, `src/paginas/CartaoCarimbos.tsx`); auditoria `npm run a11y` (Playwright + axe-core, usa o Chrome do sistema; relatório em `docs/AUDITORIA_A11Y.md`, 0 violações); protocolo `docs/PILOTO.md`; `scripts/recalibrar.mjs` (lê o CSV da folha `tentativa`, escreve `docs/RECALIBRACAO.md`). O Simulador conta a dobrar no resultado do teste.
 - Por fazer: piloto em escolas e recalibração com dados reais; revisão manual com leitor de ecrã. A auditoria automática só vê o primeiro ecrã de cada atividade.

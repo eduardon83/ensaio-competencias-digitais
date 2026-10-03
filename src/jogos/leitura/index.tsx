@@ -110,7 +110,7 @@ function TextoComGlossario({ texto, tamanho = "1.1rem" }: { texto: TextoLiterari
   }, [texto, aberta]);
   return (
     <div className="grid gap-3 md:grid-cols-[minmax(0,3fr)_minmax(0,1fr)]">
-      <div className="cartao p-5" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: tamanho, lineHeight: 1.75, whiteSpace: "pre-wrap", background: "#fffdf6", color: "#2b2418" }}>
+      <div className="cartao superficie-clara p-5" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: tamanho, lineHeight: 1.75, whiteSpace: "pre-wrap", background: "#fffdf6", color: "#2b2418" }}>
         {partes}
       </div>
       <aside className="cartao p-4 text-sm grid gap-2 content-start" aria-live="polite" aria-label="Glossário">
@@ -248,7 +248,7 @@ function RondaLacunas({ texto, config, aoConcluir }: { texto: TextoLiterario; co
           ))}
         </div>
       )}
-      <div className="cartao p-5" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: "1.1rem", lineHeight: 2.1, whiteSpace: "pre-wrap", background: "#fffdf6", color: "#2b2418" }}>
+      <div className="cartao superficie-clara p-5" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: "1.1rem", lineHeight: 2.1, whiteSpace: "pre-wrap", background: "#fffdf6", color: "#2b2418" }}>
         {conteudo}
       </div>
       <div className="flex gap-3 items-center flex-wrap">

@@ -36,7 +36,7 @@ export function cicloPorId(id: string): DefCiclo | undefined {
   return CICLOS.find((c) => c.id === id);
 }
 
-export type Dominio = "teclado" | "interface" | "atencao" | "navegacao" | "formularios" | "arrastar" | "tempo" | "atalhos" | "leitura" | "matematica" | "todas";
+export type Dominio = "teclado" | "interface" | "atencao" | "navegacao" | "formularios" | "arrastar" | "tempo" | "atalhos" | "leitura" | "matematica" | "seguranca" | "comunicacao" | "folhas" | "pensamento" | "todas";
 export const NOME_DOMINIO: Record<Dominio, string> = {
   teclado: "Escrita no teclado",
   interface: "Leitura de interfaces",
@@ -48,6 +48,10 @@ export const NOME_DOMINIO: Record<Dominio, string> = {
   atalhos: "Atalhos de teclado",
   leitura: "Leitura em ecrã",
   matematica: "Escrita matemática",
+  seguranca: "Segurança digital",
+  comunicacao: "Comunicação digital",
+  folhas: "Folhas de cálculo",
+  pensamento: "Pensamento crítico",
   todas: "Todas as competências",
 };
 

@@ -76,7 +76,7 @@ export function fraseDitado(t: TextoLiterario, r: Gerador = Math.random, evitar:
 }
 
 export function semAcentos(t: string) {
-  return t.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 /** Compara uma palavra escrita com a certa. Sem `acentos`, aceita a palavra sem acentos. */

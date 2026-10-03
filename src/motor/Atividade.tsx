@@ -230,7 +230,16 @@ function Resultado({
         ) : (
           <>
             <Botao onClick={aoRepetir}>Repetir</Botao>
-            {definicao.numero >= 100 ? (
+            {definicao.numero >= 200 ? (
+              <>
+                <Link to={`/seguranca/${definicao.slug}`} className="botao botao--contorno">
+                  Rever as informações
+                </Link>
+                <Link to="/seguranca" className="botao botao--discreto">
+                  Voltar à segurança
+                </Link>
+              </>
+            ) : definicao.numero >= 100 ? (
               <Link to="/jogos" className="botao botao--contorno">
                 Voltar aos jogos
               </Link>

@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.1.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.2.0 · outubro de 2026
 
 
 O QUE É
@@ -58,8 +58,21 @@ Disponíveis, cada uma com cinco níveis:
 
 JOGOS (Treinar → Jogos)
 
+Cada jogo tem cinco níveis e um relatório no fim. Não contam para o teste nem para os carimbos.
 - Biblioteca Viva: leitura e escrita com textos de autores portugueses em domínio público (Fernando Pessoa e Alberto Caeiro, Luís de Camões, Florbela Espanca, Eça de Queirós, Almeida Garrett). Em cada nível o texto é mais longo e mais complexo. Rondas: ler com glossário, perguntas de compreensão, palavras em falta, pôr os versos por ordem e ditado. Os excertos estão em ortografia atualizada e devem ser validados contra edições de referência antes de uso em escolas.
-- Propostas para os próximos jogos (descritas em docs/JOGOS.md): A Sala Trancada (escape room), Quem Apagou o Ficheiro? (mistério), Verdade ou Boato?, O Email Desconfiado, Orçamento da Visita de Estudo, O Robô da Bancada e Correio da Redação.
+- A Sala Trancada (escape room): uma secretária digital com Ficheiros, Email, Documento, Folha e uma Nota bloqueada. Cada enigma dá um algarismo do código do cofre (contar PDFs, ler datas de criação, anexos, procurar uma palavra, somar uma coluna, escolher a palavra-passe mais forte). Ajudas opcionais e três tentativas.
+- Quem Apagou o Ficheiro? (mistério): cruzar o registo do servidor, as reservas dos computadores, as mensagens e os metadados das fotografias, marcar as provas e acusar o culpado. Nos níveis altos há trocas de lugar, pistas falsas e ficheiros com nomes parecidos.
+- Orçamento da Visita de Estudo: uma folha de cálculo simulada onde se escrevem fórmulas (=B2*C2, =SOMA, custo por aluno, desconto, o que sobra do orçamento, =MÁXIMO e =MÉDIA).
+- Correio da Redação: escrever um email formal com Para, CC e CCO escolhidos numa lista com nomes parecidos, assunto, saudação, conteúdo pedido, despedida, assinatura, o anexo certo e linguagem adequada.
+- Proposta para um próximo jogo (docs/JOGOS.md): O Robô da Bancada.
+
+SEGURANÇA DIGITAL (Treinar → Segurança)
+
+Três temas, cada um com uma página de informações e um teste de cinco níveis com relatório:
+- Boas práticas online: palavras-passe, verificação em dois passos, atualizações, Wi-Fi e computadores partilhados. Teste: situações do dia a dia, criar uma palavra-passe forte (nunca é guardada nem enviada) e deixar uma conta segura.
+- Exemplos de fraude: phishing, SMS falsos, lojas falsas e o que fazer. Teste "O Email Desconfiado": decidir se cada mensagem é legítima ou fraude e indicar os sinais de alerta.
+- Redes sociais: privacidade, pegada digital, ciberbullying, contactos desconhecidos e desinformação. Teste "Verdade ou Boato?": verificar publicações (quem publicou, data, outras fontes, pesquisa da imagem) e decidir o que fazer em situações nas redes.
+Todas as organizações dos exemplos são fictícias. A página indica onde pedir ajuda (Linha Internet Segura, CERT.PT, Polícia Judiciária/112, um adulto de confiança); confirmar os contactos antes da publicação.
 
 Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repetir não seja decorar.
 

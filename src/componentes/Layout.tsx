@@ -58,6 +58,7 @@ export function Layout() {
           </span>
           <NavLink to="/resultados">Os meus resultados</NavLink>
           <NavLink to="/cartao">O meu cartão</NavLink>
+          <NavLink to="/seguranca">Segurança digital</NavLink>
           <NavLink to="/tutorial">Tutorial</NavLink>
           <NavLink to="/privacidade">Privacidade</NavLink>
           <NavLink to="/acessibilidade">Acessibilidade</NavLink>

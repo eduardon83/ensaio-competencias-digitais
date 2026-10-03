@@ -28,47 +28,72 @@ autores têm de ter morrido há mais de 70 anos (o teste também o verifica).
 Possíveis acrescentos: Júlio Dinis, Camilo Castelo Branco, Antero de Quental, Cesário Verde, António Nobre,
 Gil Vicente, contos tradicionais recolhidos por Adolfo Coelho e Teófilo Braga (para o 1.º ciclo).
 
-## Propostas
+## Feito: A Sala Trancada (escape room)
 
-### 1. A Sala Trancada (escape room)
-**Competências:** navegação, atenção ao detalhe, segurança digital, leitura em ecrã.
-O jogador está fechado na redação (ou no laboratório). Para abrir a porta precisa de um código de 4 a 6 caracteres,
-obtido em 4 a 6 enigmas encadeados numa secretária digital simulada:
-- a data de criação de um ficheiro dá o primeiro algarismo (propriedades do ficheiro);
-- um email com um anexo mal nomeado esconde a segunda pista (ler cabeçalhos, extensões);
-- um documento longo tem uma palavra a negrito no meio (Ctrl+F);
-- uma folha de cálculo tem uma soma que dá o terceiro algarismo;
-- a pista final está num separador que só abre com a palavra-passe certa (escolher a mais segura de três).
-Níveis: mais enigmas, menos pistas, relógio. Variabilidade: enigmas e valores gerados em cada tentativa.
-Relatório: tempo por enigma, pistas pedidas, competência de cada enigma.
+Código: `src/jogos/sala/` (enigmas em `gerar.ts`). Uma secretária digital com separadores Notas, Ficheiros, Email,
+Documento, Folha, Nota bloqueada e Cofre. Cada enigma dá um algarismo (1 a 9):
 
-### 2. Quem Apagou o Ficheiro? (mistério)
-**Competências:** literacia da informação, pensamento crítico, leitura em ecrã, verificação.
-A reportagem principal desapareceu do servidor. Há 4 suspeitos. O jogador investiga emails, mensagens de chat,
-registos de acesso (com horas), histórico de versões e fotografias com metadados. Cada pista confirma ou elimina um
-suspeito; no fim, acusa alguém e escolhe as três provas que o sustentam. A pontuação valoriza a justificação
-(provas certas) e não só o culpado. Variabilidade: culpado, álibis e horas sorteados; as pistas são geradas para
-serem coerentes.
+- Ficheiros: quantos PDF há na pasta Trabalhos, ou o dia de criação de `chave.txt`.
+- Email: quantos anexos tem o email da Direção, ou o algarismo no email com a etiqueta Importante (há spam parecido).
+- Documento: procurar uma palavra (caixa de procura ou Ctrl+F); o algarismo está escrito por extenso.
+- Folha: soma de uma coluna ou contagem de "Sim".
+- Nota bloqueada: escolher a palavra-passe mais forte.
 
-### 3. Verdade ou Boato? (verificação de factos)
-Classificar publicações como verdadeiras, falsas ou enganadoras, depois de verificar endereço, data, fonte,
-imagem original (pesquisa inversa simulada) e outras fontes. Relatório com a pista decisiva de cada caso.
+| Nível | Enigmas | Nota | Armadilhas (extensões duplas, palavra repetida) | O cofre diz quantos estão certos |
+|---|---|---|---|---|
+| 1 | 3 | não | não | sim |
+| 2 | 3 | sim | não | sim |
+| 3 | 4 | sim | não | sim |
+| 4 | 4 | sim | sim | não |
+| 5 | 5 | sim | sim | não |
 
-### 4. O Email Desconfiado (segurança)
-Caixa de correio com mensagens legítimas e tentativas de phishing: remetentes parecidos, ligações cujo destino
-real difere do texto, pedidos urgentes de dados. Segunda parte: criar uma palavra-passe forte e ativar a
-autenticação em dois passos num ecrã simulado.
+Pontuação: cofre aberto = 100 − 10 por ajuda − 10 por tentativa falhada − 5 por erro na nota (mínimo 50); fechado
+(3 tentativas ou desistir) = até 45, proporcional aos algarismos certos, menos 5 por ajuda.
 
-### 5. Orçamento da Visita de Estudo (folhas de cálculo)
-Folha simulada: somas, médias, percentagens, ordenar e filtrar, gráfico de barras. Ligação à atividade de
-escrita matemática.
+## Feito: Quem Apagou o Ficheiro? (mistério)
 
-### 6. O Robô da Bancada (pensamento computacional)
+Código: `src/jogos/misterio/` (`gerar.ts`). O culpado é quem estava no computador de onde o ficheiro foi apagado, à
+hora do registo. Fontes: registo do servidor, reservas, mensagens e fotografias (metadados). Cada pista é essencial,
+de apoio ou irrelevante. Pontuação: 60 % culpado + 40 % × (essenciais marcadas − irrelevantes marcadas) / essenciais.
+
+| Nível | Suspeitos | Motivo falso | Troca de computador | Reservas de 2 horas | Fotografias | Ficheiro com nome parecido |
+|---|---|---|---|---|---|---|
+| 1 | 3 | não | nunca | não | não | não |
+| 2 | 4 | sim | nunca | não | não | não |
+| 3 | 4 | sim | sempre | não | não | não |
+| 4 | 4 | sim | às vezes | sim | sim | não |
+| 5 | 5 | sim | sempre | sim | sim | sim |
+
+## Feito: Orçamento da Visita de Estudo (folhas de cálculo)
+
+Código: `src/jogos/orcamento/` (avaliador em `formula.ts`, folha e correção em `gerar.ts`). Referências, intervalos,
+`+ - * /`, parênteses, `%`, `SOMA/SUM`, `MÉDIA/AVERAGE`, `MÁXIMO/MAX`, `MÍNIMO/MIN`; argumentos com `;` ou `,`; erros
+`#VALOR!`, `#DIV/0!`, `#NOME?`, `#CIRC!` com explicação. A correção avalia a fórmula numa folha com as soluções nas
+outras células (um erro não arrasta os seguintes). Valor certo escrito à mão conta metade.
+
+| Nível | Despesas | Tarefas |
+|---|---|---|
+| 1 | 3 (D2 já feita) | totais, soma (com ajudas) |
+| 2 | 3 (D2 já feita) | + custo por aluno |
+| 3 | 3 (D2 já feita) | + total com desconto (sem ajudas) |
+| 4 | 4 | todos os totais + o que sobra do orçamento |
+| 5 | 4 | + despesa mais cara (MÁXIMO) e média (MÉDIA) |
+
+## Feito: Correio da Redação (comunicação digital)
+
+Código: `src/jogos/correio/` (missões e grelha em `avaliar.ts`). Cinco missões (entrevista, reserva de material,
+entrega de relatório, justificação de falta, convite), com endereços fictícios e contactos parecidos (nome, domínio).
+Critérios: Para, CC, CCO, assunto (palavras-chave, até 80 caracteres), saudação formal, conteúdo pedido, despedida,
+assinatura, anexo certo (há rascunhos, versões antigas e `.exe`) e linguagem adequada (sem abreviaturas, calão,
+emojis, `!!`). Os critérios crescem com o nível (nível 1: Para, assunto, saudação, 2 pontos de conteúdo, despedida,
+assinatura; nível 5: todos, com 4 pontos de conteúdo e 5 contactos parecidos).
+
+## Passaram para Segurança digital
+
+O Email Desconfiado e Verdade ou Boato? são os testes dos temas "Exemplos de fraude" e "Redes sociais" em
+`/seguranca` (código em `src/seguranca/`).
+
+## Proposta
+
+### O Robô da Bancada (pensamento computacional)
 Programar por blocos um robô numa grelha (sequência, repetição, condição) com o menor número de instruções.
-
-### 7. Correio da Redação (comunicação digital)
-Escrever e responder a emails formais: assunto, saudação, anexos, CC e CCO, tom e revisão.
-
-**Ordem sugerida de desenvolvimento:** A Sala Trancada e Quem Apagou o Ficheiro? reutilizam componentes que já
-existem (explorador de ficheiros do Arquivo, formulários do Cartão, separadores e histórico); Verdade ou Boato? e
-O Email Desconfiado cobrem a área de segurança e informação do DigComp, hoje menos treinada no ECD.

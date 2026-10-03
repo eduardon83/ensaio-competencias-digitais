@@ -13,7 +13,11 @@ const PAGINAS = [
   ["/professor", "Professor"], ["/tutorial", "Tutorial"], ["/observatorio", "Observatório"], ["/cartao", "Cartão"],
   ["/resultados", "Resultados"], ["/definicoes", "Definições"], ["/sobre", "Sobre"], ["/acessibilidade", "Acessibilidade"],
   ["/privacidade", "Privacidade"], ["/licenca", "Licença"], ["/admin", "Administração"],
+  ["/jogos", "Jogos"], ["/seguranca", "Segurança digital"], ["/seguranca/boas-praticas", "Segurança: boas práticas"],
+  ["/seguranca/fraude", "Segurança: exemplos de fraude"], ["/seguranca/redes-sociais", "Segurança: redes sociais"],
 ];
+// Jogos e testes de segurança (ecrã de jogo, depois de saltar a prática).
+const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3"];
 const ATIVIDADES = ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "simulador", "matematica"];
 const VARIANTES = [["mosaico", "claro"], ["mosaico", "escuro"], ["original", "claro"], ["original", "escuro"]];
 
@@ -34,11 +38,11 @@ for (const [formato, tema] of VARIANTES) {
     localStorage.setItem("ecd.preferencias.v1", JSON.stringify({ formato: f, tema: t, contexto: "jornal", tamanho: "normal", extensaoTempo: 1, nome: "", telemetria: false }));
     localStorage.setItem("ecd.tutorial.visto.v1", "1");
   }, [formato, tema]);
-  const alvos = [...PAGINAS, ...ATIVIDADES.map((a) => [`/atividades/${a}/3`, `Atividade: ${a}`]), ["/atividades/revisao/2#resultado", "Resultado com relatório (Revisão)"]];
+  const alvos = [...PAGINAS, ...ATIVIDADES.map((a) => [`/atividades/${a}/3`, `Atividade: ${a}`]), ...JOGOS.map((j) => [j, `Jogo/teste: ${j.split("/")[2]}`]), ["/atividades/revisao/2#resultado", "Resultado com relatório (Revisão)"]];
   for (const [rota, nome] of alvos) {
     const page = await ctx.newPage();
     await page.goto(BASE + rota, { waitUntil: "networkidle" });
-    if (rota.startsWith("/atividades/")) {
+    if (rota.startsWith("/atividades/") || JOGOS.includes(rota)) {
       await page.getByRole("button", { name: "Saltar a prática" }).click().catch(() => {});
       await page.waitForTimeout(300);
       const comecar = page.getByRole("button", { name: "Começar" });

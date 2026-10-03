@@ -1,6 +1,6 @@
 # Auditoria automática de acessibilidade
 
-Gerado por `npm run a11y` em 2026-10-02, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
+Gerado por `npm run a11y` em 2026-10-03, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
 Páginas e atividades (nível 3, depois de saltar a prática) nos aspetos Mosaico e Original, em tema claro e escuro.
 
 **Total de ocorrências:** 0 · **Regras violadas:** 0
@@ -33,6 +33,11 @@ Nenhuma.
 | Privacidade | mosaico | claro | ✓ |
 | Licença | mosaico | claro | ✓ |
 | Administração | mosaico | claro | ✓ |
+| Jogos | mosaico | claro | ✓ |
+| Segurança digital | mosaico | claro | ✓ |
+| Segurança: boas práticas | mosaico | claro | ✓ |
+| Segurança: exemplos de fraude | mosaico | claro | ✓ |
+| Segurança: redes sociais | mosaico | claro | ✓ |
 | Atividade: noticia | mosaico | claro | ✓ |
 | Atividade: painel | mosaico | claro | ✓ |
 | Atividade: revisao | mosaico | claro | ✓ |
@@ -44,6 +49,14 @@ Nenhuma.
 | Atividade: encontra | mosaico | claro | ✓ |
 | Atividade: simulador | mosaico | claro | ✓ |
 | Atividade: matematica | mosaico | claro | ✓ |
+| Jogo/teste: leitura | mosaico | claro | ✓ |
+| Jogo/teste: sala-trancada | mosaico | claro | ✓ |
+| Jogo/teste: misterio | mosaico | claro | ✓ |
+| Jogo/teste: orcamento | mosaico | claro | ✓ |
+| Jogo/teste: correio | mosaico | claro | ✓ |
+| Jogo/teste: boas-praticas | mosaico | claro | ✓ |
+| Jogo/teste: fraude | mosaico | claro | ✓ |
+| Jogo/teste: redes-sociais | mosaico | claro | ✓ |
 | Resultado com relatório (Revisão) | mosaico | claro | ✓ |
 | Início | mosaico | escuro | ✓ |
 | Treinar | mosaico | escuro | ✓ |
@@ -61,6 +74,11 @@ Nenhuma.
 | Privacidade | mosaico | escuro | ✓ |
 | Licença | mosaico | escuro | ✓ |
 | Administração | mosaico | escuro | ✓ |
+| Jogos | mosaico | escuro | ✓ |
+| Segurança digital | mosaico | escuro | ✓ |
+| Segurança: boas práticas | mosaico | escuro | ✓ |
+| Segurança: exemplos de fraude | mosaico | escuro | ✓ |
+| Segurança: redes sociais | mosaico | escuro | ✓ |
 | Atividade: noticia | mosaico | escuro | ✓ |
 | Atividade: painel | mosaico | escuro | ✓ |
 | Atividade: revisao | mosaico | escuro | ✓ |
@@ -72,6 +90,14 @@ Nenhuma.
 | Atividade: encontra | mosaico | escuro | ✓ |
 | Atividade: simulador | mosaico | escuro | ✓ |
 | Atividade: matematica | mosaico | escuro | ✓ |
+| Jogo/teste: leitura | mosaico | escuro | ✓ |
+| Jogo/teste: sala-trancada | mosaico | escuro | ✓ |
+| Jogo/teste: misterio | mosaico | escuro | ✓ |
+| Jogo/teste: orcamento | mosaico | escuro | ✓ |
+| Jogo/teste: correio | mosaico | escuro | ✓ |
+| Jogo/teste: boas-praticas | mosaico | escuro | ✓ |
+| Jogo/teste: fraude | mosaico | escuro | ✓ |
+| Jogo/teste: redes-sociais | mosaico | escuro | ✓ |
 | Resultado com relatório (Revisão) | mosaico | escuro | ✓ |
 | Início | original | claro | ✓ |
 | Treinar | original | claro | ✓ |
@@ -89,6 +115,11 @@ Nenhuma.
 | Privacidade | original | claro | ✓ |
 | Licença | original | claro | ✓ |
 | Administração | original | claro | ✓ |
+| Jogos | original | claro | ✓ |
+| Segurança digital | original | claro | ✓ |
+| Segurança: boas práticas | original | claro | ✓ |
+| Segurança: exemplos de fraude | original | claro | ✓ |
+| Segurança: redes sociais | original | claro | ✓ |
 | Atividade: noticia | original | claro | ✓ |
 | Atividade: painel | original | claro | ✓ |
 | Atividade: revisao | original | claro | ✓ |
@@ -100,6 +131,14 @@ Nenhuma.
 | Atividade: encontra | original | claro | ✓ |
 | Atividade: simulador | original | claro | ✓ |
 | Atividade: matematica | original | claro | ✓ |
+| Jogo/teste: leitura | original | claro | ✓ |
+| Jogo/teste: sala-trancada | original | claro | ✓ |
+| Jogo/teste: misterio | original | claro | ✓ |
+| Jogo/teste: orcamento | original | claro | ✓ |
+| Jogo/teste: correio | original | claro | ✓ |
+| Jogo/teste: boas-praticas | original | claro | ✓ |
+| Jogo/teste: fraude | original | claro | ✓ |
+| Jogo/teste: redes-sociais | original | claro | ✓ |
 | Resultado com relatório (Revisão) | original | claro | ✓ |
 | Início | original | escuro | ✓ |
 | Treinar | original | escuro | ✓ |
@@ -117,6 +156,11 @@ Nenhuma.
 | Privacidade | original | escuro | ✓ |
 | Licença | original | escuro | ✓ |
 | Administração | original | escuro | ✓ |
+| Jogos | original | escuro | ✓ |
+| Segurança digital | original | escuro | ✓ |
+| Segurança: boas práticas | original | escuro | ✓ |
+| Segurança: exemplos de fraude | original | escuro | ✓ |
+| Segurança: redes sociais | original | escuro | ✓ |
 | Atividade: noticia | original | escuro | ✓ |
 | Atividade: painel | original | escuro | ✓ |
 | Atividade: revisao | original | escuro | ✓ |
@@ -128,4 +172,12 @@ Nenhuma.
 | Atividade: encontra | original | escuro | ✓ |
 | Atividade: simulador | original | escuro | ✓ |
 | Atividade: matematica | original | escuro | ✓ |
+| Jogo/teste: leitura | original | escuro | ✓ |
+| Jogo/teste: sala-trancada | original | escuro | ✓ |
+| Jogo/teste: misterio | original | escuro | ✓ |
+| Jogo/teste: orcamento | original | escuro | ✓ |
+| Jogo/teste: correio | original | escuro | ✓ |
+| Jogo/teste: boas-praticas | original | escuro | ✓ |
+| Jogo/teste: fraude | original | escuro | ✓ |
+| Jogo/teste: redes-sociais | original | escuro | ✓ |
 | Resultado com relatório (Revisão) | original | escuro | ✓ |
