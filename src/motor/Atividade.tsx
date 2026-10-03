@@ -1,5 +1,7 @@
 // ─── Motor: corre uma atividade em quatro etapas (intro → prática → avaliação → resultado) ──
 import { useMemo, useState } from "react";
+import { Caminho } from "../componentes/Caminho";
+import { TEMAS } from "../seguranca/conteudo";
 import { Link } from "react-router";
 import { contexto as defContexto } from "../contextos";
 import { repositorioLocal, type Origem, type Tentativa } from "../dados/repositorio";
@@ -68,9 +70,14 @@ export function Atividade({
 
   const Componente = definicao.Componente;
   const titulo = definicao.titulo[prefs.contexto];
+  // Caminho de regresso (só no treino livre; no teste e na prova do professor há botões próprios).
+  const temaSeg = TEMAS.find((t) => t.teste.slug === definicao.slug);
+  const caminho: [string, string][] | null =
+    origem !== "treino" || aoConcluir ? null : definicao.numero >= 200 && temaSeg ? [["/treinar", "Treinar"], ["/seguranca", "Segurança digital"], [`/seguranca/${temaSeg.id}`, temaSeg.titulo]] : definicao.numero >= 100 ? [["/treinar", "Treinar"], ["/jogos", "Jogos"]] : [["/treinar", "Treinar"], ["/treino", "Atividades"]];
 
   return (
     <div className="grid gap-5">
+      {caminho && <Caminho itens={caminho} atual={titulo} />}
       <header className="flex flex-wrap items-baseline gap-3">
         <h1 className="text-3xl">{titulo}</h1>
         <Etiqueta>{NOME_DOMINIO[definicao.dominio]}</Etiqueta>
@@ -121,6 +128,11 @@ export function Atividade({
             <Botao variante="contorno" onClick={() => setEtapa("avaliacao")}>
               Saltar a prática
             </Botao>
+            {typeof window !== "undefined" && "speechSynthesis" in window && (
+              <Botao variante="discreto" onClick={() => lerEmVozAlta(`${ctx.briefs[definicao.slug] ?? definicao.descricao} ${definicao.descricao}`)}>
+                <span aria-hidden="true">🔊</span> Ler em voz alta
+              </Botao>
+            )}
           </div>
         </section>
       )}
@@ -265,4 +277,16 @@ function Resultado({
       </div>
     </section>
   );
+}
+
+/** Lê o texto com a síntese de voz do navegador, numa voz de português de Portugal quando existir. */
+function lerEmVozAlta(texto: string) {
+  const voz = window.speechSynthesis;
+  voz.cancel();
+  const fala = new SpeechSynthesisUtterance(texto);
+  fala.lang = "pt-PT";
+  fala.rate = 0.95;
+  const pt = voz.getVoices().find((v) => v.lang === "pt-PT") ?? voz.getVoices().find((v) => v.lang.startsWith("pt"));
+  if (pt) fala.voice = pt;
+  voz.speak(fala);
 }

@@ -1,6 +1,7 @@
 // ─── Catálogo de atividades (por ciclo) e Treino de competências (5 níveis por atividade) ──
 import { useState } from "react";
 import { Link } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { ATIVIDADES } from "../atividades";
 import { repositorioLocal } from "../dados/repositorio";
 import { CICLOS, NIVEIS, NOME_DOMINIO, NOME_NIVEL, estrelasDe, type Ciclo, type Nivel } from "../motor/tipos";
@@ -14,10 +15,11 @@ export function Catalogo() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[["/treinar", "Treinar"]]} atual="Atividades" />
         <h1 className="text-4xl">Atividades</h1>
-        <p className="m-0">Dez atividades, mais uma de escrita matemática. Escolhe o ciclo para ver o nível em que aparecem no teste. Para os cinco níveis de dificuldade, vai a Treino.</p>
+        <p className="m-0">As atividades do ECD. Escolhe a prova para ver as atividades que entram na preparação e em que nível. Para os cinco níveis de dificuldade, vai a Treino.</p>
       </header>
-      <div role="tablist" aria-label="Ciclo" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
+      <div role="tablist" aria-label="Prova" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
         {CICLOS.map((c) => (
           <button key={c.id} type="button" role="tab" className="separador" aria-selected={ciclo === c.id} onClick={() => setCiclo(c.id)}>
             {c.nome}
@@ -38,7 +40,8 @@ export function Catalogo() {
               </div>
               <div className="flex gap-2 flex-wrap">
                 <Etiqueta>{NOME_DOMINIO[a.dominio]}</Etiqueta>
-                {noTeste && <Etiqueta>No teste {def.nome}</Etiqueta>}
+                {a.slug === "maqueta" && <span className="etiqueta" style={{ background: "var(--marca)", color: "var(--marca-tinta)" }}>Novo · 3D</span>}
+                {noTeste && <Etiqueta>Na preparação {def.nome}</Etiqueta>}
               </div>
               <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
                 {a.descricao}
@@ -71,6 +74,7 @@ export function Treino() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[["/treinar", "Treinar"]]} atual="Atividades" />
         <h1 className="text-4xl">Treino de competências</h1>
         <p className="m-0">Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: abaixo de 50 pontos convém tentar novamente; de 50 a 74, 1 estrela; de 75 a 90, 2 estrelas; de 91 a 100, 3 estrelas.</p>
       </header>
@@ -89,7 +93,11 @@ export function Treino() {
           return (
             <Cartao key={a.slug} className="grid gap-2 content-start">
               <div className="flex gap-2 items-baseline">
+                <span className="tabular-nums text-sm" style={{ color: "var(--suave)", fontFamily: "var(--fonte-mono)" }}>
+                  {String(a.numero).padStart(2, "0")}
+                </span>
                 <h2 className="text-xl">{a.titulo[prefs.contexto]}</h2>
+                {a.slug === "maqueta" && <span className="etiqueta" style={{ background: "var(--marca)", color: "var(--marca-tinta)" }}>Novo · 3D</span>}
                 <span className="ml-auto text-lg" role="img" aria-label={`${estrelas} de 3 estrelas`}>
                   {"★".repeat(estrelas)}
                   <span aria-hidden="true" style={{ color: "var(--suave)" }}>{"☆".repeat(3 - estrelas)}</span>

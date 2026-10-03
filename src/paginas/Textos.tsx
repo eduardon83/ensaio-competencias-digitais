@@ -1,5 +1,6 @@
 // ─── Páginas de texto: guia de acessibilidade, sobre (com espaço para vídeo), privacidade ──
 import { Link } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { AUTORIA, DATA_VERSAO, REPOSITORIO, VERSAO } from "../versao";
 
 /** URL do vídeo de apresentação (YouTube/Vimeo "embed" ou ficheiro .mp4). Vazio = espaço reservado. */
@@ -35,6 +36,7 @@ export function Acessibilidade() {
   return (
     <div className="grid gap-8 max-w-4xl">
       <header className="grid gap-2">
+        <Caminho itens={[]} atual="Acessibilidade" />
         <h1 className="text-4xl">Guia de acessibilidade</h1>
         <p className="m-0">Para quem desenvolve, para escolas e para quem encomenda provas digitais. O enquadramento legal: o European Accessibility Act aplica-se desde 28 de junho de 2025; a EN 301 549 v4.1.1 (setembro de 2026) adota a WCAG 2.2 AA; os organismos públicos em Portugal seguem o Decreto-Lei 83/2018 e publicam uma declaração de acessibilidade. Este jogo compromete-se a cumprir todos os pontos abaixo.</p>
       </header>
@@ -132,6 +134,7 @@ export function Sobre() {
   ];
   return (
     <div className="grid gap-6 max-w-3xl">
+      <Caminho itens={[]} atual="Sobre" />
       <h1 className="text-4xl">Sobre</h1>
       <Video titulo="Apresentação do Ensaio às Competências Digitais" />
       <p className="m-0">
@@ -150,7 +153,7 @@ export function Sobre() {
       <section className="grid gap-2">
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
-          <li>Versão atual: motor de atividades, as 11 atividades jogáveis a 5 níveis, com tarefas, textos e alvos sorteados em cada tentativa, teste por ciclo, treino, carimbos e cartão de imprensa, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Versão atual: motor de atividades, as 12 atividades jogáveis a 5 níveis (incluindo A Maqueta, de manipulação 3D), com tarefas, textos e alvos sorteados em cada tentativa, preparação para as provas ModA, provas finais, exames nacionais e ensino superior, treino, carimbos e cartão de imprensa, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
           <li>Jogos (Biblioteca Viva, A Sala Trancada, Quem Apagou o Ficheiro?, Orçamento da Visita de Estudo, Correio da Redação, O Robô da Bancada) e Segurança digital (boas práticas online, exemplos de fraude, redes sociais), com cinco níveis e relatório. O professor pode incluí-los nas provas.</li>
           <li>Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados; auditoria automática de acessibilidade (WCAG 2.2 AA); protocolo de piloto e script de recalibração dos limiares.</li>
           <li>Backlog: piloto em escolas, recalibração dos limiares com os dados do piloto, revisão manual de acessibilidade com leitor de ecrã.</li>
@@ -178,6 +181,7 @@ export function Sobre() {
 export function Privacidade() {
   return (
     <div className="grid gap-5 max-w-3xl">
+      <Caminho itens={[]} atual="Privacidade" />
       <h1 className="text-4xl">Privacidade</h1>
       <p className="m-0">Escrito em linguagem simples. Se algo não ficar claro, pergunta.</p>
       <section className="grid gap-2">
@@ -204,6 +208,7 @@ export function Privacidade() {
 export function Licenca() {
   return (
     <div className="grid gap-5 max-w-3xl">
+      <Caminho itens={[]} atual="Licença" />
       <h1 className="text-4xl">Licença</h1>
       <p className="m-0">
         O Ensaio às Competências Digitais é uma ferramenta gratuita desenvolvida por {AUTORIA} para uso pelo Estado Português. Qualquer pessoa, escola ou entidade pode usá-la, copiá-la, adaptá-la e publicá-la de forma gratuita, desde que mantenha a atribuição:

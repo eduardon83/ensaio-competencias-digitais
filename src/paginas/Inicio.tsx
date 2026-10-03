@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { obterAgregados, telemetriaConfigurada } from "../dados/telemetria";
 import { FAIXAS, faixaDe } from "../motor/tipos";
 import { AvisoTutorial } from "./Tutorial";
 
 const BLOCOS = [
-  { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade, joga, aprende a navegar em segurança ou entra com o código do teu professor.", icone: "▶" },
+  { para: "/treinar", titulo: "Treinar", texto: "Prepara-te para as provas e exames, treina uma atividade, joga, aprende a navegar em segurança ou entra com o código do teu professor.", icone: "▶" },
   { para: "/professor", titulo: "Professor", texto: "Crie uma prova para as suas turmas, para avaliar as suas competências digitais.", icone: "✎" },
   { para: "/tutorial", titulo: "Tutorial", texto: "O funcionamento do Ensaio às Competências Digitais encontra-se explicado num breve tutorial. Tempo de leitura: 2 minutos.", icone: "?" },
   { para: "/observatorio", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas.", icone: "◔" },
@@ -119,7 +120,7 @@ export function Inicio() {
 
 export function Treinar() {
   const opcoes = [
-    { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. No fim, tens acesso ao teu perfil de competências.", icone: "☰" },
+    { para: "/teste", titulo: "Provas e exames", texto: "Prepara-te para as provas ModA, as provas finais do 9.º ano e os exames nacionais, que se fazem no computador. No fim, tens acesso ao teu perfil de competências.", icone: "☰" },
     { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior.", icone: "◎" },
     { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova.", icone: "#" },
     { para: "/jogos", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo, email e um robô para programar.", icone: "🎲" },
@@ -127,6 +128,7 @@ export function Treinar() {
   ];
   return (
     <div className="grid gap-8">
+      <Caminho atual="Treinar" />
       <header className="grid gap-2 text-center justify-items-center">
         <h1 className="text-4xl">Treinar</h1>
         <p className="m-0 max-w-2xl">Escolhe como queres treinar. Em todas as opções, antes de começar escolhes o cenário.</p>

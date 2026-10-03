@@ -1,6 +1,7 @@
 // ─── Segurança digital: três temas, cada um com informações e um teste de 5 níveis ──
 import { useState } from "react";
 import { Link, useParams } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { AJUDA, TEMAS, TESTES_SEGURANCA, type TemaSeguranca } from "../seguranca";
 import { Atividade } from "../motor/Atividade";
 import { NIVEIS, NOME_NIVEL, estrelasDe, type Nivel } from "../motor/tipos";
@@ -38,8 +39,9 @@ export function Seguranca() {
   return (
     <div className="grid gap-8">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[["/treinar", "Treinar"]]} atual="Segurança digital" />
         <h1 className="text-4xl">Segurança digital</h1>
-        <p className="m-0">Três temas para estares mais seguro na internet. Em cada um, lê as informações e depois faz o teste, com cinco níveis e um relatório no fim. Os testes de segurança não contam para o teste por ciclo nem para os carimbos.</p>
+        <p className="m-0">Três temas para estares mais seguro na internet. Em cada um, lê as informações e depois faz o teste, com cinco níveis e um relatório no fim. Os testes de segurança não contam para a preparação de provas nem para os carimbos.</p>
       </header>
 
       <div role="tablist" aria-label="Nível de dificuldade dos testes" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
@@ -98,9 +100,7 @@ export function SegurancaTema() {
     );
   return (
     <div className="grid gap-6 max-w-3xl">
-      <nav aria-label="Caminho" className="text-sm">
-        <Link to="/seguranca">Segurança digital</Link> › {t.titulo}
-      </nav>
+      <Caminho itens={[["/treinar", "Treinar"], ["/seguranca", "Segurança digital"]]} atual={t.titulo} />
       <header className="grid gap-2">
         <h1 className="text-4xl">
           <span aria-hidden="true">{t.icone}</span> {t.titulo}

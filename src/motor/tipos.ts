@@ -5,7 +5,7 @@
 import type { ComponentType } from "react";
 import type { Contexto } from "../preferencias/preferencias";
 
-/** Níveis de dificuldade do treino (1 a 5). O teste por ciclo mapeia para um destes. */
+/** Níveis de dificuldade do treino (1 a 5). Cada percurso de preparação (provas e exames) usa um destes. */
 export type Nivel = 1 | 2 | 3 | 4 | 5;
 export const NIVEIS: Nivel[] = [1, 2, 3, 4, 5];
 export const NOME_NIVEL: Record<Nivel, string> = {
@@ -17,26 +17,31 @@ export const NOME_NIVEL: Record<Nivel, string> = {
 };
 
 /** Ciclos de ensino usados no Teste de competências. */
-export type Ciclo = "c1" | "c2" | "c3" | "es";
+// Percursos de preparação, ligados às provas e exames feitos no computador. Os ids mantêm-se ("c1"…) para não
+// perder o progresso já guardado nos navegadores. [conteúdo Kendir] Confirmar anos e designações em cada ano letivo.
+export type Ciclo = "c1" | "c2" | "c3" | "sec" | "es";
 export interface DefCiclo {
   id: Ciclo;
-  nome: string;
+  nome: string; // curto: "ModA 4.º ano"
+  titulo: string; // "as provas ModA do 4.º ano"
+  prova: string; // o que é a prova real (uma frase)
   anos: string;
   nivel: Nivel;
   duracao: string;
   atividades: string[]; // slugs, pela ordem do percurso
 }
 export const CICLOS: DefCiclo[] = [
-  { id: "c1", nome: "1.º ciclo", anos: "1.º a 4.º ano", nivel: 1, duracao: "≈ 20 min", atividades: ["painel", "paginacao", "noticia", "revisao", "encontra", "simulador"] },
-  { id: "c2", nome: "2.º ciclo", anos: "5.º e 6.º ano", nivel: 2, duracao: "≈ 30 min", atividades: ["painel", "noticia", "cartao", "paginacao", "teclas", "encontra", "matematica", "simulador"] },
-  { id: "c3", nome: "3.º ciclo", anos: "7.º a 9.º ano", nivel: 3, duracao: "≈ 45 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "simulador"] },
-  { id: "es", nome: "Ensino Superior", anos: "Licenciatura, mestrado", nivel: 4, duracao: "≈ 50 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "simulador"] },
+  { id: "c1", nome: "ModA 4.º ano", titulo: "as provas ModA do 4.º ano", prova: "As provas ModA (Monitorização das Aprendizagens) do 4.º ano fazem-se no computador.", anos: "1.º ciclo", nivel: 1, duracao: "≈ 20 min", atividades: ["painel", "paginacao", "noticia", "revisao", "encontra", "simulador"] },
+  { id: "c2", nome: "ModA 6.º ano", titulo: "as provas ModA do 6.º ano", prova: "As provas ModA do 6.º ano fazem-se no computador, com textos, gráficos e respostas escritas.", anos: "2.º ciclo", nivel: 2, duracao: "≈ 30 min", atividades: ["painel", "noticia", "cartao", "paginacao", "teclas", "encontra", "matematica", "simulador"] },
+  { id: "c3", nome: "Provas Finais 9.º ano", titulo: "as provas finais do 9.º ano", prova: "As provas finais do 9.º ano (Português e Matemática) fazem-se em formato digital.", anos: "3.º ciclo", nivel: 3, duracao: "≈ 50 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "maqueta", "simulador"] },
+  { id: "sec", nome: "Exames Nacionais", titulo: "os exames nacionais do secundário", prova: "Os exames nacionais do 11.º e 12.º ano estão a passar para o formato digital.", anos: "Ensino secundário", nivel: 4, duracao: "≈ 55 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "maqueta", "simulador"] },
+  { id: "es", nome: "Ensino Superior", titulo: "as provas e exames digitais do ensino superior", prova: "Testes, provas de acesso e exames em plataformas digitais das instituições.", anos: "Licenciatura, mestrado", nivel: 5, duracao: "≈ 60 min", atividades: ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "matematica", "maqueta", "simulador"] },
 ];
 export function cicloPorId(id: string): DefCiclo | undefined {
   return CICLOS.find((c) => c.id === id);
 }
 
-export type Dominio = "teclado" | "interface" | "atencao" | "navegacao" | "formularios" | "arrastar" | "tempo" | "atalhos" | "leitura" | "matematica" | "seguranca" | "comunicacao" | "folhas" | "pensamento" | "programacao" | "todas";
+export type Dominio = "teclado" | "interface" | "atencao" | "navegacao" | "formularios" | "arrastar" | "tempo" | "atalhos" | "leitura" | "matematica" | "seguranca" | "comunicacao" | "folhas" | "pensamento" | "programacao" | "tresd" | "todas";
 export const NOME_DOMINIO: Record<Dominio, string> = {
   teclado: "Escrita no teclado",
   interface: "Leitura de interfaces",
@@ -53,6 +58,7 @@ export const NOME_DOMINIO: Record<Dominio, string> = {
   folhas: "Folhas de cálculo",
   pensamento: "Pensamento crítico",
   programacao: "Pensamento computacional",
+  tresd: "Manipulação 3D",
   todas: "Todas as competências",
 };
 

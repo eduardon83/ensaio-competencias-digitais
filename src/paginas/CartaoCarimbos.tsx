@@ -1,6 +1,7 @@
 // ─── Cartão de imprensa / cartão de acesso com carimbos (um por competência, a partir de 85 pontos) ──
 // Calculado a partir dos resultados guardados neste navegador; não há contas nem registos.
 import { Link } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { ATIVIDADES } from "../atividades";
 import { contexto as defContexto } from "../contextos";
 import { repositorioLocal } from "../dados/repositorio";
@@ -9,7 +10,7 @@ import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
 
 const ICONE: Record<Dominio, string> = {
-  teclado: "⌨", interface: "☰", atencao: "◉", navegacao: "🗂", formularios: "✎", arrastar: "⇅", tempo: "⏱", atalhos: "⌘", leitura: "🔍", matematica: "∑", seguranca: "🛡", comunicacao: "✉", folhas: "▦", pensamento: "🕵", programacao: "🤖", todas: "★",
+  teclado: "⌨", interface: "☰", atencao: "◉", navegacao: "🗂", formularios: "✎", arrastar: "⇅", tempo: "⏱", atalhos: "⌘", leitura: "🔍", matematica: "∑", seguranca: "🛡", comunicacao: "✉", folhas: "▦", pensamento: "🕵", programacao: "🤖", tresd: "🧊", todas: "★",
 };
 
 export interface EstadoCarimbo {
@@ -39,6 +40,7 @@ export function CartaoCarimbos() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[]} atual={`O meu ${ctx.resultado.cartao}`} />
         <h1 className="text-4xl">O meu {ctx.resultado.cartao}</h1>
         <p className="m-0">
           Cada competência dá um {ctx.resultado.carimbo} quando chegas aos {CARIMBO_MINIMO} pontos numa atividade, em qualquer nível. O cartão fica guardado só neste navegador.

@@ -10,6 +10,7 @@ export type Formato = "original" | "mosaico";
 export type Contexto = "jornal" | "laboratorio";
 export type Tema = "auto" | "claro" | "escuro";
 export type Tamanho = "normal" | "grande";
+export type Contraste = "normal" | "reforcado";
 export type ExtensaoTempo = 1 | 1.25 | 1.5 | 2;
 
 export interface Preferencias {
@@ -17,6 +18,7 @@ export interface Preferencias {
   contexto: Contexto;
   tema: Tema;
   tamanho: Tamanho;
+  contraste: Contraste; // "reforcado" = cores com contraste de nível AAA
   extensaoTempo: ExtensaoTempo;
   nome: string; // nome a mostrar na "primeira página" (opcional, só local)
   telemetria: boolean;
@@ -29,6 +31,7 @@ export const PREFERENCIAS_INICIAIS: Preferencias = {
   contexto: "jornal",
   tema: "auto",
   tamanho: "normal",
+  contraste: "normal",
   extensaoTempo: 1,
   nome: "",
   telemetria: true,
@@ -60,6 +63,7 @@ export function aplicarNoDocumento(p: Preferencias) {
   raiz.dataset.formato = p.formato;
   raiz.dataset.tema = p.tema;
   raiz.dataset.tamanho = p.tamanho;
+  raiz.dataset.contraste = p.contraste;
 }
 
 interface Valor {

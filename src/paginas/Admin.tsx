@@ -1,4 +1,5 @@
 // ─── Administração: agregados completos da telemetria, protegidos pela chave verificada no ponto de recolha ──
+import { Caminho } from "../componentes/Caminho";
 import { useEffect, useState } from "react";
 import { TODOS as ATIVIDADES } from "../registo";
 import { obterAgregados, telemetriaConfigurada, type Agregados } from "../dados/telemetria";
@@ -51,6 +52,7 @@ export function Admin() {
   if (!telemetriaConfigurada) {
     return (
       <div className="grid gap-3 max-w-2xl">
+        <Caminho itens={[]} atual="Administração" />
         <h1 className="text-4xl">Administração</h1>
         <p className="m-0">A recolha de estatísticas não está configurada nesta instalação. Defina `VITE_TELEMETRIA_URL` (ver README.txt), que deve ser implementado num novo deployment.</p>
       </div>
@@ -60,6 +62,7 @@ export function Admin() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[]} atual="Administração" />
         <h1 className="text-4xl">Administração</h1>
         <p className="m-0">Estatísticas completas da recolha anónima (sem limiar). A chave é verificada no ponto de recolha e fica só nesta sessão do navegador.</p>
       </header>

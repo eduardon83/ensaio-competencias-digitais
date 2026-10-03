@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.3.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.4.0 · outubro de 2026
 
 
 O QUE É
@@ -21,7 +21,7 @@ COMO SE USA
 Na página inicial há quatro entradas:
 
 1. Treinar
-   - Teste: uma sequência de atividades para o nível de ensino do aluno. No fim aparece uma "primeira página" com o perfil de competências.
+   - Provas e exames: preparação para as provas ModA (4.º e 6.º ano), as provas finais do 9.º ano, os exames nacionais do secundário e o ensino superior. Cada preparação é uma sequência de atividades; no fim aparece uma "primeira página" com o resultado por competência, uma frase sobre cada uma, o que treinar a seguir e a opção de guardar como imagem. O ECD não reproduz as provas oficiais: treina as competências digitais de que se precisa para as fazer.
    - Atividade: escolhe-se uma atividade e um de cinco níveis (1 Iniciação, 2 Base, 3 Intermédio, 4 Avançado, 5 Perito). Pode repetir-se à vontade.
    - Código: o aluno escreve o código que o professor lhe deu e faz a prova que o professor montou.
 
@@ -34,7 +34,7 @@ Na página inicial há quatro entradas:
 4. Observatório
    Estatísticas anónimas de todas as pessoas que usaram a aplicação: médias por competência e por nível, dispositivos, evolução por dia. Qualquer grupo com menos de 20 tentativas fica oculto.
 
-Antes de começar uma atividade ou um teste, escolhe-se o cenário:
+Antes de começar uma atividade ou uma preparação, escolhe-se o cenário:
 - Redação do jornal da escola: o aluno é repórter e cada tarefa serve a próxima edição.
 - Laboratório de experiências: o aluno é investigador e cada tarefa é um passo de uma experiência.
 O cenário muda a história, as personagens e os textos. As regras e a pontuação são iguais.
@@ -54,11 +54,12 @@ Disponíveis, cada uma com cinco níveis:
 - O Arquivo: abrir, mover e mudar o nome de ficheiros em pastas, mudar e fechar separadores, usar o histórico e chegar ao fim de uma página longa.
 - Cartão de Imprensa / Cartão de Acesso: preencher um formulário a partir de uma ficha, com formatos portugueses, e corrigir os erros de validação.
 - Fecho de Edição / Fim da Sessão: muitas perguntas curtas com relógio global e tempo sugerido por secção (mede o ritmo).
-- Simulador de Prova: uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora e confirmação antes de submeter. No teste, conta a dobrar.
+- Simulador de Prova: uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora e confirmação antes de submeter. Na preparação, conta a dobrar.
+- A Maqueta / O Modelo da Estufa (manipulação 3D): arrumar uma maqueta 3D: rodar e aproximar a câmara, mover, rodar, colar, separar, dividir, apagar e criar peças, ver de cima e em projeção ortográfica. Funciona com rato, toque ou teclado (atalhos) e também só com a lista de objetos.
 
 JOGOS (Treinar → Jogos)
 
-Cada jogo tem cinco níveis e um relatório no fim. Não contam para o teste nem para os carimbos.
+Cada jogo tem cinco níveis e um relatório no fim. Não contam para a preparação de provas nem para os carimbos.
 - Biblioteca Viva: leitura e escrita com textos de autores portugueses em domínio público (Fernando Pessoa e Alberto Caeiro, Luís de Camões, Florbela Espanca, Eça de Queirós, Almeida Garrett). Em cada nível o texto é mais longo e mais complexo. Rondas: ler com glossário, perguntas de compreensão, palavras em falta, pôr os versos por ordem e ditado. Os excertos estão em ortografia atualizada e devem ser validados contra edições de referência antes de uso em escolas.
 - A Sala Trancada (escape room): uma secretária digital com Ficheiros, Email, Documento, Folha e uma Nota bloqueada. Cada enigma dá um algarismo do código do cofre (contar PDFs, ler datas de criação, anexos, procurar uma palavra, somar uma coluna, escolher a palavra-passe mais forte). Ajudas opcionais e três tentativas.
 - Quem Apagou o Ficheiro? (mistério): cruzar o registo do servidor, as reservas dos computadores, as mensagens e os metadados das fotografias, marcar as provas e acusar o culpado. Nos níveis altos há trocas de lugar, pistas falsas e ficheiros com nomes parecidos.
@@ -88,7 +89,8 @@ Cada atividade começa com um briefing e um item de prática que não conta. Dá
 ACESSIBILIDADE
 
 - Dois aspetos à escolha em Definições: Mosaico (predefinido), o Ágora Design System da AMA usado nos serviços públicos digitais, e Original (editorial). Ambos têm tema claro e escuro.
-- Texto grande, tempo alargado (×1,25, ×1,5 ou ×2, registado como acomodação) e funcionamento completo só com teclado.
+- Texto grande, contraste reforçado (AAA), tempo alargado (×1,25, ×1,5 ou ×2, registado como acomodação) e funcionamento completo só com teclado.
+- Cada briefing pode ser lido em voz alta (síntese de voz do navegador, em português).
 - Tudo o que se arrasta tem alternativa por toque ou teclado.
 - Objetivo: WCAG 2.2 nível AA (EN 301 549). A auditoria automática (npm run a11y) passa sem problemas em todas as páginas e atividades, nos dois aspetos e nos dois temas. Falta a revisão manual com leitor de ecrã.
 - A página Acessibilidade tem um guia para quem desenvolve e para quem encomenda provas digitais.

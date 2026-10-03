@@ -11,9 +11,10 @@ import { definicao as teclas } from "./teclas";
 import { definicao as encontra } from "./encontra";
 import { definicao as simulador } from "./simulador";
 import { definicao as matematica } from "./matematica";
+import { definicao as maqueta } from "./maqueta";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const ATIVIDADES: DefinicaoAtividade<any>[] = [noticia, painel, revisao, arquivo, cartao, paginacao, fecho, teclas, encontra, simulador, matematica].sort((a, b) => a.numero - b.numero);
+export const ATIVIDADES: DefinicaoAtividade<any>[] = [noticia, painel, revisao, arquivo, cartao, paginacao, fecho, teclas, encontra, simulador, matematica, maqueta].sort((a, b) => a.numero - b.numero);
 
 export const DISPONIVEIS = ATIVIDADES.filter((a) => a.disponivel);
 

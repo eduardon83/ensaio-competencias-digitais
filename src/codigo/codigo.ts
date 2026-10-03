@@ -3,7 +3,6 @@
 // identificam. Formato XXXX·YYYYYY — XXXX identifica a sessão (aleatório), YYYYYY codifica a configuração com
 // um carácter de verificação. Alfabeto sem caracteres ambíguos (sem 0/O, 1/I/L).
 
-import { ATIVIDADES } from "../atividades";
 import type { ExtensaoTempo } from "../preferencias/preferencias";
 import type { Nivel } from "../motor/tipos";
 
@@ -30,7 +29,10 @@ export interface CodigoSessao {
 // Ordem fixa: as 11 atividades (por número) e depois os testes de segurança e os jogos. Nunca reordenar:
 // acrescentar sempre no fim (os códigos já distribuídos dependem destas posições).
 export const EXTRAS = ["boas-praticas", "fraude", "redes-sociais", "leitura", "sala-trancada", "misterio", "orcamento", "correio", "robo"];
-const SLUGS = [...ATIVIDADES.map((a) => a.slug), ...EXTRAS];
+// As 11 atividades originais por número (posições fixas), os extras e depois as atividades novas.
+const ORIGINAIS = ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "simulador", "matematica"];
+const NOVAS = ["maqueta"];
+const SLUGS = [...ORIGINAIS, ...EXTRAS, ...NOVAS];
 
 function paraBase(n: number, comprimento: number): string {
   let s = "";

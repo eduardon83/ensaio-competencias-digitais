@@ -4,6 +4,7 @@
 // (confirmado por ligação antes de qualquer envio). O token fica neste navegador e na ligação privada.
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import QRCode from "qrcode";
 import { DISPONIVEIS } from "../atividades";
 import { GRUPOS, TODOS, qualquerPorSlug as porSlug } from "../registo";
@@ -62,6 +63,11 @@ export function Professor() {
   const [estado, setEstado] = useState<"" | "a_criar" | "ok" | "aviso">("");
   const [mensagem, setMensagem] = useState("");
   const [sessoes, setSessoes] = useState<SessaoGuardada[]>(lerSessoes);
+  // Resumo ao vivo: atividades pela ordem em que os alunos as fazem e duração estimada (soma dos intervalos "x a y min").
+  const escolhidas = TODOS.filter((d) => atividades.includes(d.slug)).sort((x, y) => (GRUPOS.findIndex((g) => g.itens.includes(x)) - GRUPOS.findIndex((g) => g.itens.includes(y))));
+  const intervalo = (d: string) => (d.match(/\d+/g) ?? ["0"]).map(Number);
+  const duracaoMin = escolhidas.reduce((t, d) => t + intervalo(d.duracao)[0], 0);
+  const duracaoMax = escolhidas.reduce((t, d) => t + (intervalo(d.duracao)[1] ?? intervalo(d.duracao)[0]), 0);
   const emailInvalido = email.trim() !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
   async function criar() {
@@ -93,6 +99,7 @@ export function Professor() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[]} atual="Professor" />
         <h1 className="text-4xl">Professor</h1>
         <p className="m-0">Monte uma prova para a turma: escolha o nível e as atividades, obtenha um código e dê-o aos alunos. Para receber os resultados dos seus alunos, indique um email.</p>
       </header>
@@ -105,7 +112,7 @@ export function Professor() {
               <legend className="sr-only">Nível</legend>
               {NIVEIS.map((n) => {
                 const ciclo = CICLOS.find((c) => c.nivel === n);
-                return <BotaoRadio key={n} id={`pnivel-${n}`} name="pnivel" rotulo={`Nível ${n} · ${NOME_NIVEL[n]}${ciclo ? ` (≈ ${ciclo.nome})` : ""}`} checked={nivel === n} onChange={() => setNivel(n)} />;
+                return <BotaoRadio key={n} id={`pnivel-${n}`} name="pnivel" rotulo={`Nível ${n} · ${NOME_NIVEL[n]}${ciclo ? ` (≈ preparação ${ciclo.nome})` : ""}`} checked={nivel === n} onChange={() => setNivel(n)} />;
               })}
             </fieldset>
           </Cartao>
@@ -190,7 +197,30 @@ export function Professor() {
           </div>
         </div>
 
-        <aside className="grid gap-4 content-start">
+        <aside className="grid gap-4 content-start lg:sticky lg:top-4 self-start">
+          <Cartao className="grid gap-3" style={{ border: "2px dashed var(--tecla-borda)" }} aria-labelledby="resumo-prova">
+            <h2 id="resumo-prova" className="text-lg">A sua prova</h2>
+            <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+              O código aparece aqui depois de carregar em “Criar código”. Formato XXXX·XXXXXX, sem letras que se confundam (O e 0, I e 1).
+            </p>
+            <dl className="m-0 grid gap-1 text-sm" style={{ gridTemplateColumns: "auto 1fr", columnGap: "0.75rem" }} aria-live="polite">
+              <dt className="font-bold">Nível</dt>
+              <dd className="m-0">
+                {nivel} · {NOME_NIVEL[nivel]}
+              </dd>
+              <dt className="font-bold">Atividades</dt>
+              <dd className="m-0">{escolhidas.length}</dd>
+              <dt className="font-bold">Duração</dt>
+              <dd className="m-0">{escolhidas.length ? `≈ ${duracaoMin} a ${duracaoMax} min` : "—"}</dd>
+            </dl>
+            {escolhidas.length > 0 && (
+              <ol className="m-0 pl-5 text-sm grid gap-0.5">
+                {escolhidas.map((a) => (
+                  <li key={a.slug}>{a.titulo.jornal}</li>
+                ))}
+              </ol>
+            )}
+          </Cartao>
           <Cartao className="grid gap-2">
             <h2 className="text-lg">Como funciona</h2>
             <ol className="m-0 pl-5 grid gap-1 text-sm">
@@ -236,6 +266,7 @@ function SessaoCriada({ s, estado, mensagem, aoNova }: { s: SessaoGuardada; esta
   }
   return (
     <div className="grid gap-6">
+      <Caminho itens={[["/professor", "Professor"]]} atual="Sessão criada" />
       <h1 className="text-4xl">Sessão criada</h1>
       {mensagem && (
         <div className="cartao p-4" role="status" style={{ borderColor: estado === "ok" ? "var(--certo)" : "var(--aviso)", borderWidth: 2 }}>
@@ -335,6 +366,7 @@ export function ResultadosProfessor() {
   if (!sessao || !token) {
     return (
       <div className="grid gap-3 max-w-2xl">
+        <Caminho itens={[["/professor", "Professor"]]} atual="Resultados da sessão" />
         <h1 className="text-4xl">Resultados da sessão</h1>
         <p className="m-0">Abra a ligação privada que recebeu ao criar a sessão (ou no email de confirmação). As sessões criadas neste navegador estão listadas em <Link to="/professor">Professor</Link>.</p>
       </div>
@@ -364,6 +396,7 @@ export function ResultadosProfessor() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2">
+        <Caminho itens={[["/professor", "Professor"]]} atual="Resultados da sessão" />
         <h1 className="text-4xl">Resultados da sessão</h1>
         {dados && (
           <p className="m-0">

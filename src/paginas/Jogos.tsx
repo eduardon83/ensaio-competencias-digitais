@@ -1,6 +1,7 @@
 // ─── Jogos: lista dos jogos disponíveis (com 5 níveis) e dos jogos propostos ──
 import { useState } from "react";
 import { Link, useParams } from "react-router";
+import { Caminho } from "../componentes/Caminho";
 import { JOGOS, META_JOGOS, jogoPorSlug } from "../jogos";
 import { TEXTOS } from "../jogos/leitura/textos";
 import { Atividade } from "../motor/Atividade";
@@ -16,8 +17,9 @@ export function Jogos() {
   return (
     <div className="grid gap-8">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[["/treinar", "Treinar"]]} atual="Jogos" />
         <h1 className="text-4xl">Jogos</h1>
-        <p className="m-0">Jogos para desenvolver competências digitais e de literacia. Cada jogo tem cinco níveis e um relatório no fim. Não contam para o teste nem para os carimbos: são treino livre.</p>
+        <p className="m-0">Jogos para desenvolver competências digitais e de literacia. Cada jogo tem cinco níveis e um relatório no fim. Não contam para a preparação de provas nem para os carimbos: são treino livre.</p>
       </header>
 
       <div role="tablist" aria-label="Nível de dificuldade" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>

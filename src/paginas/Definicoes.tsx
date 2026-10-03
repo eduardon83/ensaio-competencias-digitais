@@ -1,4 +1,5 @@
 // ─── Definições: aspeto (Original / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
+import { Caminho } from "../componentes/Caminho";
 import { CONTEXTOS } from "../contextos";
 import { usePreferencias, type ExtensaoTempo } from "../preferencias/preferencias";
 import { BotaoRadio, CampoTexto, Cartao, Interruptor } from "../ui";
@@ -8,6 +9,7 @@ export function Definicoes() {
   return (
     <div className="grid gap-6 max-w-3xl">
       <header className="grid gap-2">
+        <Caminho itens={[]} atual="Definições" />
         <h1 className="text-4xl">Definições</h1>
         <p className="m-0">Tudo fica guardado neste navegador. Nenhuma destas escolhas afeta a pontuação, exceto o tempo alargado, que fica registado no resultado como acomodação.</p>
       </header>
@@ -47,6 +49,11 @@ export function Definicoes() {
           <BotaoRadio id="tam-normal" name="tamanho" rotulo="Normal" checked={prefs.tamanho === "normal"} onChange={() => definir({ tamanho: "normal" })} />
           <BotaoRadio id="tam-grande" name="tamanho" rotulo="Grande (recomendado no 1.º ciclo)" checked={prefs.tamanho === "grande"} onChange={() => definir({ tamanho: "grande" })} />
         </fieldset>
+        <fieldset className="grid gap-2 border-0 p-0 m-0">
+          <legend className="font-bold text-sm">Contraste</legend>
+          <BotaoRadio id="contraste-normal" name="contraste" rotulo="Normal (AA)" checked={prefs.contraste === "normal"} onChange={() => definir({ contraste: "normal" })} />
+          <BotaoRadio id="contraste-reforcado" name="contraste" rotulo="Reforçado (AAA): textos secundários e contornos mais escuros" checked={prefs.contraste === "reforcado"} onChange={() => definir({ contraste: "reforcado" })} />
+        </fieldset>
       </Cartao>
 
       <Cartao className="grid gap-3">
@@ -72,7 +79,7 @@ export function Definicoes() {
 
       <Cartao className="grid gap-3">
         <h2 className="text-xl">Nome na primeira página</h2>
-        <CampoTexto id="nome" rotulo="Nome ou alcunha (opcional)" ajuda="Aparece só no ecrã de resultado do teste, neste navegador. Não é enviado." value={prefs.nome} onChange={(e) => definir({ nome: e.target.value })} autoComplete="nickname" maxLength={40} />
+        <CampoTexto id="nome" rotulo="Nome ou alcunha (opcional)" ajuda="Aparece só no ecrã de resultado da preparação, neste navegador. Não é enviado." value={prefs.nome} onChange={(e) => definir({ nome: e.target.value })} autoComplete="nickname" maxLength={40} />
       </Cartao>
     </div>
   );

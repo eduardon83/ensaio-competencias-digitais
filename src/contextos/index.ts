@@ -34,7 +34,7 @@ const JORNAL: DefContexto = {
   nome: "Redação do jornal",
   descricao: "És repórter do jornal da escola. Cada atividade é uma tarefa para a próxima edição.",
   personagens: { responsavel: "Diretora Graça", ficheiros: "Tomé", revisao: "Lia", relogio: "Sr. Prazo" },
-  publicacao: (nivel) => (nivel >= 4 ? "Gazeta do Campus" : "O Recreio"),
+  publicacao: (nivel) => (nivel >= 5 ? "Gazeta do Campus" : "O Recreio"),
   papel: "Repórter",
   papelAnonimo: "Repórter anónimo",
   resultado: { titulo: "Primeira página", carimbo: "carimbo", cartao: "cartão de imprensa" },
@@ -50,6 +50,7 @@ const JORNAL: DefContexto = {
     encontra: "Chegou um texto enorme. A Diretora Graça só precisa de algumas respostas. Depressa!",
     simulador: "Último desafio: o exame de entrada na redação.",
     matematica: "A infografia da próxima edição tem números e fórmulas. Escreve-os no computador sem enganos.",
+    maqueta: "A escola vai ter uma biblioteca nova. O Tomé fez a maqueta 3D para a capa, mas está tudo fora do sítio. Arruma-a antes do fecho.",
     leitura: "A próxima edição tem uma página literária. Lê o texto, percebe-o bem e ajuda-nos a passá-lo para o computador sem erros.",
   },
 };
@@ -59,7 +60,7 @@ const LABORATORIO: DefContexto = {
   nome: "Laboratório de experiências",
   descricao: "És aluno num laboratório. Cada atividade é um passo de uma experiência que tem de ficar registada.",
   personagens: { responsavel: "Doutora Inês", ficheiros: "Rui", revisao: "Marta", relogio: "O Cronómetro" },
-  publicacao: (nivel) => (nivel >= 4 ? "Relatório de Investigação" : "Caderno de Laboratório"),
+  publicacao: (nivel) => (nivel >= 5 ? "Relatório de Investigação" : "Caderno de Laboratório"),
   papel: "Investigador",
   papelAnonimo: "Investigador anónimo",
   resultado: { titulo: "Relatório da experiência", carimbo: "selo", cartao: "cartão de acesso ao laboratório" },
@@ -75,6 +76,7 @@ const LABORATORIO: DefContexto = {
     encontra: "Chegou o manual do equipamento. A Doutora Inês só precisa de algumas respostas. Depressa!",
     simulador: "Último desafio: a prova de acesso ao laboratório.",
     matematica: "O caderno de cálculos tem fórmulas e medições. Escreve-as no computador sem enganos.",
+    maqueta: "O laboratório vai ter uma estufa nova. O Rui fez o modelo 3D, mas está tudo fora do sítio. Arruma-o antes da apresentação.",
     leitura: "Hoje há clube de leitura no laboratório. Lê o texto, percebe-o bem e regista-o no computador sem erros.",
   },
 };

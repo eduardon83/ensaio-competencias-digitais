@@ -1,4 +1,5 @@
 // ─── Tutorial: passos curtos que mostram as funcionalidades. Pode saltar-se a qualquer momento. ──
+import { Caminho } from "../componentes/Caminho";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { CONTEXTOS } from "../contextos";
@@ -121,7 +122,7 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Treinar: cinco maneiras",
     corpo: (
       <div className="grid gap-3 md:grid-cols-3">
-        <Mini titulo="Teste" figura={<IlustracaoTeste />}>Uma sequência de atividades para o teu nível de ensino. No fim recebes o teu perfil de competências.</Mini>
+        <Mini titulo="Provas e exames" figura={<IlustracaoTeste />}>Uma preparação para as provas ModA, as provas finais e os exames nacionais, que se fazem no computador. No fim recebes o teu perfil de competências.</Mini>
         <Mini titulo="Atividade" figura={<IlustracaoAtividade />}>Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade.</Mini>
         <Mini titulo="Código" figura={<IlustracaoCodigo />}>O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova.</Mini>
         <Mini titulo="Jogos" figura={<IlustracaoJogos />}>Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô.</Mini>
@@ -237,6 +238,7 @@ export function Tutorial() {
 
   return (
     <div className="grid gap-6 max-w-4xl mx-auto">
+      <Caminho atual="Tutorial" />
       <div className="flex items-center gap-3 flex-wrap">
         <span className="text-sm" style={{ color: "var(--suave)" }}>
           Tutorial · passo {i + 1} de {PASSOS.length}

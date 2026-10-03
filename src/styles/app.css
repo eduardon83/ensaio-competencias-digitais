@@ -262,3 +262,21 @@ mark.realce { background: #ffe58a; color: #14232e; }
 .robo-celula { width: var(--celula); height: var(--celula); display: grid; place-items: center; font-size: 1.5rem; background: var(--tecla); border: 1px solid var(--linha); border-radius: 6px; position: relative; }
 .robo-eixo { display: grid; place-items: center; font-size: .8rem; font-weight: 700; color: var(--suave); }
 .robo-seta { position: absolute; right: 2px; bottom: 0; font-size: .7rem; color: var(--acento); }
+
+/* Atividade A Maqueta (3D) */
+.maqueta-palco { position: relative; height: clamp(320px, 55vh, 560px); background: #7a828a; }
+.maqueta-tela { width: 100%; height: 100%; cursor: grab; }
+.maqueta-tela:active { cursor: grabbing; }
+.maqueta-etiquetas { position: absolute; left: 10px; bottom: 10px; display: flex; gap: 6px; }
+.botao kbd.tecla, .botao kbd { background: transparent; color: inherit; border-color: currentColor; }
+.maqueta-camara .botao { min-height: 40px; padding: 2px 6px; font-size: .9rem; gap: 4px; }
+
+/* Contraste reforçado (AAA, 7:1): texto secundário igual ao principal, contornos e limites mais fortes. */
+:root[data-contraste="reforcado"][data-formato][data-tema] {
+  --suave: var(--tinta);
+  --linha: color-mix(in srgb, var(--tinta) 55%, var(--fundo));
+  --tecla-borda: color-mix(in srgb, var(--tinta) 75%, var(--fundo));
+}
+:root[data-contraste="reforcado"] .superficie-clara { --suave: var(--tinta); --linha: #6b7680; --tecla-borda: #4c5761; }
+:root[data-contraste="reforcado"] a { text-decoration-thickness: 2px; }
+:root[data-contraste="reforcado"] :focus-visible { outline-width: 4px; }

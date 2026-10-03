@@ -1,4 +1,5 @@
 // ─── Os meus resultados (só neste navegador) e Observatório (agregados anónimos) ──
+import { Caminho } from "../componentes/Caminho";
 import { useEffect, useState } from "react";
 import { ATIVIDADES } from "../atividades";
 import { qualquerPorSlug as porSlug } from "../registo";
@@ -29,6 +30,7 @@ export function Resultados() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[]} atual="Os meus resultados" />
         <h1 className="text-4xl">Os meus resultados</h1>
         <p className="m-0">Não há contas: os teus resultados ficam só neste navegador, para veres a evolução e os melhores por nível. Podes exportá-los ou apagá-los quando quiseres.</p>
       </header>
@@ -139,6 +141,7 @@ export function Observatorio() {
   return (
     <div className="grid gap-6">
       <header className="grid gap-2 max-w-3xl">
+        <Caminho itens={[]} atual="Observatório" />
         <h1 className="text-4xl">Observatório</h1>
         <p className="m-0">Neste ecrã são apresentadas estatísticas anónimas sobre as competências avaliadas por todas as pessoas que usaram a aplicação, de forma anónima.</p>
       </header>

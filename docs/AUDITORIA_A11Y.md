@@ -49,6 +49,7 @@ Nenhuma.
 | Atividade: encontra | mosaico | claro | ✓ |
 | Atividade: simulador | mosaico | claro | ✓ |
 | Atividade: matematica | mosaico | claro | ✓ |
+| Atividade: maqueta | mosaico | claro | ✓ |
 | Jogo/teste: leitura | mosaico | claro | ✓ |
 | Jogo/teste: sala-trancada | mosaico | claro | ✓ |
 | Jogo/teste: misterio | mosaico | claro | ✓ |
@@ -91,6 +92,7 @@ Nenhuma.
 | Atividade: encontra | mosaico | escuro | ✓ |
 | Atividade: simulador | mosaico | escuro | ✓ |
 | Atividade: matematica | mosaico | escuro | ✓ |
+| Atividade: maqueta | mosaico | escuro | ✓ |
 | Jogo/teste: leitura | mosaico | escuro | ✓ |
 | Jogo/teste: sala-trancada | mosaico | escuro | ✓ |
 | Jogo/teste: misterio | mosaico | escuro | ✓ |
@@ -133,6 +135,7 @@ Nenhuma.
 | Atividade: encontra | original | claro | ✓ |
 | Atividade: simulador | original | claro | ✓ |
 | Atividade: matematica | original | claro | ✓ |
+| Atividade: maqueta | original | claro | ✓ |
 | Jogo/teste: leitura | original | claro | ✓ |
 | Jogo/teste: sala-trancada | original | claro | ✓ |
 | Jogo/teste: misterio | original | claro | ✓ |
@@ -175,6 +178,7 @@ Nenhuma.
 | Atividade: encontra | original | escuro | ✓ |
 | Atividade: simulador | original | escuro | ✓ |
 | Atividade: matematica | original | escuro | ✓ |
+| Atividade: maqueta | original | escuro | ✓ |
 | Jogo/teste: leitura | original | escuro | ✓ |
 | Jogo/teste: sala-trancada | original | escuro | ✓ |
 | Jogo/teste: misterio | original | escuro | ✓ |
