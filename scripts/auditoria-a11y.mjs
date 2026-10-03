@@ -17,7 +17,7 @@ const PAGINAS = [
   ["/seguranca/fraude", "Segurança: exemplos de fraude"], ["/seguranca/redes-sociais", "Segurança: redes sociais"],
 ];
 // Jogos e testes de segurança (ecrã de jogo, depois de saltar a prática).
-const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3"];
+const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/jogos/robo/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3"];
 const ATIVIDADES = ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "simulador", "matematica"];
 const VARIANTES = [["mosaico", "claro"], ["mosaico", "escuro"], ["original", "claro"], ["original", "escuro"]];
 

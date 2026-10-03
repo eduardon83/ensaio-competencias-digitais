@@ -1,6 +1,7 @@
 // ─── Os meus resultados (só neste navegador) e Observatório (agregados anónimos) ──
 import { useEffect, useState } from "react";
-import { ATIVIDADES, porSlug } from "../atividades";
+import { ATIVIDADES } from "../atividades";
+import { qualquerPorSlug as porSlug } from "../registo";
 import { repositorioLocal } from "../dados/repositorio";
 import { obterAgregados, telemetriaConfigurada, type Agregados } from "../dados/telemetria";
 import { NOME_DOMINIO, NOME_NIVEL, type Nivel } from "../motor/tipos";

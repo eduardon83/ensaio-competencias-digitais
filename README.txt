@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.2.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.3.0 · outubro de 2026
 
 
 O QUE É
@@ -64,7 +64,9 @@ Cada jogo tem cinco níveis e um relatório no fim. Não contam para o teste nem
 - Quem Apagou o Ficheiro? (mistério): cruzar o registo do servidor, as reservas dos computadores, as mensagens e os metadados das fotografias, marcar as provas e acusar o culpado. Nos níveis altos há trocas de lugar, pistas falsas e ficheiros com nomes parecidos.
 - Orçamento da Visita de Estudo: uma folha de cálculo simulada onde se escrevem fórmulas (=B2*C2, =SOMA, custo por aluno, desconto, o que sobra do orçamento, =MÁXIMO e =MÉDIA).
 - Correio da Redação: escrever um email formal com Para, CC e CCO escolhidos numa lista com nomes parecidos, assunto, saudação, conteúdo pedido, despedida, assinatura, o anexo certo e linguagem adequada.
-- Proposta para um próximo jogo (docs/JOGOS.md): O Robô da Bancada.
+- O Robô da Bancada (O Robô da Redação no cenário redação): montar um programa com instruções (avançar, virar, apanhar, repetir e, no nível 5, avançar até bloquear) para o robô apanhar os itens e chegar ao destino. Cada desafio tem uma meta de instruções.
+
+O professor pode incluir os testes de segurança e os jogos nas provas que monta (código de sessão).
 
 SEGURANÇA DIGITAL (Treinar → Segurança)
 

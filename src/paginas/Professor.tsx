@@ -5,7 +5,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 import QRCode from "qrcode";
-import { DISPONIVEIS, porSlug } from "../atividades";
+import { DISPONIVEIS } from "../atividades";
+import { GRUPOS, TODOS, qualquerPorSlug as porSlug } from "../registo";
 import { codificar, descodificar, type ConfigSessao, type Identificacao } from "../codigo/codigo";
 import { fecharSessao, obterResultadosSessao, registarSessao, sha256Hex, telemetriaConfigurada, type ResultadosSessao } from "../dados/telemetria";
 import { CICLOS, NIVEIS, NOME_DOMINIO, NOME_NIVEL, type Nivel } from "../motor/tipos";
@@ -111,25 +112,31 @@ export function Professor() {
 
           <Cartao className="grid gap-3">
             <div className="flex items-baseline gap-3 flex-wrap">
-              <h2 className="text-xl">2. Atividades</h2>
-              <Botao variante="discreto" onClick={() => setAtividades(DISPONIVEIS.map((a) => a.slug))}>
+              <h2 className="text-xl">2. Atividades, segurança e jogos</h2>
+              <Botao variante="discreto" onClick={() => setAtividades(TODOS.filter((a) => a.disponivel).map((a) => a.slug))}>
                 Todas
               </Botao>
               <Botao variante="discreto" onClick={() => setAtividades([])}>
                 Nenhuma
               </Botao>
             </div>
-            <div className="grid gap-1">
-              {DISPONIVEIS.map((a) => (
-                <CaixaVerificacao
-                  key={a.slug}
-                  id={`pat-${a.slug}`}
-                  rotulo={`${a.titulo.jornal} · ${NOME_DOMINIO[a.dominio]} (${a.duracao})`}
-                  checked={atividades.includes(a.slug)}
-                  onChange={(e) => setAtividades((l) => (e.target.checked ? [...l, a.slug] : l.filter((x) => x !== a.slug)))}
-                />
-              ))}
-            </div>
+            <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+              Pode juntar às atividades os testes de segurança digital e os jogos. Os alunos fazem tudo pela ordem da lista.
+            </p>
+            {GRUPOS.map((g) => (
+              <fieldset key={g.id} className="grid gap-1 border-0 p-0 m-0">
+                <legend className="font-bold mb-1">{g.nome}</legend>
+                {g.itens.map((a) => (
+                  <CaixaVerificacao
+                    key={a.slug}
+                    id={`pat-${a.slug}`}
+                    rotulo={`${a.titulo.jornal} · ${NOME_DOMINIO[a.dominio]} (${a.duracao})`}
+                    checked={atividades.includes(a.slug)}
+                    onChange={(e) => setAtividades((l) => (e.target.checked ? [...l, a.slug] : l.filter((x) => x !== a.slug)))}
+                  />
+                ))}
+              </fieldset>
+            ))}
             {atividades.length === 0 && (
               <p className="m-0 text-sm font-bold" style={{ color: "var(--errado)" }} role="alert">
                 Escolha pelo menos uma atividade.

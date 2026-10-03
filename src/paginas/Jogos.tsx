@@ -1,7 +1,7 @@
 // ─── Jogos: lista dos jogos disponíveis (com 5 níveis) e dos jogos propostos ──
 import { useState } from "react";
 import { Link, useParams } from "react-router";
-import { JOGOS, META_JOGOS, PROPOSTOS, jogoPorSlug } from "../jogos";
+import { JOGOS, META_JOGOS, jogoPorSlug } from "../jogos";
 import { TEXTOS } from "../jogos/leitura/textos";
 import { Atividade } from "../motor/Atividade";
 import { NIVEIS, NOME_NIVEL, estrelasDe, type Nivel } from "../motor/tipos";
@@ -33,7 +33,7 @@ export function Jogos() {
           const melhor = repositorioLocal.melhor(j.slug, nivel);
           const estrelas = melhor ? estrelasDe(melhor.pontuacao) : 0;
           return (
-            <Cartao key={j.slug} className="grid gap-3 content-start">
+            <Cartao key={j.slug} className="grid grid-rows-subgrid row-span-5 gap-3">
               <div className="flex items-baseline gap-2">
                 <h2 className="text-2xl">
                   <span aria-hidden="true">{META_JOGOS[j.slug]?.icone}</span> {j.titulo[prefs.contexto]}
@@ -52,7 +52,7 @@ export function Jogos() {
               <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
                 {j.slug === "leitura" ? `Autores: ${autores.join(", ")}. O texto cresce e fica mais antigo e complexo a cada nível.` : META_JOGOS[j.slug]?.nota}
               </p>
-              <div className="flex gap-3 items-center flex-wrap">
+              <div className="flex gap-3 items-center flex-wrap self-end">
                 <Link to={`/jogos/${j.slug}/${nivel}`} className="botao">
                   Jogar · nível {nivel}
                 </Link>
@@ -66,32 +66,9 @@ export function Jogos() {
         })}
       </section>
 
-      <section className="grid gap-3">
-        <h2 className="text-2xl">Próximo jogo (proposta)</h2>
-        <p className="m-0 max-w-3xl" style={{ color: "var(--suave)" }}>
-          Em estudo para uma próxima versão. Os jogos sobre emails falsos e notícias falsas estão agora em <Link to="/seguranca">Segurança digital</Link>.
-        </p>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {PROPOSTOS.map((p) => (
-            <Cartao key={p.titulo} className="grid gap-2 content-start">
-              <div className="flex gap-2 items-baseline">
-                <h3 className="text-lg">
-                  <span aria-hidden="true">{p.icone}</span> {p.titulo}
-                </h3>
-                <span className="etiqueta ml-auto">Em breve</span>
-              </div>
-              <div className="flex gap-1 flex-wrap">
-                {p.competencias.map((c) => (
-                  <span key={c} className="text-xs" style={{ color: "var(--suave)" }}>
-                    · {c}
-                  </span>
-                ))}
-              </div>
-              <p className="m-0 text-sm">{p.descricao}</p>
-            </Cartao>
-          ))}
-        </div>
-      </section>
+      <p className="m-0 max-w-3xl" style={{ color: "var(--suave)" }}>
+        Os jogos sobre emails falsos e notícias falsas estão em <Link to="/seguranca">Segurança digital</Link>.
+      </p>
     </div>
   );
 }

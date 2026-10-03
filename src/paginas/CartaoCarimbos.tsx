@@ -9,7 +9,7 @@ import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
 
 const ICONE: Record<Dominio, string> = {
-  teclado: "⌨", interface: "☰", atencao: "◉", navegacao: "🗂", formularios: "✎", arrastar: "⇅", tempo: "⏱", atalhos: "⌘", leitura: "🔍", matematica: "∑", seguranca: "🛡", comunicacao: "✉", folhas: "▦", pensamento: "🕵", todas: "★",
+  teclado: "⌨", interface: "☰", atencao: "◉", navegacao: "🗂", formularios: "✎", arrastar: "⇅", tempo: "⏱", atalhos: "⌘", leitura: "🔍", matematica: "∑", seguranca: "🛡", comunicacao: "✉", folhas: "▦", pensamento: "🕵", programacao: "🤖", todas: "★",
 };
 
 export interface EstadoCarimbo {

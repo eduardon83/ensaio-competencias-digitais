@@ -54,6 +54,7 @@ Nenhuma.
 | Jogo/teste: misterio | mosaico | claro | ✓ |
 | Jogo/teste: orcamento | mosaico | claro | ✓ |
 | Jogo/teste: correio | mosaico | claro | ✓ |
+| Jogo/teste: robo | mosaico | claro | ✓ |
 | Jogo/teste: boas-praticas | mosaico | claro | ✓ |
 | Jogo/teste: fraude | mosaico | claro | ✓ |
 | Jogo/teste: redes-sociais | mosaico | claro | ✓ |
@@ -95,6 +96,7 @@ Nenhuma.
 | Jogo/teste: misterio | mosaico | escuro | ✓ |
 | Jogo/teste: orcamento | mosaico | escuro | ✓ |
 | Jogo/teste: correio | mosaico | escuro | ✓ |
+| Jogo/teste: robo | mosaico | escuro | ✓ |
 | Jogo/teste: boas-praticas | mosaico | escuro | ✓ |
 | Jogo/teste: fraude | mosaico | escuro | ✓ |
 | Jogo/teste: redes-sociais | mosaico | escuro | ✓ |
@@ -136,6 +138,7 @@ Nenhuma.
 | Jogo/teste: misterio | original | claro | ✓ |
 | Jogo/teste: orcamento | original | claro | ✓ |
 | Jogo/teste: correio | original | claro | ✓ |
+| Jogo/teste: robo | original | claro | ✓ |
 | Jogo/teste: boas-praticas | original | claro | ✓ |
 | Jogo/teste: fraude | original | claro | ✓ |
 | Jogo/teste: redes-sociais | original | claro | ✓ |
@@ -177,6 +180,7 @@ Nenhuma.
 | Jogo/teste: misterio | original | escuro | ✓ |
 | Jogo/teste: orcamento | original | escuro | ✓ |
 | Jogo/teste: correio | original | escuro | ✓ |
+| Jogo/teste: robo | original | escuro | ✓ |
 | Jogo/teste: boas-praticas | original | escuro | ✓ |
 | Jogo/teste: fraude | original | escuro | ✓ |
 | Jogo/teste: redes-sociais | original | escuro | ✓ |

@@ -1,7 +1,7 @@
 // ─── Aluno: entrar com o código do professor e fazer a prova montada por ele ──
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import { porSlug } from "../atividades";
+import { qualquerPorSlug as porSlug } from "../registo";
 import { descodificar, formatarCodigo, type CodigoSessao } from "../codigo/codigo";
 import { estadoSessao, telemetriaConfigurada } from "../dados/telemetria";
 import type { Tentativa } from "../dados/repositorio";

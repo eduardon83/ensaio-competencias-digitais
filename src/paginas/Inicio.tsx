@@ -5,7 +5,7 @@ import { FAIXAS, faixaDe } from "../motor/tipos";
 import { AvisoTutorial } from "./Tutorial";
 
 const BLOCOS = [
-  { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade ou entra com o código do teu professor.", icone: "▶" },
+  { para: "/treinar", titulo: "Treinar", texto: "Faz o teste do teu nível, treina uma atividade, joga, aprende a navegar em segurança ou entra com o código do teu professor.", icone: "▶" },
   { para: "/professor", titulo: "Professor", texto: "Crie uma prova para as suas turmas, para avaliar as suas competências digitais.", icone: "✎" },
   { para: "/tutorial", titulo: "Tutorial", texto: "O funcionamento do Ensaio às Competências Digitais encontra-se explicado num breve tutorial. Tempo de leitura: 2 minutos.", icone: "?" },
   { para: "/observatorio", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas.", icone: "◔" },
@@ -38,7 +38,7 @@ export function Inicio() {
         <h1 className="text-5xl md:text-6xl font-extrabold leading-none" style={{ letterSpacing: "-.02em" }}>
           Antes da prova, o ecrã.
         </h1>
-        <p className="text-xl m-0">Treina as tuas competências digitais antes das provas e testes importantes! Podes treinar-te a escrever no teclado, ler num ecrã, preencher campos, gerir o tempo, entre outras competências.</p>
+        <p className="text-xl m-0">Treina as tuas competências digitais antes das provas e testes importantes! Podes treinar-te a escrever no teclado, ler num ecrã, preencher campos, gerir o tempo, entre outras competências. Há também jogos e testes de segurança online.</p>
         <p className="m-0">O Ensaio às Competências Digitais (ECD) ajuda a treinar estas competências. É gratuito. Não é preciso conta nem dados pessoais.</p>
       </section>
 
@@ -122,7 +122,7 @@ export function Treinar() {
     { para: "/teste", titulo: "Teste", texto: "Uma sequência de atividades para o teu nível de ensino. No fim, tens acesso ao teu perfil de competências.", icone: "☰" },
     { para: "/treino", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior.", icone: "◎" },
     { para: "/codigo", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova.", icone: "#" },
-    { para: "/jogos", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo e email.", icone: "🎲" },
+    { para: "/jogos", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo, email e um robô para programar.", icone: "🎲" },
     { para: "/seguranca", titulo: "Segurança", texto: "Informações e testes sobre boas práticas online, exemplos de fraude e redes sociais.", icone: "🛡" },
   ];
   return (

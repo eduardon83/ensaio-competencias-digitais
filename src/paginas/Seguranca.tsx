@@ -52,14 +52,14 @@ export function Seguranca() {
 
       <section className="grid gap-4 md:grid-cols-3">
         {TEMAS.map((t) => (
-          <Cartao key={t.id} className="grid gap-3 content-start">
+          <Cartao key={t.id} className="grid grid-rows-subgrid row-span-4 gap-3">
             <div className="flex items-baseline gap-2">
               <h2 className="text-2xl">
                 <span aria-hidden="true" style={{ fontSize: "1.2em" }}>{t.icone}</span> {t.titulo}
               </h2>
             </div>
             <p className="m-0">{t.resumo}</p>
-            <div className="grid gap-1">
+            <div className="grid gap-1 content-start">
               <div className="flex items-baseline gap-2">
                 <strong>{t.teste.titulo}</strong>
                 <span className="ml-auto">
@@ -70,7 +70,7 @@ export function Seguranca() {
                 {t.teste.descricao}
               </p>
             </div>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap self-end">
               <Link to={`/seguranca/${t.id}`} className="botao botao--contorno">
                 Aprender
               </Link>

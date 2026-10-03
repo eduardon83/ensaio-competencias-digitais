@@ -93,7 +93,25 @@ assinatura; nível 5: todos, com 4 pontos de conteúdo e 5 contactos parecidos).
 O Email Desconfiado e Verdade ou Boato? são os testes dos temas "Exemplos de fraude" e "Redes sociais" em
 `/seguranca` (código em `src/seguranca/`).
 
-## Proposta
+## Feito: O Robô da Bancada (pensamento computacional)
 
-### O Robô da Bancada (pensamento computacional)
-Programar por blocos um robô numa grelha (sequência, repetição, condição) com o menor número de instruções.
+Código: `src/jogos/robo/` (`gerar.ts`, testes em `robo.test.ts`). O mapa nasce de um caminho aleatório sem
+cruzamentos (tem sempre solução); os itens ficam nos cantos do caminho e o destino no fim. A solução de referência
+comprime o caminho com repetições (corridas de "avançar" e o melhor bloco que se repete) e, no nível 5, com
+"avançar até bloquear" (há caixas logo a seguir ao fim dos troços). Essa solução é a meta de instruções.
+Programa como lista plana com "Repetir N vezes" … "Fim da repetição" (acessível por teclado, com subir/descer/apagar).
+
+| Nível | Bancada | Troços | Itens | Instruções |
+|---|---|---|---|---|
+| 1 | 5×5 | 2 | 0 | avançar, virar |
+| 2 | 6×6 | 3 | 1 | + apanhar |
+| 3 | 6×6 | 2–3 longos | 1 | + repetir |
+| 4 | 7×7 | escada (padrão) | 0 | repetir com bloco de 4 instruções |
+| 5 | 7×7 | 3–4 | 2 | + avançar até bloquear |
+
+Pontuação por desafio (2 por tentativa): resolvido = 70 + 30 × (meta ÷ instruções, até 1) − 5 por execução falhada
+(máx. −20); não resolvido = até 30 pelos itens apanhados.
+
+## Nas provas do professor
+
+Desde a v1.3.0, o professor pode juntar testes de segurança e jogos às atividades de uma prova.

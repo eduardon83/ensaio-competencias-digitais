@@ -257,3 +257,8 @@ a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header 
 .app-lista > * { border-bottom: 1px solid var(--linha); padding: 8px 12px; }
 .marcar-prova[aria-pressed="true"] { background: color-mix(in srgb, var(--acento) 15%, var(--superficie)); border-color: var(--acento); }
 mark.realce { background: #ffe58a; color: #14232e; }
+/* Jogos: bancada do robô */
+.robo-grelha { --celula: clamp(2.4rem, 9vw, 3.2rem); display: grid; gap: 3px; }
+.robo-celula { width: var(--celula); height: var(--celula); display: grid; place-items: center; font-size: 1.5rem; background: var(--tecla); border: 1px solid var(--linha); border-radius: 6px; position: relative; }
+.robo-eixo { display: grid; place-items: center; font-size: .8rem; font-weight: 700; color: var(--suave); }
+.robo-seta { position: absolute; right: 2px; bottom: 0; font-size: .7rem; color: var(--acento); }

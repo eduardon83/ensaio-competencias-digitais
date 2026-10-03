@@ -137,7 +137,7 @@ export function Sobre() {
       <p className="m-0">
         Ensaio às Competências Digitais (ECD), versão {VERSAO} de {DATA_VERSAO}. Um projeto Eduardo Nunes &amp; Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824).
       </p>
-      <p className="m-0">Plataforma web de código aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática.</p>
+      <p className="m-0">Plataforma web de código aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática. Inclui também jogos e testes de segurança online.</p>
       <p className="m-0">Sem contas, sem registos de pessoas e sem base de dados: a aplicação é um conjunto de ficheiros estáticos que qualquer escola ou entidade pode alojar. As estatísticas de uso são anónimas e vão para uma folha de cálculo controlada por quem publica a aplicação.</p>
       {REPOSITORIO && (
         <p className="m-0">
@@ -151,6 +151,7 @@ export function Sobre() {
         <h2 className="text-2xl">Estado</h2>
         <ul className="pl-5 m-0 grid gap-1 text-sm">
           <li>Versão atual: motor de atividades, as 11 atividades jogáveis a 5 níveis, com tarefas, textos e alvos sorteados em cada tentativa, teste por ciclo, treino, carimbos e cartão de imprensa, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.</li>
+          <li>Jogos (Biblioteca Viva, A Sala Trancada, Quem Apagou o Ficheiro?, Orçamento da Visita de Estudo, Correio da Redação, O Robô da Bancada) e Segurança digital (boas práticas online, exemplos de fraude, redes sociais), com cinco níveis e relatório. O professor pode incluí-los nas provas.</li>
           <li>Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados; auditoria automática de acessibilidade (WCAG 2.2 AA); protocolo de piloto e script de recalibração dos limiares.</li>
           <li>Backlog: piloto em escolas, recalibração dos limiares com os dados do piloto, revisão manual de acessibilidade com leitor de ecrã.</li>
         </ul>

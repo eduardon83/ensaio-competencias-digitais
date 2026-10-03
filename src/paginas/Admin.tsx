@@ -1,6 +1,6 @@
 // ─── Administração: agregados completos da telemetria, protegidos pela chave verificada no ponto de recolha ──
 import { useEffect, useState } from "react";
-import { ATIVIDADES } from "../atividades";
+import { TODOS as ATIVIDADES } from "../registo";
 import { obterAgregados, telemetriaConfigurada, type Agregados } from "../dados/telemetria";
 import { NOME_DOMINIO } from "../motor/tipos";
 import { Botao, CampoTexto } from "../ui";

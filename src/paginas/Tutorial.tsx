@@ -21,7 +21,7 @@ export function marcarTutorialVisto() {
   }
 }
 
-/** Pequenas ilustrações (HTML, não imagens) para o passo "Treinar: três maneiras". Decorativas: aria-hidden. */
+/** Pequenas ilustrações (HTML, não imagens) para o passo "Treinar: cinco maneiras". Decorativas: aria-hidden. */
 function IlustracaoTeste() {
   const barras: [string, number][] = [["Teclado", 82], ["Interfaces", 64], ["Leitura", 91], ["Matemática", 47]];
   return (
@@ -69,6 +69,32 @@ function IlustracaoCodigo() {
   );
 }
 
+function IlustracaoJogos() {
+  const c = ["", "📦", "", "", "🤖", "", "", "📦", "", "", "🧪", "", "", "", "", "🧊"];
+  return (
+    <div aria-hidden="true" className="rounded-lg p-3 grid gap-2 justify-items-center" style={{ background: "var(--fundo)", border: "1px solid var(--linha)" }}>
+      <div className="grid gap-0.5" style={{ gridTemplateColumns: "repeat(4, 1.6rem)" }}>
+        {c.map((x, i) => (
+          <span key={i} className="grid place-items-center rounded" style={{ height: "1.6rem", background: "var(--tecla)", fontSize: ".9rem" }}>{x}</span>
+        ))}
+      </div>
+      <span className="text-xs" style={{ color: "var(--suave)" }}>Repetir 3× [Avançar] · Virar à direita</span>
+    </div>
+  );
+}
+function IlustracaoSeguranca() {
+  return (
+    <div aria-hidden="true" className="rounded-lg p-3 grid gap-1 text-xs" style={{ background: "var(--fundo)", border: "1px solid var(--linha)" }}>
+      <span className="text-xs" style={{ wordBreak: "break-all" }}><b>De:</b> seguranca@bancohorizonte-alerta.com</span>
+      <span className="text-xs"><b>Assunto:</b> A sua conta vai ser bloqueada!</span>
+      <span className="flex gap-1 mt-1">
+        <span className="etiqueta">Legítima</span>
+        <span className="etiqueta" style={{ background: "#b3402e", color: "#fff" }}>Fraude</span>
+      </span>
+    </div>
+  );
+}
+
 function Mini({ titulo, children, figura }: { titulo: string; children: ReactNode; figura?: ReactNode }) {
   return (
     <div className="cartao p-4 grid gap-2 content-start">
@@ -86,18 +112,20 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Bem-vindo ao Ensaio às Competências Digitais",
     corpo: (
       <>
-        <p className="m-0">As provas são cada vez mais feitas no computador. Aqui treinas o que essas provas pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, arrastar, usar atalhos, procurar num texto longo e escrever matemática.</p>
+        <p className="m-0">As provas são cada vez mais feitas no computador. Aqui treinas o que essas provas pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, arrastar, usar atalhos, procurar num texto longo e escrever matemática. Há também jogos e testes de segurança online.</p>
         <p className="m-0">É gratuito e não tem contas. Demora dois minutos a ver este tutorial. Podes saltá-lo quando quiseres.</p>
       </>
     ),
   },
   {
-    titulo: "Treinar: três maneiras",
+    titulo: "Treinar: cinco maneiras",
     corpo: (
       <div className="grid gap-3 md:grid-cols-3">
         <Mini titulo="Teste" figura={<IlustracaoTeste />}>Uma sequência de atividades para o teu nível de ensino. No fim recebes o teu perfil de competências.</Mini>
         <Mini titulo="Atividade" figura={<IlustracaoAtividade />}>Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade.</Mini>
         <Mini titulo="Código" figura={<IlustracaoCodigo />}>O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova.</Mini>
+        <Mini titulo="Jogos" figura={<IlustracaoJogos />}>Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô.</Mini>
+        <Mini titulo="Segurança" figura={<IlustracaoSeguranca />}>Três temas: boas práticas online, exemplos de fraude e redes sociais. Em cada um lês as informações e fazes um teste.</Mini>
       </div>
     ),
   },
@@ -165,7 +193,7 @@ const PASSOS: { titulo: string; corpo: ReactNode }[] = [
     titulo: "Para professores",
     corpo: (
       <div className="grid gap-3 md:grid-cols-3">
-        <Mini titulo="Montar">Escolhe o nível, as atividades e como os alunos se identificam (número de turma, alcunha ou nada).</Mini>
+        <Mini titulo="Montar">Escolhe o nível, as atividades (também testes de segurança e jogos) e como os alunos se identificam (número de turma, alcunha ou nada).</Mini>
         <Mini titulo="Partilhar">Recebe um código e um QR para projetar na sala.</Mini>
         <Mini titulo="Acompanhar">Recebe os resultados por email, se quiser, e consulta-os numa página privada com exportação CSV.</Mini>
       </div>
