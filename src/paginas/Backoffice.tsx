@@ -70,7 +70,16 @@ export default function Backoffice() {
     const r = await pedir<{ papel: Papel }>("/sessao", c);
     if (!r.ok) {
       setPapel(null);
-      setErro(r.erro === "sem-worker" || r.erro === "rede" ? "O backoffice precisa do Worker: abra o sítio publicado na Cloudflare, ou corra “npm run worker:dev”." : r.erro === "fechado" ? "A edição de textos está fechada nesta instalação." : "Chave incorreta.");
+      const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port !== "8787";
+      setErro(
+        r.erro === "sem-worker" || r.erro === "rede"
+          ? local
+            ? `Está a abrir a versão local (${location.host}), que não tem o Worker. Abra o endereço publicado na Cloudflare (…workers.dev/backoffice).`
+            : `Este endereço (${location.host}) não respondeu como Worker. Confirme que o deploy na Cloudflare terminou e que está a usar o endereço do Worker.`
+          : r.erro === "fechado"
+            ? "A edição está fechada: as chaves ainda não foram definidas na Cloudflare (Settings → Variables and Secrets → CHAVE_EDICAO / CHAVE_ADMIN, tipo Secret)."
+            : "Chave incorreta.",
+      );
       return;
     }
     try {
@@ -199,7 +208,16 @@ export default function Backoffice() {
             void entrar(entrada.trim());
           }}
         >
-          <CampoTexto id="chave-bo" rotulo="Chave de edição" type="password" autoComplete="current-password" value={entrada} onChange={(e) => setEntrada(e.target.value)} erro={erro ?? undefined} />
+          {/* Campo nativo: o InputText do Ágora não respeita type="password" e mostraria a chave. */}
+          <div className={`campo ${erro ? "campo--erro" : ""}`}>
+            <label htmlFor="chave-bo">Chave de edição</label>
+            <input id="chave-bo" type="password" autoComplete="current-password" spellCheck={false} value={entrada} onChange={(e) => setEntrada(e.target.value)} aria-invalid={erro ? true : undefined} aria-describedby={erro ? "chave-bo-erro" : undefined} />
+            {erro && (
+              <div id="chave-bo-erro" className="erro" role="alert">
+                {erro}
+              </div>
+            )}
+          </div>
           <div>
             <Botao type="submit" disabled={!entrada.trim()}>
               Entrar
