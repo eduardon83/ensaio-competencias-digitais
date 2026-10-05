@@ -10,7 +10,7 @@
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
   },
-  // Criar com: npx wrangler kv namespace create TEXTOS  (e colar aqui o "id" devolvido)
-  "kv_namespaces": [{ "binding": "TEXTOS", "id": "00000000000000000000000000000000" }],
+  // Base KV "TEXTOS" (criada no painel da Cloudflare). O id não é secreto.
+  "kv_namespaces": [{ "binding": "TEXTOS", "id": "a1c6457882e742e6ac65591c455cd860" }],
   "observability": { "enabled": true }
 }
