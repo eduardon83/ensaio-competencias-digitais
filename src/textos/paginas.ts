@@ -5,22 +5,22 @@
 export const PAGINAS = {
   geral: {
     nomeApp: "Ensaio às Competências Digitais",
-    faixaMosaico: "Aspeto Mosaico · Ágora Design System (AMA)",
+    faixaMosaico: "Aspeto Mosaico · Ágora Design System (ARTE)",
     saltar: "Saltar para o conteúdo",
     rodape: "Ferramenta gratuita desenvolvida por {autoria} para uso pelo Estado Português",
     ligacoesRodape: { resultados: "Os meus resultados", cartao: "O meu cartão", seguranca: "Segurança digital", tutorial: "Tutorial", privacidade: "Privacidade", acessibilidade: "Acessibilidade", admin: "Administração", licenca: "Licença" },
     menu: { inicio: "Início", sobre: "Sobre", definicoes: "Definições" },
   },
   inicio: {
-    etiqueta: "Gratuito · pt-PT · sem conta",
-    titulo: "Antes da prova, o ecrã.",
-    destaque: "Treina as tuas competências digitais antes das provas e testes importantes! Podes treinar-te a escrever no teclado, ler num ecrã, preencher campos, gerir o tempo, entre outras competências. Há também jogos e testes de segurança online.",
-    subtitulo: "O Ensaio às Competências Digitais (ECD) ajuda a treinar estas competências. É gratuito. Não é preciso conta nem dados pessoais.",
+    etiqueta: "Gratuito · PT-PT · sem conta",
+    titulo: "Antes da prova, treina no ecrã.",
+    destaque: "Prepara as tuas competências digitais para as provas e avaliações. Pratica a escrita no teclado, a leitura no ecrã e a gestão do tempo. ",
+    subtitulo: "O Ensaio às Competências Digitais (ECD) permite-te praticar tudo isto. É gratuito e não requer conta nem dados pessoais.",
     blocos: [
-      { para: "/treinar", icone: "▶", titulo: "Treinar", texto: "Prepara-te para as provas e exames, treina uma atividade, joga, aprende a navegar em segurança ou entra com o código do teu professor." },
-      { para: "/professor", icone: "✎", titulo: "Professor", texto: "Crie uma prova para as suas turmas, para avaliar as suas competências digitais." },
-      { para: "/tutorial", icone: "?", titulo: "Tutorial", texto: "O funcionamento do Ensaio às Competências Digitais encontra-se explicado num breve tutorial. Tempo de leitura: 2 minutos." },
-      { para: "/observatorio", icone: "◔", titulo: "Observatório", texto: "Estatísticas anónimas: que competências faltam e a quantas pessoas." },
+      { para: "/treinar", icone: "▶", titulo: "Treinar", texto: "Prepara-te para provas e exames, experimenta desafios de competências digitais, joga ou entra com o código do teu professor." },
+      { para: "/professor", icone: "✎", titulo: "Professor", texto: "Crie uma prova para as suas turmas e avalie as competências digitais dos seus alunos." },
+      { para: "/tutorial", icone: "?", titulo: "Tutorial", texto: "Descobre como funciona o Ensaio às Competências Digitais e como começar a treinar. \nTempo de leitura: 2 minutos." },
+      { para: "/observatorio", icone: "◔", titulo: "Observatório", texto: "Consulta estatísticas anónimas e descobre quais são as competências digitais que mais precisam de treino." },
     ],
     porque: {
       titulo: "Porquê",
@@ -33,16 +33,16 @@ export const PAGINAS = {
     comoFunciona: {
       titulo: "Como funciona",
       paragrafos: [
-        "Escolhes a prova para a qual te preparas, ou uma atividade. Fazes atividades curtas, como num jogo. Cada uma dá uma pontuação de 0 a 100. No fim vês o que já dominas e o que podes treinar.",
-        "Antes de começar escolhes o cenário: a redação do jornal da escola, ou um laboratório de experiências.",
-        "Os professores montam uma prova, dão o código à turma e veem os resultados por código.",
+        "Há duas formas de usar a plataforma:",
+        "Se és aluno: escolhe o que queres praticar ou usa o código dado pelo professor para acederes a uma ficha.",
+        "Se é professor: crie uma ficha, partilhe o código de acesso com a turma e consulte os resultados.",
       ],
     },
     dados: {
-      titulo: "Os teus dados",
+      titulo: "Privacidade e dados",
       paragrafos: [
-        "Não há contas nem registos de pessoas. Os teus resultados ficam no teu navegador. Para estatísticas, cada atividade envia um registo anónimo que serve para perceber que competências faltam e a quantas pessoas. Podes desligar isso nas Definições.",
-        "Sem endereço IP, sem impressão digital do dispositivo, sem analítica de terceiros. Por isso não há aviso de cookies.",
+        "Não precisas de criar uma conta. Os teus resultados ficam guardados no teu navegador.\nPara criar estatísticas gerais sobre as competências digitais, são enviados dados anónimos, sem nome nem endereço IP.  \n\nPodes desativar esta opção nas 'Definições'.",
+        "Não são utilizados identificadores do dispositivo nem ferramentas de análise de terceiros.",
       ],
     },
     nivelMedio: {
@@ -54,13 +54,13 @@ export const PAGINAS = {
   },
   treinar: {
     titulo: "Treinar",
-    introducao: "Escolhe como queres treinar. Em todas as opções, antes de começar escolhes o cenário.",
+    introducao: "Escolhe como queres treinar as tuas competências digitais. Se o teu professor te entregou um código, escolhe a opção correspondente.",
     opcoes: [
-      { para: "/teste", icone: "☰", titulo: "Provas e exames", texto: "Prepara-te para as provas ModA, as provas finais do 9.º ano e os exames nacionais, que se fazem no computador. No fim, tens acesso ao teu perfil de competências." },
+      { para: "/teste", icone: "☰", titulo: "Provas e exames", texto: "Treina as competências digitais para te familiarizares com as provas ModA, as provas finais do 9.º ano e os exames nacionais. Descobre o teu perfil de competências e identifica onde podes melhorar." },
       { para: "/treino", icone: "◎", titulo: "Desafios", texto: "Escolhe um desafio e o nível de dificuldade. Repete as vezes que quiseres e tenta superar o teu recorde." },
       { para: "/codigo", icone: "#", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
-      { para: "/jogos", icone: "🎲", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo, email e um robô para programar." },
-      { para: "/seguranca", icone: "🛡", titulo: "Segurança", texto: "Informações e testes sobre boas práticas online, fraude, redes sociais, privacidade, Wi-Fi público e controlo parental." },
+      { para: "/jogos", icone: "🎲", titulo: "Jogos", texto: "Joga com literatura portuguesa, participa num escape room, resolve um mistério, pratica com uma folha de cálculo, escreve uma mensagem eletrónica e programa um robô. Os jogos também te podem ajudar a desenvolver as tuas competências." },
+      { para: "/seguranca", icone: "🛡", titulo: "Segurança digital", texto: "Avalia se conheces boas práticas, identifica e reconhece as fraudes mais comuns e descobre o que sabes sobre segurança e redes sociais." },
     ],
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Os teus carimbos estão no [cartão](/cartao).",
   },
@@ -75,47 +75,47 @@ export const PAGINAS = {
     boasVindas: {
       titulo: "Bem-vindo ao Ensaio às Competências Digitais",
       paragrafos: [
-        "As provas são cada vez mais feitas no computador. Aqui treinas o que essas provas pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, arrastar, usar atalhos, procurar num texto longo e escrever matemática. Há também jogos e testes de segurança online.",
-        "É gratuito e não tem contas. Demora dois minutos a ver este tutorial. Podes saltá-lo quando quiseres.",
+        "Cada vez mais provas e avaliações são feitas no computador. Aqui podes praticar as competências digitais de que precisas para as realizar com confiança.\nTambém encontras jogos e desafios sobre segurança online.\nÉ gratuito e não precisas de criar uma conta. Este tutorial demora cerca de 2 minutos e podes saltá-lo quando quiseres.",
+        "Vamos começar?",
       ],
     },
     maneiras: {
-      titulo: "Treinar: cinco maneiras",
-      provas: { titulo: "Provas e exames", texto: "Uma preparação para as provas ModA, as provas finais e os exames nacionais, que se fazem no computador. No fim recebes o teu perfil de competências." },
+      titulo: "Formas de treinar",
+      provas: { titulo: "Provas e exames", texto: "Descobre o teu perfil de competências, os teus pontos fortes e o que precisas de praticar." },
       atividade: { titulo: "Desafio", texto: "Escolhe um desafio, avança pelos níveis e tenta superar o teu melhor resultado." },
-      codigo: { titulo: "Código", texto: "O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova." },
-      jogos: { titulo: "Jogos", texto: "Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô." },
-      seguranca: { titulo: "Segurança", texto: "Seis temas: boas práticas online, fraude, redes sociais, privacidade e navegação, computadores e Wi-Fi públicos, e família e controlo parental. Em cada um lês as informações e fazes um teste." },
+      codigo: { titulo: "Código", texto: "Recebeste um código do teu professor? Introduz o código para acederes à prova." },
+      jogos: { titulo: "Jogos", texto: "Põe as tuas competências à prova em jogos e em situações do dia a dia." },
+      seguranca: { titulo: "Segurança digital", texto: "Testa os teus conhecimentos em três temas: boas práticas online, exemplos de fraude e redes sociais. " },
     },
-    cenario: { titulo: "Escolhe o cenário", texto: "Antes de começar escolhes onde se passa a história. O cenário muda as personagens, os títulos e os textos das tarefas. As regras e a pontuação são iguais.", personagens: "Personagens" },
+    cenario: { titulo: "Escolhe o cenário", texto: "Escolhe o cenário antes de começares. As personagens e os textos mudam, mas as regras e a pontuação mantêm-se.", personagens: "Personagens" },
     atividade: {
-      titulo: "Como corre uma atividade",
+      titulo: "O que vais encontrar",
       etapas: [
-        { titulo: "1. Briefing", texto: "Uma personagem explica a tarefa em uma frase. Podes ouvi-la em voz alta." },
-        { titulo: "2. Prática", texto: "Um item curto que não conta, para perceberes o que fazer." },
-        { titulo: "3. Avaliação", texto: "A tarefa a sério. Algumas têm um relógio suave." },
-        { titulo: "4. Resultado", texto: "Pontuação de 0 a 100, estrelas, uma dica concreta e um relatório tarefa a tarefa." },
+        { titulo: "1. Instrução", texto: "Uma personagem explica o que tens de fazer. Podes ouvir as instruções em voz alta." },
+        { titulo: "2. Prática", texto: "Experimenta uma tarefa curta, sem pontuação, para perceberes como funciona." },
+        { titulo: "3. Avaliação", texto: "Aqui, as tuas respostas contam para o resultado. Em alguns casos, tens um tempo definido para responder." },
+        { titulo: "4. Resultado", texto: "Vê a tua pontuação, recebe uma dica e consulta o teu desempenho em cada tarefa." },
       ],
     },
-    pontuacao: { titulo: "Pontuação", texto: "Cada atividade dá uma pontuação de 0 a 100. Abaixo de 50 pontos, convém tentar novamente. De 50 a 74 ganhas uma estrela, de 75 a 90 duas e de 91 a 100 três. O teu melhor resultado em cada nível fica guardado neste navegador." },
+    pontuacao: { titulo: "Como funciona a pontuação", texto: "Cada desafio recebe uma pontuação de 0 a 100. Se tiveres menos de 50, podes tentar novamente. Entre 50 e 74, ganhas uma estrela; entre 75 e 90, duas; e entre 91 e 100, três. A tua melhor pontuação em cada nível fica guardada neste navegador." },
     medida: {
       titulo: "Ajusta à tua medida",
       paragrafos: [
-        "Em Definições podes mudar o aspeto (Original ou Mosaico), o tema claro ou escuro, o tamanho do texto, o contraste, a leitura facilitada, o tamanho dos botões, a leitura em voz alta, o modo calmo e o tempo alargado.",
-        "Tudo funciona só com o teclado. Quando há arrastar, há sempre outra maneira: tocar no item e depois no destino.",
+        "Nas 'Definições', podes escolher o modo de visualização, o tema, o tamanho do texto, o contraste e o tempo para responder.",
+        "Podes usar todas as funcionalidades com o teclado. Para arrastar, também podes selecionar o item e depois o destino.",
       ],
     },
     professores: {
       titulo: "Para professores",
-      montar: { titulo: "Montar", texto: "Escolhe o nível, as atividades (também testes de segurança e jogos) e como os alunos se identificam (número de turma, alcunha ou nada)." },
-      partilhar: { titulo: "Partilhar", texto: "Recebe um código e um QR para projetar na sala." },
-      acompanhar: { titulo: "Acompanhar", texto: "Recebe os resultados por email, se quiser, e consulta-os numa página privada com exportação CSV." },
+      montar: { titulo: "1. Crie uma ficha ", texto: "Escolha o nível, as atividades, incluindo jogos e testes de segurança, e se os alunos se identificam pelo número da turma, por uma alcunha ou não se identificam." },
+      partilhar: { titulo: "2. Partilhe a ficha", texto: "Receba um código e um QR para os alunos acederem à ficha." },
+      acompanhar: { titulo: "3. Acompanhe os resultados", texto: "Consulte os resultados numa página privada, receba-os por mensagem eletrónica, se quiser, ou exporte-os em CSV." },
     },
     dados: {
       titulo: "Os teus dados",
       paragrafos: [
-        "Não há contas. Os teus resultados ficam no teu navegador. Cada atividade envia um registo anónimo, sem nome nem IP, para estatísticas sobre as competências que faltam. Podes desligar isso em Definições.",
-        "Os números de todos aparecem no Observatório. Grupos com menos de 20 tentativas ficam ocultos.",
+        "Não há contas. Os teus resultados ficam guardados no teu navegador. São enviados dados anónimos, sem nome nem endereço IP, para criar estatísticas sobre as competências digitais que precisam de mais treino. Podes desativar esta opção nas 'Definições'.",
+        "No 'Observatório', podes consultar estatísticas gerais sobre as competências digitais. Para proteger a privacidade, só são apresentados resultados de grupos com vinte ou mais tentativas.",
       ],
     },
   },
@@ -148,7 +148,6 @@ export const PAGINAS = {
   },
   sobre: {
     titulo: "Sobre",
-    video: { titulo: "Apresentação do Ensaio às Competências Digitais", reservado: "Vídeo de apresentação", emBreve: "Em breve." },
     versao: "Ensaio às Competências Digitais (ECD), versão {versao} de {data}. Um projeto Eduardo Nunes & Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824).",
     paragrafos: [
       "Plataforma web de código aberto, em português de Portugal, onde alunos treinam e medem as competências digitais práticas que as provas em computador pressupõem: escrever no teclado, ler ecrãs, preencher formulários, navegar, gerir o tempo, escrever matemática. Prepara para as provas ModA, as provas finais e os exames nacionais. Inclui também jogos e testes de segurança online.",
@@ -297,6 +296,24 @@ export const PAGINAS = {
       ],
     },
   },
+  videos: {
+    titulos: {
+      promocional: "O Ensaio às Competências Digitais em um minuto",
+      institucional: "Apresentação do Ensaio às Competências Digitais",
+      aluno: "Tutorial para alunos",
+      professor: "Tutorial para professores",
+    },
+    publico: {
+      promocional: "Vídeo promocional",
+      institucional: "Para escolas, famílias e decisores",
+      aluno: "Como treinar, passo a passo",
+      professor: "Como montar uma prova para a turma",
+    },
+    reproduzir: "Reproduzir o vídeo: {titulo}",
+    aviso: "Ao carregar em reproduzir, o vídeo é carregado do YouTube (youtube-nocookie.com).",
+    verNoYoutube: "Ver no YouTube",
+    tituloSobre: "Vídeos",
+  },
   privacidade: {
     titulo: "Privacidade",
     introducao: "Escrito em linguagem simples. Se algo não ficar claro, pergunta.",
@@ -304,6 +321,7 @@ export const PAGINAS = {
       { titulo: "Não há contas", paragrafos: ["Ninguém se regista. Não pedimos nome, email nem idade. Os teus resultados ficam só no teu navegador, para veres a tua evolução; podes exportá-los ou apagá-los em “Os meus resultados”. O nome que escreveres nas Definições serve só para aparecer no teu ecrã de resultado e nunca sai do teu computador."] },
       { titulo: "Estatísticas anónimas", paragrafos: ["Para sabermos que competências faltam e a quantas pessoas, cada atividade concluída envia um pequeno registo anónimo: um identificador aleatório criado no teu navegador (não ligado a ti), a atividade, o nível, a pontuação, a duração, algumas medidas da atividade (por exemplo palavras por minuto), o tipo de dispositivo (computador, tablet, telemóvel), o contexto e o aspeto escolhidos, e se usaste tempo alargado. Não enviamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.", "Os registos vão para uma folha de cálculo controlada pela entidade que publica a aplicação, na União Europeia, e servem só para estatísticas agregadas. No Observatório, qualquer grupo com menos de 20 tentativas fica oculto. Podes desligar o envio em Definições → Estatísticas anónimas; a aplicação funciona igual, mas os professores deixam de receber os resultados das provas feitas com código."] },
       { titulo: "Sessões de professor", paragrafos: ["Quando um professor cria uma sessão, guardamos o código, a configuração da prova e, se o professor o indicar, o seu email, para lhe enviar os resultados. O email só é usado depois de confirmado por ligação e é apagado 12 meses após a última tentativa. Nas tentativas feitas com o código vai também o identificador que o professor pediu (número de turma ou alcunha); recomendamos o número de turma em vez do nome."] },
+      { titulo: "Vídeos", paragrafos: ["Os vídeos de apresentação e os tutoriais estão alojados no YouTube. A página não contacta o YouTube enquanto não carregares em reproduzir. Depois disso, o vídeo vem de youtube-nocookie.com, o modo de privacidade reforçada do YouTube, e aplicam-se as regras de privacidade da Google."] },
       { titulo: "Base legal e contacto", paragrafos: ["Os dados anónimos não identificam ninguém e são tratados com base no interesse legítimo de melhorar a preparação dos alunos para provas digitais. Dúvidas ou pedidos: Kendir Studios."] },
     ],
   },
@@ -339,7 +357,7 @@ export const PAGINAS = {
     retomar: "Retomar ({i}/{n})",
     atividades: "Nível {nivel} · {n} atividades: {lista}.",
     nota: "O ECD não reproduz as provas oficiais nem as substitui: treina as competências digitais de que precisas para as fazer no computador (escrever, ler no ecrã, usar ferramentas, gerir o tempo). Para treinar uma atividade de cada vez, vai a [Desafios](/treino).",
-    "introducao": "Escolhe a prova para a qual te estás a preparar. A preparação é uma sequência de atividades curtas que treina o que essas provas pedem no computador. Podes pausar entre atividades e retomar neste dispositivo."
+    "introducao": "Escolhe a prova para a qual te estás a preparar. A preparação é uma sequência de atividades curtas que treina o que essas provas pedem no computador. Podes pausar entre atividades e retomar neste dispositivo. O nível é adaptado a cada prova e à complexidade dos processos digitais associados."
   },
   atividades: {
     tituloCatalogo: "Atividades",
@@ -399,7 +417,7 @@ export const PAGINAS = {
   },
   observatorio: {
     titulo: "Observatório",
-    "introducao": "Neste ecrã são apresentadas estatísticas anónimas sobre as competências avaliadas por todas as pessoas que usaram a aplicação, de forma anónima."
+    "introducao": "Estatísticas anónimas sobre as competências digitais de todas as pessoas que usaram a aplicação. Escolhe o período e os filtros, vê os gráficos e exporta o relatório em CSV ou PDF. Para proteger a privacidade, os grupos com menos de 20 tentativas não são mostrados."
   },
   atividade: {
     briefing: { pratica: "Primeiro fazes um item de prática que não conta. Depois começa a avaliação.", melhor: "O teu melhor neste nível: **{pontos}** pontos.", comecar: "Começar a prática", saltar: "Saltar a prática", ouvir: "Ler em voz alta", alargado: "Tempo alargado ×{x} ativo." },

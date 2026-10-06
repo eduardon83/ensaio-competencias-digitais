@@ -1,0 +1,12 @@
+# Cabeçalhos de segurança aplicados pelo Cloudflare (Workers Static Assets) a todos os ficheiros da aplicação.
+# As respostas da API (/api/*) recebem os seus cabeçalhos em worker/index.ts.
+# connect-src: o ponto de recolha por omissão é um Google Apps Script. Se usar outro endereço em VITE_TELEMETRIA_URL,
+# acrescente-o aqui. frame-src: os vídeos (youtube-nocookie.com) só carregam depois do clique.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.youtube-nocookie.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin

@@ -12,5 +12,7 @@
   },
   // Base KV "TEXTOS" (criada no painel da Cloudflare). O id não é secreto.
   "kv_namespaces": [{ "binding": "TEXTOS", "id": "a1c6457882e742e6ac65591c455cd860" }],
+  // Limite de pedidos com chave (backoffice): 30 por minuto por endereço IP.
+  "ratelimits": [{ "name": "LIMITE_CHAVES", "namespace_id": "1001", "simple": { "limit": 30, "period": 60 } }],
   "observability": { "enabled": true }
 }

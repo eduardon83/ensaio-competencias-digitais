@@ -1,0 +1,10 @@
+/* Fontes servidas pelo próprio sítio (pacotes @fontsource): nenhuma visita contacta a Google.
+   Os nomes "… Variable" vêm dos pacotes; os tokens em app.css e mosaico.css usam-nos primeiro. */
+@import "@fontsource/atkinson-hyperlegible/400.css";
+@import "@fontsource/atkinson-hyperlegible/400-italic.css";
+@import "@fontsource/atkinson-hyperlegible/700.css";
+@import "@fontsource-variable/bricolage-grotesque/opsz.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource-variable/noto-sans/wght.css";
+@import "@fontsource-variable/noto-sans/wght-italic.css";

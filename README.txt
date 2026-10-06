@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.7.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
 
 
 O QUE É
@@ -34,7 +34,7 @@ Na página inicial há quatro entradas:
    Mostra tudo em oito passos curtos, em cerca de dois minutos. Pode saltar-se a qualquer momento.
 
 4. Observatório
-   Estatísticas anónimas de todas as pessoas que usaram a aplicação: médias por competência e por nível, dispositivos, evolução por dia. Qualquer grupo com menos de 20 tentativas fica oculto.
+   Estatísticas anónimas de todas as pessoas que usaram a aplicação. Filtros por período (últimos 3, 6 ou 12 meses, o ano letivo atual e os 10 anteriores, de 1 de setembro a 31 de agosto), desafio, teste ou jogo, nível, dispositivo, cenário e origem. Gráficos da média por desafio, das tentativas ao longo do tempo, por nível, dispositivo, cenário e origem, e da preparação para provas, cada um com os dados em tabela. Exportação do relatório em CSV (para folha de cálculo) e em PDF. Qualquer grupo com menos de 20 tentativas fica oculto. Sem ponto de recolha configurado, mostra só os dados do próprio navegador.
 
 No cabeçalho estão também a página Sobre (com as perguntas frequentes) e as Definições.
 
@@ -42,6 +42,15 @@ Antes de começar um desafio ou uma preparação, escolhe-se o cenário:
 - Redação do jornal da escola: o aluno é repórter e cada tarefa serve a próxima edição.
 - Laboratório de experiências: o aluno é investigador e cada tarefa é um passo de uma experiência.
 O cenário muda a história, as personagens, os títulos e os textos. As regras e a pontuação são iguais. Nas listas abaixo, o primeiro título é o do cenário redação e o segundo o do cenário laboratório.
+
+
+VÍDEOS
+
+- Vídeo promocional (Início): https://youtu.be/jVf32NQmNhs
+- Vídeo institucional (Sobre): https://youtu.be/hamCz5WLmq0
+- Tutorial para alunos (Tutorial e Sobre): https://youtu.be/X7X09rY0ACs
+- Tutorial para professores (Professor, Tutorial e Sobre): https://youtu.be/xHucitIp8qw
+Nas páginas, os vídeos só são carregados do YouTube (youtube-nocookie.com) quando se carrega em reproduzir.
 
 
 OS DESAFIOS (Treinar → Desafios)
@@ -57,7 +66,7 @@ Doze desafios, cada um com cinco níveis. Contam para a preparação de provas e
 8. Teclas Mágicas / Teclas de Laboratório (atalhos): copiar, colar, desfazer, selecionar e mudar de campo só com o teclado. No Mac aparece ⌘ em vez de Ctrl.
 9. Encontra no Texto / Encontra no Manual (leitura no ecrã): procurar factos num texto longo, com títulos, índice, tabela e procura. Mede estratégia, não interpretação.
 10. Simulador de Prova (todas as competências): uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora, resposta curta, ordenar e confirmação antes de submeter. Na preparação, conta a dobrar.
-11. Infografia / Caderno de Cálculos (escrita matemática): escrever no computador frações, potências, raízes, desigualdades, índices e somatórios, e reconhecer notações.
+11. Escrita Matemática / Caderno de Cálculos (escrita matemática): escrever no computador frações, potências, raízes, desigualdades, índices e somatórios, e reconhecer notações.
 12. A Maqueta / O Modelo da Estufa (manipulação 3D): rodar e aproximar a câmara, mover, rodar, colar, separar, dividir, apagar e criar peças numa maqueta 3D, ver de cima e em projeção ortográfica. Funciona com rato, toque ou teclado e também só com a lista de objetos.
 
 
@@ -119,9 +128,13 @@ DADOS E PRIVACIDADE
 
 PUBLICAR A APLICAÇÃO
 
-A aplicação é um conjunto de ficheiros estáticos. Para publicar:
+Forma mais simples: descarregar a versão pronta na página de versões do repositório (Releases): o ficheiro ecd-vX.Y.Z-aplicacao.zip tem a aplicação pronta a alojar, sem ponto de recolha configurado. Ou usar a imagem Docker, que já inclui um servidor web:
+  docker run -p 8080:8080 ghcr.io/eduardon83/ensaio-competencias-digitais:1.0.0
+(com ponto de recolha: construir a imagem com docker build --build-arg VITE_TELEMETRIA_URL=… .)
+
+Para gerar a partir do código:
 1. Instalar o ponto de recolha de estatísticas (uma folha de cálculo Google com um script ou equivalente). Instruções em telemetria/README.md.
-2. Indicar o endereço desse ponto e, se houver, o do vídeo de apresentação, no ficheiro .env.
+2. Indicar o endereço desse ponto no ficheiro .env (VITE_TELEMETRIA_URL). Ao atualizar uma instalação antiga, publicar também a nova versão do script (telemetria/apps-script.gs), que acrescenta os filtros do Observatório.
 3. Gerar os ficheiros (npm run build) e copiar a pasta dist/ para qualquer alojamento web, configurado para devolver index.html em todos os endereços.
 
 É possível instalar a aplicação sem o passo 1. Os alunos treinam e podem observar os resultados, mas as estatísticas e resultados para os professores não estarão disponíveis.
@@ -140,6 +153,8 @@ Backoffice de textos (/backoffice, sem ligação nos menus):
 - Cada texto mostra o original e pode ser reposto; cada gravação é uma versão (as últimas 40), e pode voltar-se a qualquer uma. "Exportar" gera um ficheiro JSON com todas as alterações, para passar a versão final para o código.
 - Sem Worker (npm run dev ou alojamento estático), a aplicação usa os textos do código e o backoffice avisa que não está disponível.
 
+Segurança: os ficheiros recebem cabeçalhos de segurança (public/_headers: política de conteúdo, HSTS, nosniff, proteção contra inclusão noutros sítios). Os pedidos com chave à API do Worker estão limitados a 30 por minuto por endereço IP; o ecrã de administração envia a chave ao ponto de recolha num pedido POST e bloqueia 15 minutos depois de 10 chaves erradas. Se usar outro ponto de recolha que não um Google Apps Script, acrescente o endereço em connect-src no public/_headers (e em docker/nginx.conf).
+
 Chaves (segredos do Worker, nunca no código nem no Git):
 - CHAVE_ADMIN: super admin. Fica sempre.
 - CHAVE_EDICAO: para o professor que adapta os textos. Para fechar a edição, apaga-se este segredo (npx wrangler secret delete CHAVE_EDICAO); o super admin continua a entrar.
@@ -152,7 +167,7 @@ Publicar pela primeira vez:
   npm run worker:deploy                           (constrói e publica em https://ecd-ensaio.<conta>.workers.dev)
 Testar localmente com o Worker: copiar .dev.vars.example para .dev.vars e correr npm run worker:dev (http://localhost:8787).
 
-Passar a versão final para o código: exportar no backoffice, entregar o ficheiro a quem desenvolve; as alterações passam para os ficheiros de conteúdo (as chaves indicam o ficheiro e o campo) e o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
+Passar a versão final para o código: exportar no backoffice e correr node scripts/importar-textos.mjs exportacao.json (trata os textos das páginas; as outras chaves são listadas para passar à mão). Depois o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
 
 PARA QUEM DESENVOLVE
 
@@ -166,9 +181,8 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm run a11y         auditoria de acessibilidade (com npm run dev a correr); relatório em docs/AUDITORIA_A11Y.md
   node scripts/recalibrar.mjs tentativa.csv   sugestões de recalibração a partir da folha de estatísticas
 
-Piloto em escolas: protocolo em docs/PILOTO.md.
 
-Arquitetura, convenções e estado do projeto: AGENTS.md. Resumo da especificação: docs/ESPECIFICACAO.md.
+Arquitetura, convenções e estado do projeto: AGENTS.md.
 
 
 PERGUNTAS FREQUENTES
@@ -179,7 +193,8 @@ A página Sobre tem perguntas frequentes para alunos, famílias e escolas: onde 
 CONTRIBUIR E COMUNICAR ERROS
 
 O código e os conteúdos são públicos e livres (ver Licença). Qualquer pessoa, escola ou entidade pode copiar o projeto, corrigir erros, acrescentar atividades, testes e textos e publicar a sua versão, mantendo a atribuição.
-- Erros e sugestões: comunicam-se no repositório público do código, onde qualquer pessoa pode abrir um pedido ("issue") ou propor uma correção ("pull request"). Quando o endereço do repositório for definido (constante REPOSITORIO em src/versao.ts), aparece também na página Sobre.
+- Repositório público: https://github.com/eduardon83/ensaio-competencias-digitais (também indicado na página Sobre).
+- Erros e sugestões: comunicam-se no repositório, onde qualquer pessoa pode abrir um pedido ("issue") ou propor uma correção ("pull request").
 - Antes de propor uma alteração: npm run typecheck, npm test e, para páginas novas, npm run a11y. As convenções (português de Portugal, acessibilidade, organizações fictícias nos exemplos, códigos de professor) estão em AGENTS.md.
 
 LICENÇA

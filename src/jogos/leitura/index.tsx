@@ -82,7 +82,7 @@ function FichaTexto({ texto }: { texto: TextoLiterario }) {
         <strong style={{ color: "var(--tinta)" }}>{texto.autor}</strong> · {texto.obra} · {texto.ano}
         {texto.excerto && " · excerto"}
       </span>
-      <span>Domínio público (o autor morreu em {texto.falecimento}). Ortografia atualizada.</span>
+      <span>Domínio público. Ortografia atualizada.</span>
     </div>
   );
 }

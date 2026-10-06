@@ -76,6 +76,8 @@ export default function Backoffice() {
           ? local
             ? `Está a abrir a versão local (${location.host}), que não tem o Worker. Abra o endereço publicado na Cloudflare (…workers.dev/backoffice).`
             : `Este endereço (${location.host}) não respondeu como Worker. Confirme que o deploy na Cloudflare terminou e que está a usar o endereço do Worker.`
+          : r.erro === "tentativas"
+            ? "Demasiadas tentativas seguidas. Espere um minuto e tente de novo."
           : r.erro === "fechado"
             ? "A edição está fechada: as chaves ainda não foram definidas na Cloudflare (Settings → Variables and Secrets → CHAVE_EDICAO / CHAVE_ADMIN, tipo Secret)."
             : "Chave incorreta.",

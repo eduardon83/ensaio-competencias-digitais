@@ -32,7 +32,7 @@ import { FUNCOES, SECCOES } from "../atividades/cartao/dados";
 const NOME_PAGINA: Record<string, string> = {
   geral: "Cabeçalho, menu e rodapé", inicio: "Início", treinar: "Treinar", tutorial: "Tutorial", acessibilidade: "Acessibilidade", sobre: "Sobre", privacidade: "Privacidade", licenca: "Licença",
   professor: "Professor", provas: "Provas e exames", atividades: "Atividades (listas)", jogos: "Jogos (página)", seguranca: "Segurança digital (página)", definicoes: "Definições", resultados: "Os meus resultados",
-  observatorio: "Observatório", atividade: "Atividade: briefing, resultado e relatório", codigo: "Entrar com código",
+  observatorio: "Observatório", videos: "Vídeos (títulos e avisos)", atividade: "Atividade: briefing, resultado e relatório", codigo: "Entrar com código",
 };
 for (const [k, v] of Object.entries(PAGINAS)) registar(`paginas.${k}`, "Páginas", NOME_PAGINA[k] ?? k, v);
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Caminho } from "../componentes/Caminho";
+import { VideoYoutube } from "../componentes/VideoYoutube";
 import { obterAgregados, telemetriaConfigurada } from "../dados/telemetria";
 import { FAIXAS, faixaDe } from "../motor/tipos";
 import { AvisoTutorial } from "./Tutorial";
@@ -60,6 +61,10 @@ export function Inicio() {
           </Link>
         ))}
       </nav>
+
+      <section className="max-w-3xl w-full mx-auto" aria-label={PAGINAS.videos.titulos.promocional}>
+        <VideoYoutube qual="promocional" />
+      </section>
 
       <section className="grid gap-4 md:grid-cols-3">
         {[T.porque, T.comoFunciona, T.dados].map((c) => (

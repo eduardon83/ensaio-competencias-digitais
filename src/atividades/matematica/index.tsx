@@ -383,7 +383,7 @@ export const definicao = definir<ConfigMatematica>({
   slug: "matematica",
   numero: 11,
   dominio: "matematica",
-  titulo: { jornal: "Infografia", laboratorio: "Caderno de Cálculos" },
+  titulo: { jornal: "Escrita Matemática", laboratorio: "Caderno de Cálculos" },
   descricao: "Escrever expressões matemáticas no computador: frações, potências, raízes, desigualdades, índices, somatórios. E reconhecer notações.",
   duracao: "3 a 6 min",
   disponivel: true,

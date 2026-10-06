@@ -7,6 +7,7 @@ import { PAGINAS } from "../textos/paginas";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Caminho } from "../componentes/Caminho";
+import { VideoYoutube } from "../componentes/VideoYoutube";
 import QRCode from "qrcode";
 import { DISPONIVEIS } from "../atividades";
 import { GRUPOS, TODOS, qualquerPorSlug as porSlug } from "../registo";
@@ -222,6 +223,9 @@ export function Professor() {
                 ))}
               </ol>
             )}
+          </Cartao>
+          <Cartao className="grid gap-2">
+            <VideoYoutube qual="professor" compacto />
           </Cartao>
           <Cartao className="grid gap-2">
             <h2 className="text-lg">{PAGINAS.professor.comoFuncionaTitulo}</h2>

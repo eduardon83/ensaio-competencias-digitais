@@ -10,12 +10,15 @@
 //
 // Chaves (segredos do Worker, nunca no código): CHAVE_ADMIN (super admin, fica sempre) e CHAVE_EDICAO (professor que
 // adapta os textos; apagar este segredo fecha a edição). Defina-as com `npx wrangler secret put CHAVE_ADMIN`.
+// Limite de pedidos com chave: LIMITE_CHAVES (ligação "ratelimits" em wrangler.jsonc), por endereço IP, contra
+// tentativas de adivinhar a chave. Os ficheiros estáticos recebem os cabeçalhos de segurança de public/_headers.
 
 export interface Env {
   ASSETS: Fetcher;
   TEXTOS: KVNamespace;
   CHAVE_ADMIN?: string;
   CHAVE_EDICAO?: string;
+  LIMITE_CHAVES?: { limit(o: { key: string }): Promise<{ success: boolean }> };
 }
 
 interface Pacote {
@@ -41,7 +44,7 @@ const MAX_HISTORICO = 40;
 const CHAVE_VALIDA = /^[\w.\-]{1,200}$/;
 
 const json = (dados: unknown, estado = 200, extra: Record<string, string> = {}) =>
-  new Response(JSON.stringify(dados), { status: estado, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff", ...extra } });
+  new Response(JSON.stringify(dados), { status: estado, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff", "content-security-policy": "default-src 'none'; frame-ancestors 'none'", "referrer-policy": "no-referrer", ...extra } });
 
 async function iguais(a: string, b: string): Promise<boolean> {
   // Comparação em tempo constante (resumos SHA-256 do mesmo tamanho).
@@ -101,6 +104,13 @@ async function api(req: Request, env: Env, url: URL): Promise<Response> {
   if (caminho === "/api/textos" && req.method === "GET") {
     const a = await lerAtual(env);
     return json({ valores: a.valores, versao: a.versao, atualizadoEm: a.atualizadoEm });
+  }
+
+  // Todos os pedidos com chave contam para o limite por IP (certos e errados): adivinhar a chave fica impraticável.
+  if (req.headers.has("authorization") && env.LIMITE_CHAVES) {
+    const ip = req.headers.get("cf-connecting-ip") ?? "desconhecido";
+    const { success } = await env.LIMITE_CHAVES.limit({ key: ip });
+    if (!success) return json({ erro: "tentativas" }, 429, { "retry-after": "60" });
   }
 
   const papel = await papelDe(req, env);

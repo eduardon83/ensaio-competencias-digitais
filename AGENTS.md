@@ -10,6 +10,8 @@ Pedidos adicionais do product owner, já implementados na v0.1.0:
 1. **Formato de UI selecionável**: "Original" (próprio; antes chamado "Kendir") ou "Mosaico" (Ágora Design System da AMA, `@ama-pt/agora-design-system`).
 2. **Treino de competências** com **5 níveis por atividade**; atividade específica de **escrita matemática** (notação, anotações) com 5 níveis; segundo **contexto de aprendizagem** (aluno num laboratório de experiências) além do jornalista.
 
+Documentos internos que ficam só localmente (no `.gitignore`, fora do repositório público): `docs/ESPECIFICACAO.md`, `docs/especificacao-v0.1.html`, `docs/PILOTO.md` e `design/pacote-video/`. As referências a eles abaixo valem para quem os tiver.
+
 ## Arquitetura
 
 SPA estática: Vite 7 + React 19 + TypeScript + Tailwind v4 + react-router 7 (rotas declarativas em `src/App.tsx`). **Sem servidor, sem contas, sem base de dados** (decisão do product owner, 2026-10-02: entrega simples a ARTE/EduQA). Resultados pessoais em localStorage atrás da interface `Repositorio` (`src/dados/repositorio.ts`). Estatísticas de uso por **telemetria anónima** (`src/dados/telemetria.ts`): POST de cada tentativa/teste para `VITE_TELEMETRIA_URL` e GET de agregados; implementação de referência do ponto de recolha em `telemetria/apps-script.gs` (Google Apps Script → folha de cálculo; chave `ADMIN_CHAVE` nas propriedades do script protege os agregados completos do ecrã `/admin`). Sem URL configurado, nada é enviado.
@@ -28,7 +30,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 - Perguntas frequentes da página Sobre em `PAGINAS.sobre.faq` (`<details>` nativo, classe `.faq`). As respostas descrevem o comportamento real: ao mudar dados, telemetria, acessibilidade ou estrelas, rever o FAQ.
 - Ajudas novas: blocos com perguntas ou feedback levam `data-ouvir` e um `<Ouvir />`; relógios novos usam `BarraTempo` (assim respeitam o modo calmo).
 - As provas com código só chegam ao professor pela telemetria: com o envio desligado em Definições, `Codigo.tsx` avisa e oferece ligá-lo.
-- Vídeo da página Sobre: `VITE_VIDEO_SOBRE` (embed YouTube/Vimeo ou .mp4); vazio mostra um espaço reservado.
+- Vídeos (YouTube) em `src/componentes/VideoYoutube.tsx` (`VIDEOS`: promocional no Início, institucional e os restantes em Sobre, aluno no Tutorial, professor no Tutorial e em Professor). Fachada própria: nada é pedido ao YouTube antes do clique; depois, youtube-nocookie.com. Títulos em `PAGINAS.videos`.
 
 ### Formatos de UI
 
@@ -53,7 +55,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ## Licença
 
-Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.7.0 (`src/versao.ts` e `package.json`).
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (primeira versão oficial; a numeração recomeçou depois da 1.7.0 de desenvolvimento) (`src/versao.ts` e `package.json`).
 
 ## Convenções
 
@@ -64,6 +66,8 @@ Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às
 - Testes: funções de pontuação e conteúdo com invariantes (ex.: número de diferenças na Revisão) em `*.test.ts`.
 
 ## Estado (2026-10-06)
+
+- v1.0.0 (2026-10-06), primeira versão oficial: textos do backoffice passados para o código (`scripts/importar-textos.mjs`); fontes servidas pelo próprio sítio (`src/styles/fontes.css`, @fontsource; o plugin `semGoogleFonts` em `vite.config.ts` retira o @import do Google Fonts do tema Ágora); cabeçalhos de segurança em `public/_headers` (CSP; manter igual a `docker/nginx.conf`); limite de pedidos com chave no Worker (`ratelimits` LIMITE_CHAVES em `wrangler.jsonc`); chave do `/admin` por POST (`evento: "agregados"`) com bloqueio após 10 falhas; desafio 11 passa a "Escrita Matemática"; release com zip da aplicação, zip da telemetria, README.pdf e imagem Docker no GHCR (`Dockerfile`, workflow `release.yml`); commits com o email noreply do GitHub. Antes disto: Observatório novo (`src/paginas/Observatorio.tsx`, funções puras e testadas em `src/dados/observatorio.ts`: períodos com os últimos 3/6/12 meses e o ano letivo atual mais 10 anteriores, de 1 de setembro a 31 de agosto; filtros por desafio, nível, dispositivo, cenário e origem; a mesma agregação no navegador e no Apps Script; totais ocultos abaixo do limiar em modo público). Gráficos HTML acessíveis em `src/componentes/Graficos.tsx` (cada um com tabela "Ver os dados"). Exportação CSV e PDF (`src/dados/relatorioPdf.ts`, jsPDF carregado só ao exportar). `/admin` usa o mesmo painel com a chave. Vídeos do YouTube com fachada (`VideoYoutube.tsx`). Ligações do texto rico só `/`, `https:`, `http:` e `mailto:`. CI e release em `.github/workflows/` (tag `vX.Y.Z` igual ao `package.json`; notas em `docs/notas/vX.Y.Z.md`). Ao atualizar uma instalação com ponto de recolha, publicar de novo `telemetria/apps-script.gs`.
 
 - Pacote de vídeo (`design/pacote-video/`, 2026-10-06): `BRIEF.md` com os guiões dos vídeos Institucional (88 s), Tutorial Professor (60 s) e Tutorial Aluno (60 s), seguindo a identidade da demo promocional; `scripts/capturas-video.mjs` captura do sítio publicado (textos do backoffice) para `ecras/`, `sequencias/professor|aluno/` (cursor desenhado na página) e `gravacoes/*.webm` (precisa de `npx playwright install ffmpeg`). Ao mudar ecrãs mostrados nos vídeos, voltar a correr o script.
 

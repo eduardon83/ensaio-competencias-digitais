@@ -1,40 +1,12 @@
 // ─── Páginas de texto: guia de acessibilidade, sobre (com espaço para vídeo), privacidade, licença ──
 // Todos os textos vêm de src/textos/paginas.ts (editáveis no backoffice).
+import { VideoYoutube } from "../componentes/VideoYoutube";
 import { Caminho } from "../componentes/Caminho";
 import { AUTORIA, DATA_VERSAO, REPOSITORIO, VERSAO } from "../versao";
 import { PAGINAS } from "../textos/paginas";
 import { Rico, preencher } from "../textos/Rico";
 
 /** URL do vídeo de apresentação (YouTube/Vimeo "embed" ou ficheiro .mp4). Vazio = espaço reservado. */
-const VIDEO_SOBRE: string = (import.meta.env.VITE_VIDEO_SOBRE as string | undefined)?.trim() ?? "";
-
-export function Video({ titulo }: { titulo: string }) {
-  const V = PAGINAS.sobre.video;
-  if (!VIDEO_SOBRE) {
-    return (
-      <div className="video" role="img" aria-label={V.reservado}>
-        <div className="grid gap-1 p-4">
-          <span className="text-4xl" aria-hidden="true">▶</span>
-          <strong>{V.reservado}</strong>
-          <span className="text-sm">{V.emBreve}</span>
-        </div>
-      </div>
-    );
-  }
-  if (/\.(mp4|webm)(\?|$)/i.test(VIDEO_SOBRE)) {
-    return (
-      <div className="video">
-        <video controls preload="metadata" src={VIDEO_SOBRE} aria-label={titulo} />
-      </div>
-    );
-  }
-  return (
-    <div className="video">
-      <iframe src={VIDEO_SOBRE} title={titulo} loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen />
-    </div>
-  );
-}
-
 const vars = () => ({ versao: VERSAO, data: DATA_VERSAO, autoria: AUTORIA });
 
 export function Acessibilidade() {
@@ -85,7 +57,7 @@ export function Sobre() {
     <div className="grid gap-6 max-w-3xl">
       <Caminho itens={[]} atual={T.titulo} />
       <h1 className="text-4xl">{T.titulo}</h1>
-      <Video titulo={T.video.titulo} />
+      <VideoYoutube qual="institucional" />
       <p className="m-0">
         <Rico texto={preencher(T.versao, vars())} />
       </p>
@@ -111,6 +83,14 @@ export function Sobre() {
             </li>
           ))}
         </ul>
+      </section>
+      <section className="grid gap-3" aria-labelledby="videos-t">
+        <h2 id="videos-t" className="text-2xl">{PAGINAS.videos.tituloSobre}</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          <VideoYoutube qual="promocional" compacto />
+          <VideoYoutube qual="aluno" compacto />
+          <VideoYoutube qual="professor" compacto />
+        </div>
       </section>
       <section className="grid gap-2" aria-labelledby="faq-t">
         <h2 id="faq-t" className="text-2xl">{T.faq.titulo}</h2>

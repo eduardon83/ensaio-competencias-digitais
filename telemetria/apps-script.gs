@@ -9,9 +9,13 @@
  *    evento "sessao"                → regista uma sessão de professor (código, configuração, hash do token
  *                                     privado, email opcional) e envia o email de confirmação
  *    evento "fechar"                → fecha uma sessão (com o token): deixa de aceitar tentativas e de enviar emails
+ *    evento "agregados" + chave     → agregados completos (ecrã /admin); a chave vai no corpo, nunca no endereço.
+ *                                     Filtros opcionais em "filtros". Depois de 10 chaves erradas em 15 minutos, recusa
+ *                                     novas tentativas durante 15 minutos (o Apps Script não vê o IP: o bloqueio é global).
  *  GET
  *    (sem parâmetros)               → agregados públicos (grupos com menos de LIMIAR tentativas ocultos)
- *    ?chave=ADMIN_CHAVE             → agregados completos (ecrã /admin)
+ *      filtros opcionais: desde=AAAA-MM-DD, ate=AAAA-MM-DD, atividade, nivel, dispositivo, contexto, origem
+ *      (o Observatório envia-os; os testes completos só são filtrados por datas)
  *    ?sessao=XXXX&token=…           → resultados de uma sessão de professor (token privado do professor)
  *    ?estado=XXXX                   → { existe, fechada } para o aluno saber se o código ainda está aberto
  *    ?confirmar=…                   → confirma o email do professor (ligação enviada por email)
@@ -86,6 +90,7 @@ function doPost(e) {
     var dados = JSON.parse(e.postData.contents);
     if (dados.evento === "sessao") return json_(registarSessao_(dados));
     if (dados.evento === "fechar") return json_(fecharSessao_(dados));
+    if (dados.evento === "agregados") return json_(agregadosAdmin_(dados));
     return json_(registarTentativa_(dados));
   } catch (erro) {
     return json_({ ok: false, erro: String(erro) });
@@ -156,11 +161,23 @@ function doGet(e) {
     return json_({ existe: !!s, fechada: !!(s && s.fechada === true) });
   }
   if (p.sessao) return json_(resultadosSessao_(p.sessao, p.token || ""));
+  if (p.chave) return json_({ erro: "chave_por_post" }); // a chave já não é aceite no endereço
+  return json_(agregar_(false, filtros_(p)));
+}
+
+// Agregados completos para o ecrã /admin (chave no corpo do pedido, com limite de tentativas erradas).
+var MAX_FALHAS = 10;
+function agregadosAdmin_(d) {
+  var cache = CacheService.getScriptCache();
+  var falhas = Number(cache.get("falhas_admin") || 0);
+  if (falhas >= MAX_FALHAS) return { erro: "tentativas" };
   var admin = PropertiesService.getScriptProperties().getProperty("ADMIN_CHAVE") || "";
-  var chave = p.chave || "";
-  var completo = chave !== "" && admin !== "" && chave === admin;
-  if (chave !== "" && !completo) return json_({ erro: "chave" });
-  return json_(agregar_(completo));
+  var chave = String(d.chave || "");
+  if (admin === "" || chave === "" || chave !== admin) {
+    cache.put("falhas_admin", String(falhas + 1), 900);
+    return { erro: "chave" };
+  }
+  return agregar_(true, filtros_(d.filtros || {}));
 }
 
 function confirmar_(token) {
@@ -272,11 +289,40 @@ function fecharContagens_(mapa, limiar) {
   return saida;
 }
 
-function agregar_(completo) {
+// Filtros do Observatório (mesma lógica que src/dados/observatorio.ts, função passa).
+function filtros_(p) {
+  var q = {};
+  ["desde", "ate", "atividade", "nivel", "dispositivo", "contexto", "origem"].forEach(function (k) {
+    if (p[k]) q[k] = String(p[k]).slice(0, 40);
+  });
+  return q;
+}
+function dia_(v) {
+  return v instanceof Date ? v.toISOString().slice(0, 10) : String(v).slice(0, 10);
+}
+function passa_(t, q) {
+  var d = dia_(t.recebidoEm);
+  if (q.desde && d < q.desde) return false;
+  if (q.ate && d > q.ate) return false;
+  if (q.atividade && t.atividade !== q.atividade) return false;
+  if (q.nivel && String(t.nivel) !== q.nivel) return false;
+  if (q.dispositivo && t.dispositivo !== q.dispositivo) return false;
+  if (q.contexto && t.contexto !== q.contexto) return false;
+  if (q.origem && t.origem !== q.origem) return false;
+  return true;
+}
+
+function agregar_(completo, q) {
+  q = q || {};
   var limiar = completo ? 1 : LIMIAR;
-  var tentativas = ler_("tentativa");
-  var testes = ler_("teste");
-  var porAtividade = {}, porAtividadeNivel = {}, porNivel = {}, porDispositivo = {}, porContexto = {}, porFormato = {}, porOrigem = {}, porDia = {}, sessoes = {};
+  var tentativas = ler_("tentativa").filter(function (t) {
+    return passa_(t, q);
+  });
+  var testes = ler_("teste").filter(function (t) {
+    return passa_(t, { desde: q.desde, ate: q.ate });
+  });
+  var porAtividade = {}, porAtividadeNivel = {}, porNivel = {}, porDispositivo = {}, porContexto = {}, porFormato = {}, porOrigem = {}, porDia = {}, porMes = {}, sessoes = {};
+  var soma = 0;
   tentativas.forEach(function (t) {
     somar_(porAtividade, t.atividade, t.pontuacao);
     somar_(porAtividadeNivel, t.atividade + ":" + t.nivel, t.pontuacao);
@@ -285,18 +331,23 @@ function agregar_(completo) {
     contar_(porContexto, t.contexto || "?");
     contar_(porFormato, t.formato || "?");
     contar_(porOrigem, t.origem || "?");
-    contar_(porDia, String(t.recebidoEm).slice(0, 10));
+    contar_(porDia, dia_(t.recebidoEm));
+    contar_(porMes, dia_(t.recebidoEm).slice(0, 7));
+    soma += Number(t.pontuacao) || 0;
     if (t.sessao) sessoes[t.sessao] = true;
   });
   var testesPorCiclo = {};
   testes.forEach(function (t) {
     somar_(testesPorCiclo, t.ciclo, t.pontuacaoGlobal);
   });
+  // Modo público abaixo do limiar: totais a 0, para os filtros não revelarem números pequenos.
+  var oculto = !completo && tentativas.length < limiar;
   return {
     gerado_em: new Date().toISOString(),
-    total_tentativas: tentativas.length,
-    total_testes: testes.length,
+    total_tentativas: oculto ? 0 : tentativas.length,
+    total_testes: !completo && testes.length < limiar ? 0 : testes.length,
     limiar: limiar,
+    media_geral: tentativas.length >= limiar && tentativas.length > 0 ? Math.round(soma / tentativas.length) : null,
     por_atividade: fecharMedias_(porAtividade, limiar),
     por_atividade_nivel: fecharMedias_(porAtividadeNivel, limiar),
     por_nivel: fecharContagens_(porNivel, limiar),
@@ -305,8 +356,10 @@ function agregar_(completo) {
     por_formato: fecharContagens_(porFormato, limiar),
     por_origem: fecharContagens_(porOrigem, limiar),
     por_dia: completo ? porDia : fecharContagens_(porDia, limiar),
+    por_mes: fecharContagens_(porMes, limiar),
     testes_por_ciclo: fecharMedias_(testesPorCiclo, limiar),
-    sessoes: Object.keys(sessoes).length,
+    sessoes: oculto ? 0 : Object.keys(sessoes).length,
+    abaixo_limiar: oculto,
     sessoes_professor: completo ? ler_("sessoes").length : undefined,
     completo: completo,
   };

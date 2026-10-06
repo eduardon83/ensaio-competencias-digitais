@@ -8,7 +8,7 @@
   --tecla: #eef2f5; --tecla-borda: #b9c5ce;
   --certo: #2f7a49; --errado: #b3402e; --aviso: #8a5a00;
   --b1: #c44f3c; --b2: #d89b1d; --b3: #3f8f5a; --b4: #0f6b73;
-  --fonte-titulo: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --fonte-titulo: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --fonte-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --raio: 12px;
@@ -46,8 +46,8 @@
   --tecla: #f1f3f8; --tecla-borda: #bac0cc;
   --certo: #0b7a41; --errado: #b3332a; --aviso: #8a5a00;
   --b1: #c0392b; --b2: #b7791f; --b3: #0f8a4b; --b4: #034ad8;
-  --fonte-titulo: "Noto Sans", "Segoe UI", system-ui, sans-serif;
-  --fonte-texto: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --fonte-titulo: "Noto Sans Variable", "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --fonte-texto: "Noto Sans Variable", "Noto Sans", "Segoe UI", system-ui, sans-serif;
   --raio: 8px;
   --foco: #f408fc;
   color-scheme: light;
@@ -314,3 +314,26 @@ mark.realce { background: #ffe58a; color: #14232e; }
 /* Modo calmo: sem animações nem transições (os relógios são tratados no componente BarraTempo). */
 :root[data-calmo="sim"] { scroll-behavior: auto; }
 :root[data-calmo="sim"] *, :root[data-calmo="sim"] *::before, :root[data-calmo="sim"] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+
+/* Vídeos do YouTube: fachada própria (nenhum pedido ao YouTube antes do clique). */
+.video--youtube { border-style: solid; }
+.video-fachada { all: unset; box-sizing: border-box; width: 100%; height: 100%; display: grid; place-content: center; justify-items: center; gap: 6px; padding: 16px; cursor: pointer; text-align: center; color: var(--tinta); background: linear-gradient(135deg, var(--acento-suave), var(--superficie)); }
+.video-fachada:focus-visible { outline: 3px solid var(--foco); outline-offset: -6px; }
+.video-fachada__play { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--acento); color: var(--acento-tinta); font-size: 26px; padding-left: 4px; box-shadow: 0 6px 18px rgb(0 0 0 / .18); transition: transform .15s; }
+.video-fachada:hover .video-fachada__play { transform: scale(1.08); }
+
+/* Gráficos do Observatório (HTML: o texto mantém o tamanho real em qualquer largura). */
+.grafico-barras { display: grid; gap: 6px; }
+.grafico-barras__linha { display: grid; grid-template-columns: minmax(7rem, 38%) 1fr auto; align-items: center; gap: 8px; font-size: .9rem; }
+.grafico-barras__rotulo { text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.grafico-barras__pista { display: block; height: 14px; }
+.grafico-barras__barra { display: block; height: 100%; border-radius: 3px; background: var(--acento); }
+.grafico-barras__valor { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.grafico-colunas { display: grid; gap: 4px; padding-inline: 1.25rem; }
+.grafico-colunas__area { display: flex; align-items: flex-end; gap: 3px; height: 160px; border-bottom: 1px solid var(--linha); }
+.grafico-colunas__coluna { flex: 1 1 0; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.grafico-colunas__barra { display: block; width: 100%; max-width: 48px; border-radius: 2px 2px 0 0; background: var(--acento); }
+.grafico-colunas__valor { font-size: .75rem; font-variant-numeric: tabular-nums; }
+.grafico-colunas__eixo { display: flex; gap: 3px; font-size: .75rem; color: var(--suave); }
+.grafico-colunas__eixo span { flex: 1 1 0; min-width: 0; overflow: visible; white-space: nowrap; display: flex; justify-content: center; }
+@media (forced-colors: active) { .grafico-barras__barra, .grafico-colunas__barra { background: CanvasText; } }

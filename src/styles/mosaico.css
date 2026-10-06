@@ -2,3 +2,6 @@
    Tokens + estilos compilados dos componentes. O preflight e as utilities vêm de app.css. */
 @import "@ama-pt/agora-design-system/theme.css";
 @import "@ama-pt/agora-design-system/index.css";
+
+/* Noto Sans servida pelo próprio sítio (src/styles/fontes.css); o @import do Google Fonts do tema é retirado no build. */
+:root { --font-sans: "Noto Sans Variable", "Noto Sans", sans-serif; }

@@ -8,6 +8,7 @@
 
 import { lerPreferencias } from "../preferencias/preferencias";
 import { VERSAO } from "../versao";
+import { normalizar, type Agregados } from "./observatorio";
 
 export const URL_TELEMETRIA: string = (import.meta.env.VITE_TELEMETRIA_URL as string | undefined)?.trim() ?? "";
 export const telemetriaConfigurada = URL_TELEMETRIA.length > 0;
@@ -26,27 +27,7 @@ export function enviar(evento: Evento, dados: Record<string, unknown>): void {
   fetch(URL_TELEMETRIA, { method: "POST", body: corpo, headers: { "Content-Type": "text/plain;charset=utf-8" }, keepalive: true, mode: "no-cors" }).catch(() => {});
 }
 
-export interface Grupo {
-  n: number;
-  media: number;
-}
-export interface Agregados {
-  gerado_em: string;
-  total_tentativas: number;
-  total_testes: number;
-  limiar: number;
-  por_atividade: Record<string, Grupo>;
-  por_atividade_nivel: Record<string, Grupo>; // "slug:nivel"
-  por_nivel: Record<string, number>;
-  por_dispositivo: Record<string, number>;
-  por_contexto: Record<string, number>;
-  por_formato: Record<string, number>;
-  por_origem: Record<string, number>;
-  por_dia: Record<string, number>; // AAAA-MM-DD → tentativas
-  testes_por_ciclo: Record<string, Grupo>;
-  sessoes: number;
-  completo: boolean; // true quando a chave de administração foi aceite
-}
+export type { Agregados, Grupo } from "./observatorio";
 
 // ─── Sessões de professor ────────────────────────────────────────────────────
 async function postarJson<T>(dados: Record<string, unknown>): Promise<T | { erro: string }> {
@@ -102,15 +83,22 @@ export function obterResultadosSessao(sessao: string, token: string) {
   return obterJson<ResultadosSessao>({ sessao, token });
 }
 
-/** Obtém agregados do ponto de recolha. Sem chave: versão pública. Devolve null se não configurado ou em erro. */
-export async function obterAgregados(chave?: string): Promise<Agregados | { erro: string } | null> {
+/** Obtém agregados do ponto de recolha, com filtros opcionais (desde, ate, atividade, nivel, dispositivo, contexto,
+ *  origem). Sem chave: versão pública (GET). Com a chave de administração: pedido POST, para a chave nunca ir no
+ *  endereço (histórico do navegador, registos). Devolve null se não configurado. */
+export async function obterAgregados(chave?: string, filtros: Record<string, string> = {}): Promise<Agregados | { erro: string } | null> {
   if (!telemetriaConfigurada) return null;
+  if (chave) {
+    const r = await postarJson<Agregados | { erro: string }>({ evento: "agregados", chave, filtros });
+    return "erro" in r ? r : normalizar(r);
+  }
   const url = new URL(URL_TELEMETRIA);
-  if (chave) url.searchParams.set("chave", chave);
+  for (const [k, v] of Object.entries(filtros)) url.searchParams.set(k, v);
   try {
     const r = await fetch(url.toString(), { method: "GET", redirect: "follow" });
     if (!r.ok) return { erro: `HTTP ${r.status}` };
-    return (await r.json()) as Agregados | { erro: string };
+    const j = (await r.json()) as Agregados | { erro: string };
+    return "erro" in j ? j : normalizar(j);
   } catch (e) {
     return { erro: e instanceof Error ? e.message : "falha de rede" };
   }

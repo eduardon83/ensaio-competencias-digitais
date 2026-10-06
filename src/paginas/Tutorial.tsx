@@ -1,5 +1,6 @@
 // ─── Tutorial: passos curtos que mostram as funcionalidades. Pode saltar-se a qualquer momento. ──
 import { Caminho } from "../componentes/Caminho";
+import { VideoYoutube } from "../componentes/VideoYoutube";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { CONTEXTOS } from "../contextos";
@@ -119,7 +120,17 @@ function passos(): { titulo: string; corpo: ReactNode }[] {
     </p>
   ));
   return [
-    { titulo: T.boasVindas.titulo, corpo: <>{paragrafos(T.boasVindas.paragrafos)}</> },
+    {
+      titulo: T.boasVindas.titulo,
+      corpo: (
+        <>
+          {paragrafos(T.boasVindas.paragrafos)}
+          <div className="max-w-2xl w-full">
+            <VideoYoutube qual="aluno" compacto />
+          </div>
+        </>
+      ),
+    },
     {
       titulo: T.maneiras.titulo,
       corpo: (
@@ -186,6 +197,9 @@ function passos(): { titulo: string; corpo: ReactNode }[] {
           {[T.professores.montar, T.professores.partilhar, T.professores.acompanhar].map((m) => (
             <Mini key={m.titulo} titulo={m.titulo}><Rico texto={m.texto} /></Mini>
           ))}
+          <div className="md:col-span-3 max-w-2xl w-full">
+            <VideoYoutube qual="professor" compacto />
+          </div>
         </div>
       ),
     },

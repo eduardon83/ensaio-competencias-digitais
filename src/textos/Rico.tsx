@@ -15,6 +15,12 @@ export function rico(texto: string): ReactNode[] {
     if (m[1] !== undefined) out.push(<strong key={k++}>{m[1]}</strong>);
     else if (m[2] !== undefined) {
       const destino = m[3];
+      // Só ligações internas (/rota) e externas seguras: os textos vêm do backoffice e não devem poder correr código.
+      if (!destino.startsWith("/") && !/^(https?:|mailto:)/i.test(destino)) {
+        out.push(m[2]);
+        i = m.index! + m[0].length;
+        continue;
+      }
       out.push(
         destino.startsWith("/") ? (
           <Link key={k++} to={destino}>

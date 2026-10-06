@@ -1,16 +1,13 @@
-// ─── Os meus resultados (só neste navegador) e Observatório (agregados anónimos) ──
+// ─── Os meus resultados (só neste navegador) ──
 import { Rico } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
 import { Caminho } from "../componentes/Caminho";
-import { useEffect, useState } from "react";
-import { ATIVIDADES } from "../atividades";
+import { useState } from "react";
 import { qualquerPorSlug as porSlug } from "../registo";
 import { repositorioLocal } from "../dados/repositorio";
-import { obterAgregados, telemetriaConfigurada, type Agregados } from "../dados/telemetria";
-import { NOME_DOMINIO, NOME_NIVEL, type Nivel } from "../motor/tipos";
+import { NOME_NIVEL, type Nivel } from "../motor/tipos";
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
-import { Painel } from "./Admin";
 
 export function Resultados() {
   const { prefs } = usePreferencias();
@@ -120,81 +117,6 @@ export function Resultados() {
           Apagar tudo
         </Botao>
       </div>
-    </div>
-  );
-}
-
-export function Observatorio() {
-  const [remoto, setRemoto] = useState<Agregados | null>(null);
-  const [estado, setEstado] = useState<"a_carregar" | "ok" | "erro" | "local">(telemetriaConfigurada ? "a_carregar" : "local");
-
-  useEffect(() => {
-    if (!telemetriaConfigurada) return;
-    obterAgregados().then((r) => {
-      if (r && !("erro" in r)) {
-        setRemoto(r);
-        setEstado("ok");
-      } else setEstado("erro");
-    });
-  }, []);
-
-  const local = repositorioLocal.estatisticas();
-
-  return (
-    <div className="grid gap-6">
-      <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[]} atual={PAGINAS.observatorio.titulo} />
-        <h1 className="text-4xl">{PAGINAS.observatorio.titulo}</h1>
-        <p className="m-0"><Rico texto={PAGINAS.observatorio.introducao} /></p>
-      </header>
-
-      {estado === "a_carregar" && <p className="m-0" style={{ color: "var(--suave)" }}>A obter os agregados…</p>}
-      {estado === "ok" && remoto && <Painel dados={remoto} />}
-      {(estado === "erro" || estado === "local") && (
-        <>
-          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-            {estado === "erro" ? "Não foi possível obter os agregados globais agora. " : "Esta instalação não tem recolha de estatísticas configurada. "}
-            Mostram-se apenas os dados deste navegador.
-          </p>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="cartao p-5">
-              <div className="text-sm" style={{ color: "var(--suave)" }}>
-                Tentativas neste navegador
-              </div>
-              <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
-                {local.totalTentativas}
-              </div>
-            </div>
-            <div className="cartao p-5">
-              <div className="text-sm" style={{ color: "var(--suave)" }}>
-                Testes completos
-              </div>
-              <div className="text-4xl font-extrabold tabular-nums" style={{ fontFamily: "var(--fonte-titulo)" }}>
-                {local.totalTestes}
-              </div>
-            </div>
-          </div>
-          <section className="cartao p-4 grid gap-3">
-            <h2 className="text-xl">Média por competência</h2>
-            {ATIVIDADES.filter((a) => a.disponivel).map((a) => {
-              const m = local.mediaPorAtividade[a.slug];
-              return (
-                <div key={a.slug} className="grid gap-1 text-sm">
-                  <div className="flex justify-between">
-                    <span>{NOME_DOMINIO[a.dominio]}</span>
-                    <span className="tabular-nums" style={{ color: "var(--suave)" }}>
-                      {m ? `${m.media} (n=${m.n})` : "sem dados"}
-                    </span>
-                  </div>
-                  <div className="barra" aria-hidden="true">
-                    <div style={{ width: `${m?.media ?? 0}%` }} />
-                  </div>
-                </div>
-              );
-            })}
-          </section>
-        </>
-      )}
     </div>
   );
 }
