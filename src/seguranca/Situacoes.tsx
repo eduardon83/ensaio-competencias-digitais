@@ -4,6 +4,7 @@ import { amostra, baralharOpcoes } from "../motor/aleatorio";
 import type { LinhaRelatorio } from "../motor/tipos";
 import { Instrucao } from "../motor/util";
 import { Botao, BotaoRadio } from "../ui";
+import { Ouvir } from "../componentes/Ouvir";
 
 export interface Situacao {
   pergunta: string;
@@ -20,12 +21,13 @@ export function Situacoes({ lista, n, prefixo, instrucao, aoConcluir }: { lista:
     <div className="grid gap-3">
       <Instrucao>{instrucao}</Instrucao>
       {qs.map((q, i) => (
-        <fieldset key={i} className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.correta ? "var(--certo)" : "var(--errado)"}` } : undefined}>
+        <fieldset key={i} data-ouvir="" className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.correta ? "var(--certo)" : "var(--errado)"}` } : undefined}>
           <legend className="font-bold px-1">{i + 1}. {q.pergunta}</legend>
           {q.opcoes.map((o, j) => (
             <BotaoRadio key={j} id={`${prefixo}-${i}-${j}`} name={`${prefixo}-${i}`} rotulo={o} checked={resp[i] === j} disabled={feito} onChange={() => setResp((r) => r.map((x, k) => (k === i ? j : x)))} />
           ))}
           {feito && <p className="m-0 text-sm" style={{ color: resp[i] === q.correta ? "var(--certo)" : "var(--errado)" }}>{resp[i] === q.correta ? "Certo. " : `A opção mais segura: ${q.opcoes[q.correta]}. `}{q.porque}</p>}
+          <div><Ouvir /></div>
         </fieldset>
       ))}
       <div className="flex gap-3 items-center">

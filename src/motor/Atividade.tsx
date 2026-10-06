@@ -1,6 +1,7 @@
 // ─── Motor: corre uma atividade em quatro etapas (intro → prática → avaliação → resultado) ──
 import { Rico, preencher } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
+import { lerEmVozAlta, VOZ_DISPONIVEL } from "../componentes/Ouvir";
 import { useMemo, useState } from "react";
 import { Caminho } from "../componentes/Caminho";
 import { TEMAS } from "../seguranca/conteudo";
@@ -75,7 +76,7 @@ export function Atividade({
   // Caminho de regresso (só no treino livre; no teste e na prova do professor há botões próprios).
   const temaSeg = TEMAS.find((t) => t.teste.slug === definicao.slug);
   const caminho: [string, string][] | null =
-    origem !== "treino" || aoConcluir ? null : definicao.numero >= 200 && temaSeg ? [["/treinar", "Treinar"], ["/seguranca", "Segurança digital"], [`/seguranca/${temaSeg.id}`, temaSeg.titulo]] : definicao.numero >= 100 ? [["/treinar", "Treinar"], ["/jogos", "Jogos"]] : [["/treinar", "Treinar"], ["/treino", "Atividades"]];
+    origem !== "treino" || aoConcluir ? null : definicao.numero >= 200 && temaSeg ? [["/treinar", "Treinar"], ["/seguranca", "Segurança digital"], [`/seguranca/${temaSeg.id}`, temaSeg.titulo]] : definicao.numero >= 100 ? [["/treinar", "Treinar"], ["/jogos", "Jogos"]] : [["/treinar", "Treinar"], ["/treino", PAGINAS.atividades.caminho]];
 
   return (
     <div className="grid gap-5">
@@ -127,7 +128,7 @@ export function Atividade({
             <Botao variante="contorno" onClick={() => setEtapa("avaliacao")}>
               {PAGINAS.atividade.briefing.saltar}
             </Botao>
-            {typeof window !== "undefined" && "speechSynthesis" in window && (
+            {VOZ_DISPONIVEL && (
               <Botao variante="discreto" onClick={() => lerEmVozAlta(`${ctx.briefs[definicao.slug] ?? definicao.descricao} ${definicao.descricao}`)}>
                 <span aria-hidden="true">🔊</span> {PAGINAS.atividade.briefing.ouvir}
               </Botao>
@@ -276,16 +277,4 @@ function Resultado({
       </div>
     </section>
   );
-}
-
-/** Lê o texto com a síntese de voz do navegador, numa voz de português de Portugal quando existir. */
-function lerEmVozAlta(texto: string) {
-  const voz = window.speechSynthesis;
-  voz.cancel();
-  const fala = new SpeechSynthesisUtterance(texto);
-  fala.lang = "pt-PT";
-  fala.rate = 0.95;
-  const pt = voz.getVoices().find((v) => v.lang === "pt-PT") ?? voz.getVoices().find((v) => v.lang.startsWith("pt"));
-  if (pt) fala.voice = pt;
-  voz.speak(fala);
 }

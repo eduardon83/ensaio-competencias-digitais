@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.6.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.7.0 · outubro de 2026
 
 
 O QUE É
@@ -21,59 +21,61 @@ COMO SE USA
 Na página inicial há quatro entradas:
 
 1. Treinar
-   - Provas e exames: preparação para as provas ModA (4.º e 6.º ano), as provas finais do 9.º ano, os exames nacionais do secundário e o ensino superior. Cada preparação é uma sequência de atividades; no fim aparece uma "primeira página" com o resultado por competência, uma frase sobre cada uma, o que treinar a seguir e a opção de guardar como imagem. O ECD não reproduz as provas oficiais: treina as competências digitais de que se precisa para as fazer.
-   - Desafios: escolhe-se uma atividade e um de cinco níveis (1 Iniciação, 2 Base, 3 Intermédio, 4 Avançado, 5 Perito). O aluno pode repetir a atividade quantas vezes desejar.
+   - Provas e exames: preparação para as provas ModA (4.º e 6.º ano), as provas finais do 9.º ano, os exames nacionais do secundário e o ensino superior. Cada preparação é uma sequência de desafios; no fim aparece uma "primeira página" com o perfil de competências, uma frase sobre cada uma, o que treinar a seguir e a opção de guardar como imagem. O ECD não reproduz as provas oficiais: treina as competências digitais de que se precisa para as fazer.
+   - Desafios: escolhe-se um desafio e um de cinco níveis (1 Iniciação, 2 Base, 3 Intermédio, 4 Avançado, 5 Perito). O aluno pode repetir o desafio quantas vezes desejar e tentar superar o seu recorde.
    - Código: o aluno escreve o código que o professor lhe deu e faz a prova que o professor montou.
    - Jogos: jogos desenhados e desenvolvidos para auxiliar o aluno a desenvolver as suas competências de forma divertida e motivadora.
+   - Segurança digital: seis temas com informações e um teste cada.
 
 2. Professor
-   O professor escolhe o nível, as atividades, como os alunos se identificam (número de turma, alcunha ou sem identificação) e o tempo alargado. Recebe um código e um QR para projetar. Se indicar um email, recebe os resultados (um resumo por dia ou um email por atividade), depois de confirmar o endereço. Tem sempre uma ligação privada com a tabela de resultados e exportação para folha de cálculo.
+   O professor escolhe o nível, os desafios (e também testes de segurança e jogos), como os alunos se identificam (número de turma, alcunha ou sem identificação) e o tempo alargado. Recebe um código e um QR para projetar. Se indicar um email, recebe os resultados (um resumo por dia ou um email por atividade), depois de confirmar o endereço. Tem sempre uma ligação privada com a tabela de resultados e exportação para folha de cálculo.
 
 3. Tutorial
-   Mostra tudo em oito passos curtos. Pode saltar-se a qualquer momento.
+   Mostra tudo em oito passos curtos, em cerca de dois minutos. Pode saltar-se a qualquer momento.
 
 4. Observatório
    Estatísticas anónimas de todas as pessoas que usaram a aplicação: médias por competência e por nível, dispositivos, evolução por dia. Qualquer grupo com menos de 20 tentativas fica oculto.
 
-Antes de começar uma atividade ou uma preparação, escolhe-se o cenário:
+No cabeçalho estão também a página Sobre (com as perguntas frequentes) e as Definições.
+
+Antes de começar um desafio ou uma preparação, escolhe-se o cenário:
 - Redação do jornal da escola: o aluno é repórter e cada tarefa serve a próxima edição.
 - Laboratório de experiências: o aluno é investigador e cada tarefa é um passo de uma experiência.
-O cenário muda a história, as personagens e os textos. As regras e a pontuação são iguais.
+O cenário muda a história, as personagens, os títulos e os textos. As regras e a pontuação são iguais. Nas listas abaixo, o primeiro título é o do cenário redação e o segundo o do cenário laboratório.
 
 
-AS ATIVIDADES
+OS DESAFIOS (Treinar → Desafios)
 
-Disponíveis, cada uma com cinco níveis:
-- A Notícia / O Protocolo: escrever um texto no teclado, com acentos, ç, @, € e teclado numérico.
-- O Painel / A Consola: seguir instruções num sítio simulado com botões, menus, separadores, caminhos, paginação, janelas e avisos.
-- Revisão / Controlo de Qualidade: encontrar as diferenças entre o original e a cópia.
-- Paginação / Bancada: ordenar, classificar e ligar pares, arrastando ou tocando.
-- Teclas Mágicas: copiar, colar, desfazer, selecionar e mudar de campo só com o teclado.
-- Encontra no Texto / Encontra no Manual: procurar factos num texto longo, com títulos, índice, tabela e procura.
-- Escrita Matemática: escrever no computador frações, potências, raízes, desigualdades, índices, somatórios e integrais, e reconhecer notações.
+Doze desafios, cada um com cinco níveis. Contam para a preparação de provas e dão carimbos.
+1. A Notícia / O Protocolo (escrita no teclado): copiar um texto com um temporizador suave. Acentos, ç, @, € e teclado numérico contam.
+2. O Painel / A Consola (interfaces): seguir instruções num sítio simulado com botões, caixas, menus, separadores, caminhos, paginação, janelas e avisos.
+3. Revisão / Controlo de Qualidade (atenção ao detalhe): encontrar as diferenças entre o original e a cópia: algarismos trocados, acentos em falta, meses errados, emails quase iguais.
+4. O Arquivo / Arquivo de Amostras (navegação): encontrar ficheiros em pastas, mover e mudar o nome, mudar e fechar separadores, usar o histórico e chegar ao fim de uma página longa.
+5. Cartão de Imprensa / Cartão de Acesso (formulários): preencher um formulário a partir de uma ficha, com formatos portugueses (data, código postal, telemóvel), e corrigir os erros de validação.
+6. Paginação / Bancada (arrastar e largar): ordenar, classificar em secções e ligar pares, arrastando, tocando ou com o teclado.
+7. Fecho de Edição / Fim da Sessão (gestão do tempo): muitas perguntas curtas com relógio global e tempo sugerido por secção. Mede o ritmo, não a dificuldade.
+8. Teclas Mágicas / Teclas de Laboratório (atalhos): copiar, colar, desfazer, selecionar e mudar de campo só com o teclado. No Mac aparece ⌘ em vez de Ctrl.
+9. Encontra no Texto / Encontra no Manual (leitura no ecrã): procurar factos num texto longo, com títulos, índice, tabela e procura. Mede estratégia, não interpretação.
+10. Simulador de Prova (todas as competências): uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora, resposta curta, ordenar e confirmação antes de submeter. Na preparação, conta a dobrar.
+11. Infografia / Caderno de Cálculos (escrita matemática): escrever no computador frações, potências, raízes, desigualdades, índices e somatórios, e reconhecer notações.
+12. A Maqueta / O Modelo da Estufa (manipulação 3D): rodar e aproximar a câmara, mover, rodar, colar, separar, dividir, apagar e criar peças numa maqueta 3D, ver de cima e em projeção ortográfica. Funciona com rato, toque ou teclado e também só com a lista de objetos.
 
-- O Arquivo: abrir, mover e mudar o nome de ficheiros em pastas, mudar e fechar separadores, usar o histórico e chegar ao fim de uma página longa.
-- Cartão de Imprensa / Cartão de Acesso: preencher um formulário a partir de uma ficha, com formatos portugueses, e corrigir os erros de validação.
-- Fecho de Edição / Fim da Sessão: muitas perguntas curtas com relógio global e tempo sugerido por secção (mede o ritmo).
-- Simulador de Prova: uma interface de prova genérica com lista de itens, marcar para rever, áudio, zoom, calculadora e confirmação antes de submeter. Na preparação, conta a dobrar.
-- A Maqueta / O Modelo da Estufa (manipulação 3D): arrumar uma maqueta 3D: rodar e aproximar a câmara, mover, rodar, colar, separar, dividir, apagar e criar peças, ver de cima e em projeção ortográfica. Funciona com rato, toque ou teclado (atalhos) e também só com a lista de objetos.
 
 JOGOS (Treinar → Jogos)
 
-Cada jogo tem cinco níveis e um relatório no fim. Não contam para a preparação de provas nem para os carimbos.
-- Biblioteca Viva: leitura e escrita com textos de autores portugueses em domínio público (Fernando Pessoa e Alberto Caeiro, Luís de Camões, Florbela Espanca, Eça de Queirós, Almeida Garrett). Em cada nível o texto é mais longo e mais complexo. Rondas: ler com glossário, perguntas de compreensão, palavras em falta, pôr os versos por ordem e ditado. Os excertos estão em ortografia atualizada e devem ser validados contra edições de referência antes de uso em escolas.
-- A Sala Trancada (escape room): uma secretária digital com Ficheiros, Email, Documento, Folha e uma Nota bloqueada. Cada enigma dá um algarismo do código do cofre (contar PDFs, ler datas de criação, anexos, procurar uma palavra, somar uma coluna, escolher a palavra-passe mais forte). Ajudas opcionais e três tentativas.
-- Quem Apagou o Ficheiro? (mistério): cruzar o registo do servidor, as reservas dos computadores, as mensagens e os metadados das fotografias, marcar as provas e acusar o culpado. Nos níveis altos há trocas de lugar, pistas falsas e ficheiros com nomes parecidos.
-- Orçamento da Visita de Estudo: uma folha de cálculo simulada onde se escrevem fórmulas (=B2*C2, =SOMA, custo por aluno, desconto, o que sobra do orçamento, =MÁXIMO e =MÉDIA).
-- Correio da Redação: escrever um email formal com Para, CC e CCO escolhidos numa lista com nomes parecidos, assunto, saudação, conteúdo pedido, despedida, assinatura, o anexo certo e linguagem adequada.
-- O Robô da Bancada (O Robô da Redação no cenário redação): montar um programa com instruções (avançar, virar, apanhar, repetir e, no nível 5, avançar até bloquear) para o robô apanhar os itens e chegar ao destino. Cada desafio tem uma meta de instruções.
+Seis jogos, cada um com cinco níveis e um relatório no fim. Não contam para a preparação de provas nem para os carimbos.
+- Biblioteca Viva (leitura): ler, compreender e escrever com textos de autores portugueses em domínio público (Fernando Pessoa e Alberto Caeiro, Luís de Camões, Florbela Espanca, Eça de Queirós, Almeida Garrett). Em cada nível o texto é mais longo e mais complexo. Rondas: ler com glossário, perguntas de compreensão, palavras em falta, pôr os versos por ordem e ditado. Os excertos estão em ortografia atualizada e devem ser validados contra edições de referência antes de uso em escolas.
+- A Sala Trancada (escape room): uma secretária digital com Ficheiros, Email, Documento, Folha e uma Nota protegida por palavra-passe. Cada enigma dá um algarismo do código do cofre (contar PDFs, ler datas de criação, anexos, procurar uma palavra, somar uma coluna, escolher a palavra-passe mais forte). Ajudas opcionais e três tentativas.
+- Quem Apagou a Reportagem? / Quem Apagou o Relatório? (mistério): cruzar o registo do servidor, as reservas dos computadores, as mensagens e os metadados das fotografias, marcar as provas e acusar o culpado. Nos níveis altos há trocas de lugar, pistas falsas e ficheiros com nomes parecidos.
+- Orçamento da Visita de Estudo (folha de cálculo): escrever fórmulas (=B2*C2, =SOMA, custo por aluno, desconto, o que sobra do orçamento, =MÁXIMO e =MÉDIA).
+- Correio da Redação / Correio do Laboratório (email formal): Para, CC e CCO escolhidos numa lista com nomes parecidos, assunto, saudação, conteúdo pedido, despedida, assinatura, o anexo certo e linguagem adequada.
+- O Robô da Redação / O Robô da Bancada (pensamento computacional): montar um programa com instruções (avançar, virar, apanhar, repetir e, no nível 5, avançar até bloquear) para o robô apanhar os itens e chegar ao destino com o menor número de instruções.
 
-O professor pode incluir os testes de segurança e os jogos nas provas que monta (código de sessão).
 
-SEGURANÇA DIGITAL (Treinar → Segurança)
+SEGURANÇA DIGITAL (Treinar → Segurança digital)
 
-Seis temas, cada um com uma página de informações e um teste de cinco níveis com relatório:
-- Boas práticas online: palavras-passe, verificação em dois passos, atualizações, Wi-Fi e computadores partilhados. Teste: situações do dia a dia, criar uma palavra-passe forte (nunca é guardada nem enviada) e deixar uma conta segura.
+Seis temas, cada um com uma página de informações e um teste de cinco níveis com relatório. Não contam para a preparação de provas nem para os carimbos.
+- Boas práticas online: palavras-passe, verificação em dois passos, atualizações, Wi-Fi e computadores partilhados. Teste "Boas Práticas Online": situações do dia a dia, criar uma palavra-passe forte (nunca é guardada nem enviada) e deixar uma conta segura.
 - Exemplos de fraude: phishing, SMS falsos, lojas falsas e o que fazer. Teste "O Email Desconfiado": decidir se cada mensagem é legítima ou fraude e indicar os sinais de alerta.
 - Redes sociais: privacidade, pegada digital, ciberbullying, contactos desconhecidos e desinformação. Teste "Verdade ou Boato?": verificar publicações (quem publicou, data, outras fontes, pesquisa da imagem) e decidir o que fazer em situações nas redes.
 - Privacidade e navegação: ler endereços, cookies, permissões, navegação privada, transferências, extensões e como limpar os dados do navegador. Teste "O Endereço Certo": escolher a ligação oficial entre endereços parecidos (o domínio antes da primeira barra), permitir ou bloquear pedidos de localização, câmara, microfone e notificações, e situações de navegação.
@@ -81,20 +83,28 @@ Seis temas, cada um com uma página de informações e um teste de cinco níveis
 - Família e controlo parental: porque é importante viver a internet em família, o que o controlo parental faz e não faz, um acordo da família e conselhos para pais e encarregados de educação. Teste "O Acordo da Família": mito ou facto, configurar em família o controlo parental do tablet de uma criança (classificação PEGI adequada à idade) e situações em que conversar faz a diferença.
 Todas as organizações dos exemplos são fictícias. A página indica onde pedir ajuda (Linha Internet Segura, CERT.PT, Polícia Judiciária/112, um adulto de confiança); confirmar os contactos antes da publicação.
 
+O professor pode incluir os testes de segurança e os jogos nas provas que monta (código de sessão).
+
+
+COMO CORRE CADA DESAFIO, JOGO OU TESTE
+
 Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repetir não seja decorar.
 
-Carimbos: cada competência dá um carimbo a partir de 85 pontos. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".
+Começa com uma instrução curta (que se pode ouvir em voz alta) e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (1 estrela de 50 a 74 pontos, 2 de 75 a 90, 3 de 91 a 100; abaixo de 50, tentar novamente) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
 
-No fim de cada atividade aparece um relatório: para cada tarefa, se ficou certa, em parte ou errada, a resposta dada, a resposta certa e uma indicação para melhorar, além de quantos pontos faltam para a estrela seguinte.
+No fim aparece um relatório: para cada tarefa, se ficou certa, em parte ou errada, a resposta dada, a resposta certa e uma indicação para melhorar, além de quantos pontos faltam para a estrela seguinte.
 
-Cada atividade começa com um briefing e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (1 estrela de 50 a 74 pontos, 2 de 75 a 90, 3 de 91 a 100; abaixo de 50, tentar novamente) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
+Carimbos: cada competência dá um carimbo a partir de 85 pontos num desafio. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".
 
 
 ACESSIBILIDADE
 
 - Dois aspetos à escolha em Definições: Mosaico (predefinido), o Ágora Design System da AMA usado nos serviços públicos digitais, e Original (editorial). Ambos têm tema claro e escuro.
 - Texto grande, contraste reforçado (AAA), tempo alargado (×1,25, ×1,5 ou ×2, registado como acomodação) e funcionamento completo só com teclado.
-- Cada briefing pode ser lido em voz alta (síntese de voz do navegador, em português).
+- Leitura facilitada (Definições → Leitura): letra Atkinson Hyperlegible em toda a aplicação e mais espaço entre letras, palavras e linhas (valores da WCAG 1.4.12), texto alinhado à esquerda. Para dislexia, baixa visão ou cansaço visual.
+- Botões e opções grandes (Definições → Ajudas): botões, opções, caixas, interruptores e separadores com pelo menos 56 píxeis e mais afastados. Para dificuldades de motricidade, ecrãs táteis ou ratos com pouca precisão.
+- Ler em voz alta: a instrução inicial de cada desafio pode sempre ser ouvida. Com a opção Ler em voz alta ligada em Definições, aparece também um botão "Ouvir" nas instruções das tarefas, nas perguntas dos testes de segurança (com as opções e a explicação), nas mensagens de feedback e no resumo do resultado. Usa a síntese de voz do navegador, em português.
+- Modo calmo (Definições → Ajudas): esconde os relógios e as barras de tempo e desliga as animações. O tempo continua a contar como antes; quando falta pouco, aparece só um aviso tranquilo. A pontuação não muda. Para quem fica ansioso ao ver o tempo a passar ou se distrai com movimento; pode juntar-se ao tempo alargado.
 - Tudo o que se arrasta tem alternativa por toque ou teclado.
 - Objetivo: WCAG 2.2 nível AA (EN 301 549). A auditoria automática (npm run a11y) indica sucesso em todas as páginas e atividades, nos dois aspetos e nos dois temas. Futuros utilizadores devem efetuar testes adicionais com leitor de ecrã para assegurar o nível de acessibilidade pretendido.
 - A página Acessibilidade tem um guia para quem desenvolve e para quem encomenda provas digitais.
@@ -151,7 +161,7 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm install
   npm run dev          servidor local em http://localhost:5180/
   npm run typecheck    verificação de tipos
-  npm test             testes das pontuações, conteúdos, códigos e notação matemática
+  npm test             testes das pontuações, conteúdos, geradores, códigos e notação matemática
   npm run build        ficheiros finais em dist/
   npm run a11y         auditoria de acessibilidade (com npm run dev a correr); relatório em docs/AUDITORIA_A11Y.md
   node scripts/recalibrar.mjs tentativa.csv   sugestões de recalibração a partir da folha de estatísticas

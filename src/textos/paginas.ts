@@ -57,7 +57,7 @@ export const PAGINAS = {
     introducao: "Escolhe como queres treinar. Em todas as opções, antes de começar escolhes o cenário.",
     opcoes: [
       { para: "/teste", icone: "☰", titulo: "Provas e exames", texto: "Prepara-te para as provas ModA, as provas finais do 9.º ano e os exames nacionais, que se fazem no computador. No fim, tens acesso ao teu perfil de competências." },
-      { para: "/treino", icone: "◎", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior." },
+      { para: "/treino", icone: "◎", titulo: "Desafios", texto: "Escolhe um desafio e o nível de dificuldade. Repete as vezes que quiseres e tenta superar o teu recorde." },
       { para: "/codigo", icone: "#", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
       { para: "/jogos", icone: "🎲", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo, email e um robô para programar." },
       { para: "/seguranca", icone: "🛡", titulo: "Segurança", texto: "Informações e testes sobre boas práticas online, fraude, redes sociais, privacidade, Wi-Fi público e controlo parental." },
@@ -82,7 +82,7 @@ export const PAGINAS = {
     maneiras: {
       titulo: "Treinar: cinco maneiras",
       provas: { titulo: "Provas e exames", texto: "Uma preparação para as provas ModA, as provas finais e os exames nacionais, que se fazem no computador. No fim recebes o teu perfil de competências." },
-      atividade: { titulo: "Atividade", texto: "Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade." },
+      atividade: { titulo: "Desafio", texto: "Escolhe um desafio, avança pelos níveis e tenta superar o teu melhor resultado." },
       codigo: { titulo: "Código", texto: "O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova." },
       jogos: { titulo: "Jogos", texto: "Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô." },
       seguranca: { titulo: "Segurança", texto: "Seis temas: boas práticas online, fraude, redes sociais, privacidade e navegação, computadores e Wi-Fi públicos, e família e controlo parental. Em cada um lês as informações e fazes um teste." },
@@ -101,7 +101,7 @@ export const PAGINAS = {
     medida: {
       titulo: "Ajusta à tua medida",
       paragrafos: [
-        "Em Definições podes mudar o aspeto (Original ou Mosaico), o tema claro ou escuro, o tamanho do texto, o contraste e o tempo alargado.",
+        "Em Definições podes mudar o aspeto (Original ou Mosaico), o tema claro ou escuro, o tamanho do texto, o contraste, a leitura facilitada, o tamanho dos botões, a leitura em voz alta, o modo calmo e o tempo alargado.",
         "Tudo funciona só com o teclado. Quando há arrastar, há sempre outra maneira: tocar no item e depois no destino.",
       ],
     },
@@ -243,9 +243,12 @@ export const PAGINAS = {
           paragrafos: ["Sim. O ECD foi construído para cumprir as regras de acessibilidade WCAG 2.2, nível AA:"],
           lista: [
             "Em [Definições](/definicoes): tema claro ou escuro, texto grande, contraste reforçado e tempo alargado (×1,25, ×1,5 ou ×2), como nas acomodações das provas.",
+            "Leitura facilitada: uma letra fácil de distinguir e mais espaço entre letras, palavras e linhas.",
+            "Botões e opções grandes, mais altos e mais afastados, para quem tem dificuldades de motricidade.",
+            "Modo calmo: esconde os relógios e as barras de tempo e desliga as animações. O tempo continua a contar e há um aviso tranquilo quando falta pouco.",
             "Tudo funciona só com o teclado, com o foco sempre visível.",
             "Tudo o que se arrasta também se faz com toques ou com o teclado.",
-            "As instruções de cada atividade podem ser lidas em voz alta.",
+            "As instruções de cada atividade podem ser lidas em voz alta. Com a opção Ler em voz alta, também as tarefas, as perguntas, o feedback e o resultado.",
             "Todos os campos têm rótulos e os avisos são anunciados aos leitores de ecrã.",
             "Funciona com o zoom do navegador e respeita a opção do sistema de reduzir o movimento.",
           ],
@@ -335,15 +338,15 @@ export const PAGINAS = {
     comecar: "Começar a preparação",
     retomar: "Retomar ({i}/{n})",
     atividades: "Nível {nivel} · {n} atividades: {lista}.",
-    nota: "O ECD não reproduz as provas oficiais nem as substitui: treina as competências digitais de que precisas para as fazer no computador (escrever, ler no ecrã, usar ferramentas, gerir o tempo). Para treinar uma atividade de cada vez, vai a [Atividade](/treino).",
+    nota: "O ECD não reproduz as provas oficiais nem as substitui: treina as competências digitais de que precisas para as fazer no computador (escrever, ler no ecrã, usar ferramentas, gerir o tempo). Para treinar uma atividade de cada vez, vai a [Desafios](/treino).",
     "introducao": "Escolhe a prova para a qual te estás a preparar. A preparação é uma sequência de atividades curtas que treina o que essas provas pedem no computador. Podes pausar entre atividades e retomar neste dispositivo."
   },
   atividades: {
     tituloCatalogo: "Atividades",
-    titulo: "Treino de competências",
-    caminho: "Atividades",
-    "introducaoCatalogo": "As atividades do ECD. Escolhe a prova para ver as atividades que entram na preparação e em que nível. Para os cinco níveis de dificuldade, vai a Treino.",
-    "introducao": "Cada atividade tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: abaixo de 50 pontos convém tentar novamente; de 50 a 74, 1 estrela; de 75 a 90, 2 estrelas; de 91 a 100, 3 estrelas."
+    titulo: "Desafios",
+    caminho: "Desafios",
+    "introducaoCatalogo": "As atividades do ECD. Escolhe a prova para ver as atividades que entram na preparação e em que nível. Para os cinco níveis de dificuldade, vai a [Desafios](/treino).",
+    "introducao": "Cada desafio tem cinco níveis, do 1 (Iniciação) ao 5 (Perito). Podes repetir sempre que precisares. O teu melhor desempenho fica guardado neste navegador, por nível, com as estrelas respetivas: abaixo de 50 pontos convém tentar novamente; de 50 a 74, 1 estrela; de 75 a 90, 2 estrelas; de 91 a 100, 3 estrelas."
   },
   jogos: {
     titulo: "Jogos",
@@ -358,6 +361,36 @@ export const PAGINAS = {
   },
   definicoes: {
     titulo: "Definições",
+    ajudas: {
+      titulo: "Ajudas",
+      leitura: {
+        titulo: "Tipo de leitura",
+        normal: "Normal",
+        facilitada: "Leitura facilitada",
+        ajuda: "Uma letra desenhada para ser fácil de distinguir (Atkinson Hyperlegible) e mais espaço entre letras, palavras e linhas, alinhado à esquerda. Ajuda quem tem dislexia, baixa visão ou se cansa a ler no ecrã.",
+      },
+      alvos: {
+        titulo: "Botões e opções",
+        normais: "Normais",
+        grandes: "Grandes: mais altos e mais afastados",
+        ajuda: "Botões, opções e caixas com pelo menos 56 píxeis e mais espaço entre si. Ajuda quem tem dificuldades de motricidade, usa o ecrã tátil ou um rato com pouca precisão.",
+      },
+      voz: {
+        titulo: "Ler em voz alta",
+        ajuda: "Mostra um botão “Ouvir” nas instruções das tarefas, nas perguntas dos testes de segurança, nas mensagens de feedback e no resumo do resultado. Usa a voz do navegador, em português. As instruções iniciais de cada atividade têm sempre este botão.",
+        ligado: "Botões “Ouvir” ligados",
+        desligado: "Botões “Ouvir” desligados",
+      },
+      calmo: {
+        titulo: "Modo calmo",
+        oQueFaz: "**O que faz:** esconde os relógios e as barras de tempo e desliga as animações. O tempo continua a contar como antes: quando faltar pouco, aparece só um aviso tranquilo. A pontuação não muda.",
+        paraQue: "**Para que serve:** para quem fica ansioso ao ver o tempo a passar, se distrai com movimento ou prefere concentrar-se só na tarefa. Se precisares de mais tempo, junta-lhe o tempo alargado.",
+        ligado: "Modo calmo ligado",
+        desligado: "Modo calmo desligado",
+        aviso: "O tempo está a contar. Avisamos quando faltar pouco.",
+        poucoTempo: "Falta pouco tempo. Termina com calma.",
+      },
+    },
     "introducao": "Tudo fica guardado neste navegador. Nenhuma destas escolhas afeta a pontuação, exceto o tempo alargado, que fica registado no resultado como acomodação."
   },
   resultados: {
@@ -371,7 +404,7 @@ export const PAGINAS = {
   atividade: {
     briefing: { pratica: "Primeiro fazes um item de prática que não conta. Depois começa a avaliação.", melhor: "O teu melhor neste nível: **{pontos}** pontos.", comecar: "Começar a prática", saltar: "Saltar a prática", ouvir: "Ler em voz alta", alargado: "Tempo alargado ×{x} ativo." },
     etapas: { intro: "Briefing", pratica: "Prática (não conta)", avaliacao: "A contar", resultado: "Resultado" },
-    resultado: { carimbo: "Ganhaste o {carimbo} de {dominio}.", bom: "Bom trabalho.", caminho: "Vais no bom caminho.", tenta: "Tenta novamente: vais conseguir.", verCartao: "Ver o meu {cartao}", recorde: "Novo recorde pessoal (antes: {antes}).", tempo: "Tempo: {s} s · Nível {nivel} ({nome})", repetir: "Repetir", proxima: "Próxima atividade: {titulo}", voltar: "Voltar ao treino", repetirEsta: "Repetir esta atividade", revInfo: "Rever as informações", voltarSeguranca: "Voltar à segurança", voltarJogos: "Voltar aos jogos" },
+    resultado: { carimbo: "Ganhaste o {carimbo} de {dominio}.", bom: "Bom trabalho.", caminho: "Vais no bom caminho.", tenta: "Tenta novamente: vais conseguir.", verCartao: "Ver o meu {cartao}", recorde: "Novo recorde pessoal (antes: {antes}).", tempo: "Tempo: {s} s · Nível {nivel} ({nome})", repetir: "Repetir", proxima: "Próxima atividade: {titulo}", voltar: "Voltar aos desafios", repetirEsta: "Repetir esta atividade", revInfo: "Rever as informações", voltarSeguranca: "Voltar à segurança", voltarJogos: "Voltar aos jogos" },
     relatorio: { estrelas0: "Ainda não ganhaste estrelas: vale a pena tentar novamente.", estrelas1: "Obtiveste 1 estrela.", estrelasN: "Obtiveste {n} estrelas.", tres: "Tens as três estrelas. Experimenta o nível seguinte.", falta: "Para {nome} precisas de {alvo} pontos: faltam {falta}.", nomes: ["a primeira estrela", "a segunda estrela", "a terceira estrela"], proximaVez: "Da próxima vez:", titulo: "Relatório da atividade", bemFeito: "Bem feito.", porResponder: "Por responder: em branco vale zero." },
   },
   codigo: {

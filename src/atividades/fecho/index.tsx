@@ -9,6 +9,7 @@ import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../.
 import { BarraTempo, formatarTempo, useTemporizador } from "../../motor/util";
 import { escolher } from "../../motor/aleatorio";
 import { Botao, BotaoRadio } from "../../ui";
+import { usePreferencias } from "../../preferencias/preferencias";
 import { gerarSecao, type Item } from "./itens";
 
 export interface ConfigFecho {
@@ -40,6 +41,7 @@ interface Secao {
 
 function Fecho({ config, contexto, extensaoTempo, aoTerminar }: PropsAtividade<ConfigFecho>) {
   const ctx = defContexto(contexto);
+  const { prefs } = usePreferencias();
   const [secoes] = useState<Secao[]>(() => {
     const dupla = config.pesos !== "nenhum" ? Math.floor(Math.random() * config.secoes) : -1;
     const usados = new Set<string>(); // temas já usados nesta tentativa, partilhados entre secções
@@ -168,7 +170,7 @@ function Fecho({ config, contexto, extensaoTempo, aoTerminar }: PropsAtividade<C
           })}
         </div>
         <div className="text-sm" style={{ color: "var(--suave)" }}>
-          Tempo sugerido para esta secção: {formatarTempo(sugeridoMs)}{config.digitos && <> · já usaste {formatarTempo(decorridoSecao)}</>}
+          Tempo sugerido para esta secção: {formatarTempo(sugeridoMs)}{config.digitos && !prefs.calmo && <> · já usaste {formatarTempo(decorridoSecao)}</>}
         </div>
       </div>
       <section aria-label={s.nome} className="grid gap-3">

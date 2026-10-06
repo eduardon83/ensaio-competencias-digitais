@@ -1,4 +1,4 @@
-// ─── Definições: aspeto (Original / Mosaico), contexto narrativo, tema, tamanho do texto, tempo alargado, nome ──
+// ─── Definições: aspeto (Original / Mosaico), contexto narrativo, leitura, ajudas (alvos, Ouvir, modo calmo), tempo alargado, nome ──
 import { Rico } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
 import { Caminho } from "../componentes/Caminho";
@@ -8,6 +8,7 @@ import { BotaoRadio, CampoTexto, Cartao, Interruptor } from "../ui";
 
 export function Definicoes() {
   const { prefs, definir } = usePreferencias();
+  const A = PAGINAS.definicoes.ajudas;
   return (
     <div className="grid gap-6 max-w-3xl">
       <header className="grid gap-2">
@@ -56,6 +57,33 @@ export function Definicoes() {
           <BotaoRadio id="contraste-normal" name="contraste" rotulo="Normal (AA)" checked={prefs.contraste === "normal"} onChange={() => definir({ contraste: "normal" })} />
           <BotaoRadio id="contraste-reforcado" name="contraste" rotulo="Reforçado (AAA): textos secundários e contornos mais escuros" checked={prefs.contraste === "reforcado"} onChange={() => definir({ contraste: "reforcado" })} />
         </fieldset>
+        <fieldset className="grid gap-2 border-0 p-0 m-0">
+          <legend className="font-bold text-sm">{A.leitura.titulo}</legend>
+          <BotaoRadio id="leitura-normal" name="leitura" rotulo={A.leitura.normal} checked={prefs.leitura === "normal"} onChange={() => definir({ leitura: "normal" })} />
+          <BotaoRadio id="leitura-facilitada" name="leitura" rotulo={A.leitura.facilitada} checked={prefs.leitura === "facilitada"} onChange={() => definir({ leitura: "facilitada" })} />
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>{A.leitura.ajuda}</p>
+        </fieldset>
+      </Cartao>
+
+      <Cartao className="grid gap-4">
+        <h2 className="text-xl">{A.titulo}</h2>
+        <fieldset className="grid gap-2 border-0 p-0 m-0">
+          <legend className="font-bold text-sm">{A.alvos.titulo}</legend>
+          <BotaoRadio id="alvos-normais" name="alvos" rotulo={A.alvos.normais} checked={prefs.alvos === "normais"} onChange={() => definir({ alvos: "normais" })} />
+          <BotaoRadio id="alvos-grandes" name="alvos" rotulo={A.alvos.grandes} checked={prefs.alvos === "grandes"} onChange={() => definir({ alvos: "grandes" })} />
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>{A.alvos.ajuda}</p>
+        </fieldset>
+        <div className="grid gap-1">
+          <h3 className="text-base font-bold">{A.voz.titulo}</h3>
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>{A.voz.ajuda}</p>
+          <Interruptor id="voz" rotulo={prefs.voz ? A.voz.ligado : A.voz.desligado} checked={prefs.voz} onChange={(e) => definir({ voz: e.target.checked })} />
+        </div>
+        <div className="grid gap-1">
+          <h3 className="text-base font-bold">{A.calmo.titulo}</h3>
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}><Rico texto={A.calmo.oQueFaz} /></p>
+          <p className="m-0 text-sm" style={{ color: "var(--suave)" }}><Rico texto={A.calmo.paraQue} /></p>
+          <Interruptor id="calmo" rotulo={prefs.calmo ? A.calmo.ligado : A.calmo.desligado} checked={prefs.calmo} onChange={(e) => definir({ calmo: e.target.checked })} />
+        </div>
       </Cartao>
 
       <Cartao className="grid gap-3">

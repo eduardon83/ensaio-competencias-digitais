@@ -9,6 +9,7 @@ import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../m
 import { Instrucao } from "../motor/util";
 import { Botao, BotaoRadio } from "../ui";
 import { Janela } from "../componentes/Janela";
+import { Ouvir } from "../componentes/Ouvir";
 import { CabecalhoParte, Situacoes, type Situacao } from "./Situacoes";
 
 export interface ConfigPrivacidade {
@@ -174,7 +175,7 @@ function Enderecos({ cfg, aoConcluir }: { cfg: ConfigPrivacidade; aoConcluir: (f
     <div className="grid gap-3" style={{ overflowWrap: "anywhere" }}>
       <Instrucao>Lê cada endereço com atenção. Escolhe a ligação que leva mesmo ao sítio oficial. Dica: o que conta é o que vem imediatamente antes da primeira barra /.</Instrucao>
       {qs.map((q, i) => (
-        <fieldset key={i} className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.certa ? "var(--certo)" : "var(--errado)"}` } : undefined}>
+        <fieldset key={i} data-ouvir="" className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.certa ? "var(--certo)" : "var(--errado)"}` } : undefined}>
           <legend className="font-bold px-1">
             {i + 1}. Queres entrar em {q.sitio}. O sítio oficial é <span style={{ fontFamily: "var(--fonte-mono)" }}>{q.dominio}</span>.
           </legend>
@@ -187,6 +188,7 @@ function Enderecos({ cfg, aoConcluir }: { cfg: ConfigPrivacidade; aoConcluir: (f
               {resp[i] !== null && resp[i] !== q.certa && `A que escolheste leva a ${dominioPrincipal(q.opcoes[resp[i]!])}.`}
             </p>
           )}
+          <div><Ouvir /></div>
         </fieldset>
       ))}
       <div className="flex gap-3 items-center">
@@ -231,7 +233,7 @@ function Permissoes({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l: 
       <Instrucao>Cada sítio pede uma permissão. Permite só o que o sítio precisa mesmo para funcionar.</Instrucao>
       {ps.map((p, i) => (
         <Janela key={p.endereco} endereco={p.endereco} rotulo={`Pedido de ${p.sitio}`}>
-          <div className="p-4 grid gap-2" style={feito ? { outline: `2px solid ${resp[i] === p.permitir ? "var(--certo)" : "var(--errado)"}` } : undefined}>
+          <div className="p-4 grid gap-2" data-ouvir="" style={feito ? { outline: `2px solid ${resp[i] === p.permitir ? "var(--certo)" : "var(--errado)"}` } : undefined}>
             <fieldset className="border-0 p-0 m-0 grid gap-1">
               <legend className="font-bold">
                 <span aria-hidden="true">🔔 </span>“{p.sitio}” quer {p.pedido}.
@@ -242,6 +244,7 @@ function Permissoes({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l: 
               </div>
             </fieldset>
             {feito && <p className="m-0 text-sm" style={{ color: resp[i] === p.permitir ? "var(--certo)" : "var(--errado)" }}>{resp[i] === p.permitir ? "Certo. " : `O melhor era ${p.permitir ? "permitir" : "bloquear"}. `}{p.porque}</p>}
+            <div><Ouvir /></div>
           </div>
         </Janela>
       ))}

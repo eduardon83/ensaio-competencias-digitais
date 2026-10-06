@@ -88,7 +88,7 @@ export function CartaoCarimbos() {
       </article>
       <div className="flex gap-3 flex-wrap">
         <Botao onClick={() => window.print()}>Imprimir o cartão</Botao>
-        <Link to="/treino" className="botao botao--contorno">Treinar atividades</Link>
+        <Link to="/treino" className="botao botao--contorno">Ir para os desafios</Link>
       </div>
       <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
         Para o teu nome aparecer no cartão, escreve-o em <Link to="/definicoes">Definições</Link>. Fica só neste navegador.

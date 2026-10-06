@@ -1,6 +1,9 @@
 // ─── Utilitários partilhados pelas atividades ────────────────────────────────
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Barra } from "../ui";
+import { Ouvir } from "../componentes/Ouvir";
+import { usePreferencias } from "../preferencias/preferencias";
+import { PAGINAS } from "../textos/paginas";
 
 /** Conta o tempo desde que `ativo` passou a verdadeiro. Com `limiteMs`, chama `aoEsgotar` uma vez. */
 export function useTemporizador(ativo: boolean, limiteMs: number | null, aoEsgotar?: () => void) {
@@ -34,8 +37,10 @@ export function formatarTempo(ms: number): string {
   return `${m}:${String(s % 60).padStart(2, "0")}`;
 }
 
-/** Barra de tempo fina com avisos anunciados a leitores de ecrã (50 %, 30 s, 10 s). */
+/** Barra de tempo fina com avisos anunciados a leitores de ecrã (50 %, 30 s, 10 s).
+ *  No modo calmo não há barra nem números: uma frase fixa e, perto do fim, um aviso tranquilo. O tempo conta igual. */
 export function BarraTempo({ restanteMs, totalMs, soBarra }: { restanteMs: number; totalMs: number; soBarra?: boolean }) {
+  const { prefs } = usePreferencias();
   const fracao = restanteMs / totalMs;
   const tom = fracao < 0.15 ? "errado" : fracao < 0.5 ? "aviso" : "normal";
   const [aviso, setAviso] = useState("");
@@ -44,6 +49,15 @@ export function BarraTempo({ restanteMs, totalMs, soBarra }: { restanteMs: numbe
     else if (restanteMs <= 30_000 && restanteMs > 29_000) setAviso("Faltam 30 segundos.");
     else if (fracao <= 0.5 && fracao > 0.49) setAviso("Metade do tempo passou.");
   }, [restanteMs, fracao]);
+  if (prefs.calmo) {
+    const pouco = restanteMs <= Math.min(30_000, totalMs * 0.2);
+    const C = PAGINAS.definicoes.ajudas.calmo;
+    return (
+      <p className="m-0 text-sm" role="status" style={{ color: pouco ? "var(--tinta)" : "var(--suave)", fontWeight: pouco ? 700 : 400 }}>
+        {pouco ? C.poucoTempo : C.aviso}
+      </p>
+    );
+  }
   return (
     <div className="grid gap-1">
       <div className="flex justify-between text-sm" style={{ color: "var(--suave)" }}>
@@ -65,7 +79,7 @@ export function BarraTempo({ restanteMs, totalMs, soBarra }: { restanteMs: numbe
 /** Caixa de instrução da tarefa atual. */
 export function Instrucao({ numero, total, children }: { numero?: number; total?: number; children: ReactNode }) {
   return (
-    <div className="cartao p-4" role="status" aria-live="polite" style={{ borderLeft: "6px solid var(--acento)" }}>
+    <div className="cartao p-4" role="status" aria-live="polite" data-ouvir="" style={{ borderLeft: "6px solid var(--acento)" }}>
       {numero !== undefined && total !== undefined && (
         <div className="text-xs font-bold uppercase tracking-wide" style={{ color: "var(--suave)" }}>
           Tarefa {numero} de {total}
@@ -74,6 +88,7 @@ export function Instrucao({ numero, total, children }: { numero?: number; total?
       <div className="text-lg font-bold" style={{ fontFamily: "var(--fonte-titulo)" }}>
         {children}
       </div>
+      <Ouvir />
     </div>
   );
 }
@@ -82,8 +97,9 @@ export function Instrucao({ numero, total, children }: { numero?: number; total?
 export function Feedback({ tipo, children }: { tipo: "certo" | "errado" | "info"; children: ReactNode }) {
   const cor = tipo === "certo" ? "var(--certo)" : tipo === "errado" ? "var(--errado)" : "var(--acento)";
   return (
-    <div className="cartao p-3" role="status" style={{ borderColor: cor, color: "var(--tinta)" }}>
+    <div className="cartao p-3" role="status" data-ouvir="" style={{ borderColor: cor, color: "var(--tinta)" }}>
       {children}
+      <Ouvir />
     </div>
   );
 }

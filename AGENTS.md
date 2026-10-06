@@ -26,6 +26,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 - Sessões de professor sem servidor próprio: `src/codigo/codigo.ts` codifica nível, atividades, tempo alargado e identificação no código `XXXX·YYYYYY` (alfabeto sem 0/O/1/I/L, carácter de verificação). `src/paginas/Professor.tsx` cria o código e regista a sessão no ponto de recolha (hash do token privado + email opcional, confirmado por ligação); a ligação privada `/professor/resultados#s=…&t=…` lê os resultados. `src/paginas/Codigo.tsx` é o lado do aluno (identificação, cenário, sequência). As tentativas levam `codigo` e `aluno` na telemetria; o Apps Script envia emails (MailApp) por tentativa ou em resumo diário.
 - `Sequencia` e `PrimeiraPagina` (`src/paginas/Teste.tsx`) servem o teste por ciclo e a prova do professor.
 - Perguntas frequentes da página Sobre em `PAGINAS.sobre.faq` (`<details>` nativo, classe `.faq`). As respostas descrevem o comportamento real: ao mudar dados, telemetria, acessibilidade ou estrelas, rever o FAQ.
+- Ajudas novas: blocos com perguntas ou feedback levam `data-ouvir` e um `<Ouvir />`; relógios novos usam `BarraTempo` (assim respeitam o modo calmo).
 - As provas com código só chegam ao professor pela telemetria: com o envio desligado em Definições, `Codigo.tsx` avisa e oferece ligá-lo.
 - Vídeo da página Sobre: `VITE_VIDEO_SOBRE` (embed YouTube/Vimeo ou .mp4); vazio mostra um espaço reservado.
 
@@ -52,7 +53,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ## Licença
 
-Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.6.0 (`src/versao.ts` e `package.json`).
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.7.0 (`src/versao.ts` e `package.json`).
 
 ## Convenções
 
@@ -63,6 +64,8 @@ Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às
 - Testes: funções de pontuação e conteúdo com invariantes (ex.: número de diferenças na Revisão) em `*.test.ts`.
 
 ## Estado (2026-10-06)
+
+- v1.7.0 (2026-10-06): a página `/treino` passou a chamar-se Desafios (título, caminho e ligações; os textos do Treinar e do Tutorial já estavam editados no backoffice). Ajudas em Definições (`Preferencias`: `leitura`, `alvos`, `voz`, `calmo`, aplicadas como `data-leitura`, `data-alvos`, `data-calmo` no `<html>`; CSS no fim de `app.css`; textos em `PAGINAS.definicoes.ajudas`): leitura facilitada (Atkinson Hyperlegible e espaçamento WCAG 1.4.12), alvos de 56 px, botões "Ouvir" (`src/componentes/Ouvir.tsx`: lê o antepassado com `data-ouvir`; já em `Instrucao`, `Feedback`, `ResumoRelatorio`, `Situacoes` e nos testes novos) e modo calmo (`BarraTempo` mostra só uma frase e um aviso perto do fim; o tempo conta igual; sem animações). README reescrito com as listas atuais de desafios, jogos e segurança.
 
 - v1.6.0 (2026-10-06): FAQ na página Sobre (13 perguntas). Segurança digital com três temas novos: Privacidade e navegação, Computadores e Wi-Fi públicos, Família e controlo parental (testes 204 a 206, em `NOVAS` nos códigos). Códigos de professor calculados com aritmética normal (a máscara passou os 32 bits dos operadores de bits): corpo de 5 a 7 símbolos, código até 12 caracteres sem o ponto; os códigos antigos continuam iguais (teste com um código fixo). Aviso no código do aluno quando o envio de estatísticas está desligado. README com secções de perguntas frequentes e de contribuição.
 

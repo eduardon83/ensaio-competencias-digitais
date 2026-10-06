@@ -1,6 +1,7 @@
 // ─── Relatório da atividade (modelo comum, preenchido por cada atividade) ────
 // Resumo (pontuação, estrelas, o que falta para a próxima estrela, contagem de tarefas, indicações para melhorar)
 // e tabela "Tarefa · Resultado · A tua resposta · Resposta certa · Feedback".
+import { Ouvir } from "../componentes/Ouvir";
 import { preencher } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
 import { LIMIARES_ESTRELAS, estrelasDe, type EstadoLinha, type LinhaRelatorio } from "./tipos";
@@ -28,7 +29,7 @@ export function ResumoRelatorio({ pontuacao, linhas, dica }: { pontuacao: number
   // Indicações a partir das respostas erradas ou incompletas (as não feitas já aparecem na contagem).
   const melhorar = [...new Set((linhas ?? []).filter((l) => (l.resultado === "errado" || l.resultado === "parcial") && l.feedback).map((l) => l.feedback!))].slice(0, 3);
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2" data-ouvir="">
       <p className="m-0">
         <strong>Resultado: {pontuacao} em 100.</strong> {frase} {proxima}
       </p>
@@ -48,6 +49,7 @@ export function ResumoRelatorio({ pontuacao, linhas, dica }: { pontuacao: number
             <li key={m}>{m}</li>
           ))}
         </ul>
+        <Ouvir />
       </div>
     </div>
   );

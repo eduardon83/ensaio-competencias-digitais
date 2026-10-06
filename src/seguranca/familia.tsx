@@ -10,6 +10,7 @@ import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../m
 import { Instrucao } from "../motor/util";
 import { Botao, BotaoRadio, Interruptor, Seletor } from "../ui";
 import { Janela } from "../componentes/Janela";
+import { Ouvir } from "../componentes/Ouvir";
 import { CabecalhoParte, Situacoes, type Situacao } from "./Situacoes";
 
 export interface ConfigFamilia {
@@ -147,13 +148,14 @@ function MitoOuFacto({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l:
     <div className="grid gap-3">
       <Instrucao>Cada frase é um mito (falsa) ou um facto (verdadeira)?</Instrucao>
       {lista.map((a, i) => (
-        <fieldset key={a.texto} className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === a.facto ? "var(--certo)" : "var(--errado)"}` } : undefined}>
+        <fieldset key={a.texto} data-ouvir="" className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === a.facto ? "var(--certo)" : "var(--errado)"}` } : undefined}>
           <legend className="font-bold px-1">{i + 1}. “{a.texto}”</legend>
           <div className="flex gap-x-4 flex-wrap">
             <BotaoRadio id={`mf-${i}-f`} name={`mf-${i}`} rotulo="Facto" checked={resp[i] === true} disabled={feito} onChange={() => setResp((r) => r.map((x, k) => (k === i ? true : x)))} />
             <BotaoRadio id={`mf-${i}-m`} name={`mf-${i}`} rotulo="Mito" checked={resp[i] === false} disabled={feito} onChange={() => setResp((r) => r.map((x, k) => (k === i ? false : x)))} />
           </div>
           {feito && <p className="m-0 text-sm" style={{ color: resp[i] === a.facto ? "var(--certo)" : "var(--errado)" }}>{resp[i] === a.facto ? "Certo. " : `É ${nome(a.facto).toLowerCase()}. `}{a.porque}</p>}
+          <div><Ouvir /></div>
         </fieldset>
       ))}
       <div className="flex gap-3 items-center">

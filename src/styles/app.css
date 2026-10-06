@@ -289,3 +289,28 @@ mark.realce { background: #ffe58a; color: #14232e; }
 
 /* Endereços longos (testes de segurança) partem a linha em vez de criar scroll horizontal. */
 .opcao span { overflow-wrap: anywhere; }
+
+/* ── Ajudas (Definições) ─────────────────────────────────────────────────────
+   Leitura facilitada: Atkinson Hyperlegible em tudo (já carregada) e espaçamento dos valores da WCAG 1.4.12.
+   Os blocos de código, teclas e textos de dactilografia mantêm a letra monoespaçada (estilos inline ganham). */
+:root[data-leitura="facilitada"] body,
+:root[data-leitura="facilitada"] body :where(*:not(code, kbd, pre, .dactilo, .tecla, .etiqueta, code *, pre *, .dactilo *, .tecla *)) {
+  font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+:root[data-leitura="facilitada"] body { line-height: 1.8; letter-spacing: .06em; word-spacing: .16em; }
+:root[data-leitura="facilitada"] p, :root[data-leitura="facilitada"] li { text-align: left; hyphens: none; max-width: 75ch; }
+:root[data-leitura="facilitada"] p + p { margin-top: .75em; }
+:root[data-leitura="facilitada"] h1, :root[data-leitura="facilitada"] h2, :root[data-leitura="facilitada"] h3 { letter-spacing: .02em; }
+
+/* Alvos grandes: botões, opções, caixas, interruptores e separadores com pelo menos 56 px e mais afastados. */
+:root[data-alvos="grandes"] :is(button, .botao, [role="tab"], select, input[type="text"], input[type="number"], input[type="password"], input[type="email"]) { min-height: 56px; }
+:root[data-alvos="grandes"] :is(button, .botao) { padding-inline: 22px; }
+:root[data-alvos="grandes"] :is(.opcao, .interruptor, .radio-wrapper, label:has(input[type="radio"]), label:has(input[type="checkbox"])) { min-height: 56px; }
+:root[data-alvos="grandes"] .opcao input { width: 28px; height: 28px; }
+:root[data-alvos="grandes"] fieldset { row-gap: 10px; }
+:root[data-alvos="grandes"] :is(.flex.gap-2, .flex.gap-3) { gap: 16px; }
+:root[data-alvos="grandes"] header nav a { min-height: 56px; display: inline-flex; align-items: center; }
+
+/* Modo calmo: sem animações nem transições (os relógios são tratados no componente BarraTempo). */
+:root[data-calmo="sim"] { scroll-behavior: auto; }
+:root[data-calmo="sim"] *, :root[data-calmo="sim"] *::before, :root[data-calmo="sim"] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

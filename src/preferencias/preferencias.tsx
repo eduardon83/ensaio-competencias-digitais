@@ -2,6 +2,8 @@
 // formato: aspeto da interface ("original" editorial ou "mosaico" = Ágora Design System da AMA)
 // contexto: narrativa de aprendizagem ("jornal" = redação do jornal da escola, "laboratorio" = laboratório de experiências)
 // tema: claro/escuro/auto · tamanho: texto normal/grande · extensaoTempo: acomodação de tempo (x1, x1.25, x1.5, x2)
+// leitura: letra e espaçamento facilitados · alvos: botões e opções maiores · voz: botões "Ouvir" nas perguntas e no feedback
+// calmo: esconde relógios e barras de tempo (o tempo continua a contar) e desliga animações
 // telemetria: enviar estatísticas anónimas (sem conta, sem identificação) para o ponto de recolha configurado
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
@@ -12,6 +14,8 @@ export type Tema = "auto" | "claro" | "escuro";
 export type Tamanho = "normal" | "grande";
 export type Contraste = "normal" | "reforcado";
 export type ExtensaoTempo = 1 | 1.25 | 1.5 | 2;
+export type Leitura = "normal" | "facilitada";
+export type Alvos = "normais" | "grandes";
 
 export interface Preferencias {
   formato: Formato;
@@ -20,6 +24,10 @@ export interface Preferencias {
   tamanho: Tamanho;
   contraste: Contraste; // "reforcado" = cores com contraste de nível AAA
   extensaoTempo: ExtensaoTempo;
+  leitura: Leitura;
+  alvos: Alvos;
+  voz: boolean;
+  calmo: boolean;
   nome: string; // nome a mostrar na "primeira página" (opcional, só local)
   telemetria: boolean;
 }
@@ -33,6 +41,10 @@ export const PREFERENCIAS_INICIAIS: Preferencias = {
   tamanho: "normal",
   contraste: "normal",
   extensaoTempo: 1,
+  leitura: "normal",
+  alvos: "normais",
+  voz: false,
+  calmo: false,
   nome: "",
   telemetria: true,
 };
@@ -57,13 +69,16 @@ function guardar(p: Preferencias) {
   }
 }
 
-/** Aplica os atributos no <html> que o CSS usa (formato, tema, tamanho). */
+/** Aplica os atributos no <html> que o CSS usa (formato, tema, tamanho, contraste, leitura, alvos, modo calmo). */
 export function aplicarNoDocumento(p: Preferencias) {
   const raiz = document.documentElement;
   raiz.dataset.formato = p.formato;
   raiz.dataset.tema = p.tema;
   raiz.dataset.tamanho = p.tamanho;
   raiz.dataset.contraste = p.contraste;
+  raiz.dataset.leitura = p.leitura;
+  raiz.dataset.alvos = p.alvos;
+  raiz.dataset.calmo = p.calmo ? "sim" : "nao";
 }
 
 interface Valor {
