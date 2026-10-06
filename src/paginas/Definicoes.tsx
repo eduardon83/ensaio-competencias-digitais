@@ -74,7 +74,7 @@ export function Definicoes() {
       <Cartao className="grid gap-3">
         <h2 className="text-xl">Estatísticas anónimas</h2>
         <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-          Cada atividade concluída envia um registo anónimo (atividade, nível, pontuação, duração, tipo de dispositivo) para que se saiba que competências faltam e a quantas pessoas. Nunca envia nome, email, IP ou identificação. Ver a página Privacidade.
+          Cada atividade concluída envia um registo anónimo (atividade, nível, pontuação, duração, tipo de dispositivo) para que se saiba que competências faltam e a quantas pessoas. Nunca envia nome, email, IP ou identificação. Se desligares, a aplicação funciona igual, mas os professores também deixam de receber os resultados das provas feitas com código. Ver a página Privacidade.
         </p>
         <Interruptor id="telemetria" rotulo={prefs.telemetria ? "A enviar estatísticas anónimas" : "Sem envio de estatísticas"} checked={prefs.telemetria} onChange={(e) => definir({ telemetria: e.target.checked })} />
       </Cartao>

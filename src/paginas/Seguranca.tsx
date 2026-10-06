@@ -1,4 +1,4 @@
-// ─── Segurança digital: três temas, cada um com informações e um teste de 5 níveis ──
+// ─── Segurança digital: seis temas, cada um com informações e um teste de 5 níveis ──
 import { Rico } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
 import { useState } from "react";

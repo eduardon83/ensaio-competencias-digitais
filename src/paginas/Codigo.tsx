@@ -10,6 +10,7 @@ import { estadoSessao, telemetriaConfigurada } from "../dados/telemetria";
 import type { Tentativa } from "../dados/repositorio";
 import { NOME_NIVEL } from "../motor/tipos";
 import { Botao, CampoTexto } from "../ui";
+import { usePreferencias } from "../preferencias/preferencias";
 import { PrimeiraPagina, Sequencia } from "./Teste";
 
 export function Codigo() {
@@ -64,7 +65,7 @@ export function Codigo() {
           void entrar(texto);
         }}
       >
-        <CampoTexto id="codigo" rotulo="Código da sessão" value={texto} onChange={(e) => setTexto(formatarCodigo(e.target.value))} autoComplete="off" autoCapitalize="characters" spellCheck={false} placeholder="XXXX·XXXXXX" erro={erro} obrigatorio maxLength={12} style={{ fontFamily: "var(--fonte-mono)", fontSize: "1.4rem", letterSpacing: ".08em" }} />
+        <CampoTexto id="codigo" rotulo="Código da sessão" value={texto} onChange={(e) => setTexto(formatarCodigo(e.target.value))} autoComplete="off" autoCapitalize="characters" spellCheck={false} placeholder="XXXX·XXXXXX" erro={erro} obrigatorio maxLength={13} style={{ fontFamily: "var(--fonte-mono)", fontSize: "1.4rem", letterSpacing: ".08em" }} />
         <div className="flex gap-3 flex-wrap">
           <Botao type="submit" disabled={texto.replace(/[^A-Za-z0-9]/g, "").length < 10 || aVerificar}>
             {aVerificar ? "A verificar…" : "Entrar"}
@@ -90,6 +91,7 @@ function ProvaDoProfessor({ sessao, aoSair }: { sessao: CodigoSessao; aoSair: ()
     }
   });
   const [fim, setFim] = useState<Tentativa[] | null>(null);
+  const { prefs, definir } = usePreferencias();
   const precisa = config.identificacao !== "nenhuma";
   const valido = !precisa || (config.identificacao === "numero" ? /^\d{1,3}$/.test(aluno.trim()) : aluno.trim().length >= 2);
 
@@ -121,6 +123,18 @@ function ProvaDoProfessor({ sessao, aoSair }: { sessao: CodigoSessao; aoSair: ()
             Nível {config.nivel} · {NOME_NIVEL[config.nivel]}
             {config.extensaoTempo !== 1 && <> · tempo alargado ×{config.extensaoTempo}</>}
           </p>
+          {telemetriaConfigurada && !prefs.telemetria && (
+            <div className="cartao p-4 grid gap-2 max-w-xl" role="status" style={{ borderLeft: "6px solid var(--aviso)" }}>
+              <p className="m-0">
+                <Rico texto={PAGINAS.codigo.semEnvio} />
+              </p>
+              <div>
+                <Botao variante="contorno" onClick={() => definir({ telemetria: true })}>
+                  {PAGINAS.codigo.ligarEnvio}
+                </Botao>
+              </div>
+            </div>
+          )}
           {precisa && (
             <div className="cartao p-5 max-w-md">
               {config.identificacao === "numero" ? (

@@ -3,11 +3,12 @@
 // nunca guardada nem enviada) e deixar uma conta simulada segura (interruptores).
 // Pontuação: 50 % situações + 25 % palavra-passe + 25 % conta (nível 1, sem conta: 65/35).
 import { useMemo, useRef, useState } from "react";
-import { amostra, baralharOpcoes, misturar } from "../motor/aleatorio";
+import { amostra, misturar } from "../motor/aleatorio";
 import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../motor/tipos";
 import { Instrucao } from "../motor/util";
-import { Botao, BotaoRadio, Interruptor } from "../ui";
+import { Botao, Interruptor } from "../ui";
 import { Janela } from "../componentes/Janela";
+import { Situacoes, type Situacao } from "./Situacoes";
 
 export interface ConfigBoasPraticas {
   situacoes: number;
@@ -22,12 +23,6 @@ const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigBoasPraticas> = {
   4: { situacoes: 7, senha: { minimo: 12, exigeTipos: 3, proibeNome: true }, definicoes: 6 },
   5: { situacoes: 8, senha: { minimo: 14, exigeTipos: 3, proibeNome: true }, definicoes: 6 },
 };
-
-interface Situacao {
-  pergunta: string;
-  opcoes: string[]; // a primeira é a certa
-  porque: string;
-}
 
 export const SITUACOES: Situacao[] = [
   { pergunta: "Estás no computador da biblioteca e acabaste de ler o teu email. O que fazes?", opcoes: ["Termino a sessão e fecho o navegador", "Fecho só o separador", "Deixo aberto para a próxima vez"], porque: "Num computador partilhado, a sessão fica aberta para quem vier a seguir se não a terminares." },
@@ -93,7 +88,10 @@ function BoasPraticas({ config, aoTerminar }: PropsAtividade<ConfigBoasPraticas>
       </div>
       {partes[pi] === "situacoes" && (
         <Situacoes
+          lista={SITUACOES}
           n={config.situacoes}
+          prefixo="bp"
+          instrucao="Escolhe o que é mais seguro fazer em cada situação."
           aoConcluir={(fr, linhas) => {
             resultado.current.s = fr;
             resultado.current.linhas.push(...linhas);
@@ -122,35 +120,6 @@ function BoasPraticas({ config, aoTerminar }: PropsAtividade<ConfigBoasPraticas>
           }}
         />
       )}
-    </div>
-  );
-}
-
-function Situacoes({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l: LinhaRelatorio[]) => void }) {
-  const [qs] = useState(() => amostra(SITUACOES, n).map((s) => ({ ...s, ...baralharOpcoes(s.opcoes, 0) })));
-  const [resp, setResp] = useState<(number | null)[]>(() => qs.map(() => null));
-  const [feito, setFeito] = useState(false);
-  const certas = qs.filter((q, i) => resp[i] === q.correta).length;
-  return (
-    <div className="grid gap-3">
-      <Instrucao>Escolhe o que é mais seguro fazer em cada situação.</Instrucao>
-      {qs.map((q, i) => (
-        <fieldset key={i} className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.correta ? "var(--certo)" : "var(--errado)"}` } : undefined}>
-          <legend className="font-bold px-1">{i + 1}. {q.pergunta}</legend>
-          {q.opcoes.map((o, j) => (
-            <BotaoRadio key={j} id={`bp-${i}-${j}`} name={`bp-${i}`} rotulo={o} checked={resp[i] === j} disabled={feito} onChange={() => setResp((r) => r.map((x, k) => (k === i ? j : x)))} />
-          ))}
-          {feito && <p className="m-0 text-sm" style={{ color: resp[i] === q.correta ? "var(--certo)" : "var(--errado)" }}>{resp[i] === q.correta ? "Certo. " : `A opção mais segura: ${q.opcoes[q.correta]}. `}{q.porque}</p>}
-        </fieldset>
-      ))}
-      <div className="flex gap-3 items-center">
-        {!feito ? (
-          <Botao disabled={resp.some((r) => r === null)} onClick={() => setFeito(true)}>Verificar</Botao>
-        ) : (
-          <Botao onClick={() => aoConcluir(certas / qs.length, qs.map((q, i) => ({ tarefa: q.pergunta, resultado: resp[i] === q.correta ? "certo" : "errado", resposta: resp[i] === null ? undefined : q.opcoes[resp[i]!], certa: q.opcoes[q.correta], feedback: q.porque })))}>Continuar</Botao>
-        )}
-        {feito && <span>{certas} de {qs.length} certas.</span>}
-      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { codificar, descodificar } from "./codigo";
+import { codificar, descodificar, SLUGS } from "./codigo";
+import { TODOS } from "../registo";
 
 describe("códigos de sessão", () => {
   it("codifica e descodifica a mesma configuração", () => {
@@ -29,5 +30,19 @@ describe("códigos de sessão", () => {
     expect(descodificar(c.codigo)!.config).toEqual(cfg);
     const antigo = codificar({ nivel: 2, atividades: ["painel"], extensaoTempo: 1, identificacao: "numero" }, "QRDX");
     expect(antigo.codigo).toMatch(/·[2-9A-HJKMNP-Z]{6}$/);
+  });
+  it("os códigos já distribuídos continuam iguais", () => {
+    // Código gerado pela versão anterior (operadores de bits): tem de dar o mesmo nos dois sentidos.
+    const ANTIGO = "SAPA·4D9A4VV";
+    expect(codificar({ nivel: 4, atividades: ["noticia", "fraude", "robo"], extensaoTempo: 1, identificacao: "alcunha" }, "SAPA").codigo).toBe(ANTIGO);
+    expect(descodificar(ANTIGO)!.config).toEqual({ nivel: 4, atividades: ["noticia", "fraude", "robo"], extensaoTempo: 1, identificacao: "alcunha" });
+  });
+  it("cada atividade, teste e jogo tem uma posição e todos juntos cabem num código", () => {
+    for (const d of TODOS.filter((a) => a.disponivel)) expect(SLUGS, d.slug).toContain(d.slug);
+    const cfg = { nivel: 5 as const, atividades: [...SLUGS], extensaoTempo: 2 as const, identificacao: "alcunha" as const };
+    const c = codificar(cfg, "TUDA");
+    expect(c.codigo).toMatch(/^TUDA·[2-9A-HJKMNP-Z]{6,8}$/);
+    expect(descodificar(c.codigo)!.config).toEqual(cfg);
+    for (const s of ["privacidade", "publicos", "familia"]) expect(descodificar(codificar({ ...cfg, atividades: [s] }, "NEVA").codigo)!.config.atividades).toEqual([s]);
   });
 });

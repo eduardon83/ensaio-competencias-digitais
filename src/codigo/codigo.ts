@@ -1,6 +1,6 @@
 // ─── Códigos de sessão do professor (sem servidor) ───────────────────────────
 // Toda a configuração da sessão vai dentro do código: nível, atividades, tempo alargado e como os alunos se
-// identificam. Formato XXXX·YYYYYY — XXXX identifica a sessão (aleatório), YYYYYY codifica a configuração com
+// identificam. Formato XXXX·YYYYYY — XXXX identifica a sessão (aleatório), YYYYYY (6 a 8 símbolos) codifica a configuração com
 // um carácter de verificação. Alfabeto sem caracteres ambíguos (sem 0/O, 1/I/L).
 
 import type { ExtensaoTempo } from "../preferencias/preferencias";
@@ -31,8 +31,8 @@ export interface CodigoSessao {
 export const EXTRAS = ["boas-praticas", "fraude", "redes-sociais", "leitura", "sala-trancada", "misterio", "orcamento", "correio", "robo"];
 // As 11 atividades originais por número (posições fixas), os extras e depois as atividades novas.
 const ORIGINAIS = ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "simulador", "matematica"];
-const NOVAS = ["maqueta"];
-const SLUGS = [...ORIGINAIS, ...EXTRAS, ...NOVAS];
+const NOVAS = ["maqueta", "privacidade", "publicos", "familia"];
+export const SLUGS = [...ORIGINAIS, ...EXTRAS, ...NOVAS];
 
 function paraBase(n: number, comprimento: number): string {
   let s = "";
@@ -64,16 +64,17 @@ export function gerarSessao(): string {
   return Array.from(bytes, (b) => ALFABETO[b % BASE]).join("");
 }
 
-/** Codifica a configuração: máscara (11 bits de atividades + 9 de segurança/jogos) · nível (3) · extensão (2) ·
- *  identificação (2). Só com atividades cabe em 5 símbolos (códigos antigos); com segurança ou jogos usa 6. Mais 1 de verificação. */
+/** Codifica a configuração: máscara (um bit por posição de SLUGS) · nível (3 bits) · extensão (2) · identificação (2).
+ *  Aritmética normal e não operadores de bits, que em JavaScript cortam a 32 bits (a máscara já passa disso).
+ *  Só com atividades cabe em 5 símbolos (códigos antigos); com segurança ou jogos usa 6 ou 7. Mais 1 de verificação. */
 export function codificar(config: ConfigSessao, sessao = gerarSessao()): CodigoSessao {
   let mascara = 0;
-  for (const slug of config.atividades) {
+  for (const slug of new Set(config.atividades)) {
     const i = SLUGS.indexOf(slug);
-    if (i >= 0) mascara |= 1 << i;
+    if (i >= 0) mascara += 2 ** i;
   }
-  const n = (((mascara << 3) | (config.nivel & 7)) << 2 | EXT.indexOf(config.extensaoTempo)) << 2 | IDENT.indexOf(config.identificacao);
-  const corpo = paraBase(n, n < BASE ** 5 ? 5 : 6);
+  const n = mascara * 128 + config.nivel * 16 + EXT.indexOf(config.extensaoTempo) * 4 + IDENT.indexOf(config.identificacao);
+  const corpo = paraBase(n, n < BASE ** 5 ? 5 : n < BASE ** 6 ? 6 : 7);
   const codigo = `${sessao}·${corpo}${verificacao(corpo)}`;
   return { codigo, sessao, config: normalizarConfig(config) };
 }
@@ -85,7 +86,7 @@ function normalizarConfig(c: ConfigSessao): ConfigSessao {
 /** Lê um código escrito pelo aluno (aceita minúsculas, espaços, ponto, hífen). Devolve null se inválido ou com erro de dígito. */
 export function descodificar(texto: string): CodigoSessao | null {
   const limpo = texto.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  if (limpo.length !== 10 && limpo.length !== 11) return null;
+  if (limpo.length < 10 || limpo.length > 12) return null;
   const sessao = limpo.slice(0, 4);
   const corpo = limpo.slice(4, -1);
   const check = limpo[limpo.length - 1];
@@ -93,11 +94,11 @@ export function descodificar(texto: string): CodigoSessao | null {
   if (verificacao(corpo) !== check) return null;
   const n = deBase(corpo);
   if (!Number.isFinite(n)) return null;
-  const identificacao = IDENT[n & 3];
-  const extensaoTempo = EXT[(n >> 2) & 3];
-  const nivel = ((n >> 4) & 7) as Nivel;
-  const mascara = n >> 7;
-  const atividades = SLUGS.filter((_, i) => mascara & (1 << i));
+  const identificacao = IDENT[n % 4];
+  const extensaoTempo = EXT[Math.floor(n / 4) % 4];
+  const nivel = (Math.floor(n / 16) % 8) as Nivel;
+  const mascara = Math.floor(n / 128);
+  const atividades = SLUGS.filter((_, i) => Math.floor(mascara / 2 ** i) % 2 === 1);
   if (!identificacao || !extensaoTempo || nivel < 1 || nivel > 5 || atividades.length === 0) return null;
   return { codigo: `${sessao}·${corpo}${check}`, sessao, config: { nivel, atividades, extensaoTempo, identificacao } };
 }

@@ -1,6 +1,6 @@
 # Auditoria automática de acessibilidade
 
-Gerado por `npm run a11y` em 2026-10-03, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
+Gerado por `npm run a11y` em 2026-10-06, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
 Páginas e atividades (nível 3, depois de saltar a prática) nos aspetos Mosaico e Original, em tema claro e escuro.
 
 **Total de ocorrências:** 0 · **Regras violadas:** 0
@@ -39,6 +39,9 @@ Nenhuma.
 | Segurança: boas práticas | mosaico | claro | ✓ |
 | Segurança: exemplos de fraude | mosaico | claro | ✓ |
 | Segurança: redes sociais | mosaico | claro | ✓ |
+| Segurança: privacidade e navegação | mosaico | claro | ✓ |
+| Segurança: computadores e Wi-Fi públicos | mosaico | claro | ✓ |
+| Segurança: família e controlo parental | mosaico | claro | ✓ |
 | Atividade: noticia | mosaico | claro | ✓ |
 | Atividade: painel | mosaico | claro | ✓ |
 | Atividade: revisao | mosaico | claro | ✓ |
@@ -60,6 +63,9 @@ Nenhuma.
 | Jogo/teste: boas-praticas | mosaico | claro | ✓ |
 | Jogo/teste: fraude | mosaico | claro | ✓ |
 | Jogo/teste: redes-sociais | mosaico | claro | ✓ |
+| Jogo/teste: privacidade | mosaico | claro | ✓ |
+| Jogo/teste: publicos | mosaico | claro | ✓ |
+| Jogo/teste: familia | mosaico | claro | ✓ |
 | Resultado com relatório (Revisão) | mosaico | claro | ✓ |
 | Início | mosaico | escuro | ✓ |
 | Treinar | mosaico | escuro | ✓ |
@@ -83,6 +89,9 @@ Nenhuma.
 | Segurança: boas práticas | mosaico | escuro | ✓ |
 | Segurança: exemplos de fraude | mosaico | escuro | ✓ |
 | Segurança: redes sociais | mosaico | escuro | ✓ |
+| Segurança: privacidade e navegação | mosaico | escuro | ✓ |
+| Segurança: computadores e Wi-Fi públicos | mosaico | escuro | ✓ |
+| Segurança: família e controlo parental | mosaico | escuro | ✓ |
 | Atividade: noticia | mosaico | escuro | ✓ |
 | Atividade: painel | mosaico | escuro | ✓ |
 | Atividade: revisao | mosaico | escuro | ✓ |
@@ -104,6 +113,9 @@ Nenhuma.
 | Jogo/teste: boas-praticas | mosaico | escuro | ✓ |
 | Jogo/teste: fraude | mosaico | escuro | ✓ |
 | Jogo/teste: redes-sociais | mosaico | escuro | ✓ |
+| Jogo/teste: privacidade | mosaico | escuro | ✓ |
+| Jogo/teste: publicos | mosaico | escuro | ✓ |
+| Jogo/teste: familia | mosaico | escuro | ✓ |
 | Resultado com relatório (Revisão) | mosaico | escuro | ✓ |
 | Início | original | claro | ✓ |
 | Treinar | original | claro | ✓ |
@@ -127,6 +139,9 @@ Nenhuma.
 | Segurança: boas práticas | original | claro | ✓ |
 | Segurança: exemplos de fraude | original | claro | ✓ |
 | Segurança: redes sociais | original | claro | ✓ |
+| Segurança: privacidade e navegação | original | claro | ✓ |
+| Segurança: computadores e Wi-Fi públicos | original | claro | ✓ |
+| Segurança: família e controlo parental | original | claro | ✓ |
 | Atividade: noticia | original | claro | ✓ |
 | Atividade: painel | original | claro | ✓ |
 | Atividade: revisao | original | claro | ✓ |
@@ -148,6 +163,9 @@ Nenhuma.
 | Jogo/teste: boas-praticas | original | claro | ✓ |
 | Jogo/teste: fraude | original | claro | ✓ |
 | Jogo/teste: redes-sociais | original | claro | ✓ |
+| Jogo/teste: privacidade | original | claro | ✓ |
+| Jogo/teste: publicos | original | claro | ✓ |
+| Jogo/teste: familia | original | claro | ✓ |
 | Resultado com relatório (Revisão) | original | claro | ✓ |
 | Início | original | escuro | ✓ |
 | Treinar | original | escuro | ✓ |
@@ -171,6 +189,9 @@ Nenhuma.
 | Segurança: boas práticas | original | escuro | ✓ |
 | Segurança: exemplos de fraude | original | escuro | ✓ |
 | Segurança: redes sociais | original | escuro | ✓ |
+| Segurança: privacidade e navegação | original | escuro | ✓ |
+| Segurança: computadores e Wi-Fi públicos | original | escuro | ✓ |
+| Segurança: família e controlo parental | original | escuro | ✓ |
 | Atividade: noticia | original | escuro | ✓ |
 | Atividade: painel | original | escuro | ✓ |
 | Atividade: revisao | original | escuro | ✓ |
@@ -192,4 +213,7 @@ Nenhuma.
 | Jogo/teste: boas-praticas | original | escuro | ✓ |
 | Jogo/teste: fraude | original | escuro | ✓ |
 | Jogo/teste: redes-sociais | original | escuro | ✓ |
+| Jogo/teste: privacidade | original | escuro | ✓ |
+| Jogo/teste: publicos | original | escuro | ✓ |
+| Jogo/teste: familia | original | escuro | ✓ |
 | Resultado com relatório (Revisão) | original | escuro | ✓ |

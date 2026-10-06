@@ -13,6 +13,9 @@ import { AJUDA, TEMAS } from "../seguranca/conteudo";
 import { MENSAGENS, NOME_SINAL } from "../seguranca/fraude";
 import { SITUACOES } from "../seguranca/boas-praticas";
 import { PUBLICACOES, SITUACOES_REDES } from "../seguranca/redes";
+import { PEDIDOS, SITIOS, SITUACOES_NAVEGACAO } from "../seguranca/privacidade";
+import { ACOES, LOCAIS, SITUACOES_PUBLICOS } from "../seguranca/publicos";
+import { AFIRMACOES, DEFINICOES_PARENTAIS, SITUACOES_FAMILIA } from "../seguranca/familia";
 import { MISSOES } from "../jogos/correio/avaliar";
 import { TAREFAS as TAREFAS_MAQUETA } from "../atividades/maqueta/modelo";
 import { NOME_INSTR } from "../jogos/robo/gerar";
@@ -71,13 +74,22 @@ registar("atividade.cartao.seccoes", "Atividades", "Cartão de Imprensa", SECCOE
 registar("atividade.maqueta.tarefas", "Atividades", "A Maqueta", TAREFAS_MAQUETA);
 
 for (const d of Object.values(TESTES_SEGURANCA)) registar(`seguranca.${d.slug}`, "Segurança", d.titulo.jornal, d);
-registar("seguranca.temas", "Segurança", "Informações dos três temas", TEMAS);
+registar("seguranca.temas", "Segurança", "Informações dos temas", TEMAS);
 registar("seguranca.ajuda", "Segurança", "Onde pedir ajuda", AJUDA, { aviso: "Confirmar os contactos antes de publicar." });
 registar("seguranca.mensagens", "Segurança", "O Email Desconfiado", MENSAGENS);
 registar("seguranca.nomesSinais", "Segurança", "O Email Desconfiado", NOME_SINAL);
 registar("seguranca.situacoes", "Segurança", "Boas Práticas Online", SITUACOES, { aviso: "Em cada situação, a primeira opção é a resposta certa." });
 registar("seguranca.publicacoes", "Segurança", "Verdade ou Boato?", PUBLICACOES);
 registar("seguranca.situacoesRedes", "Segurança", "Verdade ou Boato?", SITUACOES_REDES, { aviso: "Em cada situação, a primeira opção é a resposta certa." });
+registar("seguranca.sitios", "Segurança", "O Endereço Certo", SITIOS, { negar: ["caminho"] });
+registar("seguranca.pedidos", "Segurança", "O Endereço Certo", PEDIDOS, { negar: ["endereco"] });
+registar("seguranca.situacoesNavegacao", "Segurança", "O Endereço Certo", SITUACOES_NAVEGACAO, { aviso: "Em cada situação, a primeira opção é a resposta certa." });
+registar("seguranca.locais", "Segurança", "Na Biblioteca", LOCAIS, { negar: ["rede"], aviso: "O nome da rede não é editável aqui: as imitações são geradas a partir dele." });
+registar("seguranca.acoes", "Segurança", "Na Biblioteca", ACOES);
+registar("seguranca.situacoesPublicos", "Segurança", "Na Biblioteca", SITUACOES_PUBLICOS, { aviso: "Em cada situação, a primeira opção é a resposta certa." });
+registar("seguranca.afirmacoes", "Segurança", "O Acordo da Família", AFIRMACOES);
+registar("seguranca.definicoesParentais", "Segurança", "O Acordo da Família", DEFINICOES_PARENTAIS);
+registar("seguranca.situacoesFamilia", "Segurança", "O Acordo da Família", SITUACOES_FAMILIA, { aviso: "Em cada situação, a primeira opção é a resposta certa." });
 
 for (const d of JOGOS) registar(`jogo.${d.slug}`, "Jogos", d.titulo.jornal, d, { negar: ["niveis"] });
 registar("jogo.meta", "Jogos", "Cartões da página Jogos", META_JOGOS);

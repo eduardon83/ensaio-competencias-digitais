@@ -1,8 +1,8 @@
-// ─── Segurança digital: conteúdos informativos dos três temas ────────────────
+// ─── Segurança digital: conteúdos informativos dos seis temas ────────────────
 // [conteúdo Kendir] Texto provisório em linguagem simples. Os contactos de ajuda devem ser confirmados antes da
 // publicação. Todos os exemplos usam organizações fictícias (Banco Horizonte, Envios Já, TecnoMais...).
 
-export type TemaSeguranca = "boas-praticas" | "fraude" | "redes-sociais";
+export type TemaSeguranca = "boas-praticas" | "fraude" | "redes-sociais" | "privacidade" | "publicos" | "familia";
 
 export interface SecaoInfo {
   titulo: string;
@@ -165,6 +165,154 @@ export const TEMAS: ConteudoTema[] = [
           "Procura a mesma informação noutras fontes fiáveis. Se nenhuma fala disso, desconfia.",
           "Faz uma pesquisa pela imagem: muitas fotografias são verdadeiras mas de outro lugar ou de outro ano.",
           "Na dúvida, não partilhes.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "privacidade",
+    titulo: "Privacidade e navegação",
+    icone: "🧭",
+    resumo: "Ler endereços, cookies, permissões, navegação privada, transferências e limpar os dados do navegador.",
+    teste: { titulo: "Teste: O Endereço Certo", descricao: "Escolhe a ligação oficial entre endereços parecidos, decide que permissões dar e o que fazer ao navegar.", slug: "privacidade" },
+    secoes: [
+      {
+        titulo: "Ler um endereço",
+        pontos: [
+          "O que conta é o nome imediatamente antes da primeira barra /. Em “www.bancohorizonte.pt/entrar” o sítio é bancohorizonte.pt.",
+          "Em “bancohorizonte.pt.verificar-conta.com/entrar” o sítio é verificar-conta.com: o nome do banco no início é só uma máscara.",
+          "Desconfia de letras trocadas por algarismos (0 em vez de o, 1 em vez de l) e de palavras a mais (-seguranca, -premios, -login).",
+          "Para sítios importantes (banco, escola, email), escreve tu o endereço ou usa um marcador guardado.",
+          "Nos resultados de pesquisa, “Patrocinado” quer dizer anúncio. Alguns anúncios imitam sítios verdadeiros.",
+        ],
+        exemplo: {
+          titulo: "Qual é o sítio verdadeiro?",
+          linhas: ["www.bancohorizonte.pt/entrar ✔ bancohorizonte.pt", "conta.bancohorizonte.pt/entrar ✔ bancohorizonte.pt", "bancohorizonte.pt.verificar-conta.com/entrar ✘ verificar-conta.com", "banc0horizonte.pt/entrar ✘ banc0horizonte.pt"],
+          nota: "O domínio principal é o que fica imediatamente antes da primeira barra. Tudo o que está à esquerda dele pode ser escolhido por quem criou o sítio.",
+        },
+      },
+      {
+        titulo: "Cookies, rastreio e permissões",
+        pontos: [
+          "Os cookies necessários fazem o sítio funcionar. Os outros servem sobretudo para seguir o que fazes e mostrar publicidade: podes recusá-los.",
+          "Quando um sítio pede a localização, a câmara, o microfone ou notificações, pergunta: precisa mesmo disto para fazer o que eu quero?",
+          "Revê de vez em quando as permissões nas definições do navegador e retira as que já não fazem falta.",
+          "Dá só os dados indispensáveis. Um jogo grátis não precisa da tua morada.",
+        ],
+      },
+      {
+        titulo: "Navegar com cuidado",
+        pontos: [
+          "A navegação privada não guarda o histórico neste dispositivo, mas os sítios, a escola ou a rede continuam a ver o que fazes.",
+          "Descarrega programas só do sítio oficial de quem os faz ou da loja de aplicações do sistema.",
+          "Instala poucas extensões no navegador e só de quem conheces. Uma extensão com acesso a tudo pode ler o que escreves.",
+          "Avisos a piscar a dizer que o computador tem vírus são burlas: fecha a página.",
+          "Se o navegador avisar que a ligação não é privada, volta atrás.",
+          "Mantém o navegador atualizado.",
+        ],
+      },
+      {
+        titulo: "Limpar os dados do navegador",
+        pontos: [
+          "Limpar o histórico, os cookies e os dados guardados é uma boa prática, sobretudo num computador partilhado.",
+          "Na maior parte dos navegadores: Definições, Privacidade, Limpar dados de navegação. O atalho Ctrl+Shift+Delete (no Mac, Cmd+Shift+Delete) abre o mesmo menu.",
+          "Escolhe o período (por exemplo, “Desde sempre”) e o que queres apagar: histórico, cookies e dados de sítios, imagens e ficheiros em cache.",
+          "Atenção: ao apagar os cookies e os dados de sítios, terminas as sessões e apagas o que os sítios guardaram no navegador, como o progresso em jogos e os resultados guardados localmente.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "publicos",
+    titulo: "Computadores e Wi-Fi públicos",
+    icone: "📶",
+    resumo: "Bibliotecas, cafés, estações e computadores da escola: redes falsas, sessões abertas, pens e carregadores.",
+    teste: { titulo: "Teste: Na Biblioteca", descricao: "Escolhe a rede Wi-Fi certa, deixa o computador público como o encontraste e decide o que fazer fora de casa.", slug: "publicos" },
+    secoes: [
+      {
+        titulo: "Redes Wi-Fi públicas",
+        pontos: [
+          "Confirma o nome exato da rede com o espaço (cartaz, talão, funcionário). Redes com nomes quase iguais podem ser armadilhas.",
+          "Numa rede pública não sabes quem a gere nem quem está ligado. Deixa o banco e as compras para os dados móveis ou uma rede de confiança.",
+          "Confirma que os sítios usam https e que o endereço é o oficial.",
+          "Desliga a ligação automática a redes abertas e, quando saíres, esquece a rede.",
+          "Desliga a partilha de ficheiros e o Bluetooth quando não precisares.",
+        ],
+      },
+      {
+        titulo: "Computadores públicos e partilhados",
+        pontos: [
+          "Não guardes palavras-passe no navegador. Recusa sempre quando ele perguntar.",
+          "Usa a navegação privada, se o computador deixar.",
+          "Cuidado com quem está atrás de ti quando escreves a palavra-passe.",
+          "Não guardes trabalhos no ambiente de trabalho do computador: usa a tua pen ou a tua nuvem.",
+        ],
+      },
+      {
+        titulo: "Antes de sair",
+        pontos: [
+          "Termina a sessão em todas as contas (email, plataforma da escola, redes sociais). Fechar o separador não chega.",
+          "Apaga o que descarregaste da pasta Transferências e esvazia a reciclagem.",
+          "Fecha todas as janelas do navegador.",
+          "Retira a pen.",
+        ],
+      },
+      {
+        titulo: "Pens e carregadores",
+        pontos: [
+          "Não ligues pens encontradas: entrega-as a quem gere o espaço.",
+          "Nas estações de carregamento públicas, prefere o teu carregador numa tomada. Se o telemóvel perguntar se confias no dispositivo, recusa.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "familia",
+    titulo: "Família e controlo parental",
+    icone: "👪",
+    resumo: "Porque é importante viver a internet em família: conversar, combinar regras e usar o controlo parental.",
+    teste: { titulo: "Teste: O Acordo da Família", descricao: "Mitos e factos, um painel de controlo parental para configurar em família e situações para decidir.", slug: "familia" },
+    secoes: [
+      {
+        titulo: "Porque é importante",
+        pontos: [
+          "Na internet há coisas ótimas e algumas que magoam, assustam ou enganam. Ninguém tem de lidar com isso sozinho.",
+          "Quando pais e filhos falam sobre o que fazem online, é mais fácil pedir ajuda cedo, antes de um problema crescer.",
+          "Os pais aprendem com os filhos (jogos, aplicações, redes) e os filhos aprendem com os pais (cuidado, bom senso, limites).",
+          "Contar a um adulto quando algo corre mal não é fazer queixinhas: é proteger-te a ti e aos outros.",
+        ],
+      },
+      {
+        titulo: "O que o controlo parental faz e não faz",
+        pontos: [
+          "Filtra conteúdos impróprios, limita o tempo de ecrã, pede autorização para compras e para instalar aplicações.",
+          "Existe no sistema do telemóvel, do tablet e do computador, nas consolas, em muitas aplicações e no router de casa.",
+          "Nenhum filtro é perfeito: alguns conteúdos passam e alguns bons ficam bloqueados.",
+          "Não substitui a conversa. Funciona melhor quando as regras são explicadas e combinadas, e não usadas como castigo.",
+          "Deve mudar com a idade: mais autonomia à medida que a criança cresce e mostra que sabe decidir.",
+        ],
+      },
+      {
+        titulo: "Um acordo da família",
+        pontos: [
+          "Combinem por escrito onde e quando se usam ecrãs (por exemplo, nada às refeições nem no quarto à noite).",
+          "Que jogos e aplicações são adequados. A classificação PEGI (3, 7, 12, 16, 18) indica a idade mínima.",
+          "Que dados nunca se partilham: morada, escola, fotografias, palavras-passe.",
+          "Que compras precisam de autorização.",
+          "O que fazer quando algo corre mal: contar logo, sem medo de castigo.",
+          "As regras valem para todos: os adultos também dão o exemplo.",
+          "Revejam o acordo de tempos a tempos.",
+        ],
+      },
+      {
+        titulo: "Para pais e encarregados de educação",
+        pontos: [
+          "Naveguem juntos, sobretudo com crianças pequenas. Perguntem que jogos e aplicações usam e experimentem-nos.",
+          "Configurem o controlo parental com a criança, explicando cada opção.",
+          "Ativem a autorização de compras e desliguem as mensagens de desconhecidos nos jogos.",
+          "Antes de publicar fotografias dos filhos, perguntem-lhes. Também têm direito à sua imagem.",
+          "Reajam com calma quando a criança conta um problema. Se contar trouxer castigo, da próxima vez não conta.",
+          "Em caso de dúvida, a Linha Internet Segura (800 21 90 90) também apoia pais e educadores.",
         ],
       },
     ],

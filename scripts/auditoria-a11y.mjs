@@ -15,9 +15,10 @@ const PAGINAS = [
   ["/privacidade", "Privacidade"], ["/licenca", "Licença"], ["/admin", "Administração"], ["/backoffice", "Backoffice (entrada)"],
   ["/jogos", "Jogos"], ["/seguranca", "Segurança digital"], ["/seguranca/boas-praticas", "Segurança: boas práticas"],
   ["/seguranca/fraude", "Segurança: exemplos de fraude"], ["/seguranca/redes-sociais", "Segurança: redes sociais"],
+  ["/seguranca/privacidade", "Segurança: privacidade e navegação"], ["/seguranca/publicos", "Segurança: computadores e Wi-Fi públicos"], ["/seguranca/familia", "Segurança: família e controlo parental"],
 ];
 // Jogos e testes de segurança (ecrã de jogo, depois de saltar a prática).
-const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/jogos/robo/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3"];
+const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/jogos/robo/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3", "/seguranca/privacidade/teste/3", "/seguranca/publicos/teste/3", "/seguranca/familia/teste/3"];
 const ATIVIDADES = ["noticia", "painel", "revisao", "arquivo", "cartao", "paginacao", "fecho", "teclas", "encontra", "simulador", "matematica", "maqueta"];
 const VARIANTES = [["mosaico", "claro"], ["mosaico", "escuro"], ["original", "claro"], ["original", "escuro"]];
 

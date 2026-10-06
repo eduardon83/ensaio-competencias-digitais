@@ -112,6 +112,35 @@ export function Sobre() {
           ))}
         </ul>
       </section>
+      <section className="grid gap-2" aria-labelledby="faq-t">
+        <h2 id="faq-t" className="text-2xl">{T.faq.titulo}</h2>
+        {T.faq.itens.map((q, k) => (
+          <details key={k} className="cartao faq">
+            <summary>{q.pergunta}</summary>
+            <div className="grid gap-2 px-4 pb-4">
+              {q.paragrafos.map((p, j) => (
+                <p key={j} className="m-0">
+                  <Rico texto={p} />
+                </p>
+              ))}
+              {"lista" in q && q.lista && (
+                <ul className="m-0 pl-5 grid gap-1">
+                  {q.lista.map((it, j) => (
+                    <li key={j}>
+                      <Rico texto={it} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {"nota" in q && q.nota && (
+                <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+                  <Rico texto={q.nota} />
+                </p>
+              )}
+            </div>
+          </details>
+        ))}
+      </section>
       <p className="m-0">
         <Rico texto={T.rodape} />
       </p>

@@ -4,11 +4,12 @@
 // Parte 2: situações de privacidade, ciberbullying e contactos desconhecidos.
 // Pontuação: 60 % publicações + 40 % situações.
 import { useState } from "react";
-import { amostra, baralharOpcoes, misturar } from "../motor/aleatorio";
+import { misturar } from "../motor/aleatorio";
 import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../motor/tipos";
 import { Instrucao } from "../motor/util";
 import { Botao, BotaoRadio } from "../ui";
 import { Janela } from "../componentes/Janela";
+import { Situacoes, type Situacao } from "./Situacoes";
 
 type Veredicto = "verdadeiro" | "falso" | "enganador";
 type Ferramenta = "conta" | "data" | "fontes" | "imagem";
@@ -40,11 +41,6 @@ export const PUBLICACOES: Publicacao[] = [
   { id: "velha", autor: "@JornalDaRegiao", conta: "Página de um jornal regional · criada em 2009.", texto: "Escola fecha por falta de professores.", data: "Publicado originalmente em março de 2017; voltou a circular hoje, partilhado por outras contas.", fontes: ["A escola está aberta e funciona normalmente em 2026."], veredicto: "enganador", chave: "data", explicacao: "A notícia era verdadeira em 2017, mas está a ser partilhada como se fosse de hoje." },
 ];
 
-interface Situacao {
-  pergunta: string;
-  opcoes: string[]; // a primeira é a certa
-  porque: string;
-}
 export const SITUACOES_REDES: Situacao[] = [
   { pergunta: "Estão a gozar contigo num grupo de mensagens da turma.", opcoes: ["Guardo provas, saio ou bloqueio, denuncio e conto a um adulto", "Respondo com insultos", "Apago a conta e não conto a ninguém"], porque: "Guardar provas e pedir ajuda resolve; responder na mesma moeda piora a situação." },
   { pergunta: "Um desconhecido com um perfil simpático pede para falarem em privado e guardarem segredo.", opcoes: ["Não aceito e falo com um adulto de confiança", "Aceito, porque parece simpático", "Envio-lhe uma fotografia minha"], porque: "Pedir segredo é um sinal de alerta. Um perfil pode ser falso." },
@@ -89,7 +85,10 @@ function Redes({ config, aoTerminar }: PropsAtividade<ConfigRedes>) {
         />
       ) : (
         <Situacoes
+          lista={SITUACOES_REDES}
           n={config.situacoes}
+          prefixo="rs"
+          instrucao="O que fazes em cada situação?"
           aoConcluir={(fr, l) => {
             aoTerminar({ pontuacao: limitar(100 * (0.6 * res.p + 0.4 * fr)), duracaoMs: performance.now() - inicio, metricas: { publicacoes: Math.round(100 * res.p), situacoes: Math.round(100 * fr), ferramentasPorPublicacao: Math.round((10 * res.ferramentas) / config.publicacoes) / 10 }, relatorio: [...res.linhas, ...l] });
           }}
@@ -176,35 +175,6 @@ function Publicacoes({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l:
           </Botao>
         )}
         {feito && <span>{certas} de {posts.length} certas.</span>}
-      </div>
-    </div>
-  );
-}
-
-function Situacoes({ n, aoConcluir }: { n: number; aoConcluir: (fr: number, l: LinhaRelatorio[]) => void }) {
-  const [qs] = useState(() => amostra(SITUACOES_REDES, n).map((s) => ({ ...s, ...baralharOpcoes(s.opcoes, 0) })));
-  const [resp, setResp] = useState<(number | null)[]>(() => qs.map(() => null));
-  const [feito, setFeito] = useState(false);
-  const certas = qs.filter((q, i) => resp[i] === q.correta).length;
-  return (
-    <div className="grid gap-3">
-      <Instrucao>O que fazes em cada situação?</Instrucao>
-      {qs.map((q, i) => (
-        <fieldset key={i} className="cartao p-4 grid gap-1 border-0" style={feito ? { outline: `2px solid ${resp[i] === q.correta ? "var(--certo)" : "var(--errado)"}` } : undefined}>
-          <legend className="font-bold px-1">{i + 1}. {q.pergunta}</legend>
-          {q.opcoes.map((o, j) => (
-            <BotaoRadio key={j} id={`rs-${i}-${j}`} name={`rs-${i}`} rotulo={o} checked={resp[i] === j} disabled={feito} onChange={() => setResp((r) => r.map((x, k) => (k === i ? j : x)))} />
-          ))}
-          {feito && <p className="m-0 text-sm" style={{ color: resp[i] === q.correta ? "var(--certo)" : "var(--errado)" }}>{resp[i] === q.correta ? "Certo. " : `O mais seguro: ${q.opcoes[q.correta]}. `}{q.porque}</p>}
-        </fieldset>
-      ))}
-      <div className="flex gap-3 items-center">
-        {!feito ? (
-          <Botao disabled={resp.some((r) => r === null)} onClick={() => setFeito(true)}>Verificar</Botao>
-        ) : (
-          <Botao onClick={() => aoConcluir(certas / qs.length, qs.map((q, i) => ({ tarefa: q.pergunta, resultado: resp[i] === q.correta ? "certo" : "errado", resposta: resp[i] === null ? undefined : q.opcoes[resp[i]!], certa: q.opcoes[q.correta], feedback: q.porque })))}>Continuar</Botao>
-        )}
-        {feito && <span>{certas} de {qs.length} certas.</span>}
       </div>
     </div>
   );

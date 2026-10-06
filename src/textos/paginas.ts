@@ -60,7 +60,7 @@ export const PAGINAS = {
       { para: "/treino", icone: "◎", titulo: "Atividade", texto: "Escolhe uma atividade e um de cinco níveis. É possível repetir as atividades e bater o recorde anterior." },
       { para: "/codigo", icone: "#", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
       { para: "/jogos", icone: "🎲", titulo: "Jogos", texto: "Jogos para desenvolver competências: leitura com literatura portuguesa, escape room, mistério, folha de cálculo, email e um robô para programar." },
-      { para: "/seguranca", icone: "🛡", titulo: "Segurança", texto: "Informações e testes sobre boas práticas online, exemplos de fraude e redes sociais." },
+      { para: "/seguranca", icone: "🛡", titulo: "Segurança", texto: "Informações e testes sobre boas práticas online, fraude, redes sociais, privacidade, Wi-Fi público e controlo parental." },
     ],
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Os teus carimbos estão no [cartão](/cartao).",
   },
@@ -85,7 +85,7 @@ export const PAGINAS = {
       atividade: { titulo: "Atividade", texto: "Escolhes uma atividade e um de cinco níveis, do 1 (Iniciação) ao 5 (Perito). Repetes à vontade." },
       codigo: { titulo: "Código", texto: "O professor montou uma prova e deu-te um código. Escreves o código e fazes essa prova." },
       jogos: { titulo: "Jogos", texto: "Seis jogos para treinar de outra maneira: ler autores portugueses, sair de uma sala trancada, resolver um mistério, fazer um orçamento, escrever um email e programar um robô." },
-      seguranca: { titulo: "Segurança", texto: "Três temas: boas práticas online, exemplos de fraude e redes sociais. Em cada um lês as informações e fazes um teste." },
+      seguranca: { titulo: "Segurança", texto: "Seis temas: boas práticas online, fraude, redes sociais, privacidade e navegação, computadores e Wi-Fi públicos, e família e controlo parental. Em cada um lês as informações e fazes um teste." },
     },
     cenario: { titulo: "Escolhe o cenário", texto: "Antes de começar escolhes onde se passa a história. O cenário muda as personagens, os títulos e os textos das tarefas. As regras e a pontuação são iguais.", personagens: "Personagens" },
     atividade: {
@@ -159,9 +159,120 @@ export const PAGINAS = {
       titulo: "Estado",
       itens: [
         "Versão atual: motor de atividades, as 12 atividades jogáveis a 5 níveis (incluindo A Maqueta, de manipulação 3D), com tarefas, textos e alvos sorteados em cada tentativa, preparação para as provas ModA, provas finais, exames nacionais e ensino superior, treino, carimbos e cartão de imprensa, dois contextos narrativos (redação e laboratório), duas interfaces de utilização possíveis (Original e Mosaico) com tema claro e escuro, resultados locais, telemetria anónima com Observatório e ecrã de administração.",
-        "Jogos (Biblioteca Viva, A Sala Trancada, Quem Apagou o Ficheiro?, Orçamento da Visita de Estudo, Correio da Redação, O Robô da Bancada) e Segurança digital (boas práticas online, exemplos de fraude, redes sociais), com cinco níveis e relatório. O professor pode incluí-los nas provas.",
+        "Jogos (Biblioteca Viva, A Sala Trancada, Quem Apagou o Ficheiro?, Orçamento da Visita de Estudo, Correio da Redação, O Robô da Bancada) e Segurança digital (boas práticas online, exemplos de fraude, redes sociais, privacidade e navegação, computadores e Wi-Fi públicos, família e controlo parental), com cinco níveis e relatório. O professor pode incluí-los nas provas.",
         "Ferramentas de suporte: tutorial, sessões de professor com código, QR, resultados por email e página privada de resultados; auditoria automática de acessibilidade (WCAG 2.2 AA); protocolo de piloto e script de recalibração dos limiares.",
         "Backlog: piloto em escolas, recalibração dos limiares com os dados do piloto, revisão manual de acessibilidade com leitor de ecrã.",
+      ],
+    },
+    faq: {
+      titulo: "Perguntas frequentes",
+      itens: [
+        {
+          pergunta: "Como são os meus dados guardados?",
+          paragrafos: [
+            "Não há contas. Os teus resultados ficam guardados só neste navegador, neste dispositivo. Não vão para nenhuma base de dados.",
+            "Cada atividade concluída envia também um registo anónimo para estatísticas: a atividade, o nível, a pontuação, a duração e o tipo de dispositivo. Nunca envia o nome, o email nem o endereço IP. Tudo explicado na página [Privacidade](/privacidade).",
+          ],
+        },
+        {
+          pergunta: "Posso ver as minhas conquistas noutro computador?",
+          paragrafos: [
+            "Não. Como não há contas, os resultados, as estrelas e os carimbos ficam só no navegador onde fizeste as atividades. Noutro computador, ou noutro navegador do mesmo computador, começas do zero.",
+            "Em [Os meus resultados](/resultados) podes exportar as tuas tentativas para um ficheiro CSV e guardá-lo, mas esse ficheiro não pode ser importado noutro computador.",
+          ],
+        },
+        {
+          pergunta: "Se fizer estas atividades, terei mais sucesso nas provas?",
+          paragrafos: [
+            "Não te podemos prometer melhores notas. O ECD não reproduz as provas oficiais nem ensina a matéria das disciplinas.",
+            "O que faz é treinar as competências digitais que as provas em computador pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, gerir o tempo e escrever matemática. Os estudos sobre provas em computador mostram que a falta destas competências pode baixar os resultados, independentemente do que o aluno sabe (ver as fontes no fim desta página).",
+            "O efeito do ECD nos resultados das provas ainda não foi medido. Isso será feito no piloto em escolas.",
+          ],
+        },
+        {
+          pergunta: "Quem pode fazer estas atividades?",
+          paragrafos: [
+            "Qualquer pessoa. O ECD foi pensado para alunos do 1.º ciclo ao ensino superior, com cinco níveis por atividade.",
+            "Os professores podem montar uma prova para a turma em [Professor](/professor). Pais, encarregados de educação e adultos que queiram treinar também são bem-vindos.",
+          ],
+        },
+        {
+          pergunta: "Fazer estas atividades tem algum custo?",
+          paragrafos: [
+            "Não. É gratuito, não tem publicidade nem compras e não pede conta nem dados de pagamento.",
+            "Escolas e entidades também podem usar, copiar e alojar a aplicação sem custos (ver [Licença](/licenca)).",
+          ],
+        },
+        {
+          pergunta: "O professor vê o meu nome?",
+          paragrafos: [
+            "Só se tu o escreveres. Nas provas com código, o professor escolhe como te identificas: número de turma, alcunha ou nada. Nunca é pedido o nome completo e recomendamos o número de turma.",
+            "Para cada identificador, o professor vê a atividade, o nível, a pontuação e a duração. O nome que escreves em Definições aparece só no teu ecrã e nunca é enviado.",
+          ],
+        },
+        {
+          pergunta: "Posso apagar os meus resultados?",
+          paragrafos: [
+            "Sim. Em [Os meus resultados](/resultados), o botão “Apagar tudo” apaga as tentativas e os testes guardados neste navegador. Não é possível recuperá-los.",
+            "Também podes limpar os dados do navegador. É uma boa prática, sobretudo em computadores partilhados:",
+          ],
+          lista: [
+            "Abre as definições do navegador e procura Privacidade.",
+            "Escolhe Limpar dados de navegação. O atalho Ctrl+Shift+Delete (no Mac, Cmd+Shift+Delete) abre o mesmo menu.",
+            "Escolhe o período, por exemplo “Desde sempre”, e marca o histórico, os cookies e dados de sítios e os ficheiros em cache.",
+            "Confirma. Isto apaga os resultados e as preferências do ECD e termina as sessões abertas noutros sítios.",
+          ],
+          nota: "Os registos anónimos já enviados não identificam ninguém, por isso não há forma de os associar a ti para os apagar. Mais conselhos em [Privacidade e navegação](/seguranca/privacidade).",
+        },
+        {
+          pergunta: "Posso desligar o envio de estatísticas?",
+          paragrafos: [
+            "Sim. Em [Definições](/definicoes), em Estatísticas anónimas, desliga o interruptor. A partir daí nada é enviado. O treino, os resultados e as estrelas funcionam da mesma forma.",
+            "Atenção: nas provas com código, os resultados chegam ao professor por esse mesmo envio. Com o envio desligado, o professor não recebe os teus resultados. A aplicação avisa-te antes de começares a prova.",
+          ],
+        },
+        {
+          pergunta: "Preciso de instalar alguma coisa? Funciona no telemóvel ou no tablet?",
+          paragrafos: [
+            "Não é preciso instalar nada. Basta um navegador atualizado e ligação à internet.",
+            "Funciona no computador, no tablet e no telemóvel. Como as provas digitais se fazem no computador, recomendamos treinar num computador com teclado físico, sobretudo nas atividades de escrita e de atalhos.",
+          ],
+        },
+        {
+          pergunta: "Tenho uma dificuldade de visão, de motricidade, de leitura ou de atenção. Posso usar?",
+          paragrafos: ["Sim. O ECD foi construído para cumprir as regras de acessibilidade WCAG 2.2, nível AA:"],
+          lista: [
+            "Em [Definições](/definicoes): tema claro ou escuro, texto grande, contraste reforçado e tempo alargado (×1,25, ×1,5 ou ×2), como nas acomodações das provas.",
+            "Tudo funciona só com o teclado, com o foco sempre visível.",
+            "Tudo o que se arrasta também se faz com toques ou com o teclado.",
+            "As instruções de cada atividade podem ser lidas em voz alta.",
+            "Todos os campos têm rótulos e os avisos são anunciados aos leitores de ecrã.",
+            "Funciona com o zoom do navegador e respeita a opção do sistema de reduzir o movimento.",
+          ],
+          nota: "A revisão com leitores de ecrã por pessoas que os usam no dia a dia ainda está por fazer. Se algo não funcionar contigo, diz-nos. Mais informação em [Acessibilidade](/acessibilidade).",
+        },
+        {
+          pergunta: "O que significam as estrelas e os níveis?",
+          paragrafos: [
+            "Cada atividade tem cinco níveis: 1 Iniciação, 2 Base, 3 Intermédio, 4 Avançado e 5 Perito. Podes começar em qualquer um.",
+            "Cada tentativa dá de 0 a 100 pontos. Abaixo de 50, convém tentar de novo. De 50 a 74 ganhas uma estrela, de 75 a 90 duas e de 91 a 100 três. Fica guardada a melhor tentativa de cada nível.",
+            "Com 85 pontos ou mais numa competência ganhas o carimbo dessa competência no [teu cartão](/cartao).",
+          ],
+        },
+        {
+          pergunta: "Este jogo é oficial? É do IAVE?",
+          paragrafos: [
+            "Não. O ECD é um projeto independente e gratuito da Kendir Studios. Não é um produto do IAVE nem do Ministério da Educação e não reproduz as provas oficiais.",
+            "Baseia-se em informação pública sobre as provas digitais (ver as fontes no fim desta página) e treina as competências de que precisas para as fazer.",
+          ],
+        },
+        {
+          pergunta: "A minha escola pode alojar a aplicação ou adaptá-la?",
+          paragrafos: [
+            "Sim. O código está sob a Licença MIT e os conteúdos sob a licença CC BY 4.0. Qualquer escola ou entidade pode usar, copiar, adaptar e publicar a aplicação, gratuitamente, desde que mantenha a atribuição (ver [Licença](/licenca)).",
+            "A aplicação é um conjunto de ficheiros estáticos: aloja-se em qualquer servidor web, sem base de dados. As instruções estão no ficheiro README que acompanha o código.",
+          ],
+        },
       ],
     },
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Estatísticas de uso no [Observatório](/observatorio).",
@@ -188,7 +299,7 @@ export const PAGINAS = {
     introducao: "Escrito em linguagem simples. Se algo não ficar claro, pergunta.",
     seccoes: [
       { titulo: "Não há contas", paragrafos: ["Ninguém se regista. Não pedimos nome, email nem idade. Os teus resultados ficam só no teu navegador, para veres a tua evolução; podes exportá-los ou apagá-los em “Os meus resultados”. O nome que escreveres nas Definições serve só para aparecer no teu ecrã de resultado e nunca sai do teu computador."] },
-      { titulo: "Estatísticas anónimas", paragrafos: ["Para sabermos que competências faltam e a quantas pessoas, cada atividade concluída envia um pequeno registo anónimo: um identificador aleatório criado no teu navegador (não ligado a ti), a atividade, o nível, a pontuação, a duração, algumas medidas da atividade (por exemplo palavras por minuto), o tipo de dispositivo (computador, tablet, telemóvel), o contexto e o aspeto escolhidos, e se usaste tempo alargado. Não enviamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.", "Os registos vão para uma folha de cálculo controlada pela entidade que publica a aplicação, na União Europeia, e servem só para estatísticas agregadas. No Observatório, qualquer grupo com menos de 20 tentativas fica oculto. Podes desligar o envio em Definições → Estatísticas anónimas; a aplicação funciona exatamente igual."] },
+      { titulo: "Estatísticas anónimas", paragrafos: ["Para sabermos que competências faltam e a quantas pessoas, cada atividade concluída envia um pequeno registo anónimo: um identificador aleatório criado no teu navegador (não ligado a ti), a atividade, o nível, a pontuação, a duração, algumas medidas da atividade (por exemplo palavras por minuto), o tipo de dispositivo (computador, tablet, telemóvel), o contexto e o aspeto escolhidos, e se usaste tempo alargado. Não enviamos o endereço IP, nem impressão digital do dispositivo, nem usamos analítica ou publicidade de terceiros. Por isso não há aviso de cookies: só há armazenamento estritamente necessário.", "Os registos vão para uma folha de cálculo controlada pela entidade que publica a aplicação, na União Europeia, e servem só para estatísticas agregadas. No Observatório, qualquer grupo com menos de 20 tentativas fica oculto. Podes desligar o envio em Definições → Estatísticas anónimas; a aplicação funciona igual, mas os professores deixam de receber os resultados das provas feitas com código."] },
       { titulo: "Sessões de professor", paragrafos: ["Quando um professor cria uma sessão, guardamos o código, a configuração da prova e, se o professor o indicar, o seu email, para lhe enviar os resultados. O email só é usado depois de confirmado por ligação e é apagado 12 meses após a última tentativa. Nas tentativas feitas com o código vai também o identificador que o professor pediu (número de turma ou alcunha); recomendamos o número de turma em vez do nome."] },
       { titulo: "Base legal e contacto", paragrafos: ["Os dados anónimos não identificam ninguém e são tratados com base no interesse legítimo de melhorar a preparação dos alunos para provas digitais. Dúvidas ou pedidos: Kendir Studios."] },
     ],
@@ -243,7 +354,7 @@ export const PAGINAS = {
     ajudaTitulo: "Onde pedir ajuda",
     aprender: "Aprender",
     testar: "Testar · nível {nivel}",
-    "introducao": "Três temas para estares mais seguro na internet. Em cada um, lê as informações e depois faz o teste, com cinco níveis e um relatório no fim. Os testes de segurança não contam para a preparação de provas nem para os carimbos."
+    "introducao": "Seis temas para estares mais seguro na internet. Em cada um, lê as informações e depois faz o teste, com cinco níveis e um relatório no fim. Os testes de segurança não contam para a preparação de provas nem para os carimbos."
   },
   definicoes: {
     titulo: "Definições",
@@ -267,5 +378,7 @@ export const PAGINAS = {
     titulo: "Entrar com código",
     caminho: "Código",
     introducao: "Insere aqui o código que o teu professor indicou. Terá o formato **TEC7·4F7KQ2**. Após inserires o código, clica em “Entrar” para começar a prova.",
+    semEnvio: "**O envio de estatísticas está desligado neste navegador.** Assim, o teu professor não vai receber os resultados desta prova. Liga o envio para que ele os receba.",
+    ligarEnvio: "Ligar o envio",
   },
 };
