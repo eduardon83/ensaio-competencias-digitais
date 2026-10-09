@@ -51,22 +51,22 @@ export function Layout() {
           </nav>
         </div>
       </header>
-      <main id="conteudo" tabIndex={-1} className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 outline-none">
+      <main id="conteudo" tabIndex={-1} className="flex-1 max-w-6xl w-full mx-auto px-4 py-[2rem] outline-none">
         <Outlet />
       </main>
       <footer className="border-t mt-12" style={{ borderColor: "var(--linha)", color: "var(--suave)" }}>
-        <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap gap-x-6 gap-y-2">
+        <div className="max-w-6xl mx-auto px-4 py-6 text-sm flex flex-wrap items-center gap-x-6 gap-y-0">
           <span>
             {G.nomeApp} · v{VERSAO} · {G.rodape.replace("{autoria}", AUTORIA)} · <NavLink to="/licenca">{G.ligacoesRodape.licenca}</NavLink>
           </span>
-          <NavLink to="/resultados">{G.ligacoesRodape.resultados}</NavLink>
-          <NavLink to="/cartao">{G.ligacoesRodape.cartao}</NavLink>
-          <NavLink to="/seguranca">{G.ligacoesRodape.seguranca}</NavLink>
-          <NavLink to="/tutorial">{G.ligacoesRodape.tutorial}</NavLink>
-          <NavLink to="/privacidade">{G.ligacoesRodape.privacidade}</NavLink>
-          <NavLink to="/acessibilidade">{G.ligacoesRodape.acessibilidade}</NavLink>
-          <NavLink to="/admin">{G.ligacoesRodape.admin}</NavLink>
-          <a href="https://mosaico.gov.pt/ferramentas/agora-design-system" target="_blank" rel="noreferrer">
+          <NavLink to="/resultados" className="ligacao-alvo">{G.ligacoesRodape.resultados}</NavLink>
+          <NavLink to="/cartao" className="ligacao-alvo">{G.ligacoesRodape.cartao}</NavLink>
+          <NavLink to="/seguranca" className="ligacao-alvo">{G.ligacoesRodape.seguranca}</NavLink>
+          <NavLink to="/tutorial" className="ligacao-alvo">{G.ligacoesRodape.tutorial}</NavLink>
+          <NavLink to="/privacidade" className="ligacao-alvo">{G.ligacoesRodape.privacidade}</NavLink>
+          <NavLink to="/acessibilidade" className="ligacao-alvo">{G.ligacoesRodape.acessibilidade}</NavLink>
+          <NavLink to="/admin" className="ligacao-alvo">{G.ligacoesRodape.admin}</NavLink>
+          <a href="https://mosaico.gov.pt/ferramentas/agora-design-system" target="_blank" rel="noreferrer" className="ligacao-alvo">
             Ágora Design System
           </a>
         </div>

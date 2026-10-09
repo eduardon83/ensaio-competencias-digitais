@@ -39,6 +39,11 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 - O módulo Ágora (`src/ui/agora.tsx`, ~540 kB JS) e o seu CSS (~1 MB, com `@layer base` global e `--color-*: initial` no `@theme`) são carregados **só** quando o formato é Mosaico (`carregarAgora()` em `src/ui/registo-agora.ts`, chamado em `src/main.tsx`); `src/ui/index.tsx` obtém os componentes por `agora()`. Por isso trocar de formato recarrega a página. **Não** uses utilitários de cor do Tailwind (`bg-white`, `text-gray-…`): usa `var(--token)`.
 - Tema escuro nos dois formatos: tokens em `app.css` (`[data-tema]`, incluindo `[data-formato="mosaico"]`) e, no Mosaico, a prop `darkMode` passada a cada componente Ágora a partir de `usePreferencias().escuro`.
 - `InputSelect` do Ágora tem API própria (dropdown não nativo); `Seletor` usa `<select>` nativo nos dois formatos.
+- O plugin `semGoogleFonts` (`vite.config.ts`) usa `retirarGoogleFonts` de `src/build/semGoogleFonts.ts`. O endereço do Google Fonts tem `;` dentro: se a expressão cortar a meio, o navegador deita fora o CSS inteiro do Mosaico (aconteceu na v1.0.0 publicada). Guardado por `src/build/build.test.ts`.
+- O CSS do Ágora traz utilidades **fora de qualquer @layer** com outra escala (`.py-8` = 8 px, `.gap-8`, `.w-32`…), que ganham sempre ao Tailwind da aplicação. Não uses esses nomes: escreve o valor (`py-[2rem]`, `gap-[2rem]`, `w-[8rem]`). O mesmo teste falha se algum componente os usar.
+- Ícones da interface: Lucide, por nome, com `<Icone nome="…" />` (`src/componentes/Icone.tsx`; `ICONE_DOMINIO` para os carimbos). Os campos `icone` dos conteúdos guardam o nome. Emojis só no conteúdo dos jogos e das janelas simuladas.
+- Nível dos desafios, jogos e testes de segurança: lista `SeletorNivel` dentro de cada cartão (sem separadores de nível no topo).
+- Etiquetas e pequenos rótulos usam `--fonte-rotulo` (mono no Original, letra do texto no Mosaico). Ligações soltas (caminho, rodapé, cartão) levam `.ligacao-alvo` (44 px).
 
 ### Motor de atividades
 
@@ -55,7 +60,7 @@ Documentação para o público geral: `README.txt` (fonte) e `README.pdf` (gerad
 
 ## Licença
 
-Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.0 (primeira versão oficial; a numeração recomeçou depois da 1.7.0 de desenvolvimento) (`src/versao.ts` e `package.json`).
+Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às Competências Digitais, desenvolvido por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824)" (constante `AUTORIA` em `src/versao.ts`; `REPOSITORIO` recebe o link público do código quando existir) (ficheiro `LICENSE`, página `/licenca`, rodapé). Versão pública atual: 1.0.1 (a 1.0.0 foi a primeira versão oficial; a numeração recomeçou depois da 1.7.0 de desenvolvimento) (`src/versao.ts` e `package.json`).
 
 ## Convenções
 
@@ -65,8 +70,9 @@ Código sob MIT, conteúdos sob CC BY 4.0, atribuição obrigatória "Ensaio às
 - Conteúdo marcado `[conteúdo Kendir]` é provisório (textos de autor com direitos a tratar).
 - Testes: funções de pontuação e conteúdo com invariantes (ex.: número de diferenças na Revisão) em `*.test.ts`.
 
-## Estado (2026-10-06)
+## Estado (2026-10-09)
 
+- v1.0.1 (2026-10-09), correção visual do Mosaico: o CSS do Ágora voltou a carregar (a v1.0.0 publicada mostrava os controlos sem estilo) e deixou de haver conflito de classes com o Tailwind (guardas em `src/build/build.test.ts`); nível escolhido numa lista dentro de cada cartão em Desafios, Jogos e Segurança; ícones Lucide em vez de emojis na interface; etiquetas na letra do texto no Mosaico; alvos de 44 px no caminho, rodapé, pontos do tutorial e cartão; Observatório mostra 0 em vez de "< 1" sem dados. Revisão visual feita com Playwright no sítio publicado (desktop 1280 e telemóvel 390, claro e escuro).
 - v1.0.0 (2026-10-06), primeira versão oficial: textos do backoffice passados para o código (`scripts/importar-textos.mjs`); fontes servidas pelo próprio sítio (`src/styles/fontes.css`, @fontsource; o plugin `semGoogleFonts` em `vite.config.ts` retira o @import do Google Fonts do tema Ágora); cabeçalhos de segurança em `public/_headers` (CSP; manter igual a `docker/nginx.conf`); limite de pedidos com chave no Worker (`ratelimits` LIMITE_CHAVES em `wrangler.jsonc`); chave do `/admin` por POST (`evento: "agregados"`) com bloqueio após 10 falhas; desafio 11 passa a "Escrita Matemática"; release com zip da aplicação, zip da telemetria, README.pdf e imagem Docker no GHCR (`Dockerfile`, workflow `release.yml`); commits com o email noreply do GitHub. Antes disto: Observatório novo (`src/paginas/Observatorio.tsx`, funções puras e testadas em `src/dados/observatorio.ts`: períodos com os últimos 3/6/12 meses e o ano letivo atual mais 10 anteriores, de 1 de setembro a 31 de agosto; filtros por desafio, nível, dispositivo, cenário e origem; a mesma agregação no navegador e no Apps Script; totais ocultos abaixo do limiar em modo público). Gráficos HTML acessíveis em `src/componentes/Graficos.tsx` (cada um com tabela "Ver os dados"). Exportação CSV e PDF (`src/dados/relatorioPdf.ts`, jsPDF carregado só ao exportar). `/admin` usa o mesmo painel com a chave. Vídeos do YouTube com fachada (`VideoYoutube.tsx`). Ligações do texto rico só `/`, `https:`, `http:` e `mailto:`. CI e release em `.github/workflows/` (tag `vX.Y.Z` igual ao `package.json`; notas em `docs/notas/vX.Y.Z.md`). Ao atualizar uma instalação com ponto de recolha, publicar de novo `telemetria/apps-script.gs`.
 
 - Pacote de vídeo (`design/pacote-video/`, 2026-10-06): `BRIEF.md` com os guiões dos vídeos Institucional (88 s), Tutorial Professor (60 s) e Tutorial Aluno (60 s), seguindo a identidade da demo promocional; `scripts/capturas-video.mjs` captura do sítio publicado (textos do backoffice) para `ecras/`, `sequencias/professor|aluno/` (cursor desenhado na página) e `gravacoes/*.webm` (precisa de `npx playwright install ffmpeg`). Ao mudar ecrãs mostrados nos vídeos, voltar a correr o script.

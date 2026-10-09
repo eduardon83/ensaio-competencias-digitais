@@ -1,5 +1,5 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.0 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.1 · outubro de 2026
 
 
 O QUE É
@@ -129,7 +129,7 @@ DADOS E PRIVACIDADE
 PUBLICAR A APLICAÇÃO
 
 Forma mais simples: descarregar a versão pronta na página de versões do repositório (Releases): o ficheiro ecd-vX.Y.Z-aplicacao.zip tem a aplicação pronta a alojar, sem ponto de recolha configurado. Ou usar a imagem Docker, que já inclui um servidor web:
-  docker run -p 8080:8080 ghcr.io/eduardon83/ensaio-competencias-digitais:1.0.0
+  docker run -p 8080:8080 ghcr.io/eduardon83/ensaio-competencias-digitais:1.0.1
 (com ponto de recolha: construir a imagem com docker build --build-arg VITE_TELEMETRIA_URL=… .)
 
 Para gerar a partir do código:

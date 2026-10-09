@@ -1,6 +1,6 @@
 // ─── Textos das páginas (editáveis no backoffice) ────────────────────────────
 // [conteúdo Kendir] Marcação permitida nos textos: **negrito**, [texto](/rota), ^1^ (índice superior).
-// Os campos "para" e "icone" não são editáveis (rotas e símbolos).
+// Os campos "para" e "icone" não são editáveis (rotas e nomes de ícones de src/componentes/Icone.tsx).
 
 export const PAGINAS = {
   geral: {
@@ -17,10 +17,10 @@ export const PAGINAS = {
     destaque: "Prepara as tuas competências digitais para as provas e avaliações. Pratica a escrita no teclado, a leitura no ecrã e a gestão do tempo. ",
     subtitulo: "O Ensaio às Competências Digitais (ECD) permite-te praticar tudo isto. É gratuito e não requer conta nem dados pessoais.",
     blocos: [
-      { para: "/treinar", icone: "▶", titulo: "Treinar", texto: "Prepara-te para provas e exames, experimenta desafios de competências digitais, joga ou entra com o código do teu professor." },
-      { para: "/professor", icone: "✎", titulo: "Professor", texto: "Crie uma prova para as suas turmas e avalie as competências digitais dos seus alunos." },
-      { para: "/tutorial", icone: "?", titulo: "Tutorial", texto: "Descobre como funciona o Ensaio às Competências Digitais e como começar a treinar. \nTempo de leitura: 2 minutos." },
-      { para: "/observatorio", icone: "◔", titulo: "Observatório", texto: "Consulta estatísticas anónimas e descobre quais são as competências digitais que mais precisam de treino." },
+      { para: "/treinar", icone: "jogar", titulo: "Treinar", texto: "Prepara-te para provas e exames, experimenta desafios de competências digitais, joga ou entra com o código do teu professor." },
+      { para: "/professor", icone: "lapis", titulo: "Professor", texto: "Crie uma prova para as suas turmas e avalie as competências digitais dos seus alunos." },
+      { para: "/tutorial", icone: "ajuda", titulo: "Tutorial", texto: "Descobre como funciona o Ensaio às Competências Digitais e como começar a treinar. \nTempo de leitura: 2 minutos." },
+      { para: "/observatorio", icone: "grafico", titulo: "Observatório", texto: "Consulta estatísticas anónimas e descobre quais são as competências digitais que mais precisam de treino." },
     ],
     porque: {
       titulo: "Porquê",
@@ -56,11 +56,11 @@ export const PAGINAS = {
     titulo: "Treinar",
     introducao: "Escolhe como queres treinar as tuas competências digitais. Se o teu professor te entregou um código, escolhe a opção correspondente.",
     opcoes: [
-      { para: "/teste", icone: "☰", titulo: "Provas e exames", texto: "Treina as competências digitais para te familiarizares com as provas ModA, as provas finais do 9.º ano e os exames nacionais. Descobre o teu perfil de competências e identifica onde podes melhorar." },
-      { para: "/treino", icone: "◎", titulo: "Desafios", texto: "Escolhe um desafio e o nível de dificuldade. Repete as vezes que quiseres e tenta superar o teu recorde." },
-      { para: "/codigo", icone: "#", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
-      { para: "/jogos", icone: "🎲", titulo: "Jogos", texto: "Joga com literatura portuguesa, participa num escape room, resolve um mistério, pratica com uma folha de cálculo, escreve uma mensagem eletrónica e programa um robô. Os jogos também te podem ajudar a desenvolver as tuas competências." },
-      { para: "/seguranca", icone: "🛡", titulo: "Segurança digital", texto: "Avalia se conheces boas práticas, identifica e reconhece as fraudes mais comuns e descobre o que sabes sobre segurança e redes sociais." },
+      { para: "/teste", icone: "lista", titulo: "Provas e exames", texto: "Treina as competências digitais para te familiarizares com as provas ModA, as provas finais do 9.º ano e os exames nacionais. Descobre o teu perfil de competências e identifica onde podes melhorar." },
+      { para: "/treino", icone: "alvo", titulo: "Desafios", texto: "Escolhe um desafio e o nível de dificuldade. Repete as vezes que quiseres e tenta superar o teu recorde." },
+      { para: "/codigo", icone: "cardinal", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
+      { para: "/jogos", icone: "dados", titulo: "Jogos", texto: "Joga com literatura portuguesa, participa num escape room, resolve um mistério, pratica com uma folha de cálculo, escreve uma mensagem eletrónica e programa um robô. Os jogos também te podem ajudar a desenvolver as tuas competências." },
+      { para: "/seguranca", icone: "escudo", titulo: "Segurança digital", texto: "Avalia se conheces boas práticas, identifica e reconhece as fraudes mais comuns e descobre o que sabes sobre segurança e redes sociais." },
     ],
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Os teus carimbos estão no [cartão](/cartao).",
   },

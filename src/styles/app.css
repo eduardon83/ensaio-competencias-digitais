@@ -11,6 +11,7 @@
   --fonte-titulo: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --fonte-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --fonte-rotulo: var(--fonte-mono); /* etiquetas e pequenos rótulos; no Mosaico usam a letra do texto */
   --raio: 12px;
   --foco: #0f6b73;
   color-scheme: light;
@@ -49,6 +50,7 @@
   --fonte-titulo: "Noto Sans Variable", "Noto Sans", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: "Noto Sans Variable", "Noto Sans", "Segoe UI", system-ui, sans-serif;
   --raio: 8px;
+  --fonte-rotulo: var(--fonte-texto);
   --foco: #f408fc;
   color-scheme: light;
 }
@@ -128,7 +130,7 @@ mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; bord
 .barra > div { height: 100%; background: var(--acento); transition: width .3s linear; }
 .barra--aviso > div { background: var(--aviso); }
 .barra--errado > div { background: var(--errado); }
-.etiqueta { font-family: var(--fonte-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--acento); background: var(--acento-suave); padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
+.etiqueta { justify-self: start; font-family: var(--fonte-rotulo); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--acento); background: var(--acento-suave); padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
 .faixa { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border: 1px solid var(--linha); border-radius: 10px; overflow: hidden; }
 .faixa div { padding: 10px 12px; font-size: .88rem; background: var(--superficie); border-top: 6px solid; }
 .faixa div:nth-child(1){border-color:var(--b1)} .faixa div:nth-child(2){border-color:var(--b2)} .faixa div:nth-child(3){border-color:var(--b3)} .faixa div:nth-child(4){border-color:var(--b4)}
@@ -162,7 +164,7 @@ mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; bord
 .janela-barra { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--tecla); border-bottom: 1px solid var(--linha); flex-wrap: wrap; }
 .janela-barra .pontos { display: flex; gap: 6px; }
 .janela-barra .pontos span { width: 12px; height: 12px; border-radius: 50%; background: var(--tecla-borda); }
-.janela-barra .endereco { flex: 1; min-width: 160px; font-family: var(--fonte-mono); font-size: .8rem; background: var(--superficie); color: var(--suave); border: 1px solid var(--linha); border-radius: 99px; padding: 3px 12px; }
+.janela-barra .endereco { flex: 1; min-width: 160px; overflow-wrap: anywhere; font-family: var(--fonte-mono); font-size: .8rem; background: var(--superficie); color: var(--suave); border: 1px solid var(--linha); border-radius: 99px; padding: 3px 12px; }
 .superficie-clara {
   --fundo: #f5f7f9; --superficie: #ffffff; --tinta: #14232e; --suave: #4c5b67; --linha: #d9e1e7;
   --acento: #0f6b73; --acento-tinta: #ffffff; --acento-suave: #e0f0f0;
@@ -185,7 +187,7 @@ mark { background: var(--marca); color: var(--marca-tinta); padding: 0 3px; bord
 .simulado .topo { display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--linha); background: var(--tecla); flex-wrap: wrap; }
 .separador { padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; background: transparent; font: inherit; color: var(--tinta); cursor: pointer; min-height: 44px; }
 .separador[aria-selected="true"], .separador[data-ativo="true"] { border-bottom-color: var(--acento); font-weight: 700; color: var(--acento); }
-.modal-fundo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 50; padding: 16px; }
+.modal-fundo { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 50; padding: 16px; overscroll-behavior: contain; }
 .modal { background: var(--superficie); border-radius: var(--raio); padding: 20px; max-width: 480px; width: 100%; border: 1px solid var(--linha); color: var(--tinta); }
 .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--tinta); color: var(--fundo); padding: 10px 16px; border-radius: 10px; display: flex; gap: 12px; align-items: center; z-index: 60; max-width: calc(100vw - 32px); }
 .toast button { font: inherit; background: transparent; border: 1px solid currentColor; color: inherit; border-radius: 6px; padding: 4px 10px; cursor: pointer; min-height: 36px; }
@@ -238,6 +240,11 @@ a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header 
 
 /* Mosaico: deixar os componentes Ágora mandar nos controlos */
 :root[data-formato="mosaico"] body { font-size: 1rem; }
+/* Mosaico: etiquetas na letra do texto, sem maiúsculas forçadas (o tipo de letra mono é do formato Original). */
+:root[data-formato="mosaico"] .etiqueta { text-transform: none; letter-spacing: 0; font-size: .8rem; font-weight: 600; }
+
+/* Alvos de toque de 44 px nas ligações soltas (caminho, rodapé, cartão). */
+.ligacao-alvo { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
 
 /* Jogos: folha de cálculo simulada */
 .folha-grelha { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .93rem; background: var(--superficie); }
@@ -249,6 +256,7 @@ a.botao, a.no-underline, a.bloco-entrada, nav[aria-label="Principal"] a, header 
 .folha-grelha td.tarefa { padding: 0; background: color-mix(in srgb, var(--acento) 8%, var(--superficie)); }
 .folha-grelha td.tarefa input { font: inherit; color: var(--tinta); background: transparent; border: 2px solid transparent; width: 100%; min-width: 6rem; height: 2.4rem; padding: 0 8px; text-align: right; }
 .folha-grelha td.tarefa input:focus { border-color: var(--acento); background: var(--superficie); text-align: left; outline: none; }
+.folha-grelha td.tarefa input:focus-visible { outline: 3px solid var(--foco); outline-offset: -3px; }
 .folha-grelha td.ativa { outline: 2px solid var(--acento); outline-offset: -2px; }
 .barra-formula { display: flex; gap: 8px; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--linha); background: var(--superficie); font-family: var(--fonte-mono); font-size: .9rem; }
 .barra-formula .ref { font-weight: 700; min-width: 3rem; border-right: 1px solid var(--linha); padding-right: 8px; }

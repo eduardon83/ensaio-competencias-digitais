@@ -8,10 +8,7 @@ import { repositorioLocal } from "../dados/repositorio";
 import { CARIMBO_MINIMO, NOME_DOMINIO, type Dominio } from "../motor/tipos";
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
-
-const ICONE: Record<Dominio, string> = {
-  teclado: "⌨", interface: "☰", atencao: "◉", navegacao: "🗂", formularios: "✎", arrastar: "⇅", tempo: "⏱", atalhos: "⌘", leitura: "🔍", matematica: "∑", seguranca: "🛡", comunicacao: "✉", folhas: "▦", pensamento: "🕵", programacao: "🤖", tresd: "🧊", todas: "★",
-};
+import { ICONE_DOMINIO, Icone } from "../componentes/Icone";
 
 export interface EstadoCarimbo {
   dominio: Dominio;
@@ -49,7 +46,7 @@ export function CartaoCarimbos() {
       <article className="cartao p-6 grid gap-5 max-w-4xl" style={{ borderWidth: 2, borderColor: "var(--tinta)" }} aria-label={titulo}>
         <div className="flex flex-wrap justify-between gap-3 items-start border-b pb-3" style={{ borderColor: "var(--linha)" }}>
           <div>
-            <div className="text-xs uppercase tracking-widest" style={{ color: "var(--suave)", fontFamily: "var(--fonte-mono)" }}>{titulo}</div>
+            <div className="text-xs uppercase tracking-widest" style={{ color: "var(--suave)", fontFamily: "var(--fonte-rotulo)" }}>{titulo}</div>
             <div className="text-2xl font-extrabold" style={{ fontFamily: "var(--fonte-titulo)" }}>{nome}</div>
             <div className="text-sm" style={{ color: "var(--suave)" }}>{ctx.papel} · {ctx.publicacao(1)}</div>
           </div>
@@ -63,25 +60,24 @@ export function CartaoCarimbos() {
             <li key={c.atividade} className="grid justify-items-center gap-1 text-center">
               <div
                 aria-hidden="true"
-                className="grid place-items-center rounded-full text-3xl"
+                className="grid place-items-center rounded-full"
                 style={{
                   width: 84, height: 84,
                   border: c.ganho ? "4px double var(--acento)" : "2px dashed var(--tecla-borda)",
                   color: c.ganho ? "var(--acento)" : "var(--tecla-borda)",
                   background: c.ganho ? "var(--acento-suave)" : "transparent",
                   transform: c.ganho ? `rotate(${((i * 37) % 24) - 12}deg)` : undefined,
-                  filter: c.ganho ? undefined : "grayscale(1)",
                   opacity: c.ganho ? 1 : 0.6,
                 }}
               >
-                {ICONE[c.dominio]}
+                <Icone nome={ICONE_DOMINIO[c.dominio]} tamanho={34} />
               </div>
               <span className="text-sm font-bold">{c.nome}</span>
               <span className="text-xs" style={{ color: "var(--suave)" }}>
                 {c.ganho ? `Ganho · melhor ${c.melhor}` : c.melhor === null ? "Ainda não jogado" : `Melhor ${c.melhor} · faltam ${CARIMBO_MINIMO - c.melhor}`}
               </span>
               <span className="sr-only">{c.ganho ? `${ctx.resultado.carimbo} ganho` : `${ctx.resultado.carimbo} por ganhar`}</span>
-              {!c.ganho && <Link to={`/atividades/${c.atividade}/1`} className="text-xs">Treinar</Link>}
+              {!c.ganho && <Link to={`/atividades/${c.atividade}/1`} className="text-sm ligacao-alvo">Treinar</Link>}
             </li>
           ))}
         </ul>

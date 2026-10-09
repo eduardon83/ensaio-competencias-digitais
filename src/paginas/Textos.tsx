@@ -12,7 +12,7 @@ const vars = () => ({ versao: VERSAO, data: DATA_VERSAO, autoria: AUTORIA });
 export function Acessibilidade() {
   const T = PAGINAS.acessibilidade;
   return (
-    <div className="grid gap-8 max-w-4xl">
+    <div className="grid gap-[2rem] max-w-4xl">
       <header className="grid gap-2">
         <Caminho itens={[]} atual={T.caminho} />
         <h1 className="text-4xl">{T.titulo}</h1>

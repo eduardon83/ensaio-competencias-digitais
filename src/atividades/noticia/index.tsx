@@ -344,7 +344,7 @@ function RondaTeclado({
                   id={`np-${i}`}
                   ref={i === 0 ? primeiro : undefined}
                   inputMode="decimal"
-                  className="w-32 px-2 py-1 rounded border"
+                  className="w-[8rem] px-2 py-1 rounded border"
                   style={{ borderColor: "var(--tecla-borda)", fontFamily: "var(--fonte-mono)", background: "var(--superficie)", color: "var(--tinta)" }}
                   value={valores[i]}
                   disabled={terminou}

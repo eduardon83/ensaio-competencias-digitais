@@ -8,6 +8,7 @@ import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../.
 import { BarraTempo, useTemporizador } from "../../motor/util";
 import { misturar } from "../../motor/aleatorio";
 import { Botao, BotaoRadio, ForcarClaro } from "../../ui";
+import { Icone } from "../../componentes/Icone";
 import { gerarProva, type ItemProva } from "./itens";
 
 export interface ConfigSimulador {
@@ -291,7 +292,7 @@ function Audio({ fala }: { fala: string }) {
   }
   return (
     <div className="cartao p-3 flex flex-wrap gap-2 items-center">
-      <Botao onClick={ouvir}>{aFalar ? "A reproduzir…" : "▶ Ouvir"}</Botao>
+      <Botao onClick={ouvir}>{aFalar ? "A reproduzir…" : <><Icone nome="ouvir" /> Ouvir</>}</Botao>
       <Botao variante="discreto" onClick={() => setTranscricao((t) => !t)} aria-expanded={transcricao}>{transcricao ? "Esconder transcrição" : "Ver transcrição"}</Botao>
       {!disponivel && <span className="text-sm">O teu navegador não reproduz áudio: usa a transcrição.</span>}
       {transcricao && <p className="m-0 w-full" style={{ fontStyle: "italic" }}>“{fala}”</p>}

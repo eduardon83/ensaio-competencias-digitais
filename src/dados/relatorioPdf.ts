@@ -51,9 +51,9 @@ export function gerarRelatorioPdf(a: Agregados, filtros: string[], seccoes: Secc
 
   // Resumo em caixas
   const caixas: [string, string][] = [
-    ["Tentativas", a.abaixo_limiar ? `< ${a.limiar}` : String(a.total_tentativas)],
+    ["Tentativas", a.abaixo_limiar && a.limiar > 1 ? `< ${a.limiar}` : String(a.total_tentativas)],
     ["Testes completos", String(a.total_testes)],
-    ["Navegadores", a.abaixo_limiar ? "-" : String(a.sessoes)],
+    ["Navegadores", a.abaixo_limiar && a.limiar > 1 ? "-" : String(a.sessoes)],
     ["Média geral", a.media_geral === null ? "-" : String(a.media_geral)],
   ];
   const lc = (L - 9) / 4;

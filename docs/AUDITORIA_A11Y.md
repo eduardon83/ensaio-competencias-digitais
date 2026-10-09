@@ -1,6 +1,6 @@
 # Auditoria automática de acessibilidade
 
-Gerado por `npm run a11y` em 2026-10-06, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
+Gerado por `npm run a11y` em 2026-10-09, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
 Páginas e atividades (nível 3, depois de saltar a prática) nos aspetos Mosaico e Original, em tema claro e escuro.
 
 **Total de ocorrências:** 0 · **Regras violadas:** 0

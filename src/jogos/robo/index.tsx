@@ -8,6 +8,7 @@ import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../.
 import { Instrucao } from "../../motor/util";
 import { Botao, Seletor } from "../../ui";
 import { Janela } from "../../componentes/Janela";
+import { Icone } from "../../componentes/Icone";
 import { custo, executar, gerarMapa, NOME_DIR, NOME_INSTR, nomeCelula, textoPrograma, type ConfigRobo, type Estado, type Instr, type Mapa } from "./gerar";
 
 const NIVEIS: Record<1 | 2 | 3 | 4 | 5, ConfigRobo> = {
@@ -165,17 +166,17 @@ function Desafio({ mapa, config, item, destino, ultimo, aoConcluir }: { mapa: Ma
             <div className="flex gap-2 flex-wrap">
               {(["avancar", "esquerda", "direita"] as const).map((t) => (
                 <Botao key={t} variante="contorno" disabled={aCorrer || resolvido} onClick={() => add({ t })}>
-                  {t === "avancar" ? "⬆" : t === "esquerda" ? "↺" : "↻"} {NOME_INSTR[t]}
+                  <Icone nome={t === "avancar" ? "avancar" : t} /> {NOME_INSTR[t]}
                 </Botao>
               ))}
               {(mapa.itens.length > 0 || config.itens > 0) && (
                 <Botao variante="contorno" disabled={aCorrer || resolvido} onClick={() => add({ t: "apanhar" })}>
-                  ✋ {NOME_INSTR.apanhar}
+                  <Icone nome="mao" /> {NOME_INSTR.apanhar}
                 </Botao>
               )}
               {config.ate && (
                 <Botao variante="contorno" disabled={aCorrer || resolvido} onClick={() => add({ t: "ate" })}>
-                  ⏩ {NOME_INSTR.ate}
+                  <Icone nome="ate" /> {NOME_INSTR.ate}
                 </Botao>
               )}
             </div>
@@ -185,10 +186,10 @@ function Desafio({ mapa, config, item, destino, ultimo, aoConcluir }: { mapa: Ma
                   <Seletor id="robo-vezes" rotulo="Vezes" value={vezes} onChange={(e) => setVezes(e.target.value)} opcoes={["2", "3", "4", "5", "6"].map((v) => ({ valor: v, texto: `${v} vezes` }))} />
                 </div>
                 <Botao variante="contorno" disabled={aCorrer || resolvido} onClick={() => add({ t: "repetir", n: Number(vezes) })}>
-                  🔁 Repetir
+                  <Icone nome="repetir" /> Repetir
                 </Botao>
                 <Botao variante="contorno" disabled={aCorrer || resolvido} onClick={() => add({ t: "fim" })}>
-                  ⏹ {NOME_INSTR.fim}
+                  <Icone nome="parar" /> {NOME_INSTR.fim}
                 </Botao>
               </div>
             )}
@@ -207,9 +208,9 @@ function Desafio({ mapa, config, item, destino, ultimo, aoConcluir }: { mapa: Ma
                     <span className="flex-1" style={{ fontWeight: i.t === "repetir" || i.t === "fim" ? 700 : 400 }}>
                       {i.t === "repetir" ? `Repetir ${i.n} vezes:` : NOME_INSTR[i.t]}
                     </span>
-                    <button type="button" className="botao botao--discreto" style={{ minHeight: 36, padding: "0 8px" }} disabled={aCorrer || resolvido || j === 0} onClick={() => mover(j, -1)} aria-label={`Subir a instrução ${j + 1}`}>↑</button>
-                    <button type="button" className="botao botao--discreto" style={{ minHeight: 36, padding: "0 8px" }} disabled={aCorrer || resolvido || j === prog.length - 1} onClick={() => mover(j, 1)} aria-label={`Descer a instrução ${j + 1}`}>↓</button>
-                    <button type="button" className="botao botao--discreto" style={{ minHeight: 36, padding: "0 8px" }} disabled={aCorrer || resolvido} onClick={() => setProg((p) => p.filter((_, m) => m !== j))} aria-label={`Apagar a instrução ${j + 1}`}>✕</button>
+                    <button type="button" className="botao botao--discreto" style={{ minHeight: 44, minWidth: 44, padding: "0 8px" }} disabled={aCorrer || resolvido || j === 0} onClick={() => mover(j, -1)} aria-label={`Subir a instrução ${j + 1}`}>↑</button>
+                    <button type="button" className="botao botao--discreto" style={{ minHeight: 44, minWidth: 44, padding: "0 8px" }} disabled={aCorrer || resolvido || j === prog.length - 1} onClick={() => mover(j, 1)} aria-label={`Descer a instrução ${j + 1}`}>↓</button>
+                    <button type="button" className="botao botao--discreto" style={{ minHeight: 44, minWidth: 44, padding: "0 8px" }} disabled={aCorrer || resolvido} onClick={() => setProg((p) => p.filter((_, m) => m !== j))} aria-label={`Apagar a instrução ${j + 1}`}>✕</button>
                   </li>
                 ))}
               </ol>
@@ -217,7 +218,7 @@ function Desafio({ mapa, config, item, destino, ultimo, aoConcluir }: { mapa: Ma
             <div className="flex gap-2 flex-wrap">
               {!resolvido ? (
                 <>
-                  <Botao disabled={aCorrer || prog.length === 0} onClick={correr}>▶ Executar</Botao>
+                  <Botao disabled={aCorrer || prog.length === 0} onClick={correr}><Icone nome="jogar" /> Executar</Botao>
                   <Botao variante="discreto" disabled={aCorrer || prog.length === 0} onClick={() => { setProg([]); setEstado({ ...mapa.inicio, apanhados: [] }); setMsg(null); }}>Limpar</Botao>
                   {falhadas > 0 && <Botao variante="discreto" disabled={aCorrer} onClick={() => aoConcluir({ resolvido: false, instrucoes: custo(prog), falhadas, itens: melhorItens, programa: textoPrograma(prog) })}>Desistir deste desafio</Botao>}
                 </>

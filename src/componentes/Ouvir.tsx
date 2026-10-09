@@ -4,6 +4,7 @@
 import { useEffect, useRef } from "react";
 import { usePreferencias } from "../preferencias/preferencias";
 import { Botao } from "../ui";
+import { Icone } from "./Icone";
 
 export const VOZ_DISPONIVEL = typeof window !== "undefined" && "speechSynthesis" in window;
 
@@ -42,7 +43,7 @@ export function Ouvir({ texto, sempre, rotulo = "Ouvir" }: { texto?: string; sem
           lerEmVozAlta(texto ?? (bloco ? textoDoBloco(bloco) : ""));
         }}
       >
-        <span aria-hidden="true">🔊</span> {rotulo}
+        <Icone nome="ouvir" /> {rotulo}
       </Botao>
     </span>
   );

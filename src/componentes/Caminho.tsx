@@ -8,13 +8,13 @@ export function Caminho({ itens: dados = [], atual }: { itens?: [string, string]
   const [rotaAnterior, nomeAnterior] = itens[itens.length - 1];
   return (
     <nav aria-label="Caminho" className="text-sm flex flex-wrap items-center gap-x-3 gap-y-1">
-      <Link to={rotaAnterior} className="botao botao--contorno" style={{ minHeight: 36, padding: "2px 12px" }} aria-label={`Voltar a ${nomeAnterior}`}>
+      <Link to={rotaAnterior} className="botao botao--contorno" style={{ minHeight: 44, padding: "2px 12px" }} aria-label={`Voltar a ${nomeAnterior}`}>
         <span aria-hidden="true">←</span>&nbsp;Voltar
       </Link>
       <ol className="m-0 p-0 list-none flex flex-wrap items-center gap-x-2">
         {itens.map(([rota, nome]) => (
           <li key={rota} className="flex items-center gap-2">
-            <Link to={rota}>{nome}</Link>
+            <Link to={rota} className="ligacao-alvo">{nome}</Link>
             <span aria-hidden="true" style={{ color: "var(--suave)" }}>›</span>
           </li>
         ))}

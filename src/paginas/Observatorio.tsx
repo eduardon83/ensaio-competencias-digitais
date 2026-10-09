@@ -179,9 +179,9 @@ export function PainelObservatorio({ chave }: { chave?: string }) {
       {dados && (
         <>
           <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
-            <Numero rotulo="Tentativas" valor={dados.abaixo_limiar ? `< ${dados.limiar}` : dados.total_tentativas} />
+            <Numero rotulo="Tentativas" valor={dados.abaixo_limiar && dados.limiar > 1 ? `< ${dados.limiar}` : dados.total_tentativas} />
             <Numero rotulo="Testes completos" valor={dados.total_testes} />
-            <Numero rotulo="Navegadores" valor={dados.abaixo_limiar ? "–" : dados.sessoes} />
+            <Numero rotulo="Navegadores" valor={dados.abaixo_limiar && dados.limiar > 1 ? "–" : dados.sessoes} />
             <Numero rotulo="Média geral" valor={dados.media_geral ?? "–"} />
           </div>
           <Barras titulo="Média por desafio, teste e jogo (0 a 100)" dados={medias} max={100} unidade="Média" />

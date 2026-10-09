@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Caminho } from "../componentes/Caminho";
 import { VideoYoutube } from "../componentes/VideoYoutube";
+import { Icone } from "../componentes/Icone";
 import { obterAgregados, telemetriaConfigurada } from "../dados/telemetria";
 import { FAIXAS, faixaDe } from "../motor/tipos";
 import { AvisoTutorial } from "./Tutorial";
@@ -32,7 +33,7 @@ export function Inicio() {
   return (
     <div className="grid gap-12">
       <section className="grid gap-4 max-w-3xl mx-auto text-center justify-items-center">
-        <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--suave)", fontFamily: "var(--fonte-mono)" }}>
+        <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--suave)", fontFamily: "var(--fonte-rotulo)" }}>
           {T.etiqueta}
         </div>
         <h1 className="text-5xl md:text-6xl font-extrabold leading-none" style={{ letterSpacing: "-.02em" }}>
@@ -50,11 +51,11 @@ export function Inicio() {
 
       <nav aria-label="Entradas principais" className="grid gap-4 sm:grid-cols-2 max-w-4xl w-full mx-auto">
         {BLOCOS.map((b) => (
-          <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6" style={{ color: "var(--tinta)" }}>
-            <span aria-hidden="true" className="grid place-items-center rounded-xl text-2xl font-extrabold" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
-              {b.icone}
+          <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6 content-start" style={{ color: "var(--tinta)" }}>
+            <span aria-hidden="true" className="grid place-items-center rounded-xl" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
+              <Icone nome={b.icone} tamanho={28} />
             </span>
-            <span className="text-3xl font-extrabold" style={{ fontFamily: "var(--fonte-titulo)" }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: "var(--fonte-titulo)" }}>
               {b.titulo}
             </span>
             <span style={{ color: "var(--suave)" }}>{b.texto}</span>
@@ -92,7 +93,7 @@ export function Inicio() {
               <b className="block" style={{ fontFamily: "var(--fonte-titulo)" }}>
                 {f.nome}
               </b>
-              <span className="tabular-nums text-xs" style={{ color: "var(--suave)", fontFamily: "var(--fonte-mono)" }}>
+              <span className="tabular-nums text-xs" style={{ color: "var(--suave)", fontFamily: "var(--fonte-rotulo)" }}>
                 {f.min} a {f.max}
               </span>
             </div>
@@ -116,7 +117,7 @@ export function Treinar() {
   const T = PAGINAS.treinar;
   const opcoes = T.opcoes;
   return (
-    <div className="grid gap-8">
+    <div className="grid gap-[2rem]">
       <Caminho atual={T.titulo} />
       <header className="grid gap-2 text-center justify-items-center">
         <h1 className="text-4xl">{T.titulo}</h1>
@@ -127,10 +128,10 @@ export function Treinar() {
       <nav aria-label="Modos de treino" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl w-full mx-auto">
         {opcoes.map((b) => (
           <Link key={b.para} to={b.para} className="bloco-entrada cartao no-underline grid gap-2 p-6 content-start" style={{ color: "var(--tinta)" }}>
-            <span aria-hidden="true" className="grid place-items-center rounded-xl text-2xl font-extrabold" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
-              {b.icone}
+            <span aria-hidden="true" className="grid place-items-center rounded-xl" style={{ width: 56, height: 56, background: "var(--acento)", color: "var(--acento-tinta)" }}>
+              <Icone nome={b.icone} tamanho={28} />
             </span>
-            <span className="text-3xl font-extrabold" style={{ fontFamily: "var(--fonte-titulo)" }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: "var(--fonte-titulo)" }}>
               {b.titulo}
             </span>
             <span style={{ color: "var(--suave)" }}>{b.texto}</span>

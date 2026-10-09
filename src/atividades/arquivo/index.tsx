@@ -211,7 +211,7 @@ function RondaPastas({ config, contexto, endereco, aoConcluir }: { config: Confi
           <button
             type="button"
             className="w-full text-left flex items-center gap-2 px-2 rounded"
-            style={{ paddingLeft: 8 + nivel * 20, minHeight: 36, background: selecionado === n.id ? "var(--acento-suave)" : "transparent", border: 0, color: "var(--tinta)", font: "inherit", cursor: "pointer" }}
+            style={{ paddingLeft: 8 + nivel * 20, minHeight: 44, background: selecionado === n.id ? "var(--acento-suave)" : "transparent", border: 0, color: "var(--tinta)", font: "inherit", cursor: "pointer" }}
             onClick={() => {
               acao();
               if (n.tipo === "pasta") setAbertas((s) => { const x = new Set(s); if (x.has(n.id)) x.delete(n.id); else x.add(n.id); return x; });

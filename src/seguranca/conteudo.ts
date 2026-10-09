@@ -2,6 +2,8 @@
 // [conteúdo Kendir] Texto provisório em linguagem simples. Os contactos de ajuda devem ser confirmados antes da
 // publicação. Todos os exemplos usam organizações fictícias (Banco Horizonte, Envios Já, TecnoMais...).
 
+import type { NomeIcone } from "../componentes/Icone";
+
 export type TemaSeguranca = "boas-praticas" | "fraude" | "redes-sociais" | "privacidade" | "publicos" | "familia";
 
 export interface SecaoInfo {
@@ -13,7 +15,7 @@ export interface SecaoInfo {
 export interface ConteudoTema {
   id: TemaSeguranca;
   titulo: string;
-  icone: string;
+  icone: NomeIcone;
   resumo: string;
   teste: { titulo: string; descricao: string; slug: string };
   secoes: SecaoInfo[];
@@ -30,7 +32,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "boas-praticas",
     titulo: "Boas práticas online",
-    icone: "🛡️",
+    icone: "escudoCerto",
     resumo: "Palavras-passe, verificação em dois passos, atualizações, redes Wi-Fi e computadores partilhados.",
     teste: { titulo: "Teste: boas práticas", descricao: "Situações do dia a dia, criar uma palavra-passe forte e deixar uma conta segura.", slug: "boas-praticas" },
     secoes: [
@@ -77,7 +79,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "fraude",
     titulo: "Exemplos de fraude",
-    icone: "🎣",
+    icone: "anzol",
     resumo: "Emails, SMS e mensagens falsas: como reconhecer uma burla e o que fazer.",
     teste: { titulo: "Teste: O Email Desconfiado", descricao: "Uma caixa de correio com mensagens verdadeiras e burlas. Descobre quais são falsas e porquê.", slug: "fraude" },
     secoes: [
@@ -124,7 +126,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "redes-sociais",
     titulo: "Redes sociais",
-    icone: "💬",
+    icone: "mensagem",
     resumo: "Privacidade, pegada digital, ciberbullying, contactos desconhecidos e desinformação.",
     teste: { titulo: "Teste: Verdade ou Boato?", descricao: "Verifica publicações com ferramentas de pesquisa e decide o que fazer em situações nas redes sociais.", slug: "redes-sociais" },
     secoes: [
@@ -172,7 +174,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "privacidade",
     titulo: "Privacidade e navegação",
-    icone: "🧭",
+    icone: "bussola",
     resumo: "Ler endereços, cookies, permissões, navegação privada, transferências e limpar os dados do navegador.",
     teste: { titulo: "Teste: O Endereço Certo", descricao: "Escolhe a ligação oficial entre endereços parecidos, decide que permissões dar e o que fazer ao navegar.", slug: "privacidade" },
     secoes: [
@@ -225,7 +227,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "publicos",
     titulo: "Computadores e Wi-Fi públicos",
-    icone: "📶",
+    icone: "wifi",
     resumo: "Bibliotecas, cafés, estações e computadores da escola: redes falsas, sessões abertas, pens e carregadores.",
     teste: { titulo: "Teste: Na Biblioteca", descricao: "Escolhe a rede Wi-Fi certa, deixa o computador público como o encontraste e decide o que fazer fora de casa.", slug: "publicos" },
     secoes: [
@@ -269,7 +271,7 @@ export const TEMAS: ConteudoTema[] = [
   {
     id: "familia",
     titulo: "Família e controlo parental",
-    icone: "👪",
+    icone: "familia",
     resumo: "Porque é importante viver a internet em família: conversar, combinar regras e usar o controlo parental.",
     teste: { titulo: "Teste: O Acordo da Família", descricao: "Mitos e factos, um painel de controlo parental para configurar em família e situações para decidir.", slug: "familia" },
     secoes: [

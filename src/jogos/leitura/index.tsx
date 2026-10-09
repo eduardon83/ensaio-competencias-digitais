@@ -8,6 +8,7 @@ import { baralharOpcoes, escolher, misturar } from "../../motor/aleatorio";
 import { definir, limitar, type LinhaRelatorio, type PropsAtividade } from "../../motor/tipos";
 import { Instrucao } from "../../motor/util";
 import { Botao, BotaoRadio } from "../../ui";
+import { Icone } from "../../componentes/Icone";
 import { explicarErro } from "../../atividades/noticia/pontuacao";
 import { TEXTOS, TEXTO_PRATICA, type TextoLiterario } from "./textos";
 import { fraseDitado, gerarLacunas, palavraCerta, semAcentos, unidadesOrdenar } from "./gerar";
@@ -405,7 +406,7 @@ function RondaDitado({ texto, config, aoConcluir }: { texto: TextoLiterario; con
         Ouve a frase do texto e escreve-a. Podes ouvir as vezes que precisares. A pontuação não conta{config.acentos ? "; os acentos contam" : ""}.
       </Instrucao>
       <div className="cartao p-4 flex flex-wrap gap-2 items-center">
-        {voz && <Botao onClick={ouvir}>▶ Ouvir a frase</Botao>}
+        {voz && <Botao onClick={ouvir}><Icone nome="ouvir" /> Ouvir a frase</Botao>}
         <Botao variante={voz ? "discreto" : "primario"} onClick={mostrarFrase} disabled={mostrar}>
           {voz ? "Não consigo ouvir: mostrar 4 segundos" : "Mostrar a frase durante 4 segundos"}
         </Botao>

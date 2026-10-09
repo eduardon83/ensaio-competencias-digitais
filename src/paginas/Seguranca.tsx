@@ -9,6 +9,8 @@ import { Atividade } from "../motor/Atividade";
 import { NIVEIS, NOME_NIVEL, estrelasDe, type Nivel } from "../motor/tipos";
 import { repositorioLocal } from "../dados/repositorio";
 import { Cartao } from "../ui";
+import { Icone } from "../componentes/Icone";
+import { SeletorNivel } from "../componentes/SeletorNivel";
 
 function Estrelas({ slug, nivel }: { slug: string; nivel: Nivel }) {
   const melhor = repositorioLocal.melhor(slug, nivel);
@@ -37,57 +39,57 @@ function Ajuda() {
 }
 
 export function Seguranca() {
-  const [nivel, setNivel] = useState<Nivel>(2);
   return (
-    <div className="grid gap-8">
+    <div className="grid gap-[2rem]">
       <header className="grid gap-2 max-w-3xl">
         <Caminho itens={[["/treinar", "Treinar"]]} atual={PAGINAS.seguranca.titulo} />
         <h1 className="text-4xl">{PAGINAS.seguranca.titulo}</h1>
         <p className="m-0"><Rico texto={PAGINAS.seguranca.introducao} /></p>
       </header>
 
-      <div role="tablist" aria-label="Nível de dificuldade dos testes" className="flex gap-1 flex-wrap border-b" style={{ borderColor: "var(--linha)" }}>
-        {NIVEIS.map((n) => (
-          <button key={n} type="button" role="tab" className="separador" aria-selected={nivel === n} onClick={() => setNivel(n)}>
-            Nível {n} · {NOME_NIVEL[n]}
-          </button>
-        ))}
-      </div>
-
       <section className="grid gap-4 md:grid-cols-3">
         {TEMAS.map((t) => (
-          <Cartao key={t.id} className="grid grid-rows-subgrid row-span-4 gap-3">
-            <div className="flex items-baseline gap-2">
-              <h2 className="text-2xl">
-                <span aria-hidden="true" style={{ fontSize: "1.2em" }}>{t.icone}</span> {t.titulo}
-              </h2>
-            </div>
-            <p className="m-0">{t.resumo}</p>
-            <div className="grid gap-1 content-start">
-              <div className="flex items-baseline gap-2">
-                <strong>{t.teste.titulo}</strong>
-                <span className="ml-auto">
-                  <Estrelas slug={t.teste.slug} nivel={nivel} />
-                </span>
-              </div>
-              <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
-                {t.teste.descricao}
-              </p>
-            </div>
-            <div className="flex gap-2 flex-wrap self-end">
-              <Link to={`/seguranca/${t.id}`} className="botao botao--contorno">
-                Aprender
-              </Link>
-              <Link to={`/seguranca/${t.id}/teste/${nivel}`} className="botao">
-                Testar · nível {nivel}
-              </Link>
-            </div>
-          </Cartao>
+          <CartaoTema key={t.id} tema={t} />
         ))}
       </section>
 
       <Ajuda />
     </div>
+  );
+}
+
+/** Cartão de um tema: o nível do teste escolhe-se na lista do próprio cartão. */
+function CartaoTema({ tema: t }: { tema: (typeof TEMAS)[number] }) {
+  const [nivel, setNivel] = useState<Nivel>(2);
+  return (
+    <Cartao className="grid grid-rows-subgrid row-span-4 gap-3">
+      <h2 className="text-2xl flex items-center gap-2">
+        <Icone nome={t.icone} /> {t.titulo}
+      </h2>
+      <p className="m-0">{t.resumo}</p>
+      <div className="grid gap-1 content-start">
+        <div className="flex items-baseline gap-2">
+          <strong>{t.teste.titulo}</strong>
+          <span className="ml-auto">
+            <Estrelas slug={t.teste.slug} nivel={nivel} />
+          </span>
+        </div>
+        <p className="m-0 text-sm" style={{ color: "var(--suave)" }}>
+          {t.teste.descricao}
+        </p>
+      </div>
+      <div className="grid gap-3 self-end">
+        <SeletorNivel id={`nivel-${t.id}`} slug={t.teste.slug} valor={nivel} aoMudar={setNivel} />
+        <div className="flex gap-2 flex-wrap">
+          <Link to={`/seguranca/${t.id}`} className="botao botao--contorno">
+            Aprender
+          </Link>
+          <Link to={`/seguranca/${t.id}/teste/${nivel}`} className="botao">
+            Testar · nível {nivel}
+          </Link>
+        </div>
+      </div>
+    </Cartao>
   );
 }
 
@@ -105,7 +107,7 @@ export function SegurancaTema() {
       <Caminho itens={[["/treinar", "Treinar"], ["/seguranca", "Segurança digital"]]} atual={t.titulo} />
       <header className="grid gap-2">
         <h1 className="text-4xl">
-          <span aria-hidden="true">{t.icone}</span> {t.titulo}
+          <Icone nome={t.icone} /> {t.titulo}
         </h1>
         <p className="m-0 text-lg">{t.resumo}</p>
       </header>

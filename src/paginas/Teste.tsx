@@ -284,14 +284,14 @@ export function PrimeiraPagina({ tentativas, ciclo, titulo, nivel, codigo, aluno
           <span className="font-extrabold" style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)", lineHeight: 1 }}>
             {ctx.publicacao(nivel)}
           </span>
-          <span className="text-sm self-end" style={{ fontFamily: "var(--fonte-mono)", color: "var(--suave)" }}>
+          <span className="text-sm self-end" style={{ fontFamily: "var(--fonte-rotulo)", color: "var(--suave)" }}>
             Edição especial · {data} · {nomeCiclo}
             {codigo ? ` · sessão ${codigo}` : ""}
           </span>
         </div>
         <div className="grid gap-4 md:grid-cols-[1fr_auto] items-center">
           <div className="grid gap-2">
-            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--acento)", fontFamily: "var(--fonte-mono)" }}>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--acento)", fontFamily: "var(--fonte-rotulo)" }}>
               {prefs.contexto === "jornal" ? "Manchete" : "Conclusão"}
             </div>
             <div className="manchete">

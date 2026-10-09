@@ -4,6 +4,7 @@ import { PAGINAS } from "../textos/paginas";
 import { lerEmVozAlta, VOZ_DISPONIVEL } from "../componentes/Ouvir";
 import { useMemo, useState } from "react";
 import { Caminho } from "../componentes/Caminho";
+import { Icone } from "../componentes/Icone";
 import { TEMAS } from "../seguranca/conteudo";
 import { Link } from "react-router";
 import { contexto as defContexto } from "../contextos";
@@ -130,7 +131,7 @@ export function Atividade({
             </Botao>
             {VOZ_DISPONIVEL && (
               <Botao variante="discreto" onClick={() => lerEmVozAlta(`${ctx.briefs[definicao.slug] ?? definicao.descricao} ${definicao.descricao}`)}>
-                <span aria-hidden="true">🔊</span> {PAGINAS.atividade.briefing.ouvir}
+                <Icone nome="ouvir" /> {PAGINAS.atividade.briefing.ouvir}
               </Botao>
             )}
           </div>

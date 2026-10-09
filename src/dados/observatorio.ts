@@ -226,9 +226,9 @@ export function paraCsv(a: Agregados, descricaoFiltros: string[], nome: (slug: s
   L.push(["Limiar de privacidade (grupos com menos tentativas ocultos)", String(a.limiar)]);
   L.push([]);
   L.push(["Resumo"]);
-  L.push(["Tentativas", a.abaixo_limiar ? `menos de ${a.limiar}` : String(a.total_tentativas)]);
+  L.push(["Tentativas", a.abaixo_limiar && a.limiar > 1 ? `menos de ${a.limiar}` : String(a.total_tentativas)]);
   L.push(["Testes completos", String(a.total_testes)]);
-  L.push(["Navegadores (sessões anónimas)", a.abaixo_limiar ? "" : String(a.sessoes)]);
+  L.push(["Navegadores (sessões anónimas)", a.abaixo_limiar && a.limiar > 1 ? "" : String(a.sessoes)]);
   L.push(["Média geral", a.media_geral === null ? "" : String(a.media_geral)]);
   L.push([]);
   L.push(["Desafio, teste ou jogo", "Tentativas", "Média", "N1 (n)", "N1 média", "N2 (n)", "N2 média", "N3 (n)", "N3 média", "N4 (n)", "N4 média", "N5 (n)", "N5 média"]);
