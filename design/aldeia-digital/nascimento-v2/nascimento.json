@@ -1,0 +1,107 @@
+{
+ "fps": 12,
+ "cena": {
+  "w": 200,
+  "h": 120,
+  "chao_y": 100,
+  "ninho": [
+   74,
+   70
+  ],
+  "ovo": [
+   88,
+   33
+  ]
+ },
+ "segmentos": {
+  "chegada": {
+   "fotogramas": [
+    0,
+    22
+   ],
+   "duracao_ms": 1833,
+   "ciclo": false
+  },
+  "entrega": {
+   "fotogramas": [
+    22,
+    30
+   ],
+   "duracao_ms": 667,
+   "ciclo": false
+  },
+  "espera": {
+   "fotogramas": [
+    30,
+    42
+   ],
+   "duracao_ms": 1000,
+   "ciclo": true
+  },
+  "toque-1": {
+   "fotogramas": [
+    42,
+    49
+   ],
+   "duracao_ms": 583,
+   "ciclo": false
+  },
+  "toque-2": {
+   "fotogramas": [
+    49,
+    56
+   ],
+   "duracao_ms": 583,
+   "ciclo": false
+  },
+  "toque-3": {
+   "fotogramas": [
+    56,
+    63
+   ],
+   "duracao_ms": 583,
+   "ciclo": false
+  },
+  "abertura": {
+   "fotogramas": [
+    63,
+    79
+   ],
+   "duracao_ms": 1333,
+   "ciclo": false
+  },
+  "sair": {
+   "fotogramas": [
+    79,
+    96
+   ],
+   "duracao_ms": 1417,
+   "ciclo": false
+  },
+  "acenar": {
+   "fotogramas": [
+    96,
+    104
+   ],
+   "duracao_ms": 667,
+   "ciclo": true
+  }
+ },
+ "interacao": "chegada e entrega correm sozinhas; espera em ciclo até ao 1.º toque; cada toque toca o seu segmento; o 3.º toque encadeia abertura, sair e acenar.",
+ "camadas": "fundo, cegonha, ninho grande, avatar (quando está dentro do ovo), fundo do ovo, frente do ninho, tampa, avatar (quando já saiu), efeitos.",
+ "correcoes_v2": [
+  "ovo maior: o avatar sai de dentro, tapado pelo fundo do ovo",
+  "a tampa pousa no chão à direita do ninho, virada; já não fica junto à mão",
+  "a cegonha entrega a trouxa no ninho",
+  "o avatar salta para o chão à frente do ninho e só depois acena"
+ ],
+ "calmo": "4 imagens fixas: ovo, ovo rachado, ovo aberto, avatar a acenar; botão Abrir o ovo.",
+ "amostras": [
+  "dinossauro",
+  "raposa",
+  "coelho",
+  "panda",
+  "tiranossauro",
+  "triceratopo"
+ ]
+}

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import "./styles/fontes.css";
 import "./styles/app.css";
+import "./styles/aldeia.css";
 import { App } from "./App";
 import { PreferenciasProvider, aplicarNoDocumento, lerPreferencias } from "./preferencias/preferencias";
 import { carregarAgora } from "./ui/registo-agora";

@@ -76,7 +76,7 @@ async function foto(page, nome, descricao, inteira = false, pasta = "ecras") {
   console.log("✓", pasta, nome);
 }
 const ir = (page, rota) => page.goto(BASE + rota, { waitUntil: "networkidle" });
-const saltar = (page) => page.getByRole("button", { name: "Saltar a prática" }).click().catch(() => {});
+const saltar = (page) => page.getByRole("button", { name: "Começar", exact: true }).click().catch(() => {});
 const pausa = (page, ms) => page.waitForTimeout(ms);
 
 /** Desliza até ao elemento, leva o cursor até ele devagar e (opcionalmente) clica. */
@@ -205,7 +205,7 @@ async function responderEAvancar(page) {
   await pausa(page, 400);
   for (let k = 0; k < 160; k++) {
     if (await page.getByText("Guardar como imagem").isVisible().catch(() => false)) break;
-    const sp = page.getByRole("button", { name: "Saltar a prática" });
+    const sp = page.getByRole("button", { name: "Começar", exact: true });
     if (await sp.isVisible().catch(() => false)) { await sp.click(); await pausa(page, 300); continue; }
     const area = page.locator("textarea").first();
     if ((await area.count()) && (await area.isEditable().catch(() => false)) && !(await area.inputValue())) {
@@ -337,7 +337,7 @@ for (const [formato, tema, sufixo] of [["original", "claro", "original-claro"], 
   await apontar(page, page.getByText(/^Laboratório/).first(), { clicar: true });
   await pausa(page, 600);
   await A("A05-cenario", "Escolher o cenário (laboratório): o título e a personagem mudam, as regras não");
-  await apontar(page, page.getByRole("button", { name: "Saltar a prática" }), { clicar: true });
+  await apontar(page, page.getByRole("button", { name: "Começar", exact: true }), { clicar: true });
   await pausa(page, 600);
   const f = (await page.locator(".dactilo").first().innerText().catch(() => "")).replace(/\s+/g, " ").trim();
   const area = page.locator("textarea").first();

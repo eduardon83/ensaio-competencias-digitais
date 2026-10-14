@@ -7,7 +7,7 @@ import type { Contexto, Formato } from "../preferencias/preferencias";
 import type { Ciclo, Metricas, Nivel } from "../motor/tipos";
 import { enviar } from "./telemetria";
 
-export type Origem = "teste" | "treino" | "codigo";
+export type Origem = "teste" | "treino" | "codigo" | "aldeia";
 
 export interface Tentativa {
   id: string;
@@ -173,6 +173,17 @@ export const repositorioLocal: Repositorio = {
     }
   },
 };
+
+/** Missões da Aldeia Digital: a tentativa vai só para a telemetria anónima (origem "aldeia", sem nome nem código).
+ *  Não fica neste navegador: o progresso do aluno vive na turma, e o computador pode ser partilhado. */
+export function registarTentativaAnonima(t: Omit<Tentativa, "id" | "sessaoId" | "concluidaEm" | "dispositivo" | "codigo" | "aluno">): Tentativa {
+  const nova: Tentativa = { ...t, id: uuid(), sessaoId: repositorioLocal.sessaoId(), dispositivo: classeDispositivo(), concluidaEm: new Date().toISOString() };
+  enviar("tentativa", {
+    sessao: nova.sessaoId, atividade: nova.atividade, nivel: nova.nivel, pontuacao: nova.pontuacao, duracaoS: Math.round(nova.duracaoMs / 1000), origem: nova.origem,
+    contexto: nova.contexto, formato: nova.formato, extensaoTempo: nova.extensaoTempo, dispositivo: nova.dispositivo, metricas: nova.metricas,
+  });
+  return nova;
+}
 
 // ─── Progresso do percurso de teste (pausa/retoma no mesmo dispositivo) ──────
 export interface Percurso {

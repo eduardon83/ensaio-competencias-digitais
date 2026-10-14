@@ -1,0 +1,916 @@
+{
+ "_nota": "Gerado por scripts/aldeia/preparar-arte.mjs. Ids validados pelo Worker; nomes editáveis no backoffice através de src/aldeia/textos.",
+ "fatos": [
+  {
+   "id": "dinossauro",
+   "nome": "Dinossauro",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "lince",
+   "nome": "Lince",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "lobo",
+   "nome": "Lobo",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "golfinho",
+   "nome": "Golfinho",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "esquilo",
+   "nome": "Esquilo",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "polvo",
+   "nome": "Polvo",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "ourico",
+   "nome": "Ouriço",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "coelho",
+   "nome": "Coelho",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "gato",
+   "nome": "Gato",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "cao",
+   "nome": "Cão",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "urso",
+   "nome": "Urso",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "panda",
+   "nome": "Panda",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "pinguim",
+   "nome": "Pinguim",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "leao",
+   "nome": "Leão",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "tigre",
+   "nome": "Tigre",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "elefante",
+   "nome": "Elefante",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "camaleao",
+   "nome": "Camaleão",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "dragao",
+   "nome": "Dragão",
+   "genero": "m",
+   "colecao": "atuais"
+  },
+  {
+   "id": "andorinha",
+   "nome": "Andorinha",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "raposa",
+   "nome": "Raposa",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "coruja",
+   "nome": "Coruja",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "tartaruga",
+   "nome": "Tartaruga",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "baleia",
+   "nome": "Baleia",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "abelha",
+   "nome": "Abelha",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "girafa",
+   "nome": "Girafa",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "lontra",
+   "nome": "Lontra",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "zebra",
+   "nome": "Zebra",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "ra",
+   "nome": "Rã",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "foca",
+   "nome": "Foca",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "joaninha",
+   "nome": "Joaninha",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "lula",
+   "nome": "Lula",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "gaivota",
+   "nome": "Gaivota",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "lebre",
+   "nome": "Lebre",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "ovelha",
+   "nome": "Ovelha",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "formiga",
+   "nome": "Formiga",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "toupeira",
+   "nome": "Toupeira",
+   "genero": "f",
+   "colecao": "atuais"
+  },
+  {
+   "id": "tiranossauro",
+   "nome": "Tiranossauro",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "triceratopo",
+   "nome": "Tricerátopo",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "estegossauro",
+   "nome": "Estegossauro",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "braquiossauro",
+   "nome": "Braquiossauro",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "anquilossauro",
+   "nome": "Anquilossauro",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "velociraptor",
+   "nome": "Velociraptor",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "pterodactilo",
+   "nome": "Pterodáctilo",
+   "genero": "m",
+   "colecao": "extintos",
+   "nota": "Réptil voador; não era dinossauro."
+  },
+  {
+   "id": "parassaurolofo",
+   "nome": "Parassaurolofo",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "espinossauro",
+   "nome": "Espinossauro",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "lourinhanossauro",
+   "nome": "Lourinhanossauro",
+   "genero": "m",
+   "colecao": "extintos",
+   "nota": "Descoberto na Lourinhã, Portugal."
+  },
+  {
+   "id": "plesiossauro",
+   "nome": "Plesiossauro",
+   "genero": "m",
+   "colecao": "extintos",
+   "nota": "Réptil marinho; não era dinossauro."
+  },
+  {
+   "id": "mamute",
+   "nome": "Mamute",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "dentes-de-sabre",
+   "nome": "Tigre-dentes-de-sabre",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "dodo",
+   "nome": "Dodó",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "gliptodonte",
+   "nome": "Gliptodonte",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "arqueopterix",
+   "nome": "Arqueoptérix",
+   "genero": "m",
+   "colecao": "extintos"
+  },
+  {
+   "id": "titanoboa",
+   "nome": "Titanoboa",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "hiena-cavernas",
+   "nome": "Hiena-das-cavernas",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "arau-gigante",
+   "nome": "Arau-gigante",
+   "genero": "f",
+   "colecao": "extintos",
+   "nota": "Chegou a viver nas costas da Península Ibérica."
+  },
+  {
+   "id": "meganeura",
+   "nome": "Meganeura",
+   "genero": "f",
+   "colecao": "extintos",
+   "nota": "Libélula gigante, muito antes dos dinossauros."
+  },
+  {
+   "id": "moa",
+   "nome": "Moa",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "ave-elefante",
+   "nome": "Ave-elefante",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "quaga",
+   "nome": "Quaga",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "vaca-marinha",
+   "nome": "Vaca-marinha",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "preguica-gigante",
+   "nome": "Preguiça-gigante",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "amonite",
+   "nome": "Amonite",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "trilobite",
+   "nome": "Trilobite",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "meiolania",
+   "nome": "Meiolânia",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "foca-monge",
+   "nome": "Foca-monge",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "coruja-risonha",
+   "nome": "Coruja-risonha",
+   "genero": "f",
+   "colecao": "extintos"
+  },
+  {
+   "id": "lagartixa-gigante",
+   "nome": "Lagartixa-gigante",
+   "genero": "f",
+   "colecao": "extintos",
+   "nota": "Lagartixa-gigante de Cabo Verde."
+  },
+  {
+   "id": "cabra-pireneus",
+   "nome": "Cabra-dos-Pirenéus",
+   "genero": "f",
+   "colecao": "extintos",
+   "nota": "Bucardo: vivia na Península Ibérica; extinto em 2000."
+  }
+ ],
+ "cores": [
+  "menta",
+  "ceu",
+  "lilas",
+  "pessego",
+  "limao",
+  "rosa",
+  "areia",
+  "nuvem"
+ ],
+ "peles": [
+  "pele-1",
+  "pele-2",
+  "pele-3",
+  "pele-4",
+  "pele-5",
+  "pele-6"
+ ],
+ "cabelos": [
+  "franja",
+  "caracois",
+  "trancas",
+  "curto",
+  "rapado",
+  "lenco"
+ ],
+ "coresCabelo": [
+  "castanho",
+  "preto",
+  "ruivo",
+  "loiro"
+ ],
+ "padroes": [
+  "riscas",
+  "pintas",
+  "estrelas",
+  "xadrez",
+  "confetes"
+ ],
+ "cosmetica": [
+  {
+   "id": "bone-reporter",
+   "cat": "chapeu",
+   "nome": "Boné de repórter"
+  },
+  {
+   "id": "explorador",
+   "cat": "chapeu",
+   "nome": "Chapéu de explorador"
+  },
+  {
+   "id": "coroa-papel",
+   "cat": "chapeu",
+   "nome": "Coroa de papel"
+  },
+  {
+   "id": "capacete-obra",
+   "cat": "chapeu",
+   "nome": "Capacete de obra"
+  },
+  {
+   "id": "gorro-la",
+   "cat": "chapeu",
+   "nome": "Gorro de lã"
+  },
+  {
+   "id": "chapeu-palha",
+   "cat": "chapeu",
+   "nome": "Chapéu de palha"
+  },
+  {
+   "id": "laco",
+   "cat": "chapeu",
+   "nome": "Laço grande"
+  },
+  {
+   "id": "capacete-bicicleta",
+   "cat": "chapeu",
+   "nome": "Capacete de bicicleta"
+  },
+  {
+   "id": "chapeu-festa",
+   "cat": "chapeu",
+   "nome": "Chapéu da festa"
+  },
+  {
+   "id": "oculos-sol",
+   "cat": "oculos",
+   "nome": "Óculos de sol"
+  },
+  {
+   "id": "oculos-laboratorio",
+   "cat": "oculos",
+   "nome": "Óculos de laboratório"
+  },
+  {
+   "id": "oculos-estrela",
+   "cat": "oculos",
+   "nome": "Óculos estrela"
+  },
+  {
+   "id": "oculos-coloridos",
+   "cat": "oculos",
+   "nome": "Óculos coloridos"
+  },
+  {
+   "id": "ver-redondos",
+   "cat": "ver",
+   "nome": "Óculos de ver redondos"
+  },
+  {
+   "id": "ver-retangulares",
+   "cat": "ver",
+   "nome": "Óculos de ver retangulares"
+  },
+  {
+   "id": "mochila-escolar",
+   "cat": "mochila",
+   "nome": "Mochila escolar"
+  },
+  {
+   "id": "mochila-cartao-asas",
+   "cat": "mochila",
+   "nome": "Mochila de cartão com asas"
+  },
+  {
+   "id": "mochila-livros",
+   "cat": "mochila",
+   "nome": "Mochila de livros"
+  },
+  {
+   "id": "mochila-antena",
+   "cat": "mochila",
+   "nome": "Mochila rádio de repórter"
+  },
+  {
+   "id": "mochila-estrelas",
+   "cat": "mochila",
+   "nome": "Mochila das estrelas"
+  },
+  {
+   "id": "mochila-desporto",
+   "cat": "mochila",
+   "nome": "Saco de desporto"
+  },
+  {
+   "id": "microfone",
+   "cat": "objeto",
+   "nome": "Microfone de repórter"
+  },
+  {
+   "id": "lupa",
+   "cat": "objeto",
+   "nome": "Lupa"
+  },
+  {
+   "id": "tubo-ensaio",
+   "cat": "objeto",
+   "nome": "Tubo de ensaio"
+  },
+  {
+   "id": "lapis-gigante",
+   "cat": "objeto",
+   "nome": "Lápis gigante"
+  },
+  {
+   "id": "livro",
+   "cat": "objeto",
+   "nome": "Livro"
+  },
+  {
+   "id": "regador",
+   "cat": "objeto",
+   "nome": "Regador"
+  },
+  {
+   "id": "botas-chuva",
+   "cat": "calcado",
+   "nome": "Botas de chuva"
+  },
+  {
+   "id": "tenis",
+   "cat": "calcado",
+   "nome": "Ténis"
+  },
+  {
+   "id": "pantufas",
+   "cat": "calcado",
+   "nome": "Pantufas"
+  },
+  {
+   "id": "botas-caminhada",
+   "cat": "calcado",
+   "nome": "Botas de caminhada"
+  }
+ ],
+ "emblemas": [
+  {
+   "id": "noticia",
+   "nome": "A Notícia"
+  },
+  {
+   "id": "painel",
+   "nome": "O Painel"
+  },
+  {
+   "id": "revisao",
+   "nome": "Revisão"
+  },
+  {
+   "id": "arquivo",
+   "nome": "O Arquivo"
+  },
+  {
+   "id": "cartao",
+   "nome": "Cartão de Imprensa"
+  },
+  {
+   "id": "paginacao",
+   "nome": "Paginação"
+  },
+  {
+   "id": "fecho",
+   "nome": "Fecho de Edição"
+  },
+  {
+   "id": "teclas",
+   "nome": "Teclas Mágicas"
+  },
+  {
+   "id": "encontra",
+   "nome": "Encontra no Texto"
+  },
+  {
+   "id": "simulador",
+   "nome": "Simulador de Prova"
+  },
+  {
+   "id": "matematica",
+   "nome": "Matemática no Ecrã"
+  },
+  {
+   "id": "maqueta",
+   "nome": "A Maqueta"
+  },
+  {
+   "id": "leitura",
+   "nome": "Biblioteca Viva"
+  }
+ ],
+ "trofeus": [
+  {
+   "id": "taca-noticia",
+   "nome": "Taça · A Notícia",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-painel",
+   "nome": "Taça · O Painel",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-revisao",
+   "nome": "Taça · Revisão",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-arquivo",
+   "nome": "Taça · O Arquivo",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-cartao",
+   "nome": "Taça · Cartão de Imprensa",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-paginacao",
+   "nome": "Taça · Paginação",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-fecho",
+   "nome": "Taça · Fecho de Edição",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-teclas",
+   "nome": "Taça · Teclas Mágicas",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-encontra",
+   "nome": "Taça · Encontra no Texto",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-simulador",
+   "nome": "Taça · Simulador de Prova",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-matematica",
+   "nome": "Taça · Matemática no Ecrã",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-maqueta",
+   "nome": "Taça · A Maqueta",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "taca-leitura",
+   "nome": "Taça · Biblioteca Viva",
+   "familia": "taca",
+   "regra": "Carimbo: 85 ou mais nesta competência."
+  },
+  {
+   "id": "estatueta-cap-0",
+   "nome": "Capítulo 0 · Nasce um morador",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-1",
+   "nome": "Capítulo 1 · A sala de computadores",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-2",
+   "nome": "Capítulo 2 · O jornal da turma",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-3",
+   "nome": "Capítulo 3 · A experiência perdida",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-4",
+   "nome": "Capítulo 4 · Papéis por todo o lado",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-5",
+   "nome": "Capítulo 5 · A aldeia decide",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-6",
+   "nome": "Capítulo 6 · Alerta na aldeia",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-7",
+   "nome": "Capítulo 7 · Quem baralhou a aldeia?",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "estatueta-cap-8",
+   "nome": "Capítulo 8 · A Festa da Aldeia",
+   "familia": "estatueta",
+   "regra": "Capítulo concluído."
+  },
+  {
+   "id": "roseta-media",
+   "nome": "Roseta · Media",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-direitos",
+   "nome": "Roseta · Direitos Humanos",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-democracia",
+   "nome": "Roseta · Democracia e Instituições",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-sustentabilidade",
+   "nome": "Roseta · Desenvolvimento Sustentável",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-financeira",
+   "nome": "Roseta · Literacia Financeira",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-pluralismo",
+   "nome": "Roseta · Pluralismo e Diversidade",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-saude",
+   "nome": "Roseta · Saúde",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "roseta-seguranca",
+   "nome": "Roseta · Risco e Segurança",
+   "familia": "roseta",
+   "regra": "Missões de cidadania desta dimensão concluídas."
+  },
+  {
+   "id": "especial-primeira-missao",
+   "nome": "Primeira missão",
+   "familia": "especial",
+   "regra": "Concluir a primeira missão."
+  },
+  {
+   "id": "especial-outra-vez",
+   "nome": "Tentei outra vez",
+   "familia": "especial",
+   "regra": "Repetir uma missão e melhorar."
+  },
+  {
+   "id": "especial-treino-casa",
+   "nome": "Treino em casa",
+   "familia": "especial",
+   "regra": "Treinar em casa 3 vezes."
+  },
+  {
+   "id": "especial-todas-estrelas",
+   "nome": "Todas as estrelas",
+   "familia": "especial",
+   "regra": "Ganhar 3 estrelas em 5 missões."
+  },
+  {
+   "id": "especial-ajudante-aldeia",
+   "nome": "Ajudante da aldeia",
+   "familia": "especial",
+   "regra": "A turma chegou ao objetivo coletivo."
+  },
+  {
+   "id": "especial-jornal-aldeia",
+   "nome": "Jornal da Aldeia",
+   "familia": "especial",
+   "regra": "Terminar a história."
+  }
+ ],
+ "casa": {
+  "paredes": [
+   "nata",
+   "rosa",
+   "ceu",
+   "menta",
+   "limao",
+   "lilas",
+   "pessego",
+   "branco"
+  ],
+  "telhados": [
+   "telha",
+   "ardosia",
+   "verde",
+   "azul",
+   "vinho",
+   "mel"
+  ],
+  "portas": [
+   "azul",
+   "verde",
+   "amarela",
+   "vermelha",
+   "madeira",
+   "lilas"
+  ]
+ }
+}

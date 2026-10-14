@@ -1,0 +1,213 @@
+/* ── Aldeia Digital ───────────────────────────────────────────────────────────
+   A interface usa só os tokens do ECD (Mosaico e Original, claro e escuro). O pixel vive em janelas de ilustração,
+   a escala inteira, com image-rendering: pixelated. Tokens de movimento do pacote (design/aldeia-digital/movimento.json):
+   micro 120 ms, curto 200 ms, médio 320 ms; curvas suave, saída e salto. Tudo para no modo calmo (regra global de
+   app.css) e com prefers-reduced-motion. */
+:root {
+  --mov-micro: 120ms; --mov-curto: 200ms; --mov-medio: 320ms;
+  --curva-suave: cubic-bezier(.2,.8,.2,1); --curva-saida: cubic-bezier(.4,0,1,1); --curva-salto: cubic-bezier(.34,1.56,.64,1);
+  --aldeia-barra: #021c51; --aldeia-barra-tinta: #ffffff;
+}
+
+/* Páginas do aluno fora do mapa: barra azul "Aldeia Digital · secção". */
+.aldeia-pagina { min-height: 100vh; background: var(--fundo); color: var(--tinta); }
+.aldeia-barra { background: var(--aldeia-barra); color: var(--aldeia-barra-tinta); }
+.aldeia-barra__dentro { max-width: 72rem; margin: 0 auto; padding: 10px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-height: 56px; }
+.aldeia-barra__nome { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.1rem; }
+.aldeia-barra__seccao { opacity: .9; font-size: .95rem; }
+.aldeia-barra__voltar { color: var(--aldeia-barra-tinta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 2px solid currentColor; border-radius: 8px; }
+.aldeia-barra__voltar:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.aldeia-conteudo { max-width: 72rem; margin: 0 auto; padding: 24px 16px 48px; outline: none; }
+
+/* Escolhas grandes (nomes, fatos, cores) com estado por forma: borda grossa e visto, nunca só cor. */
+.aldeia-escolha, .aldeia-fato, .aldeia-chip { position: relative; cursor: pointer; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--superficie); color: var(--tinta); transition: border-color var(--mov-micro), transform var(--mov-micro) var(--curva-suave); }
+.aldeia-escolha { display: flex; align-items: center; gap: 10px; padding: 10px 12px; min-height: 64px; }
+.aldeia-escolha:hover, .aldeia-fato:hover, .aldeia-chip:hover { border-color: var(--acento); }
+.aldeia-escolha--ativa { border-width: 3px; border-color: var(--acento); background: var(--acento-suave); }
+.aldeia-escolha__marca { margin-left: auto; font-weight: 800; color: var(--acento); }
+label:has(> input.sr-only:focus-visible) { outline: 3px solid var(--foco); outline-offset: 2px; }
+.aldeia-grelha-fatos { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+.aldeia-fato { display: grid; justify-items: center; gap: 4px; padding: 8px 6px; text-align: center; font-size: .9rem; min-height: 120px; }
+.aldeia-fato--ocupado { opacity: .5; cursor: not-allowed; border-style: dashed; }
+.aldeia-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; min-height: 44px; font-weight: 600; }
+.aldeia-chip__cor { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,.35); }
+:root[data-alvos="grandes"] .aldeia-chip, :root[data-alvos="grandes"] .aldeia-escolha { min-height: 56px; }
+.aldeia-sessao { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px 12px; min-height: 56px; border: 1px solid var(--linha); border-radius: var(--raio); cursor: pointer; }
+.aldeia-sessao:hover { border-color: var(--acento); }
+.aldeia-sessao:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.aldeia-vitrine { background: linear-gradient(180deg, var(--acento-suave), var(--superficie)); }
+.aldeia-cartao-nome { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; border-width: 2px; }
+
+/* Nascimento */
+.aldeia-nascimento { display: grid; gap: 16px; }
+.aldeia-nascimento__palco { display: grid; justify-items: center; }
+.aldeia-nascimento__moldura { position: relative; border: 3px solid rgba(255,255,255,.75); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+.aldeia-nascimento__moldura canvas:focus-visible { outline: 4px solid var(--foco); outline-offset: -4px; }
+.aldeia-nascimento__etiqueta { position: absolute; background: #fff; color: #2b363c; border: 2px solid #2b363c; border-radius: 6px; padding: 1px 8px; font-size: .8rem; font-weight: 700; white-space: nowrap; pointer-events: none; }
+
+/* Balão de diálogo (em baixo, até 720 px): retrato, nome, texto 18 px ou mais, Ouvir, Continuar. */
+.aldeia-dialogo { display: flex; gap: 16px; align-items: flex-start; background: var(--superficie); color: var(--tinta); border: 1px solid var(--linha); border-radius: var(--raio); padding: 16px; box-shadow: 0 8px 28px rgba(0,0,0,.18); max-width: 720px; width: 100%; margin: 0 auto; }
+.aldeia-dialogo--fixo { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); width: calc(100% - 32px); z-index: 40; animation: aldeia-sobe var(--mov-curto) var(--curva-suave); }
+.aldeia-dialogo__nome { font-family: var(--fonte-titulo); font-weight: 800; color: var(--acento); }
+.aldeia-dialogo__fala { margin: 0; font-size: max(1.125rem, 1em); line-height: 1.5; }
+@media (max-width: 560px) { .aldeia-dialogo { flex-direction: column; gap: 10px; } .aldeia-dialogo > div:first-child { transform: scale(.75); transform-origin: top left; margin-bottom: -28px; } }
+@keyframes aldeia-sobe { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+.aldeia-modal-fundo { animation: aldeia-escurece var(--mov-curto) var(--curva-suave); }
+.aldeia-modal { max-height: calc(100vh - 32px); overflow: auto; animation: aldeia-cartao var(--mov-curto) var(--curva-suave); }
+@keyframes aldeia-escurece { from { background: rgba(0,0,0,0); } }
+@keyframes aldeia-cartao { from { opacity: 0; transform: translateY(16px); } }
+.aldeia-cartao-missao__arte { margin: -20px -20px 0; background: linear-gradient(180deg, #cfe9f5, #eaf6ec); display: grid; place-items: center; padding: 12px 0 0; border-radius: var(--raio) var(--raio) 0 0; overflow: hidden; }
+:root[data-tema="escuro"] .aldeia-cartao-missao__arte { background: linear-gradient(180deg, #2a2f48, #3a3f5c); }
+.aldeia-premio { all: unset; box-sizing: border-box; display: grid; justify-items: center; gap: 8px; padding: 12px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--superficie); cursor: pointer; text-align: center; min-height: 180px; transition: transform var(--mov-micro) var(--curva-suave), border-color var(--mov-micro); }
+.aldeia-premio:hover { border-color: var(--acento); transform: translateY(-2px); }
+.aldeia-premio:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.aldeia-ganhou { background: linear-gradient(180deg, #fff3bf 0%, transparent 60%); margin: -20px; padding: 20px; border-radius: var(--raio); }
+:root[data-tema="escuro"] .aldeia-ganhou { background: linear-gradient(180deg, #3a3416 0%, transparent 60%); }
+.aldeia-estrela-entra { animation: aldeia-estrela var(--mov-medio) var(--curva-salto) both; }
+@keyframes aldeia-estrela { from { transform: scale(.4); opacity: 0; } }
+
+/* Mapa e HUD */
+.aldeia-jogo { position: fixed; inset: 0; overflow: hidden; background: #cfe9f5; }
+:root[data-tema="escuro"] .aldeia-jogo { background: #2a2f48; }
+@media (prefers-color-scheme: dark) { :root[data-tema="auto"] .aldeia-jogo { background: #2a2f48; } }
+.aldeia-mapa { position: absolute; inset: 0; outline: none; touch-action: manipulation; }
+.aldeia-mapa:focus-visible::after { content: ""; position: absolute; inset: 4px; border: 4px solid var(--foco); border-radius: 8px; pointer-events: none; }
+.aldeia-mapa canvas { position: absolute; inset: 0; image-rendering: pixelated; cursor: pointer; }
+.aldeia-mapa__camada { position: absolute; left: 0; top: 0; transform-origin: 0 0; pointer-events: none; }
+.aldeia-mapa__edificio { position: absolute; pointer-events: auto; background: transparent; border: 0; padding: 0; cursor: pointer; border-radius: 6px; transition: transform var(--mov-micro) var(--curva-suave); }
+.aldeia-mapa__edificio:hover, .aldeia-mapa__edificio:focus-visible { transform: translateY(-1px); }
+.aldeia-mapa__edificio:focus-visible { outline: 2px solid var(--foco); outline-offset: 1px; }
+.aldeia-mapa__etiqueta { position: absolute; transform: translate(-50%, -100%); background: #ffffff; color: #2b363c; border: 1px solid #2b363c; border-radius: 4px; padding: 0 4px; font-size: 7px; line-height: 12px; font-weight: 700; white-space: nowrap; display: inline-flex; gap: 2px; align-items: center; font-family: var(--fonte-texto); }
+.aldeia-mapa__aviso { position: absolute; left: 50%; top: 96px; transform: translateX(-50%); background: var(--superficie); color: var(--tinta); border: 1px solid var(--linha); border-radius: 8px; padding: 8px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.2); max-width: calc(100% - 32px); z-index: 20; }
+.aldeia-mapa__espera { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; color: #2b363c; }
+.aldeia-destaque { position: absolute; border: 2px solid var(--foco); border-radius: 6px; box-shadow: 0 0 0 9999px rgba(10, 16, 40, .32); pointer-events: none; }
+.aldeia-destaque-hud { outline: 4px solid var(--foco) !important; outline-offset: 2px; position: relative; z-index: 5; }
+.aldeia-hud { position: absolute; inset: 16px 16px auto 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; pointer-events: none; z-index: 10; }
+.aldeia-hud > * { pointer-events: auto; }
+.aldeia-hud__cartao { display: flex; align-items: center; gap: 12px; background: var(--superficie); color: var(--tinta); border: 1px solid var(--linha); border-radius: 10px; padding: 8px 14px 8px 8px; box-shadow: 0 2px 10px rgba(0,0,0,.12); width: 290px; max-width: 100%; }
+.aldeia-hud__botoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; align-content: flex-start; }
+.aldeia-hud__botao { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--linha); background: var(--superficie); color: var(--tinta); font: inherit; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.12); transition: transform var(--mov-micro) var(--curva-suave); }
+.aldeia-hud__botao:hover { transform: translateY(-1px); border-color: var(--acento); }
+.aldeia-hud__botao:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+:root[data-alvos="grandes"] .aldeia-hud__botao { min-height: 56px; min-width: 56px; }
+.aldeia-hud__fila { position: absolute; top: 100%; left: 0; margin-top: 8px; font-size: .85rem; background: var(--superficie); border: 1px solid var(--linha); border-radius: 6px; padding: 2px 8px; }
+.aldeia-hud { align-items: flex-start; }
+@media (max-width: 760px) {
+  .aldeia-hud { inset: 8px 8px auto 8px; flex-direction: column; gap: 6px; }
+  .aldeia-hud__rotulo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .aldeia-hud__botoes { justify-content: flex-start; gap: 6px; }
+  .aldeia-hud__botao { padding: 0; }
+  .aldeia-hud__cartao { width: 100%; padding: 6px 10px 6px 6px; }
+  .aldeia-hud__fila { position: static; margin: 0; }
+}
+
+/* Mapa em lista */
+.aldeia-lugar { display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.aldeia-lugar__img { width: 64px; height: auto; justify-self: center; image-rendering: auto; }
+.aldeia-estado { display: inline-flex; align-items: center; gap: 4px; justify-self: start; border: 1px solid var(--linha); border-radius: 99px; padding: 0 10px; font-size: .85rem; font-weight: 700; background: var(--acento-suave); }
+.aldeia-estado--concluido { border-color: var(--certo); }
+.aldeia-estado--missao { border-color: var(--aviso); background: var(--marca); color: var(--marca-tinta); }
+.aldeia-estado--obras { border-style: dashed; background: var(--tecla); }
+
+/* Guarda-roupa e casa */
+.aldeia-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.aldeia-item { all: unset; box-sizing: border-box; width: 100%; height: 100%; display: grid; justify-items: center; align-content: start; gap: 6px; padding: 10px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--superficie); cursor: pointer; text-align: center; }
+.aldeia-item:hover { border-color: var(--acento); }
+.aldeia-item:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.aldeia-item.aldeia-escolha--ativa { border-width: 3px; border-color: var(--acento); }
+.aldeia-item--bloqueado { cursor: not-allowed; background: var(--tecla); }
+.aldeia-sala { width: 100%; display: grid; justify-items: center; overflow: hidden; }
+.aldeia-fachada { position: relative; width: 296px; height: 284px; max-width: 100%; justify-self: center; background: linear-gradient(180deg, #cfe9f5, #dff2df); border-radius: var(--raio); }
+
+/* Jornal da Aldeia (primeira página) */
+.jornal-aldeia { background: #fffdf6; color: #2b363c; border: 2px solid #2b363c; border-radius: 8px; padding: 20px 22px; display: grid; gap: 16px; }
+:root[data-tema="escuro"] .jornal-aldeia { background: #1e2a31; color: #f1f3f8; border-color: #bac0cc; }
+.jornal-aldeia__cabecalho { text-align: center; border-bottom: 4px double currentColor; padding-bottom: 8px; }
+.jornal-aldeia__cabecalho h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; }
+.jornal-aldeia__capa { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 18px; }
+@media (max-width: 640px) { .jornal-aldeia__capa { grid-template-columns: 1fr; } }
+.jornal-aldeia__foto { background: #eaf4fb; border-radius: 8px; display: grid; place-items: center; padding: 12px; overflow: hidden; }
+:root[data-tema="escuro"] .jornal-aldeia__foto { background: #26333b; }
+.jornal-aldeia__manchete { font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; }
+.jornal-aldeia__colunas { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.jornal-aldeia__barra { display: block; height: 8px; background: rgba(0,0,0,.08); border-radius: 99px; overflow: hidden; }
+.jornal-aldeia__barra > span { display: block; height: 100%; border-radius: 99px; }
+
+/* Missões de cidadania: cena 16:9, texto da UI por cima nas âncoras do pacote */
+.cena-missao { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--raio); overflow: hidden; background: #e9eef6; container-type: inline-size; }
+.cena-missao__fundo { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cena-missao__ecra { position: absolute; display: grid; place-items: center; text-align: center; padding: 1cqw; overflow: hidden; }
+.cena-missao__ecra span { font-weight: 700; color: #2b363c; font-size: clamp(.7rem, 2.1cqw, 1.2rem); line-height: 1.2; }
+.cena-missao__avatar { position: absolute; width: 13.75%; }
+.cena-missao__avatar canvas { width: 100% !important; height: auto !important; }
+.cena-missao__balao { position: absolute; max-width: 26%; background: #fff; color: #2b363c; border: 2px solid #2b363c; border-radius: 10px; padding: .6cqw 1cqw; font-size: clamp(.7rem, 1.6cqw, 1rem); line-height: 1.3; }
+.cena-missao--simples { aspect-ratio: auto; background: transparent; }
+.cena-missao__simples { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.cena-missao__cartaz { background: #fff; color: #2b363c; border: 3px solid #5a6070; border-radius: 6px; padding: 8px 12px; font-weight: 700; max-width: 260px; }
+
+/* Briefing das atividades (todo o ECD): banda com o edifício e retrato em moldura */
+.atividade-intro { overflow: hidden; }
+.atividade-intro__corpo { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; padding: 20px; align-items: start; }
+@media (max-width: 560px) { .atividade-intro__corpo { grid-template-columns: 1fr; } }
+.banda-edificio { position: relative; overflow: hidden; background: #cfe9f5; border-bottom: 1px solid var(--linha); }
+.banda-edificio__nome { position: absolute; left: 12px; bottom: 12px; background: #fff; color: #2b363c; border-radius: 99px; padding: 2px 12px; font-weight: 700; font-size: .9rem; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+
+/* Esperas: avatar a andar no lugar (camadas animadas por passos) */
+.avatar-andar { position: relative; display: inline-block; flex: none; }
+.avatar-andar > span { position: absolute; inset: 0; background-repeat: no-repeat; image-rendering: pixelated; animation: avatar-andar .667s steps(8) infinite; }
+@keyframes avatar-andar { from { background-position-x: 0; } to { background-position-x: calc(-352px * var(--e, 1)); } }
+:root[data-calmo="sim"] .avatar-andar > span { animation: none; }
+
+/* Página Professor: escolha de modo (radiogroup com dois cartões) */
+.modo-cartao { display: grid; gap: 12px; align-content: start; padding: 18px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--superficie); cursor: pointer; transition: border-color var(--mov-micro), box-shadow var(--mov-micro); }
+.modo-cartao:hover { border-color: var(--acento); }
+.modo-cartao__radio { display: grid; gap: 12px; border-radius: 8px; outline: none; }
+.modo-cartao:has(.modo-cartao__radio:focus-visible) { outline: 3px solid var(--foco); outline-offset: 3px; }
+.modo-cartao--ativo { border-width: 4px; padding: 16px; border-color: var(--acento); background: var(--acento-suave); }
+.modo-cartao__arte { height: 120px; display: grid; place-items: center; background: var(--tecla); border-radius: 8px; color: var(--suave); overflow: hidden; }
+.modo-cartao--ativo .modo-cartao__arte { background: color-mix(in srgb, #cfe9f5 70%, var(--acento-suave)); }
+.modo-cartao__escolhido { display: inline-flex; align-items: center; gap: 4px; background: var(--acento); color: var(--acento-tinta); border-radius: 99px; padding: 1px 10px; font-size: .85rem; font-weight: 700; }
+.modo-cartao__video .video { aspect-ratio: auto; min-height: 72px; }
+.modo-blocos { animation: aldeia-cartao var(--mov-curto) var(--curva-suave); }
+.casinhas { display: flex; gap: 4px; justify-content: center; }
+.casinhas__casa { position: relative; width: 74px; height: 71px; flex: none; }
+.casinhas__casa img { position: absolute; inset: 0; image-rendering: pixelated; }
+
+/* Painel do professor (sem pixel nos dados, só as cabeças) */
+.celula { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 5px; vertical-align: middle; }
+.celula--estrela { background: var(--certo); color: #fff; }
+.celula--visto { background: color-mix(in srgb, var(--certo) 22%, var(--superficie)); color: var(--certo); border: 1px solid var(--certo); }
+.celula--repetir { background: color-mix(in srgb, var(--aviso) 15%, var(--superficie)); color: var(--aviso); border: 1px dashed var(--aviso); }
+.celula--curso { border: 2px solid var(--acento); background: linear-gradient(90deg, var(--acento) 50%, transparent 50%); }
+.celula--vazio { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--tecla-borda); }
+.caminho-capitulos { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(110px, 1fr); gap: 4px; overflow-x: auto; padding-bottom: 6px; position: relative; }
+.caminho-capitulos__estacao { display: grid; justify-items: center; align-content: start; gap: 4px; text-align: center; position: relative; }
+.caminho-capitulos__estacao::before { content: ""; position: absolute; top: 21px; left: -50%; width: 100%; border-top: 3px dashed var(--linha); z-index: 0; }
+.caminho-capitulos__estacao:first-child::before { display: none; }
+.caminho-capitulos__n { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--acento); background: var(--superficie); color: var(--acento); display: grid; place-items: center; font-weight: 800; }
+.caminho-capitulos__n--cheio { background: var(--acento); color: var(--acento-tinta); }
+.caminho-capitulos__cabecas { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 110px; }
+.cabeca-aluno { position: relative; border: 0; background: var(--acento-suave); border-radius: 6px; padding: 2px; cursor: pointer; min-width: 36px; min-height: 36px; }
+.cabeca-aluno:focus-visible, .aluno-linha:focus-visible, .miniatura-aldeia__casa:focus-visible { outline: 3px solid var(--foco); outline-offset: 1px; }
+.cabeca-aluno__aviso { position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; border-radius: 50%; background: var(--aviso); color: #fff; font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+.filtro { font: inherit; font-weight: 700; min-height: 44px; padding: 0 16px; border-radius: 99px; border: 1px solid var(--linha); background: var(--superficie); color: var(--tinta); cursor: pointer; }
+.filtro[aria-pressed="true"] { border: 2px solid var(--acento); background: var(--acento-suave); color: var(--acento); }
+.filtro:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.tabela-feito th, .tabela-feito td { padding: 4px; }
+.tabela-feito__missao { font-size: .72rem; writing-mode: initial; text-align: center; }
+.tabela-feito abbr { text-decoration: none; }
+.tabela-feito tbody th { position: sticky; left: 0; background: var(--superficie); z-index: 1; min-width: 210px; }
+.aluno-linha { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 8px; cursor: pointer; min-height: 44px; border-radius: 6px; }
+.cartoes-feito { display: none; }
+@media (max-width: 760px) { .grelha-feito { display: none; } .cartoes-feito { display: grid; } }
+.miniatura-aldeia { position: relative; width: 100%; aspect-ratio: 2640 / 1500; border-radius: 8px; overflow: hidden; background: #cfe9f5; }
+.miniatura-aldeia__mapa { position: absolute; inset: 0; width: 100%; height: 100%; }
+.miniatura-aldeia__casa { position: absolute; transform: translate(-50%, -100%); border: 0; padding: 1px; background: #fff; border-radius: 6px; cursor: pointer; line-height: 0; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+.gaveta-aluno { max-height: 80vh; }
+.projetar__codigo { font-family: var(--fonte-mono); font-weight: 800; font-size: clamp(3rem, 12vw, 8rem); letter-spacing: .08em; line-height: 1; }
+.alerta-aldeia { min-height: 52px; }
+
+@media print {
+  .aldeia-barra, .aldeia-hud { display: none !important; }
+}

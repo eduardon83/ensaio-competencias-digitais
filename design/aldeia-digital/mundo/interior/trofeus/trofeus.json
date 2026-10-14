@@ -1,0 +1,466 @@
+{
+ "nota": "Recompensam esforço e progresso, nunca comparação. Grande 20x26 para UI e desbloqueio; pequeno 10x13 para as prateleiras.",
+ "parede": {
+  "lugares": 18,
+  "ancoras_nativas": [
+   [
+    161.84,
+    65.92
+   ],
+   [
+    142.64,
+    75.52000000000001
+   ],
+   [
+    123.44,
+    85.12
+   ],
+   [
+    104.24000000000001,
+    94.72
+   ],
+   [
+    85.04,
+    104.32
+   ],
+   [
+    65.84,
+    113.92
+   ],
+   [
+    161.84,
+    51.92
+   ],
+   [
+    142.64,
+    61.52000000000001
+   ],
+   [
+    123.44,
+    71.12
+   ],
+   [
+    104.24000000000001,
+    80.72
+   ],
+   [
+    85.04,
+    90.32
+   ],
+   [
+    65.84,
+    99.92
+   ],
+   [
+    161.84,
+    37.92
+   ],
+   [
+    142.64,
+    47.52000000000001
+   ],
+   [
+    123.44,
+    57.120000000000005
+   ],
+   [
+    104.24000000000001,
+    66.72
+   ],
+   [
+    85.04,
+    76.32
+   ],
+   [
+    65.84,
+    85.92
+   ]
+  ],
+  "pivo_pequeno": [
+   5,
+   12
+  ]
+ },
+ "vitrine": {
+  "lugares_nativos": [
+   [
+    10.4,
+    59.2
+   ],
+   [
+    16.8,
+    62.400000000000006
+   ],
+   [
+    23.200000000000003,
+    65.6
+   ],
+   [
+    29.6,
+    68.8
+   ],
+   [
+    10.4,
+    46.2
+   ],
+   [
+    16.8,
+    49.400000000000006
+   ],
+   [
+    23.200000000000003,
+    52.599999999999994
+   ],
+   [
+    29.6,
+    55.8
+   ],
+   [
+    10.4,
+    33.2
+   ],
+   [
+    16.8,
+    36.400000000000006
+   ],
+   [
+    23.200000000000003,
+    39.599999999999994
+   ],
+   [
+    29.6,
+    42.8
+   ]
+  ],
+  "pivo_pequeno": [
+   5,
+   12
+  ]
+ },
+ "trofeus": [
+  {
+   "id": "taca-noticia",
+   "nome": "Taça · A Notícia",
+   "familia": "taca",
+   "cor": "#6f9ff0",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-noticia.png",
+   "pequeno": "trofeu-taca-noticia-pequeno.png"
+  },
+  {
+   "id": "taca-painel",
+   "nome": "Taça · O Painel",
+   "familia": "taca",
+   "cor": "#7fc9a0",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-painel.png",
+   "pequeno": "trofeu-taca-painel-pequeno.png"
+  },
+  {
+   "id": "taca-revisao",
+   "nome": "Taça · Revisão",
+   "familia": "taca",
+   "cor": "#f5a54a",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-revisao.png",
+   "pequeno": "trofeu-taca-revisao-pequeno.png"
+  },
+  {
+   "id": "taca-arquivo",
+   "nome": "Taça · O Arquivo",
+   "familia": "taca",
+   "cor": "#c9a27e",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-arquivo.png",
+   "pequeno": "trofeu-taca-arquivo-pequeno.png"
+  },
+  {
+   "id": "taca-cartao",
+   "nome": "Taça · Cartão de Imprensa",
+   "familia": "taca",
+   "cor": "#ef7b8f",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-cartao.png",
+   "pequeno": "trofeu-taca-cartao-pequeno.png"
+  },
+  {
+   "id": "taca-paginacao",
+   "nome": "Taça · Paginação",
+   "familia": "taca",
+   "cor": "#9c7bf0",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-paginacao.png",
+   "pequeno": "trofeu-taca-paginacao-pequeno.png"
+  },
+  {
+   "id": "taca-fecho",
+   "nome": "Taça · Fecho de Edição",
+   "familia": "taca",
+   "cor": "#f2c94c",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-fecho.png",
+   "pequeno": "trofeu-taca-fecho-pequeno.png"
+  },
+  {
+   "id": "taca-teclas",
+   "nome": "Taça · Teclas Mágicas",
+   "familia": "taca",
+   "cor": "#6fd0d8",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-teclas.png",
+   "pequeno": "trofeu-taca-teclas-pequeno.png"
+  },
+  {
+   "id": "taca-encontra",
+   "nome": "Taça · Encontra no Texto",
+   "familia": "taca",
+   "cor": "#8fd18a",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-encontra.png",
+   "pequeno": "trofeu-taca-encontra-pequeno.png"
+  },
+  {
+   "id": "taca-simulador",
+   "nome": "Taça · Simulador de Prova",
+   "familia": "taca",
+   "cor": "#5f8fe0",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-simulador.png",
+   "pequeno": "trofeu-taca-simulador-pequeno.png"
+  },
+  {
+   "id": "taca-matematica",
+   "nome": "Taça · Matemática no Ecrã",
+   "familia": "taca",
+   "cor": "#f08a6f",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-matematica.png",
+   "pequeno": "trofeu-taca-matematica-pequeno.png"
+  },
+  {
+   "id": "taca-maqueta",
+   "nome": "Taça · A Maqueta",
+   "familia": "taca",
+   "cor": "#b5926f",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-maqueta.png",
+   "pequeno": "trofeu-taca-maqueta-pequeno.png"
+  },
+  {
+   "id": "taca-leitura",
+   "nome": "Taça · Biblioteca Viva",
+   "familia": "taca",
+   "cor": "#c79be6",
+   "regra": "Carimbo: 85 ou mais nesta competência.",
+   "grande": "trofeu-taca-leitura.png",
+   "pequeno": "trofeu-taca-leitura-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-0",
+   "nome": "Capítulo 0 · Nasce um morador",
+   "familia": "estatueta",
+   "cor": "#f6a5b4",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-0.png",
+   "pequeno": "trofeu-estatueta-cap-0-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-1",
+   "nome": "Capítulo 1 · A sala de computadores",
+   "familia": "estatueta",
+   "cor": "#6fa8e8",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-1.png",
+   "pequeno": "trofeu-estatueta-cap-1-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-2",
+   "nome": "Capítulo 2 · O jornal da turma",
+   "familia": "estatueta",
+   "cor": "#4f7fd0",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-2.png",
+   "pequeno": "trofeu-estatueta-cap-2-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-3",
+   "nome": "Capítulo 3 · A experiência perdida",
+   "familia": "estatueta",
+   "cor": "#7fc9a0",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-3.png",
+   "pequeno": "trofeu-estatueta-cap-3-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-4",
+   "nome": "Capítulo 4 · Papéis por todo o lado",
+   "familia": "estatueta",
+   "cor": "#c9a27e",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-4.png",
+   "pequeno": "trofeu-estatueta-cap-4-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-5",
+   "nome": "Capítulo 5 · A aldeia decide",
+   "familia": "estatueta",
+   "cor": "#f6c9c0",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-5.png",
+   "pequeno": "trofeu-estatueta-cap-5-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-6",
+   "nome": "Capítulo 6 · Alerta na aldeia",
+   "familia": "estatueta",
+   "cor": "#6fd0d8",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-6.png",
+   "pequeno": "trofeu-estatueta-cap-6-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-7",
+   "nome": "Capítulo 7 · Quem baralhou a aldeia?",
+   "familia": "estatueta",
+   "cor": "#9c7bf0",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-7.png",
+   "pequeno": "trofeu-estatueta-cap-7-pequeno.png"
+  },
+  {
+   "id": "estatueta-cap-8",
+   "nome": "Capítulo 8 · A Festa da Aldeia",
+   "familia": "estatueta",
+   "cor": "#ffcf4d",
+   "regra": "Capítulo concluído.",
+   "grande": "trofeu-estatueta-cap-8.png",
+   "pequeno": "trofeu-estatueta-cap-8-pequeno.png"
+  },
+  {
+   "id": "roseta-media",
+   "nome": "Roseta · Media",
+   "familia": "roseta",
+   "cor": "#4f7fd0",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-media.png",
+   "pequeno": "trofeu-roseta-media-pequeno.png"
+  },
+  {
+   "id": "roseta-direitos",
+   "nome": "Roseta · Direitos Humanos",
+   "familia": "roseta",
+   "cor": "#ef7b8f",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-direitos.png",
+   "pequeno": "trofeu-roseta-direitos-pequeno.png"
+  },
+  {
+   "id": "roseta-democracia",
+   "nome": "Roseta · Democracia e Instituições",
+   "familia": "roseta",
+   "cor": "#9c7bf0",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-democracia.png",
+   "pequeno": "trofeu-roseta-democracia-pequeno.png"
+  },
+  {
+   "id": "roseta-sustentabilidade",
+   "nome": "Roseta · Desenvolvimento Sustentável",
+   "familia": "roseta",
+   "cor": "#6cc489",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-sustentabilidade.png",
+   "pequeno": "trofeu-roseta-sustentabilidade-pequeno.png"
+  },
+  {
+   "id": "roseta-financeira",
+   "nome": "Roseta · Literacia Financeira",
+   "familia": "roseta",
+   "cor": "#f2c94c",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-financeira.png",
+   "pequeno": "trofeu-roseta-financeira-pequeno.png"
+  },
+  {
+   "id": "roseta-pluralismo",
+   "nome": "Roseta · Pluralismo e Diversidade",
+   "familia": "roseta",
+   "cor": "#f5a54a",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-pluralismo.png",
+   "pequeno": "trofeu-roseta-pluralismo-pequeno.png"
+  },
+  {
+   "id": "roseta-saude",
+   "nome": "Roseta · Saúde",
+   "familia": "roseta",
+   "cor": "#e8675e",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-saude.png",
+   "pequeno": "trofeu-roseta-saude-pequeno.png"
+  },
+  {
+   "id": "roseta-seguranca",
+   "nome": "Roseta · Risco e Segurança",
+   "familia": "roseta",
+   "cor": "#6fd0d8",
+   "regra": "Missões de cidadania desta dimensão concluídas.",
+   "grande": "trofeu-roseta-seguranca.png",
+   "pequeno": "trofeu-roseta-seguranca-pequeno.png"
+  },
+  {
+   "id": "especial-primeira-missao",
+   "nome": "Primeira missão",
+   "familia": "especial",
+   "cor": "#ef7b8f",
+   "regra": "Concluir a primeira missão.",
+   "grande": "trofeu-especial-primeira-missao.png",
+   "pequeno": "trofeu-especial-primeira-missao-pequeno.png"
+  },
+  {
+   "id": "especial-outra-vez",
+   "nome": "Tentei outra vez",
+   "familia": "especial",
+   "cor": "#9c7bf0",
+   "regra": "Repetir uma missão e melhorar.",
+   "grande": "trofeu-especial-outra-vez.png",
+   "pequeno": "trofeu-especial-outra-vez-pequeno.png"
+  },
+  {
+   "id": "especial-treino-casa",
+   "nome": "Treino em casa",
+   "familia": "especial",
+   "cor": "#7fc9a0",
+   "regra": "Treinar em casa 3 vezes.",
+   "grande": "trofeu-especial-treino-casa.png",
+   "pequeno": "trofeu-especial-treino-casa-pequeno.png"
+  },
+  {
+   "id": "especial-todas-estrelas",
+   "nome": "Todas as estrelas",
+   "familia": "especial",
+   "cor": "#ffcf4d",
+   "regra": "Ganhar 3 estrelas em 5 missões.",
+   "grande": "trofeu-especial-todas-estrelas.png",
+   "pequeno": "trofeu-especial-todas-estrelas-pequeno.png"
+  },
+  {
+   "id": "especial-ajudante-aldeia",
+   "nome": "Ajudante da aldeia",
+   "familia": "especial",
+   "cor": "#6fa8e8",
+   "regra": "A turma chegou ao objetivo coletivo.",
+   "grande": "trofeu-especial-ajudante-aldeia.png",
+   "pequeno": "trofeu-especial-ajudante-aldeia-pequeno.png"
+  },
+  {
+   "id": "especial-jornal-aldeia",
+   "nome": "Jornal da Aldeia",
+   "familia": "especial",
+   "cor": "#c99a6b",
+   "regra": "Terminar a história.",
+   "grande": "trofeu-especial-jornal-aldeia.png",
+   "pequeno": "trofeu-especial-jornal-aldeia-pequeno.png"
+  }
+ ]
+}

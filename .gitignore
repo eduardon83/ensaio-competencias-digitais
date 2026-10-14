@@ -7,6 +7,20 @@ dist
 .DS_Store
 coverage
 design/pacote-video*.zip
+# Pacote de arte da Aldeia: no Git só o LEIA-ME, os geradores (fonte/) e os manifestos JSON.
+# As imagens usadas pela aplicação estão em public/aldeia (cópia nativa); maquetas, guia, zips e capturas ficam locais.
+design/aldeia-digital/**
+!design/aldeia-digital/**/
+!design/aldeia-digital/LEIA-ME.md
+!design/aldeia-digital/movimento.json
+!design/aldeia-digital/fonte/*.py
+!design/aldeia-digital/avatares/avatares.json
+!design/aldeia-digital/missoes/missoes.json
+!design/aldeia-digital/mundo/mundo.json
+!design/aldeia-digital/mundo/mapa/mapa.json
+!design/aldeia-digital/mundo/interior/trofeus/trofeus.json
+!design/aldeia-digital/nascimento-v2/nascimento.json
+!design/aldeia-digital/personagens/personagens.json
 .dev.vars
 .wrangler
 

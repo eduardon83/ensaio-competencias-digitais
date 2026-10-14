@@ -1,6 +1,6 @@
 # Auditoria automática de acessibilidade
 
-Gerado por `npm run a11y` em 2026-10-09, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
+Gerado por `npm run a11y` em 2026-10-14, com axe-core (regras WCAG 2.0, 2.1 e 2.2, níveis A e AA).
 Páginas e atividades (nível 3, depois de saltar a prática) nos aspetos Mosaico e Original, em tema claro e escuro.
 
 **Total de ocorrências:** 0 · **Regras violadas:** 0
@@ -42,6 +42,10 @@ Nenhuma.
 | Segurança: privacidade e navegação | mosaico | claro | ✓ |
 | Segurança: computadores e Wi-Fi públicos | mosaico | claro | ✓ |
 | Segurança: família e controlo parental | mosaico | claro | ✓ |
+| Aldeia Digital: entrada | mosaico | claro | ✓ |
+| Aldeia Digital: painel (entrada) | mosaico | claro | ✓ |
+| Aldeia Digital: termos | mosaico | claro | ✓ |
+| Aldeia Digital: tratamento de dados | mosaico | claro | ✓ |
 | Atividade: noticia | mosaico | claro | ✓ |
 | Atividade: painel | mosaico | claro | ✓ |
 | Atividade: revisao | mosaico | claro | ✓ |
@@ -92,6 +96,10 @@ Nenhuma.
 | Segurança: privacidade e navegação | mosaico | escuro | ✓ |
 | Segurança: computadores e Wi-Fi públicos | mosaico | escuro | ✓ |
 | Segurança: família e controlo parental | mosaico | escuro | ✓ |
+| Aldeia Digital: entrada | mosaico | escuro | ✓ |
+| Aldeia Digital: painel (entrada) | mosaico | escuro | ✓ |
+| Aldeia Digital: termos | mosaico | escuro | ✓ |
+| Aldeia Digital: tratamento de dados | mosaico | escuro | ✓ |
 | Atividade: noticia | mosaico | escuro | ✓ |
 | Atividade: painel | mosaico | escuro | ✓ |
 | Atividade: revisao | mosaico | escuro | ✓ |
@@ -142,6 +150,10 @@ Nenhuma.
 | Segurança: privacidade e navegação | original | claro | ✓ |
 | Segurança: computadores e Wi-Fi públicos | original | claro | ✓ |
 | Segurança: família e controlo parental | original | claro | ✓ |
+| Aldeia Digital: entrada | original | claro | ✓ |
+| Aldeia Digital: painel (entrada) | original | claro | ✓ |
+| Aldeia Digital: termos | original | claro | ✓ |
+| Aldeia Digital: tratamento de dados | original | claro | ✓ |
 | Atividade: noticia | original | claro | ✓ |
 | Atividade: painel | original | claro | ✓ |
 | Atividade: revisao | original | claro | ✓ |
@@ -192,6 +204,10 @@ Nenhuma.
 | Segurança: privacidade e navegação | original | escuro | ✓ |
 | Segurança: computadores e Wi-Fi públicos | original | escuro | ✓ |
 | Segurança: família e controlo parental | original | escuro | ✓ |
+| Aldeia Digital: entrada | original | escuro | ✓ |
+| Aldeia Digital: painel (entrada) | original | escuro | ✓ |
+| Aldeia Digital: termos | original | escuro | ✓ |
+| Aldeia Digital: tratamento de dados | original | escuro | ✓ |
 | Atividade: noticia | original | escuro | ✓ |
 | Atividade: painel | original | escuro | ✓ |
 | Atividade: revisao | original | escuro | ✓ |

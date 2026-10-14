@@ -1,2 +1,5 @@
 CHAVE_ADMIN=admin-local-apenas-para-testes
 CHAVE_EDICAO=edicao-local-apenas-para-testes
+# Aldeia Digital (só para testes locais com `npm run worker:dev`; em produção definir com `npx wrangler secret put`).
+PIMENTA_PROFESSOR=pimenta-local-apenas-para-testes
+CHAVE_TOKENS=tokens-local-apenas-para-testes

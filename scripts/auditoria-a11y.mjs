@@ -16,6 +16,8 @@ const PAGINAS = [
   ["/jogos", "Jogos"], ["/seguranca", "Segurança digital"], ["/seguranca/boas-praticas", "Segurança: boas práticas"],
   ["/seguranca/fraude", "Segurança: exemplos de fraude"], ["/seguranca/redes-sociais", "Segurança: redes sociais"],
   ["/seguranca/privacidade", "Segurança: privacidade e navegação"], ["/seguranca/publicos", "Segurança: computadores e Wi-Fi públicos"], ["/seguranca/familia", "Segurança: família e controlo parental"],
+  ["/aldeia", "Aldeia Digital: entrada"], ["/professor/aldeia/painel", "Aldeia Digital: painel (entrada)"], ["/professor/aldeia/termos", "Aldeia Digital: termos"], ["/professor/aldeia/tratamento", "Aldeia Digital: tratamento de dados"],
+  // O jogo e o painel com dados verificam-se em scripts/aldeia/percurso.mjs (precisam de uma turma).
 ];
 // Jogos e testes de segurança (ecrã de jogo, depois de saltar a prática).
 const JOGOS = ["/jogos/leitura/3", "/jogos/sala-trancada/3", "/jogos/misterio/3", "/jogos/orcamento/3", "/jogos/correio/3", "/jogos/robo/3", "/seguranca/boas-praticas/teste/3", "/seguranca/fraude/teste/3", "/seguranca/redes-sociais/teste/3", "/seguranca/privacidade/teste/3", "/seguranca/publicos/teste/3", "/seguranca/familia/teste/3"];
@@ -44,7 +46,7 @@ for (const [formato, tema] of VARIANTES) {
     const page = await ctx.newPage();
     await page.goto(BASE + rota, { waitUntil: "networkidle" });
     if (rota.startsWith("/atividades/") || JOGOS.includes(rota)) {
-      await page.getByRole("button", { name: "Saltar a prática" }).click().catch(() => {});
+      await page.getByRole("button", { name: "Começar", exact: true }).click().catch(() => {});
       await page.waitForTimeout(300);
       const comecar = page.getByRole("button", { name: "Começar" });
       if (await comecar.count()) await comecar.first().click().catch(() => {});

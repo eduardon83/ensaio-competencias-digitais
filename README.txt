@@ -1,12 +1,12 @@
 ENSAIO ÀS COMPETÊNCIAS DIGITAIS (ECD)
-Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.0.1 · outubro de 2026
+Ferramenta gratuita desenvolvida por Eduardo Nunes / Kendir Studios (Worlds4Education - Jogos e Ambientes Educativos, Lda. | NIPC 516583824) para uso pelo Estado Português · versão 1.1.0 · outubro de 2026
 
 
 O QUE É
 
 O Ensaio às Competências Digitais é uma aplicação web gratuita, em português, onde os alunos treinam e medem as competências digitais que as provas feitas no computador pressupõem: escrever no teclado, ler ecrãs, usar menus e formulários, arrastar e largar, usar atalhos, procurar informação num texto longo e escrever matemática. Ajuda a desenvolver boas práticas digitais, incluindo segurança digital.
 
-Não tem contas, não regista pessoas e não precisa de base de dados. Funciona em qualquer navegador moderno, no computador, no tablet ou no telemóvel.
+Não tem contas, não regista pessoas e não precisa de base de dados. Funciona em qualquer navegador moderno, no computador, no tablet ou no telemóvel. A exceção é a Aldeia Digital (ver abaixo): um modo para turmas que guarda o progresso num servidor, sem contas e só até ao fim do ano letivo.
 
 
 PARA QUEM
@@ -26,9 +26,10 @@ Na página inicial há quatro entradas:
    - Código: o aluno escreve o código que o professor lhe deu e faz a prova que o professor montou.
    - Jogos: jogos desenhados e desenvolvidos para auxiliar o aluno a desenvolver as suas competências de forma divertida e motivadora.
    - Segurança digital: seis temas com informações e um teste cada.
+   - Aldeia Digital: o aluno entra com o código da turma que o professor criou (ver a secção ALDEIA DIGITAL).
 
 2. Professor
-   O professor escolhe o nível, os desafios (e também testes de segurança e jogos), como os alunos se identificam (número de turma, alcunha ou sem identificação) e o tempo alargado. Recebe um código e um QR para projetar. Se indicar um email, recebe os resultados (um resumo por dia ou um email por atividade), depois de confirmar o endereço. Tem sempre uma ligação privada com a tabela de resultados e exportação para folha de cálculo.
+   A página abre com dois modos lado a lado: Teste de Competências (uma prova curta, numa só aula) e Aldeia Digital (uma história em várias aulas). No Teste de Competências, o professor escolhe o nível, os desafios (e também testes de segurança e jogos), como os alunos se identificam (número de turma, alcunha ou sem identificação) e o tempo alargado. Recebe um código e um QR para projetar. Se indicar um email, recebe os resultados (um resumo por dia ou um email por atividade), depois de confirmar o endereço. Tem sempre uma ligação privada com a tabela de resultados e exportação para folha de cálculo.
 
 3. Tutorial
    Mostra tudo em oito passos curtos, em cerca de dois minutos. Pode saltar-se a qualquer momento.
@@ -95,13 +96,29 @@ Todas as organizações dos exemplos são fictícias. A página indica onde pedi
 O professor pode incluir os testes de segurança e os jogos nas provas que monta (código de sessão).
 
 
+ALDEIA DIGITAL (Professor → Aldeia Digital; aluno em /aldeia)
+
+A prova completa contada como história, em 4 a 6 aulas, para crianças e jovens. Cada aluno nasce na aldeia como um avatar (uma criança com fato de animal), recebe uma casa e ajuda a aldeia a pôr os computadores em ordem antes da Festa, capítulo a capítulo, de recém-chegado a morador de pleno direito.
+- O professor define o nome da turma (só para si), os lugares (1 a 32), o nível, a extensão (Essencial com os 12 desafios, Completa, ou Personalizada escolhendo as missões), as dimensões de Cidadania e Desenvolvimento que a turma trabalha, como os alunos se identificam (nome de animal gerado, número de turma ou primeiro nome), o ritmo (livre ou guiado, em que o professor abre cada capítulo), o tempo alargado, a data de fim (até 31 de agosto), os fatos (animais de hoje, animais de antigamente ou à escolha) e, se quiser, um email para resumos e alertas. Aceita os termos de utilização e de tratamento de dados.
+- Recebe o código da turma (XXX·XXXX, com QR e "Projetar código") e o código do professor (XXXX-XXXX-XXXX-X, mostrado uma vez, com "Guardar como PDF"). Pode imprimir cartões de entrada, um por lugar, e uma carta para os encarregados de educação.
+- O aluno escreve o código da turma e um nome; o nome é único na turma. Escolhe o fato, vê o avatar nascer de um ovo (três toques; no modo calmo, quatro imagens fixas), escolhe a pele e o cabelo, guarda o cartão com o código e o nome, e faz um tutorial de oito passos (que explica também que dados se guardam). No mesmo computador basta "Continuar como…"; noutro, o mesmo código e o mesmo nome. "Sair deste computador" apaga a chave local.
+- A aldeia é um mapa isométrico que se percorre com o rato, o toque ou o teclado (setas, W A S D, Tab pelos edifícios). O Mapa em lista faz tudo o que o mapa faz. Os edifícios têm as missões: os desafios, jogos e testes de segurança do ECD, com o edifício e a personagem da aldeia, e 10 missões de cidadania com situações ilustradas e escolhas (variantes para o 1.º ciclo, o 2.º e 3.º ciclos e o secundário).
+- Prémios por esforço e progresso, nunca por comparação: um item à escolha em cada missão, cores e padrões com as estrelas, carimbo, emblema e troféu com 85 pontos, estatuetas e novas opções da casa ao fechar capítulos, grinaldas no Largo quando a turma chega ao objetivo coletivo e o fato da festa no fim. Os desbloqueios são calculados no servidor. Guarda-roupa, casa por dentro (mobília por lista, troféus nas prateleiras) e "Treinar aqui" em casa, que não conta.
+- No fim, o Jornal da Aldeia: primeira página com o avatar, o perfil de competências, o perfil de cidadania e o que treinar, para guardar como imagem.
+- O professor entra no painel com o código do professor: onde está cada aluno na história, o que fez e o que falta (estado por forma e ícone), quem precisa de apoio, sugestões para a próxima aula, alertas, a miniatura da aldeia, o detalhe de cada aluno, missões, competências, cidadania, relatórios de progresso e de conclusão (CSV e PDF, com uma nota agregada para o PADDE) e as definições (abrir capítulos, aumentar lugares, mudar o nome de um aluno, renovar o acesso, apagar um aluno, fechar a turma, apagar tudo).
+- Emails pela Resend (só depois de confirmar o endereço): resumo semanal (por omissão), diário ou só marcos, nunca mais de um por dia, com ligação para deixar de receber. Levam números e identificadores, nunca o código do professor; o primeiro nome só com autorização.
+- Todos os textos da Aldeia (história, diálogos, tutorial, missões, emails, documentos) editam-se no backoffice, no grupo Aldeia Digital.
+- Sem o Worker (npm run dev, Docker, alojamento estático), a Aldeia funciona só no próprio navegador (modo local), como demonstração; a aplicação avisa.
+Especificação, alinhamento curricular e segurança: docs/aldeia-digital/.
+
+
 COMO CORRE CADA DESAFIO, JOGO OU TESTE
 
 Em cada tentativa mudam as tarefas, os textos, os alvos e a ordem, para que repetir não seja decorar.
 
-Começa com uma instrução curta (que se pode ouvir em voz alta) e um item de prática que não conta. Dá uma pontuação de 0 a 100, estrelas (1 estrela de 50 a 74 pontos, 2 de 75 a 90, 3 de 91 a 100; abaixo de 50, tentar novamente) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
+Começa com uma instrução curta, dada por uma personagem num edifício da aldeia (que se pode ouvir em voz alta). Pode começar-se logo ou experimentar primeiro um item de prática que não conta. Nas atividades com tempo, o Sr. Prazo (ou O Cronómetro) acompanha o relógio e muda de expressão nos avisos. Dá uma pontuação de 0 a 100, estrelas (1 estrela de 50 a 74 pontos, 2 de 75 a 90, 3 de 91 a 100; abaixo de 50, tentar novamente) e uma dica concreta. Faixas: A começar (0 a 39), Em progresso (40 a 64), Confiante (65 a 84), Autónomo (85 a 100). As pontuações descrevem o desempenho neste jogo e não são uma certificação.
 
-No fim aparece um relatório: para cada tarefa, se ficou certa, em parte ou errada, a resposta dada, a resposta certa e uma indicação para melhorar, além de quantos pontos faltam para a estrela seguinte.
+No fim, o avatar celebra (ou faz “Vamos outra vez” abaixo de 50) e aparece um relatório: para cada tarefa, se ficou certa, em parte ou errada, a resposta dada, a resposta certa e uma indicação para melhorar, além de quantos pontos faltam para a estrela seguinte.
 
 Carimbos: cada competência dá um carimbo a partir de 85 pontos num desafio. Os carimbos aparecem no cartão de imprensa (ou cartão de acesso ao laboratório), que se pode imprimir em "O meu cartão".
 
@@ -124,12 +141,13 @@ DADOS E PRIVACIDADE
 - Não há contas. Os resultados de cada aluno ficam no navegador dele, que pode exportá-los ou apagá-los.
 - Cada atividade concluída envia um registo anónimo (atividade, nível, pontuação, duração, tipo de dispositivo) para uma folha de cálculo controlada por quem publica a aplicação. Nunca envia nome, email, endereço IP nem identificação do dispositivo. O envio pode ser desligado em Definições.
 - Nas provas de professor vai também o identificador que o professor pediu (recomenda-se o número de turma). Os resultados chegam ao professor pelo mesmo envio: se o aluno o desligar em Definições, o professor não os recebe (a aplicação avisa antes de começar a prova). O email do professor só é usado depois de confirmado e é apagado 12 meses após a última tentativa.
+- Aldeia Digital: guarda num servidor (Cloudflare, um objeto separado por turma) o nome escolhido pelo aluno, o avatar, a casa e o progresso; do professor, o email opcional. Nunca email de alunos, idade, IP ou impressão digital do dispositivo. Só o aluno e o professor veem os resultados; os colegas veem a fachada da casa. Tudo é apagado 30 dias depois da data de fim (turmas sem alunos ao fim de 14 dias). Proposta de papéis: a escola é responsável pelo tratamento e a Kendir Studios subcontratante (termos em /professor/aldeia/termos e /professor/aldeia/tratamento, a validar com um agrupamento piloto). As tentativas da Aldeia vão também para as estatísticas anónimas, com a origem "aldeia", sem nome; não ficam no navegador.
 
 
 PUBLICAR A APLICAÇÃO
 
 Forma mais simples: descarregar a versão pronta na página de versões do repositório (Releases): o ficheiro ecd-vX.Y.Z-aplicacao.zip tem a aplicação pronta a alojar, sem ponto de recolha configurado. Ou usar a imagem Docker, que já inclui um servidor web:
-  docker run -p 8080:8080 ghcr.io/eduardon83/ensaio-competencias-digitais:1.0.1
+  docker run -p 8080:8080 ghcr.io/eduardon83/ensaio-competencias-digitais:latest
 (com ponto de recolha: construir a imagem com docker build --build-arg VITE_TELEMETRIA_URL=… .)
 
 Para gerar a partir do código:
@@ -167,7 +185,16 @@ Publicar pela primeira vez:
   npm run worker:deploy                           (constrói e publica em https://ecd-ensaio.<conta>.workers.dev)
 Testar localmente com o Worker: copiar .dev.vars.example para .dev.vars e correr npm run worker:dev (http://localhost:8787).
 
-Passar a versão final para o código: exportar no backoffice e correr node scripts/importar-textos.mjs exportacao.json (trata os textos das páginas; as outras chaves são listadas para passar à mão). Depois o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
+Aldeia Digital no Worker (ver docs/aldeia-digital/SEGURANCA.md):
+- Durable Objects (Turma, Guarda, Registo) e limites de pedidos já declarados em wrangler.jsonc; a primeira publicação cria-os (migração "aldeia-v1").
+- Segredos novos: npx wrangler secret put PIMENTA_PROFESSOR (HMAC do código do professor) e npx wrangler secret put CHAVE_TOKENS (tokens do painel e das ligações dos emails); frases longas e aleatórias. Sem eles, a Aldeia responde "fechada". Rodar: definir um valor novo (os códigos de professor antigos deixam de servir; os tokens antigos caducam).
+- Email (opcional): npx wrangler secret put RESEND_CHAVE (chave só de envio, restrita ao domínio) e, no painel do Worker, as variáveis ALDEIA_REMETENTE (por exemplo "Aldeia Digital <aldeia@dominio>", com SPF, DKIM e DMARC verificados na Resend) e ALDEIA_RESPONDER.
+- Interruptor sem novo deploy: variável ALDEIA_ESTADO = aberta, so-leitura ou fechada (keep_vars mantém-na entre publicações). Teto de turmas ativas: ALDEIA_TETO (omissão 5000); teto de emails por dia: ALDEIA_EMAILS_DIA (omissão 2000).
+- Ambiente de testes separado: npx wrangler deploy --env testes.
+- Testar localmente: npm run build, npx wrangler dev --port 8787 --local (com .dev.vars) e node scripts/aldeia/testar-api.mjs http://127.0.0.1:8787 (31 verificações de rotas, chaves, tokens, bloqueios e prémios).
+- Arte: o pacote de ilustração vive em design/aldeia-digital; node scripts/aldeia/preparar-arte.mjs copia a versão nativa para public/aldeia e gera os manifestos; python scripts/aldeia/exportar-cena.py exporta a disposição do mapa.
+
+Passar a versão final para o código: exportar no backoffice e correr node scripts/importar-textos.mjs exportacao.json (trata os textos das páginas e da Aldeia Digital; as outras chaves são listadas para passar à mão). Depois o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
 
 PARA QUEM DESENVOLVE
 
@@ -179,6 +206,8 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm test             testes das pontuações, conteúdos, geradores, códigos e notação matemática
   npm run build        ficheiros finais em dist/
   npm run a11y         auditoria de acessibilidade (com npm run dev a correr); relatório em docs/AUDITORIA_A11Y.md
+  node scripts/aldeia/percurso.mjs           percurso da Aldeia no navegador, com capturas e axe-core (com npm run dev a correr)
+  node scripts/aldeia/percurso-premios.mjs   prémios, capítulo concluído, missão de cidadania e painel (modo local)
   node scripts/recalibrar.mjs tentativa.csv   sugestões de recalibração a partir da folha de estatísticas
 
 
@@ -187,7 +216,7 @@ Arquitetura, convenções e estado do projeto: AGENTS.md.
 
 PERGUNTAS FREQUENTES
 
-A página Sobre tem perguntas frequentes para alunos, famílias e escolas: onde ficam os dados, se os resultados passam para outro computador (não passam), se o treino garante melhores notas (não garante; o efeito vai ser medido no piloto), custos, o que o professor vê, como apagar resultados e limpar os dados do navegador, como desligar as estatísticas, dispositivos, acessibilidade, estrelas e níveis, relação com o IAVE e como alojar ou adaptar a aplicação. Os textos editam-se no backoffice (Páginas, Sobre).
+A página Sobre tem perguntas frequentes para alunos, famílias e escolas: onde ficam os dados, se os resultados passam para outro computador (não passam), se o treino garante melhores notas (não garante; o efeito vai ser medido no piloto), custos, o que o professor vê, como apagar resultados e limpar os dados do navegador, como desligar as estatísticas, dispositivos, acessibilidade, estrelas e níveis, relação com o IAVE, como alojar ou adaptar a aplicação e o que é a Aldeia Digital. Os textos editam-se no backoffice (Páginas, Sobre).
 
 
 CONTRIBUIR E COMUNICAR ERROS
@@ -195,6 +224,7 @@ CONTRIBUIR E COMUNICAR ERROS
 O código e os conteúdos são públicos e livres (ver Licença). Qualquer pessoa, escola ou entidade pode copiar o projeto, corrigir erros, acrescentar atividades, testes e textos e publicar a sua versão, mantendo a atribuição.
 - Repositório público: https://github.com/eduardon83/ensaio-competencias-digitais (também indicado na página Sobre).
 - Erros e sugestões: comunicam-se no repositório, onde qualquer pessoa pode abrir um pedido ("issue") ou propor uma correção ("pull request").
+- Vulnerabilidades de segurança: comunicam-se em privado (ver SECURITY.md), nunca num pedido público.
 - Antes de propor uma alteração: npm run typecheck, npm test e, para páginas novas, npm run a11y. As convenções (português de Portugal, acessibilidade, organizações fictícias nos exemplos, códigos de professor) estão em AGENTS.md.
 
 LICENÇA

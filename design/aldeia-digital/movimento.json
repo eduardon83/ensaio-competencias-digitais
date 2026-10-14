@@ -1,0 +1,166 @@
+{
+ "_nota": "Tokens de movimento da Aldeia Digital. Sprites a passo fixo; UI do Ágora com transições curtas. Tudo para no modo calmo e com prefers-reduced-motion.",
+ "sprite": {
+  "avatar_fps": 12,
+  "ambiente_fps": {
+   "arvores": 3,
+   "agua": 4,
+   "npc_parado": 4,
+   "fonte": 6,
+   "luzinhas": 3,
+   "cegonha_voo": 10
+  },
+  "efeito_fps": {
+   "brilho": 8,
+   "poeira": 10,
+   "confetes": 12,
+   "coracao": 6,
+   "zzz": 3,
+   "pensamento": 4
+  }
+ },
+ "ui_ms": {
+  "micro": 120,
+  "curto": 200,
+  "medio": 320,
+  "historia": [
+   600,
+   1500
+  ],
+  "intervalo_estrelas": 160
+ },
+ "curvas": {
+  "suave": "cubic-bezier(.2,.8,.2,1)",
+  "saida": "cubic-bezier(.4,0,1,1)",
+  "salto": "cubic-bezier(.34,1.56,.64,1)",
+  "sprites": "steps (sem interpolação)"
+ },
+ "mapa": {
+  "passo_ms_por_mosaico": 400,
+  "atraso_camara_ms": 200,
+  "elevacao_foco_px_nativos": 1
+ },
+ "distancias": "múltiplos de 1 px nativo (2 px a 1x, 4 px a 2x)",
+ "entradas": {
+  "marcador_missao": "cai 8 px nativos, curva salto, 320 ms; depois flutua a 4 fps",
+  "edificio_abre": "poeira 300 ms; troca de imagem com achatamento 1,06/0,94 em 360 ms; 3 brilhos",
+  "item_ganho": "confetes 8 f; avatar celebrar; item sobe 4 px nativos com curva salto",
+  "cartao_missao": "sobe 16 px e aparece em 200 ms (suave); fundo escurece 200 ms",
+  "avatar_chega": "aparece à porta de casa, escala 0,6 a 1 em 320 ms (salto), depois acenar",
+  "nascimento": [
+   [
+    "cegonha chega e pousa",
+    1500
+   ],
+   [
+    "ovo à espera (ciclo)",
+    1000
+   ],
+   [
+    "toque 1, 2, 3 (cada)",
+    600
+   ],
+   [
+    "abertura",
+    1200
+   ],
+   [
+    "avatar sai e acena",
+    1500
+   ]
+  ],
+  "nascimento_v2": {
+   "ficheiro": "nascimento-v2/nascimento.json",
+   "fps": 12,
+   "segmentos": {
+    "chegada": {
+     "fotogramas": [
+      0,
+      22
+     ],
+     "duracao_ms": 1833,
+     "ciclo": false
+    },
+    "entrega": {
+     "fotogramas": [
+      22,
+      30
+     ],
+     "duracao_ms": 667,
+     "ciclo": false
+    },
+    "espera": {
+     "fotogramas": [
+      30,
+      42
+     ],
+     "duracao_ms": 1000,
+     "ciclo": true
+    },
+    "toque-1": {
+     "fotogramas": [
+      42,
+      49
+     ],
+     "duracao_ms": 583,
+     "ciclo": false
+    },
+    "toque-2": {
+     "fotogramas": [
+      49,
+      56
+     ],
+     "duracao_ms": 583,
+     "ciclo": false
+    },
+    "toque-3": {
+     "fotogramas": [
+      56,
+      63
+     ],
+     "duracao_ms": 583,
+     "ciclo": false
+    },
+    "abertura": {
+     "fotogramas": [
+      63,
+      79
+     ],
+     "duracao_ms": 1333,
+     "ciclo": false
+    },
+    "sair": {
+     "fotogramas": [
+      79,
+      96
+     ],
+     "duracao_ms": 1417,
+     "ciclo": false
+    },
+    "acenar": {
+     "fotogramas": [
+      96,
+      104
+     ],
+     "duracao_ms": 667,
+     "ciclo": true
+    }
+   }
+  }
+ },
+ "ambiente": {
+  "nuvens": "4 px nativos por segundo para nordeste; sombras só de dia",
+  "passaros": "cada 20 a 40 s",
+  "borboletas": "voo em oito, ciclo 6 s, perto de canteiros e da Horta",
+  "cegonha": "atravessa a aldeia cada 2 a 3 min se o aluno estiver parado",
+  "npc": "respirar e piscar cada 3 a 5 s; viram-se para o avatar a 2 mosaicos",
+  "janelas": "ao passar ao tema escuro acendem em cascata, atraso 0 a 1200 ms",
+  "avatar_inativo": {
+   "pensar_apos_s": 20,
+   "dormir_apos_s": 90,
+   "dormir_so_a_porta_de_casa": true
+  }
+ },
+ "calmo": "sprites no fotograma 0; sem confetes, brilhos, luzinhas, nuvens; avatar muda de sítio sem passos; nascimento em 4 imagens com botão 'Abrir o ovo'",
+ "fotossensibilidade": "nada pisca mais de 3 vezes por segundo"
+}

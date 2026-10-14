@@ -17,7 +17,7 @@ const ROTULOS: Record<string, Record<string, string>> = {
   dispositivo: { desktop: "Computador", tablet: "Tablet", telemovel: "Telemóvel" },
   contexto: { jornal: "Redação do jornal", laboratorio: "Laboratório" },
   formato: { mosaico: "Mosaico", original: "Original" },
-  origem: { treino: "Treino livre (desafios, jogos, segurança)", teste: "Preparação para provas", codigo: "Prova do professor" },
+  origem: { treino: "Treino livre (desafios, jogos, segurança)", teste: "Preparação para provas", codigo: "Prova do professor", aldeia: "Aldeia Digital" },
 };
 
 export function rotulo(campo: string, valor: string): string {

@@ -4,6 +4,7 @@ import { Barra } from "../ui";
 import { Ouvir } from "../componentes/Ouvir";
 import { usePreferencias } from "../preferencias/preferencias";
 import { PAGINAS } from "../textos/paginas";
+import { PersonagemTempo } from "../aldeia/arte/pixel";
 
 /** Conta o tempo desde que `ativo` passou a verdadeiro. Com `limiteMs`, chama `aoEsgotar` uma vez. */
 export function useTemporizador(ativo: boolean, limiteMs: number | null, aoEsgotar?: () => void) {
@@ -53,13 +54,19 @@ export function BarraTempo({ restanteMs, totalMs, soBarra }: { restanteMs: numbe
     const pouco = restanteMs <= Math.min(30_000, totalMs * 0.2);
     const C = PAGINAS.definicoes.ajudas.calmo;
     return (
-      <p className="m-0 text-sm" role="status" style={{ color: pouco ? "var(--tinta)" : "var(--suave)", fontWeight: pouco ? 700 : 400 }}>
-        {pouco ? C.poucoTempo : C.aviso}
-      </p>
+      <div className="flex items-center gap-3">
+        <PersonagemTempo restanteMs={totalMs} totalMs={totalMs} />
+        <p className="m-0 text-sm" role="status" style={{ color: pouco ? "var(--tinta)" : "var(--suave)", fontWeight: pouco ? 700 : 400 }}>
+          {pouco ? C.poucoTempo : C.aviso}
+        </p>
+      </div>
     );
   }
+  // Personagem do tempo do cenário (Sr. Prazo ou O Cronómetro): muda de expressão nos avisos, sem tremer nem piscar.
   return (
-    <div className="grid gap-1">
+    <div className="flex items-center gap-3">
+      {!soBarra && <PersonagemTempo restanteMs={restanteMs} totalMs={totalMs} />}
+      <div className="grid gap-1 flex-1 min-w-0">
       <div className="flex justify-between text-sm" style={{ color: "var(--suave)" }}>
         <span>Tempo</span>
         {!soBarra && (
@@ -71,6 +78,7 @@ export function BarraTempo({ restanteMs, totalMs, soBarra }: { restanteMs: numbe
       <Barra valor={restanteMs} max={totalMs} rotulo="Tempo restante" tom={tom} />
       <div className="sr-only" aria-live="polite">
         {aviso}
+      </div>
       </div>
     </div>
   );

@@ -28,6 +28,9 @@ import { EXTRA as EXTRA_MATEMATICA } from "../atividades/matematica";
 import { ROTULOS as ROTULOS_PAINEL } from "../atividades/painel";
 import { INFOS, PAGINAS as PAGINAS_ARQUIVO, PARAGRAFOS, POOLS, PUBLICIDADE } from "../atividades/arquivo/gerar";
 import { FUNCOES, SECCOES } from "../atividades/cartao/dados";
+import { ALDEIA } from "../aldeia/textos";
+import { ALDEIA_EMAILS } from "../aldeia/textos-emails";
+import { CIDADANIA } from "../aldeia/cidadania/conteudo";
 
 const NOME_PAGINA: Record<string, string> = {
   geral: "Cabeçalho, menu e rodapé", inicio: "Início", treinar: "Treinar", tutorial: "Tutorial", acessibilidade: "Acessibilidade", sobre: "Sobre", privacidade: "Privacidade", licenca: "Licença",
@@ -95,3 +98,17 @@ for (const d of JOGOS) registar(`jogo.${d.slug}`, "Jogos", d.titulo.jornal, d, {
 registar("jogo.meta", "Jogos", "Cartões da página Jogos", META_JOGOS);
 registar("jogo.correio.missoes", "Jogos", "Correio da Redação", MISSOES, { negar: ["assunto", "conteudo"], aviso: "As palavras-chave usadas na correção não são editáveis aqui: se mudar o pedido, mantenha as mesmas informações." });
 registar("jogo.robo.instrucoes", "Jogos", "O Robô da Bancada", NOME_INSTR);
+
+// ── Aldeia Digital (ESPECIFICACAO.md 11.1): chaves por id, nunca por índice ──
+// Os nomes anónimos (animais e adjetivos) ficam técnicos: o servidor valida os nomes com eles.
+// Os emails ("aldeia.emails.…") são lidos também pelo Worker, que escapa tudo e só aceita **negrito** e [ligações](/rota).
+const AVISO_ALDEIA = "Variáveis entre chavetas ({nome}, {capitulo}…) são preenchidas pela aplicação: mantenha-as. Variantes por ciclo: c1 (1.º ciclo), c23 (2.º e 3.º ciclos), sec (secundário); se faltar uma, usa a do ciclo abaixo.";
+const SECCOES_ALDEIA: [keyof typeof ALDEIA, string][] = [
+  ["historia", "História"], ["capitulos", "História: capítulos"], ["dialogos", "Diálogos"], ["nascimento", "Nascimento"], ["tutorial", "Tutorial"],
+  ["missoes", "Missões: briefings"], ["edificios", "Edifícios e lugares"], ["estadosEdificio", "Edifícios e lugares"], ["personagens", "Personagens"],
+  ["premios", "Prémios"], ["dimensoes", "Dimensões de Cidadania"], ["interface", "Interface"], ["personalizar", "Interface: avatar"], ["guardaNome", "Interface: guarda o teu nome"],
+  ["professor", "Professor"], ["documentos", "Documentos"],
+];
+for (const [k, nome] of SECCOES_ALDEIA) registar(`aldeia.${k}`, "Aldeia Digital", nome, ALDEIA[k], { aviso: AVISO_ALDEIA });
+registar("aldeia.cidadania", "Aldeia Digital", "Missões de cidadania", CIDADANIA, { aviso: `${AVISO_ALDEIA} Em cada situação, “certa” é a resposta certa: mude o texto, não o sentido.` });
+registar("aldeia.emails", "Aldeia Digital", "Emails", ALDEIA_EMAILS, { aviso: "Só texto simples com **negrito** e [ligações](/rota) para o próprio sítio. Editar emails exige a chave de administração ou de edição." });

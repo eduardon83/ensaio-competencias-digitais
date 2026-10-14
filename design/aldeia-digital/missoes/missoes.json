@@ -1,0 +1,350 @@
+{
+ "direitos-online": {
+  "edificio": "Escola",
+  "titulo": "Os direitos das crianças, também online",
+  "situacoes": [
+   {
+    "imagem": "missoes/direitos-online/missao-direitos-online-situacao-1.png",
+    "exemplo": "missoes/direitos-online/missao-direitos-online-situacao-1-exemplo.png",
+    "resumo": "Direitos das crianças: tirar foto a um colega sem perguntar.",
+    "ancoras_1x": {
+     "ecra": [
+      92,
+      84,
+      588,
+      292
+     ],
+     "avatar_pes": [
+      1048,
+      680
+     ],
+     "balao": [
+      800,
+      368
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": true
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/direitos-online/missao-direitos-online-situacao-2.png",
+    "exemplo": "missoes/direitos-online/missao-direitos-online-situacao-2-exemplo.png",
+    "resumo": "Ninguém fica de fora no grupo da turma: ecrã do grupo e uma colega à parte.",
+    "ancoras_1x": {
+     "ecra": [
+      396,
+      268,
+      692,
+      460
+     ],
+     "avatar_pes": [
+      784,
+      680
+     ],
+     "balao": [
+      960,
+      360
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/direitos-online/missao-direitos-online-situacao-3.png",
+    "exemplo": "missoes/direitos-online/missao-direitos-online-situacao-3-exemplo.png",
+    "resumo": "Pedir ajuda a um adulto de confiança: a professora ouve com calma.",
+    "ancoras_1x": {
+     "ecra": [
+      160,
+      80,
+      800,
+      176
+     ],
+     "avatar_pes": [
+      560,
+      680
+     ],
+     "balao": [
+      784,
+      336
+     ]
+    },
+    "pose_avatar": {
+     "anim": "acenar",
+     "frame": 1,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   }
+  ]
+ },
+ "votacao-festa": {
+  "edificio": "Junta",
+  "titulo": "A votação da festa",
+  "situacoes": [
+   {
+    "imagem": "missoes/votacao-festa/missao-votacao-festa-situacao-1.png",
+    "exemplo": "missoes/votacao-festa/missao-votacao-festa-situacao-1-exemplo.png",
+    "resumo": "A votação da festa: quiosque de voto com três opções em ícone.",
+    "ancoras_1x": {
+     "ecra": [
+      564,
+      316,
+      748,
+      388
+     ],
+     "avatar_pes": [
+      656,
+      688
+     ],
+     "balao": [
+      960,
+      336
+     ]
+    },
+    "pose_avatar": {
+     "anim": "parado",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/votacao-festa/missao-votacao-festa-situacao-2.png",
+    "exemplo": "missoes/votacao-festa/missao-votacao-festa-situacao-2-exemplo.png",
+    "resumo": "Ouvir todos antes de decidir: cartaz vazio no largo e crianças a conversar.",
+    "ancoras_1x": {
+     "ecra": [
+      504,
+      208,
+      776,
+      304
+     ],
+     "avatar_pes": [
+      640,
+      696
+     ],
+     "balao": [
+      280,
+      352
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/votacao-festa/missao-votacao-festa-situacao-3.png",
+    "exemplo": "missoes/votacao-festa/missao-votacao-festa-situacao-3-exemplo.png",
+    "resumo": "O resultado: barras do gráfico em branco para a UI preencher.",
+    "ancoras_1x": {
+     "ecra": [
+      252,
+      84,
+      1028,
+      388
+     ],
+     "avatar_pes": [
+      680,
+      688
+     ],
+     "balao": [
+      224,
+      360
+     ]
+    },
+    "pose_avatar": {
+     "anim": "celebrar",
+     "frame": 4,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   }
+  ]
+ },
+ "computador-velho": {
+  "edificio": "Horta e Ecoponto",
+  "titulo": "Onde vai o computador velho?",
+  "situacoes": [
+   {
+    "imagem": "missoes/computador-velho/missao-computador-velho-situacao-1.png",
+    "exemplo": "missoes/computador-velho/missao-computador-velho-situacao-1-exemplo.png",
+    "resumo": "Onde vai o computador velho? Em casa, a família olha para o computador antigo.",
+    "ancoras_1x": {
+     "ecra": [
+      160,
+      80,
+      800,
+      176
+     ],
+     "avatar_pes": [
+      784,
+      688
+     ],
+     "balao": [
+      304,
+      344
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": true
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/computador-velho/missao-computador-velho-situacao-2.png",
+    "exemplo": "missoes/computador-velho/missao-computador-velho-situacao-2-exemplo.png",
+    "resumo": "Ecoponto e ponto de recolha de elétricos: escolher o sítio certo.",
+    "ancoras_1x": {
+     "ecra": [
+      240,
+      72,
+      1040,
+      176
+     ],
+     "avatar_pes": [
+      160,
+      688
+     ],
+     "balao": [
+      1120,
+      368
+     ]
+    },
+    "pose_avatar": {
+     "anim": "parado",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/computador-velho/missao-computador-velho-situacao-3.png",
+    "exemplo": "missoes/computador-velho/missao-computador-velho-situacao-3-exemplo.png",
+    "resumo": "Reparar primeiro: a oficina de reparação com o Avô Zé.",
+    "ancoras_1x": {
+     "ecra": [
+      704,
+      356,
+      832,
+      424
+     ],
+     "avatar_pes": [
+      544,
+      688
+     ],
+     "balao": [
+      1024,
+      344
+     ]
+    },
+    "pose_avatar": {
+     "anim": "celebrar",
+     "frame": 3,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   }
+  ]
+ },
+ "preciso-ou-quero": {
+  "edificio": "Mercado",
+  "titulo": "Preciso ou quero?",
+  "situacoes": [
+   {
+    "imagem": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-1.png",
+    "exemplo": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-1-exemplo.png",
+    "resumo": "Preciso ou quero? Uma janela de compra brilhante aparece num jogo.",
+    "ancoras_1x": {
+     "ecra": [
+      688,
+      240,
+      880,
+      336
+     ],
+     "avatar_pes": [
+      440,
+      600
+     ],
+     "balao": [
+      1104,
+      360
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-2.png",
+    "exemplo": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-2-exemplo.png",
+    "resumo": "O mealheiro: lanche (precisas) e brinquedo (queres) na banca do mercado.",
+    "ancoras_1x": {
+     "ecra": [
+      320,
+      80,
+      960,
+      176
+     ],
+     "avatar_pes": [
+      640,
+      696
+     ],
+     "balao": [
+      1128,
+      368
+     ]
+    },
+    "pose_avatar": {
+     "anim": "pensar",
+     "frame": 0,
+     "espelhar": false
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   },
+   {
+    "imagem": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-3.png",
+    "exemplo": "missoes/preciso-ou-quero/missao-preciso-ou-quero-situacao-3-exemplo.png",
+    "resumo": "Decidir em família: conversa calma no sofá.",
+    "ancoras_1x": {
+     "ecra": [
+      160,
+      80,
+      800,
+      176
+     ],
+     "avatar_pes": [
+      680,
+      600
+     ],
+     "balao": [
+      440,
+      304
+     ]
+    },
+    "pose_avatar": {
+     "anim": "acenar",
+     "frame": 2,
+     "espelhar": true
+    },
+    "escala_avatar": "desenhar o avatar a 4 px por pixel (igual à cena)"
+   }
+  ]
+ }
+}

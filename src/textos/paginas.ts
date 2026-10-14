@@ -61,6 +61,7 @@ export const PAGINAS = {
       { para: "/codigo", icone: "cardinal", titulo: "Código", texto: "O teu professor deu-te um código? Introduz aqui para fazer a prova." },
       { para: "/jogos", icone: "dados", titulo: "Jogos", texto: "Joga com literatura portuguesa, participa num escape room, resolve um mistério, pratica com uma folha de cálculo, escreve uma mensagem eletrónica e programa um robô. Os jogos também te podem ajudar a desenvolver as tuas competências." },
       { para: "/seguranca", icone: "escudo", titulo: "Segurança digital", texto: "Avalia se conheces boas práticas, identifica e reconhece as fraudes mais comuns e descobre o que sabes sobre segurança e redes sociais." },
+      { para: "/aldeia", icone: "familia", titulo: "Aldeia Digital", texto: "O teu professor criou uma aldeia para a turma? Entra com o código da turma, faz nascer o teu avatar e ajuda a aldeia, missão a missão." },
     ],
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Os teus carimbos estão no [cartão](/cartao).",
   },
@@ -85,16 +86,17 @@ export const PAGINAS = {
       atividade: { titulo: "Desafio", texto: "Escolhe um desafio, avança pelos níveis e tenta superar o teu melhor resultado." },
       codigo: { titulo: "Código", texto: "Recebeste um código do teu professor? Introduz o código para acederes à prova." },
       jogos: { titulo: "Jogos", texto: "Põe as tuas competências à prova em jogos e em situações do dia a dia." },
-      seguranca: { titulo: "Segurança digital", texto: "Testa os teus conhecimentos em três temas: boas práticas online, exemplos de fraude e redes sociais. " },
+      seguranca: { titulo: "Segurança digital", texto: "Testa os teus conhecimentos em seis temas: boas práticas, fraudes, redes sociais, privacidade, computadores públicos e família." },
+      aldeia: { titulo: "Aldeia Digital", texto: "O teu professor criou uma aldeia? Entra com o código da turma, faz nascer o teu avatar e ajuda a aldeia, missão a missão." },
     },
     cenario: { titulo: "Escolhe o cenário", texto: "Escolhe o cenário antes de começares. As personagens e os textos mudam, mas as regras e a pontuação mantêm-se.", personagens: "Personagens" },
     atividade: {
       titulo: "O que vais encontrar",
       etapas: [
-        { titulo: "1. Instrução", texto: "Uma personagem explica o que tens de fazer. Podes ouvir as instruções em voz alta." },
-        { titulo: "2. Prática", texto: "Experimenta uma tarefa curta, sem pontuação, para perceberes como funciona." },
-        { titulo: "3. Avaliação", texto: "Aqui, as tuas respostas contam para o resultado. Em alguns casos, tens um tempo definido para responder." },
-        { titulo: "4. Resultado", texto: "Vê a tua pontuação, recebe uma dica e consulta o teu desempenho em cada tarefa." },
+        { titulo: "1. Instrução", texto: "Uma personagem, à porta de um edifício da aldeia, explica o que tens de fazer. Carrega em Ouvir para ouvir em voz alta." },
+        { titulo: "2. Começar ou experimentar", texto: "Carrega em Começar para ires já à tarefa, ou em Experimentar primeiro para fazeres uma tarefa curta que não conta." },
+        { titulo: "3. Avaliação", texto: "Aqui, as tuas respostas contam para o resultado. Quando há tempo, o Sr. Prazo ou O Cronómetro avisam quando passa metade e quando falta pouco." },
+        { titulo: "4. Resultado", texto: "O teu avatar celebra a pontuação. Vês as estrelas, uma dica e o desempenho em cada tarefa. Com 85 pontos ganhas o carimbo." },
       ],
     },
     pontuacao: { titulo: "Como funciona a pontuação", texto: "Cada desafio recebe uma pontuação de 0 a 100. Se tiveres menos de 50, podes tentar novamente. Entre 50 e 74, ganhas uma estrela; entre 75 e 90, duas; e entre 91 e 100, três. A tua melhor pontuação em cada nível fica guardada neste navegador." },
@@ -107,15 +109,16 @@ export const PAGINAS = {
     },
     professores: {
       titulo: "Para professores",
-      montar: { titulo: "1. Crie uma ficha ", texto: "Escolha o nível, as atividades, incluindo jogos e testes de segurança, e se os alunos se identificam pelo número da turma, por uma alcunha ou não se identificam." },
-      partilhar: { titulo: "2. Partilhe a ficha", texto: "Receba um código e um QR para os alunos acederem à ficha." },
-      acompanhar: { titulo: "3. Acompanhe os resultados", texto: "Consulte os resultados numa página privada, receba-os por mensagem eletrónica, se quiser, ou exporte-os em CSV." },
+      montar: { titulo: "1. Escolha o modo", texto: "Teste de Competências: uma prova curta numa aula, com as atividades, os jogos e os testes de segurança que escolher. Aldeia Digital: a prova completa contada como história, em 4 a 6 aulas." },
+      partilhar: { titulo: "2. Partilhe o código", texto: "Receba um código e um QR para projetar. Na Aldeia recebe também o código do professor, os cartões de entrada e uma carta para as famílias." },
+      acompanhar: { titulo: "3. Acompanhe os resultados", texto: "Teste: página privada, email e CSV. Aldeia: painel com onde está cada aluno, quem precisa de apoio, relatórios em CSV e PDF e resumos por email." },
     },
     dados: {
       titulo: "Os teus dados",
       paragrafos: [
         "Não há contas. Os teus resultados ficam guardados no teu navegador. São enviados dados anónimos, sem nome nem endereço IP, para criar estatísticas sobre as competências digitais que precisam de mais treino. Podes desativar esta opção nas 'Definições'.",
         "No 'Observatório', podes consultar estatísticas gerais sobre as competências digitais. Para proteger a privacidade, só são apresentados resultados de grupos com vinte ou mais tentativas.",
+        "Na Aldeia Digital, o teu nome, o avatar e o progresso ficam numa caixa segura da turma, para o professor os ver e para continuares noutro computador. Tudo é apagado no fim do ano letivo.",
       ],
     },
   },
@@ -275,6 +278,13 @@ export const PAGINAS = {
             "A aplicação é um conjunto de ficheiros estáticos: aloja-se em qualquer servidor web, sem base de dados. As instruções estão no ficheiro README que acompanha o código.",
           ],
         },
+        {
+          pergunta: "O que é a Aldeia Digital?",
+          paragrafos: [
+            "É um modo para turmas, criado pelo professor em [Professor](/professor). A prova completa é contada como uma história, em 4 a 6 aulas: cada aluno nasce na aldeia como um avatar, recebe uma casa e ajuda a pôr os computadores em ordem, com as atividades do ECD e missões de cidadania.",
+            "Não há contas nem emails de alunos: entra-se com o código da turma e um nome (um número, o primeiro nome ou um nome de animal). Ao contrário do resto do ECD, o progresso fica num servidor, para o professor o ver e para o aluno continuar noutro computador. Tudo é apagado 30 dias depois da data de fim da turma. Mais em [Privacidade](/privacidade).",
+          ],
+        },
       ],
     },
     rodape: "Primeira vez? Vê o [tutorial](/tutorial). Estatísticas de uso no [Observatório](/observatorio).",
@@ -420,9 +430,9 @@ export const PAGINAS = {
     "introducao": "Estatísticas anónimas sobre as competências digitais de todas as pessoas que usaram a aplicação. Escolhe o período e os filtros, vê os gráficos e exporta o relatório em CSV ou PDF. Para proteger a privacidade, os grupos com menos de 20 tentativas não são mostrados."
   },
   atividade: {
-    briefing: { pratica: "Primeiro fazes um item de prática que não conta. Depois começa a avaliação.", melhor: "O teu melhor neste nível: **{pontos}** pontos.", comecar: "Começar a prática", saltar: "Saltar a prática", ouvir: "Ler em voz alta", alargado: "Tempo alargado ×{x} ativo." },
+    briefing: { praticaOpcional: "Podes experimentar primeiro um item de prática, que não conta.", melhor: "O teu melhor neste nível: **{pontos}** pontos.", iniciar: "Começar", experimentar: "Experimentar primeiro", ouvir: "Ouvir", alargado: "Tempo alargado ×{x} ativo.", nivel: "Nível {nivel} · {nome}" },
     etapas: { intro: "Briefing", pratica: "Prática (não conta)", avaliacao: "A contar", resultado: "Resultado" },
-    resultado: { carimbo: "Ganhaste o {carimbo} de {dominio}.", bom: "Bom trabalho.", caminho: "Vais no bom caminho.", tenta: "Tenta novamente: vais conseguir.", verCartao: "Ver o meu {cartao}", recorde: "Novo recorde pessoal (antes: {antes}).", tempo: "Tempo: {s} s · Nível {nivel} ({nome})", repetir: "Repetir", proxima: "Próxima atividade: {titulo}", voltar: "Voltar aos desafios", repetirEsta: "Repetir esta atividade", revInfo: "Rever as informações", voltarSeguranca: "Voltar à segurança", voltarJogos: "Voltar aos jogos" },
+    resultado: { carimbo: "Ganhaste o {carimbo} de {dominio}.", bom: "Bom trabalho.", caminho: "Vais no bom caminho.", tenta: "Tenta novamente: vais conseguir.", verCartao: "Ver o meu {cartao}", recorde: "Novo recorde pessoal (antes: {antes}).", tempo: "Tempo: {s} s · Nível {nivel} ({nome})", repetir: "Repetir", proxima: "Próxima atividade: {titulo}", voltar: "Voltar aos desafios", repetirEsta: "Repetir esta atividade", revInfo: "Rever as informações", voltarSeguranca: "Voltar à segurança", voltarJogos: "Voltar aos jogos", muitoBem: "Muito bem!", faltaCarimbo: "Falta pouco para o carimbo de {titulo}. Com 85 pontos ganhas o carimbo.", ganhouCarimbo: "Ganhaste o carimbo de {titulo}.", outraVez: "Vamos outra vez? Lê a indicação abaixo e tenta de novo." },
     relatorio: { estrelas0: "Ainda não ganhaste estrelas: vale a pena tentar novamente.", estrelas1: "Obtiveste 1 estrela.", estrelasN: "Obtiveste {n} estrelas.", tres: "Tens as três estrelas. Experimenta o nível seguinte.", falta: "Para {nome} precisas de {alvo} pontos: faltam {falta}.", nomes: ["a primeira estrela", "a segunda estrela", "a terceira estrela"], proximaVez: "Da próxima vez:", titulo: "Relatório da atividade", bemFeito: "Bem feito.", porResponder: "Por responder: em branco vale zero." },
   },
   codigo: {

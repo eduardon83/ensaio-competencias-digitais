@@ -4,7 +4,15 @@
 // (confirmado por ligação antes de qualquer envio). O token fica neste navegador e na ligação privada.
 import { Rico } from "../textos/Rico";
 import { PAGINAS } from "../textos/paginas";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { Check, FileText, Play } from "lucide-react";
+import { ALDEIA } from "../aldeia/textos";
+import { Espera } from "../aldeia/arte/espera";
+import { urlPixel } from "../aldeia/arte/pixel";
+import { formatarTurma } from "../aldeia/nucleo/codigos";
+import { turmasGuardadas } from "../aldeia/cliente/sessao";
+
+const ConfigAldeia = lazy(() => import("../aldeia/professor/Config"));
 import { Link, useLocation } from "react-router";
 import { Caminho } from "../componentes/Caminho";
 import { VideoYoutube } from "../componentes/VideoYoutube";
@@ -55,7 +63,7 @@ function urlAluno(codigo: string) {
   return `${urlBase()}/codigo/${codigo.replace("·", "")}`;
 }
 
-export function Professor() {
+function ConfigTeste() {
   const [nivel, setNivel] = useState<Nivel>(2);
   const [atividades, setAtividades] = useState<string[]>(() => DISPONIVEIS.map((a) => a.slug));
   const [extensao, setExtensao] = useState<ExtensaoTempo>(1);
@@ -65,7 +73,6 @@ export function Professor() {
   const [criada, setCriada] = useState<SessaoGuardada | null>(null);
   const [estado, setEstado] = useState<"" | "a_criar" | "ok" | "aviso">("");
   const [mensagem, setMensagem] = useState("");
-  const [sessoes, setSessoes] = useState<SessaoGuardada[]>(lerSessoes);
   // Resumo ao vivo: atividades pela ordem em que os alunos as fazem e duração estimada (soma dos intervalos "x a y min").
   const escolhidas = TODOS.filter((d) => atividades.includes(d.slug)).sort((x, y) => (GRUPOS.findIndex((g) => g.itens.includes(x)) - GRUPOS.findIndex((g) => g.itens.includes(y))));
   const intervalo = (d: string) => (d.match(/\d+/g) ?? ["0"]).map(Number);
@@ -80,7 +87,6 @@ export function Professor() {
     const nova: SessaoGuardada = { codigo, sessao, token, criadoEm: new Date().toISOString(), config, email: email.trim() };
     const lista = [nova, ...lerSessoes()].slice(0, 50);
     guardarSessoes(lista);
-    setSessoes(lista);
     setCriada(nova);
     if (!telemetriaConfigurada) {
       setEstado("aviso");
@@ -101,11 +107,7 @@ export function Professor() {
 
   return (
     <div className="grid gap-6">
-      <header className="grid gap-2 max-w-3xl">
-        <Caminho itens={[]} atual={PAGINAS.professor.titulo} />
-        <h1 className="text-4xl">{PAGINAS.professor.titulo}</h1>
-        <p className="m-0"><Rico texto={PAGINAS.professor.introducao} /></p>
-      </header>
+      <p className="m-0 max-w-3xl"><Rico texto={PAGINAS.professor.introducao} /></p>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="grid gap-4">
@@ -236,26 +238,163 @@ export function Professor() {
               <li><Rico texto={PAGINAS.professor.comoFunciona[3]} /></li>
             </ol>
           </Cartao>
-          {sessoes.length > 0 && (
-            <Cartao className="grid gap-2">
-              <h2 className="text-lg">As suas sessões neste navegador</h2>
-              <ul className="m-0 p-0 list-none grid gap-2 text-sm">
-                {sessoes.map((s) => (
-                  <li key={s.codigo} className="grid gap-0">
-                    <span>
-                      <strong style={{ fontFamily: "var(--fonte-mono)" }}>{s.codigo}</strong> · nível {s.config.nivel} · {s.config.atividades.length} atividade{s.config.atividades.length === 1 ? "" : "s"}
-                    </span>
-                    <span style={{ color: "var(--suave)" }}>
-                      {new Date(s.criadoEm).toLocaleDateString("pt-PT")} · <Link to={`/professor/resultados#s=${s.sessao}&t=${s.token}`}>ver resultados</Link>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Cartao>
-          )}
         </aside>
       </div>
     </div>
+  );
+}
+
+// ─── Professor: escolha do modo (Teste de Competências ou Aldeia Digital) ─────
+// Duas opções lado a lado (radiogroup), não é menu: escolher muda os blocos de baixo. Na primeira visita nenhuma está
+// escolhida; depois lembra a última escolha neste navegador. Mudar de modo não apaga o que já foi preenchido no outro.
+type ModoProfessor = "teste" | "aldeia";
+const CHAVE_MODO = "ecd.professor.modo.v1";
+function lerModo(): ModoProfessor | null {
+  try {
+    const v = localStorage.getItem(CHAVE_MODO);
+    return v === "teste" || v === "aldeia" ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export function Professor() {
+  const [modo, setModo] = useState<ModoProfessor | null>(lerModo);
+  const E = ALDEIA.professor.escolha;
+  const escolher = (m: ModoProfessor) => {
+    setModo(m);
+    try {
+      localStorage.setItem(CHAVE_MODO, m);
+    } catch {
+      /* nada */
+    }
+  };
+  const cartao = (m: ModoProfessor) => {
+    const t = E[m];
+    const ativo = modo === m;
+    const outro: ModoProfessor = m === "teste" ? "aldeia" : "teste";
+    return (
+      <div className={`modo-cartao ${ativo ? "modo-cartao--ativo" : ""}`} onClick={() => escolher(m)}>
+        <div
+          id={`modo-${m}`}
+          role="radio"
+          aria-checked={ativo}
+          aria-labelledby={`modo-${m}-t`}
+          aria-describedby={`modo-${m}-d`}
+          tabIndex={ativo || (modo === null && m === "teste") ? 0 : -1}
+          className="modo-cartao__radio"
+          onKeyDown={(e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault();
+              escolher(m);
+            } else if (["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(e.key)) {
+              e.preventDefault();
+              escolher(outro);
+              document.getElementById(`modo-${outro}`)?.focus();
+            }
+          }}
+        >
+          <div className="modo-cartao__arte" aria-hidden="true">{m === "teste" ? <FileText size={88} strokeWidth={1.5} /> : <CasinhasAldeia />}</div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 id={`modo-${m}-t`} className="text-2xl">{t.titulo}</h2>
+            {ativo && (
+              <span className="modo-cartao__escolhido">
+                <Check size={14} aria-hidden="true" /> {E.escolhido}
+              </span>
+            )}
+          </div>
+          <p id={`modo-${m}-d`} className="m-0">{t.frase}</p>
+        </div>
+        <div className="modo-cartao__video" onClick={(e) => e.stopPropagation()}>
+          {m === "teste" ? (
+            <VideoYoutube qual="professor" compacto />
+          ) : (
+            <div className="video" role="img" aria-label={`${t.video} (em produção)`}>
+              <span>
+                <Play size={16} aria-hidden="true" /> {t.video}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+  return (
+    <div className="grid gap-6">
+      <header className="grid gap-2">
+        <Caminho itens={[]} atual={PAGINAS.professor.titulo} />
+        <h1 className="text-4xl">{E.titulo}</h1>
+      </header>
+      <div role="radiogroup" aria-label={E.grupo} className="grid gap-4 md:grid-cols-2">
+        {cartao("teste")}
+        {cartao("aldeia")}
+      </div>
+      {modo === null && <p className="m-0" style={{ color: "var(--suave)" }}>{E.escolha}</p>}
+      <div hidden={modo !== "teste"} className="modo-blocos">
+        <ConfigTeste />
+      </div>
+      {modo === "aldeia" && (
+        <div className="modo-blocos">
+          <Suspense fallback={<Espera />}>
+            <ConfigAldeia />
+          </Suspense>
+        </div>
+      )}
+      <MinhasSessoes />
+    </div>
+  );
+}
+
+/** Ilustração do cartão da Aldeia: casinhas em pixel (camadas do pacote de arte). */
+function CasinhasAldeia() {
+  const casas: [string, string, string][] = [["pessego", "azul", "telha"], ["branco", "verde", "ardosia"], ["limao", "amarela", "mel"], ["rosa", "vermelha", "vinho"], ["ceu", "madeira", "azul"]];
+  return (
+    <span className="casinhas">
+      {casas.map(([p, o, t], k) => (
+        <span key={k} className="casinhas__casa">
+          {[`mundo/casa/casa-paredes-${p}`, `mundo/casa/casa-porta-${o}`, `mundo/casa/casa-telhado-${t}`].map((c) => (
+            <img key={c} src={urlPixel(c)} alt="" width={74} height={71} />
+          ))}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/** As minhas sessões (os dois modos, com etiqueta), no fim da página. */
+function MinhasSessoes() {
+  const S = ALDEIA.professor.sessoes;
+  const sessoes = lerSessoes();
+  const turmas = turmasGuardadas();
+  if (!sessoes.length && !turmas.length) return null;
+  return (
+    <Cartao className="grid gap-3">
+      <h2 className="text-xl">{S.titulo}</h2>
+      <ul className="m-0 p-0 list-none grid gap-2 text-sm">
+        {turmas.map((t) => (
+          <li key={t.codigo} className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <Etiqueta>{S.aldeia}</Etiqueta>
+            <strong style={{ fontFamily: "var(--fonte-mono)" }}>{formatarTurma(t.codigo)}</strong>
+            {t.nome && <span>{t.nome}</span>}
+            <span style={{ color: "var(--suave)" }}>{new Date(t.criadoEm).toLocaleDateString("pt-PT")}</span>
+            <Link to="/professor/aldeia/painel" className="ligacao-alvo">{S.abrir}</Link>
+          </li>
+        ))}
+        {sessoes.map((s) => (
+          <li key={s.codigo} className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <Etiqueta>{S.teste}</Etiqueta>
+            <strong style={{ fontFamily: "var(--fonte-mono)" }}>{s.codigo}</strong>
+            <span>
+              nível {s.config.nivel} · {s.config.atividades.length} atividade{s.config.atividades.length === 1 ? "" : "s"}
+            </span>
+            <span style={{ color: "var(--suave)" }}>{new Date(s.criadoEm).toLocaleDateString("pt-PT")}</span>
+            <Link to={`/professor/resultados#s=${s.sessao}&t=${s.token}`} className="ligacao-alvo">
+              ver resultados
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Cartao>
   );
 }
 
@@ -393,7 +532,7 @@ export function ResultadosProfessor() {
     if (!dados) return;
     const cab = ["data", "aluno", "atividade", "nivel", "pontuacao", "duracao_s", "dispositivo", "cenario"];
     const linhas = [cab.join(";"), ...dados.tentativas.map((t) => [t.recebidoEm, t.aluno, t.atividade, t.nivel, t.pontuacao, t.duracaoS, t.dispositivo, t.contexto].join(";"))];
-    const blob = new Blob(["﻿" + linhas.join("\n")], { type: "text/csv;charset=utf-8" });
+    const blob = new Blob(["\uFEFF" + linhas.join("\n")], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = `ecd-sessao-${dados.sessao}.csv`;

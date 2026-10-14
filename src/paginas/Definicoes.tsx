@@ -4,17 +4,26 @@ import { PAGINAS } from "../textos/paginas";
 import { Caminho } from "../componentes/Caminho";
 import { CONTEXTOS } from "../contextos";
 import { usePreferencias, type ExtensaoTempo } from "../preferencias/preferencias";
-import { BotaoRadio, CampoTexto, Cartao, Interruptor } from "../ui";
+import { BotaoRadio, CampoTexto, Cartao, Interruptor, LigacaoBotao } from "../ui";
+import { useSearchParams } from "react-router";
 
 export function Definicoes() {
   const { prefs, definir } = usePreferencias();
   const A = PAGINAS.definicoes.ajudas;
+  // Vindo da Aldeia Digital (?voltar=/aldeia/…): regresso direto ao jogo. Só caminhos da aldeia.
+  const [params] = useSearchParams();
+  const voltar = /^\/aldeia\/[A-Z0-9]{7}$/.test(params.get("voltar") ?? "") ? params.get("voltar")! : null;
   return (
     <div className="grid gap-6 max-w-3xl">
       <header className="grid gap-2">
-        <Caminho itens={[]} atual={PAGINAS.definicoes.titulo} />
+        <Caminho itens={voltar ? [[voltar, "Aldeia Digital"]] : []} atual={PAGINAS.definicoes.titulo} />
         <h1 className="text-4xl">{PAGINAS.definicoes.titulo}</h1>
         <p className="m-0"><Rico texto={PAGINAS.definicoes.introducao} /></p>
+        {voltar && (
+          <div>
+            <LigacaoBotao para={voltar}>Voltar à aldeia</LigacaoBotao>
+          </div>
+        )}
       </header>
 
       <Cartao className="grid gap-3">

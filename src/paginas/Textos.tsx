@@ -1,6 +1,8 @@
 // ─── Páginas de texto: guia de acessibilidade, sobre (com espaço para vídeo), privacidade, licença ──
 // Todos os textos vêm de src/textos/paginas.ts (editáveis no backoffice).
 import { VideoYoutube } from "../componentes/VideoYoutube";
+import { Link } from "react-router";
+import { ALDEIA } from "../aldeia/textos";
 import { Caminho } from "../componentes/Caminho";
 import { AUTORIA, DATA_VERSAO, REPOSITORIO, VERSAO } from "../versao";
 import { PAGINAS } from "../textos/paginas";
@@ -167,6 +169,15 @@ export function Privacidade() {
         <Rico texto={T.introducao} />
       </p>
       <Seccoes seccoes={T.seccoes} />
+      <section className="grid gap-2" aria-labelledby="priv-aldeia">
+        <h2 id="priv-aldeia" className="text-2xl">{ALDEIA.documentos.privacidade.titulo}</h2>
+        {Object.values(ALDEIA.documentos.privacidade.paragrafos).map((p) => (
+          <p key={p} className="m-0">{p}</p>
+        ))}
+        <p className="m-0">
+          <Link to="/professor/aldeia/termos">{ALDEIA.documentos.termos.titulo}</Link> · <Link to="/professor/aldeia/tratamento">{ALDEIA.documentos.tratamento.titulo}</Link>
+        </p>
+      </section>
     </div>
   );
 }

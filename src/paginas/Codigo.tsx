@@ -12,6 +12,7 @@ import { NOME_NIVEL } from "../motor/tipos";
 import { Botao, CampoTexto } from "../ui";
 import { usePreferencias } from "../preferencias/preferencias";
 import { PrimeiraPagina, Sequencia } from "./Teste";
+import { codigoTurmaValido, eCodigoAldeia } from "../aldeia/nucleo/codigos";
 
 export function Codigo() {
   const { codigo: doUrl } = useParams();
@@ -22,6 +23,11 @@ export function Codigo() {
   const [aVerificar, setAVerificar] = useState(false);
 
   async function entrar(valor: string) {
+    // Os códigos da Aldeia Digital têm 7 símbolos; os de prova, 10 a 12.
+    if (eCodigoAldeia(valor)) {
+      const t = codigoTurmaValido(valor);
+      if (t) return navegar(`/aldeia/${t}`);
+    }
     const c = descodificar(valor);
     if (!c) {
       setErro("Este código não é válido. Confirma as letras e os números com o teu professor.");

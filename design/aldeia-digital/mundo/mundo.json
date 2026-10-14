@@ -1,0 +1,1446 @@
+{
+ "escola": {
+  "nome": "Escola",
+  "pegada": "4x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/escola/edificio-escola-obras-dia.png",
+    "entardecer": "mundo/edificios/escola/edificio-escola-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      122.0,
+      165.0
+     ],
+     "marcador": [
+      122.0,
+      135.0
+     ],
+     "porta": [
+      74.0,
+      224.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/escola/edificio-escola-aberto-dia.png",
+    "entardecer": "mundo/edificios/escola/edificio-escola-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     140
+    ],
+    "ancoras": {
+     "porta": [
+      67.6,
+      223.2
+     ],
+     "topo": [
+      122.0,
+      97.0
+     ],
+     "fumo": [
+      99.6,
+      73.0
+     ],
+     "marcador": [
+      122.0,
+      71.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/escola/edificio-escola-concluido-dia.png",
+    "entardecer": "mundo/edificios/escola/edificio-escola-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     140
+    ],
+    "ancoras": {
+     "porta": [
+      67.6,
+      223.2
+     ],
+     "topo": [
+      122.0,
+      97.0
+     ],
+     "fumo": [
+      99.6,
+      73.0
+     ],
+     "marcador": [
+      122.0,
+      71.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/escola/edificio-escola-festivo-dia.png",
+    "entardecer": "mundo/edificios/escola/edificio-escola-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     140
+    ],
+    "ancoras": {
+     "porta": [
+      67.6,
+      223.2
+     ],
+     "topo": [
+      122.0,
+      97.0
+     ],
+     "fumo": [
+      99.6,
+      73.0
+     ],
+     "marcador": [
+      122.0,
+      71.0
+     ]
+    }
+   }
+  }
+ },
+ "jornal": {
+  "nome": "Redação do Jornal",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/jornal/edificio-jornal-obras-dia.png",
+    "entardecer": "mundo/edificios/jornal/edificio-jornal-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/jornal/edificio-jornal-aberto-dia.png",
+    "entardecer": "mundo/edificios/jornal/edificio-jornal-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      77.19999999999999,
+      212.0
+     ],
+     "topo": [
+      106.0,
+      86.0
+     ],
+     "fumo": [
+      157.2,
+      95.6
+     ],
+     "marcador": [
+      106.0,
+      60.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/jornal/edificio-jornal-concluido-dia.png",
+    "entardecer": "mundo/edificios/jornal/edificio-jornal-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      77.19999999999999,
+      212.0
+     ],
+     "topo": [
+      106.0,
+      86.0
+     ],
+     "fumo": [
+      157.2,
+      95.6
+     ],
+     "marcador": [
+      106.0,
+      60.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/jornal/edificio-jornal-festivo-dia.png",
+    "entardecer": "mundo/edificios/jornal/edificio-jornal-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      77.19999999999999,
+      212.0
+     ],
+     "topo": [
+      106.0,
+      86.0
+     ],
+     "fumo": [
+      157.2,
+      95.6
+     ],
+     "marcador": [
+      106.0,
+      60.0
+     ]
+    }
+   }
+  }
+ },
+ "laboratorio": {
+  "nome": "Laboratório",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/laboratorio/edificio-laboratorio-obras-dia.png",
+    "entardecer": "mundo/edificios/laboratorio/edificio-laboratorio-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/laboratorio/edificio-laboratorio-aberto-dia.png",
+    "entardecer": "mundo/edificios/laboratorio/edificio-laboratorio-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     134
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      209.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "fumo": [
+      176.4,
+      105.6
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/laboratorio/edificio-laboratorio-concluido-dia.png",
+    "entardecer": "mundo/edificios/laboratorio/edificio-laboratorio-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     134
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      209.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "fumo": [
+      176.4,
+      105.6
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/laboratorio/edificio-laboratorio-festivo-dia.png",
+    "entardecer": "mundo/edificios/laboratorio/edificio-laboratorio-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     134
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      209.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "fumo": [
+      176.4,
+      105.6
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   }
+  }
+ },
+ "biblioteca": {
+  "nome": "Biblioteca",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/biblioteca/edificio-biblioteca-obras-dia.png",
+    "entardecer": "mundo/edificios/biblioteca/edificio-biblioteca-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/biblioteca/edificio-biblioteca-aberto-dia.png",
+    "entardecer": "mundo/edificios/biblioteca/edificio-biblioteca-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     128
+    ],
+    "ancoras": {
+     "porta": [
+      32.400000000000006,
+      212.8
+     ],
+     "topo": [
+      106.0,
+      85.0
+     ],
+     "marcador": [
+      106.0,
+      59.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/biblioteca/edificio-biblioteca-concluido-dia.png",
+    "entardecer": "mundo/edificios/biblioteca/edificio-biblioteca-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     128
+    ],
+    "ancoras": {
+     "porta": [
+      32.400000000000006,
+      212.8
+     ],
+     "topo": [
+      106.0,
+      85.0
+     ],
+     "marcador": [
+      106.0,
+      59.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/biblioteca/edificio-biblioteca-festivo-dia.png",
+    "entardecer": "mundo/edificios/biblioteca/edificio-biblioteca-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     128
+    ],
+    "ancoras": {
+     "porta": [
+      32.400000000000006,
+      212.8
+     ],
+     "topo": [
+      106.0,
+      85.0
+     ],
+     "marcador": [
+      106.0,
+      59.0
+     ]
+    }
+   }
+  }
+ },
+ "arquivo": {
+  "nome": "Arquivo",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/arquivo/edificio-arquivo-obras-dia.png",
+    "entardecer": "mundo/edificios/arquivo/edificio-arquivo-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     112
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      143.0
+     ],
+     "marcador": [
+      106.0,
+      113.0
+     ],
+     "porta": [
+      58.0,
+      184.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/arquivo/edificio-arquivo-aberto-dia.png",
+    "entardecer": "mundo/edificios/arquivo/edificio-arquivo-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     96
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      171.2
+     ],
+     "topo": [
+      106.0,
+      80.0
+     ],
+     "marcador": [
+      106.0,
+      54.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/arquivo/edificio-arquivo-concluido-dia.png",
+    "entardecer": "mundo/edificios/arquivo/edificio-arquivo-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     96
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      171.2
+     ],
+     "topo": [
+      106.0,
+      80.0
+     ],
+     "marcador": [
+      106.0,
+      54.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/arquivo/edificio-arquivo-festivo-dia.png",
+    "entardecer": "mundo/edificios/arquivo/edificio-arquivo-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     96
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      171.2
+     ],
+     "topo": [
+      106.0,
+      80.0
+     ],
+     "marcador": [
+      106.0,
+      54.0
+     ]
+    }
+   }
+  }
+ },
+ "junta": {
+  "nome": "Junta de Freguesia e Correios",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/junta/edificio-junta-obras-dia.png",
+    "entardecer": "mundo/edificios/junta/edificio-junta-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/junta/edificio-junta-aberto-dia.png",
+    "entardecer": "mundo/edificios/junta/edificio-junta-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     174
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      249.2
+     ],
+     "topo": [
+      106.0,
+      99.0
+     ],
+     "ninho": [
+      106.0,
+      101.0
+     ],
+     "marcador": [
+      106.0,
+      73.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/junta/edificio-junta-concluido-dia.png",
+    "entardecer": "mundo/edificios/junta/edificio-junta-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     174
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      249.2
+     ],
+     "topo": [
+      106.0,
+      99.0
+     ],
+     "ninho": [
+      106.0,
+      101.0
+     ],
+     "marcador": [
+      106.0,
+      73.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/junta/edificio-junta-festivo-dia.png",
+    "entardecer": "mundo/edificios/junta/edificio-junta-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     174
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      249.2
+     ],
+     "topo": [
+      106.0,
+      99.0
+     ],
+     "ninho": [
+      106.0,
+      101.0
+     ],
+     "marcador": [
+      106.0,
+      73.0
+     ]
+    }
+   }
+  }
+ },
+ "seguranca": {
+  "nome": "Centro de Segurança Digital",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/seguranca/edificio-seguranca-obras-dia.png",
+    "entardecer": "mundo/edificios/seguranca/edificio-seguranca-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/seguranca/edificio-seguranca-aberto-dia.png",
+    "entardecer": "mundo/edificios/seguranca/edificio-seguranca-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/seguranca/edificio-seguranca-concluido-dia.png",
+    "entardecer": "mundo/edificios/seguranca/edificio-seguranca-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/seguranca/edificio-seguranca-festivo-dia.png",
+    "entardecer": "mundo/edificios/seguranca/edificio-seguranca-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      84.0
+     ],
+     "marcador": [
+      106.0,
+      58.0
+     ]
+    }
+   }
+  }
+ },
+ "mercado": {
+  "nome": "Mercado",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/mercado/edificio-mercado-obras-dia.png",
+    "entardecer": "mundo/edificios/mercado/edificio-mercado-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     112
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      143.0
+     ],
+     "marcador": [
+      106.0,
+      113.0
+     ],
+     "porta": [
+      58.0,
+      184.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/mercado/edificio-mercado-aberto-dia.png",
+    "entardecer": "mundo/edificios/mercado/edificio-mercado-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     82
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      96.0
+     ],
+     "porta": [
+      51.599999999999994,
+      157.2
+     ],
+     "marcador": [
+      106.0,
+      70.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/mercado/edificio-mercado-concluido-dia.png",
+    "entardecer": "mundo/edificios/mercado/edificio-mercado-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     82
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      96.0
+     ],
+     "porta": [
+      51.599999999999994,
+      157.2
+     ],
+     "marcador": [
+      106.0,
+      70.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/mercado/edificio-mercado-festivo-dia.png",
+    "entardecer": "mundo/edificios/mercado/edificio-mercado-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     82
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      96.0
+     ],
+     "porta": [
+      51.599999999999994,
+      157.2
+     ],
+     "marcador": [
+      106.0,
+      70.0
+     ]
+    }
+   }
+  }
+ },
+ "oficina": {
+  "nome": "Oficina dos Robôs",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/oficina/edificio-oficina-obras-dia.png",
+    "entardecer": "mundo/edificios/oficina/edificio-oficina-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     112
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      143.0
+     ],
+     "marcador": [
+      106.0,
+      113.0
+     ],
+     "porta": [
+      58.0,
+      184.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/oficina/edificio-oficina-aberto-dia.png",
+    "entardecer": "mundo/edificios/oficina/edificio-oficina-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     94
+    ],
+    "ancoras": {
+     "porta": [
+      42.0,
+      164.4
+     ],
+     "topo": [
+      106.0,
+      82.0
+     ],
+     "marcador": [
+      106.0,
+      56.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/oficina/edificio-oficina-concluido-dia.png",
+    "entardecer": "mundo/edificios/oficina/edificio-oficina-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     94
+    ],
+    "ancoras": {
+     "porta": [
+      42.0,
+      164.4
+     ],
+     "topo": [
+      106.0,
+      82.0
+     ],
+     "marcador": [
+      106.0,
+      56.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/oficina/edificio-oficina-festivo-dia.png",
+    "entardecer": "mundo/edificios/oficina/edificio-oficina-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     94
+    ],
+    "ancoras": {
+     "porta": [
+      42.0,
+      164.4
+     ],
+     "topo": [
+      106.0,
+      82.0
+     ],
+     "marcador": [
+      106.0,
+      56.0
+     ]
+    }
+   }
+  }
+ },
+ "museu": {
+  "nome": "Museu",
+  "pegada": "3x3",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/museu/edificio-museu-obras-dia.png",
+    "entardecer": "mundo/edificios/museu/edificio-museu-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     144
+    ],
+    "ancoras": {
+     "topo": [
+      106.0,
+      157.0
+     ],
+     "marcador": [
+      106.0,
+      127.0
+     ],
+     "porta": [
+      58.0,
+      216.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/museu/edificio-museu-aberto-dia.png",
+    "entardecer": "mundo/edificios/museu/edificio-museu-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      87.0
+     ],
+     "marcador": [
+      106.0,
+      61.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/museu/edificio-museu-concluido-dia.png",
+    "entardecer": "mundo/edificios/museu/edificio-museu-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      87.0
+     ],
+     "marcador": [
+      106.0,
+      61.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/museu/edificio-museu-festivo-dia.png",
+    "entardecer": "mundo/edificios/museu/edificio-museu-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     106,
+     124
+    ],
+    "ancoras": {
+     "porta": [
+      51.599999999999994,
+      199.2
+     ],
+     "topo": [
+      106.0,
+      87.0
+     ],
+     "marcador": [
+      106.0,
+      61.0
+     ]
+    }
+   }
+  }
+ },
+ "largo": {
+  "nome": "Largo e Torre do Relógio",
+  "pegada": "4x4",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/largo/edificio-largo-obras-dia.png",
+    "entardecer": "mundo/edificios/largo/edificio-largo-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     138,
+     130
+    ],
+    "ancoras": {
+     "topo": [
+      138.0,
+      112.4
+     ],
+     "porta": [
+      74.0,
+      226.0
+     ],
+     "marcador": [
+      138.0,
+      88.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/largo/edificio-largo-aberto-dia.png",
+    "entardecer": "mundo/edificios/largo/edificio-largo-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     138,
+     130
+    ],
+    "ancoras": {
+     "topo": [
+      138.0,
+      48.400000000000006
+     ],
+     "porta": [
+      74.0,
+      226.0
+     ],
+     "marcador": [
+      138.0,
+      24.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/largo/edificio-largo-concluido-dia.png",
+    "entardecer": "mundo/edificios/largo/edificio-largo-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     138,
+     130
+    ],
+    "ancoras": {
+     "topo": [
+      138.0,
+      48.400000000000006
+     ],
+     "porta": [
+      74.0,
+      226.0
+     ],
+     "marcador": [
+      138.0,
+      24.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/largo/edificio-largo-festivo-dia.png",
+    "entardecer": "mundo/edificios/largo/edificio-largo-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     138,
+     130
+    ],
+    "ancoras": {
+     "topo": [
+      138.0,
+      48.400000000000006
+     ],
+     "porta": [
+      74.0,
+      226.0
+     ],
+     "marcador": [
+      138.0,
+      24.0
+     ]
+    }
+   }
+  }
+ },
+ "horta": {
+  "nome": "Horta e Ecoponto",
+  "pegada": "3x2",
+  "estados": {
+   "obras": {
+    "dia": "mundo/edificios/horta/edificio-horta-obras-dia.png",
+    "entardecer": "mundo/edificios/horta/edificio-horta-obras-entardecer.png",
+    "origem_mosaico_norte": [
+     74,
+     70
+    ],
+    "ancoras": {
+     "topo": [
+      90.0,
+      80.0
+     ],
+     "porta": [
+      51.599999999999994,
+      129.2
+     ],
+     "marcador": [
+      90.0,
+      56.0
+     ]
+    }
+   },
+   "aberto": {
+    "dia": "mundo/edificios/horta/edificio-horta-aberto-dia.png",
+    "entardecer": "mundo/edificios/horta/edificio-horta-aberto-entardecer.png",
+    "origem_mosaico_norte": [
+     74,
+     70
+    ],
+    "ancoras": {
+     "topo": [
+      90.0,
+      80.0
+     ],
+     "porta": [
+      51.599999999999994,
+      129.2
+     ],
+     "marcador": [
+      90.0,
+      56.0
+     ]
+    }
+   },
+   "concluido": {
+    "dia": "mundo/edificios/horta/edificio-horta-concluido-dia.png",
+    "entardecer": "mundo/edificios/horta/edificio-horta-concluido-entardecer.png",
+    "origem_mosaico_norte": [
+     74,
+     70
+    ],
+    "ancoras": {
+     "topo": [
+      90.0,
+      80.0
+     ],
+     "porta": [
+      51.599999999999994,
+      129.2
+     ],
+     "marcador": [
+      90.0,
+      56.0
+     ]
+    }
+   },
+   "festivo": {
+    "dia": "mundo/edificios/horta/edificio-horta-festivo-dia.png",
+    "entardecer": "mundo/edificios/horta/edificio-horta-festivo-entardecer.png",
+    "origem_mosaico_norte": [
+     74,
+     70
+    ],
+    "ancoras": {
+     "topo": [
+      90.0,
+      80.0
+     ],
+     "porta": [
+      51.599999999999994,
+      129.2
+     ],
+     "marcador": [
+      90.0,
+      56.0
+     ]
+    }
+   }
+  }
+ },
+ "casa": {
+  "nome": "Casa do aluno",
+  "pegada": "2x2",
+  "origem_mosaico_norte": [
+   74,
+   68
+  ],
+  "ancoras": {
+   "porta": [
+    46.8,
+    126.4
+   ],
+   "topo": [
+    74.0,
+    54.0
+   ],
+   "fumo": [
+    106.0,
+    57.599999999999994
+   ],
+   "marcador": [
+    74.0,
+    30.0
+   ],
+   "caixa_correio": [
+    -2.799999999999997,
+    112.80000000000001
+   ],
+   "bandeira": [
+    70.8,
+    143.2
+   ]
+  },
+  "paredes": {
+   "nata": "#f6ead2",
+   "rosa": "#f6c9c0",
+   "ceu": "#cfe3f2",
+   "menta": "#d4efe0",
+   "limao": "#f9eaa3",
+   "lilas": "#e0d6f2",
+   "pessego": "#f8d2b8",
+   "branco": "#f5f7fa"
+  },
+  "telhados": {
+   "telha": "#e98a5e",
+   "ardosia": "#6f7891",
+   "verde": "#7fb88a",
+   "azul": "#6f9fd8",
+   "vinho": "#b45d6a",
+   "mel": "#e3a94a"
+  },
+  "portas": {
+   "azul": "#5f8fe0",
+   "verde": "#4f9f7a",
+   "amarela": "#f2c94c",
+   "vermelha": "#e8675e",
+   "madeira": "#a77755",
+   "lilas": "#9c7bf0"
+  },
+  "ordem": [
+   "paredes",
+   "porta",
+   "telhado"
+  ],
+  "nota": "As três camadas partilham a mesma tela e origem; empilhar por esta ordem."
+ },
+ "interior": {
+  "grelha": "6x6",
+  "origem_grelha": [
+   198.0,
+   54.0
+  ],
+  "trofeus": [
+   [
+    161.84,
+    65.92
+   ],
+   [
+    142.64,
+    75.52000000000001
+   ],
+   [
+    123.44,
+    85.12
+   ],
+   [
+    104.24000000000001,
+    94.72
+   ],
+   [
+    85.04,
+    104.32
+   ],
+   [
+    65.84,
+    113.92
+   ],
+   [
+    161.84,
+    51.92
+   ],
+   [
+    142.64,
+    61.52000000000001
+   ],
+   [
+    123.44,
+    71.12
+   ],
+   [
+    104.24000000000001,
+    80.72
+   ],
+   [
+    85.04,
+    90.32
+   ],
+   [
+    65.84,
+    99.92
+   ],
+   [
+    161.84,
+    37.92
+   ],
+   [
+    142.64,
+    47.52000000000001
+   ],
+   [
+    123.44,
+    57.120000000000005
+   ],
+   [
+    104.24000000000001,
+    66.72
+   ],
+   [
+    85.04,
+    76.32
+   ],
+   [
+    65.84,
+    85.92
+   ]
+  ],
+  "moldura": [
+   [
+    236.4,
+    39.2
+   ],
+   [
+    281.2,
+    61.599999999999994
+   ],
+   [
+    281.2,
+    77.6
+   ],
+   [
+    236.4,
+    55.2
+   ]
+  ],
+  "projecao": "x = ox + (i - j) * 32, y = oy + (i + j) * 16 (nativo)",
+  "moveis": {
+   "cama": {
+    "pivo_esquina_sul": [
+     68.0,
+     78.0
+    ],
+    "pegada": [
+     2,
+     1
+    ]
+   },
+   "cama-f6a5b4": {
+    "pivo_esquina_sul": [
+     68.0,
+     78.0
+    ],
+    "pegada": [
+     2,
+     1
+    ]
+   },
+   "secretaria": {
+    "pivo_esquina_sul": [
+     52.0,
+     72.8
+    ],
+    "pegada": [
+     1.5,
+     0.8
+    ]
+   },
+   "cadeira": {
+    "pivo_esquina_sul": [
+     23.2,
+     47.2
+    ],
+    "pegada": [
+     0.6,
+     0.6
+    ]
+   },
+   "cadeira-6fa8e8": {
+    "pivo_esquina_sul": [
+     23.2,
+     47.2
+    ],
+    "pegada": [
+     0.6,
+     0.6
+    ]
+   },
+   "estante": {
+    "pivo_esquina_sul": [
+     36.0,
+     74.0
+    ],
+    "pegada": [
+     1,
+     0.5
+    ]
+   },
+   "tapete": {
+    "pivo_esquina_sul": [
+     68.0,
+     70.0
+    ],
+    "pegada": [
+     2,
+     2
+    ]
+   },
+   "tapete-bfe3c9": {
+    "pivo_esquina_sul": [
+     68.0,
+     70.0
+    ],
+    "pegada": [
+     2,
+     2
+    ]
+   },
+   "candeeiro": {
+    "pivo_esquina_sul": [
+     20.8,
+     52.8
+    ],
+    "pegada": [
+     0.4,
+     0.4
+    ]
+   },
+   "planta": {
+    "pivo_esquina_sul": [
+     24.0,
+     46.0
+    ],
+    "pegada": [
+     0.5,
+     0.5
+    ]
+   }
+  }
+ }
+}

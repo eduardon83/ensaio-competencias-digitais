@@ -1,0 +1,82 @@
+{
+ "diretora-graca": {
+  "nome": "Diretora Graça",
+  "papel": "Redação do Jornal"
+ },
+ "tome": {
+  "nome": "Tomé",
+  "papel": "Redação: fotógrafo, ficheiros"
+ },
+ "lia": {
+  "nome": "Lia",
+  "papel": "Redação: revisão"
+ },
+ "doutora-ines": {
+  "nome": "Doutora Inês",
+  "papel": "Laboratório"
+ },
+ "rui": {
+  "nome": "Rui",
+  "papel": "Laboratório: ficheiros"
+ },
+ "marta": {
+  "nome": "Marta",
+  "papel": "Laboratório: revisão"
+ },
+ "professora": {
+  "nome": "Professora Sara",
+  "papel": "Escola"
+ },
+ "bibliotecaria": {
+  "nome": "Dona Amélia",
+  "papel": "Biblioteca"
+ },
+ "presidente-junta": {
+  "nome": "Senhor Joaquim",
+  "papel": "Junta de Freguesia"
+ },
+ "mae": {
+  "nome": "Mãe Rita",
+  "papel": "Família da aldeia"
+ },
+ "avo": {
+  "nome": "Avô Zé",
+  "papel": "Família da aldeia"
+ },
+ "crianca": {
+  "nome": "Bia",
+  "papel": "Família da aldeia"
+ },
+ "leo": {
+  "nome": "Leo",
+  "papel": "Criança da aldeia (missões)"
+ },
+ "nina": {
+  "nome": "Nina",
+  "papel": "Criança da aldeia (missões)"
+ },
+ "tiago": {
+  "nome": "Tiago",
+  "papel": "Criança da aldeia (missões)"
+ },
+ "ana": {
+  "nome": "Ana",
+  "papel": "Criança da aldeia (missões)"
+ },
+ "sr-prazo": {
+  "nome": "Sr. Prazo",
+  "papel": "Redação: atividades com tempo"
+ },
+ "cronometro": {
+  "nome": "O Cronómetro",
+  "papel": "Laboratório: atividades com tempo"
+ },
+ "robo": {
+  "nome": "Robô de limpeza",
+  "papel": "Centro do mistério; adorável, nunca vilão"
+ },
+ "dona-cegonha": {
+  "nome": "Dona Cegonha",
+  "papel": "Carteira e guia da aldeia"
+ }
+}

@@ -6,6 +6,7 @@
 //   GET  /api/textos/historico            lista de versões guardadas (editor ou admin)
 //   GET  /api/textos/historico/:versao    uma versão antiga (editor ou admin)
 //   POST /api/textos/repor                volta a uma versão antiga (cria uma versão nova) · corpo { versao }
+//   /api/aldeia/…                         Aldeia Digital (worker/aldeia/rotas.ts; Durable Objects Turma, Guarda e Registo)
 // Tudo o resto vai para os ficheiros estáticos (dist/), com regresso a index.html (SPA).
 //
 // Chaves (segredos do Worker, nunca no código): CHAVE_ADMIN (super admin, fica sempre) e CHAVE_EDICAO (professor que
@@ -13,13 +14,13 @@
 // Limite de pedidos com chave: LIMITE_CHAVES (ligação "ratelimits" em wrangler.jsonc), por endereço IP, contra
 // tentativas de adivinhar a chave. Os ficheiros estáticos recebem os cabeçalhos de segurança de public/_headers.
 
-export interface Env {
-  ASSETS: Fetcher;
-  TEXTOS: KVNamespace;
-  CHAVE_ADMIN?: string;
-  CHAVE_EDICAO?: string;
-  LIMITE_CHAVES?: { limit(o: { key: string }): Promise<{ success: boolean }> };
-}
+import type { Env } from "./env";
+import { aldeia } from "./aldeia/rotas";
+
+export type { Env };
+export { Turma } from "./aldeia/turma";
+export { Guarda } from "./aldeia/guarda";
+export { Registo } from "./aldeia/registo";
 
 interface Pacote {
   valores: Record<string, string>;
@@ -155,6 +156,15 @@ async function api(req: Request, env: Env, url: URL): Promise<Response> {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+    if (url.pathname.startsWith("/api/aldeia/") || url.pathname === "/api/aldeia") {
+      try {
+        return await aldeia(req, env, url);
+      } catch {
+        // Registos só com a rota e o estado (nunca corpos, nomes nem chaves).
+        console.error("aldeia: erro", url.pathname.split("/").slice(0, 4).join("/"));
+        return json({ erro: "servidor" }, 500);
+      }
+    }
     if (url.pathname.startsWith("/api/")) {
       try {
         return await api(req, env, url);

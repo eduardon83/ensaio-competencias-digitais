@@ -1,0 +1,5717 @@
+{
+ "versao": "1.0",
+ "celula": {
+  "w": 44,
+  "h": 64,
+  "origem": {
+   "x": 22,
+   "y": 60
+  }
+ },
+ "fps": 12,
+ "escala": {
+  "nativo": 1,
+  "1x": 2,
+  "2x": 4
+ },
+ "linhas": [
+  {
+   "anim": "parado",
+   "dir": "se",
+   "frames": 8,
+   "uso": "respirar e piscar; sempre"
+  },
+  {
+   "anim": "parado",
+   "dir": "ne",
+   "frames": 8,
+   "uso": "respirar e piscar; sempre"
+  },
+  {
+   "anim": "andar",
+   "dir": "se",
+   "frames": 8,
+   "uso": "mapa; 8 por direção"
+  },
+  {
+   "anim": "andar",
+   "dir": "ne",
+   "frames": 8,
+   "uso": "mapa; 8 por direção"
+  },
+  {
+   "anim": "acenar",
+   "dir": "se",
+   "frames": 8,
+   "uso": "chegar, à porta de casa"
+  },
+  {
+   "anim": "celebrar",
+   "dir": "se",
+   "frames": 10,
+   "uso": "missão, desbloqueio"
+  },
+  {
+   "anim": "pensar",
+   "dir": "se",
+   "frames": 6,
+   "uso": "à porta de um edifício"
+  },
+  {
+   "anim": "outra-vez",
+   "dir": "se",
+   "frames": 6,
+   "uso": "abaixo de 50; leve, nunca choro"
+  },
+  {
+   "anim": "dormir",
+   "dir": "se",
+   "frames": 6,
+   "uso": "aluno inativo, à porta de casa"
+  },
+  {
+   "anim": "vestir",
+   "dir": "giro",
+   "frames": 8,
+   "uso": "guarda-roupa (rodopio)"
+  }
+ ],
+ "espelhar": {
+  "sw": "se espelhado na horizontal",
+  "nw": "ne espelhado na horizontal"
+ },
+ "ancoras": {
+  "parado/se/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/02": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/04": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/05": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/06": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/07": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/se/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "parado/ne/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/02": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/04": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    22,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/05": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    22,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/06": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    22,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/07": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "parado/ne/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/se/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/02": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    23,
+    30
+   ],
+   "mao_e": [
+    13,
+    49
+   ],
+   "mao_d": [
+    33,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    56
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/03": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    23,
+    30
+   ],
+   "mao_e": [
+    14,
+    49
+   ],
+   "mao_d": [
+    34,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    19,
+    56
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/04": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    13,
+    50
+   ],
+   "mao_d": [
+    33,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    19,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/05": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/06": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    23,
+    30
+   ],
+   "mao_e": [
+    11,
+    49
+   ],
+   "mao_d": [
+    31,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    56
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/07": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    23,
+    30
+   ],
+   "mao_e": [
+    10,
+    49
+   ],
+   "mao_d": [
+    30,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    25,
+    56
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/se/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    11,
+    50
+   ],
+   "mao_d": [
+    31,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    25,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "andar/ne/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/02": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    22,
+    30
+   ],
+   "mao_e": [
+    13,
+    49
+   ],
+   "mao_d": [
+    33,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    56
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/03": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    22,
+    30
+   ],
+   "mao_e": [
+    14,
+    49
+   ],
+   "mao_d": [
+    34,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    19,
+    56
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/04": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    13,
+    50
+   ],
+   "mao_d": [
+    33,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    19,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/05": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/06": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    22,
+    30
+   ],
+   "mao_e": [
+    11,
+    49
+   ],
+   "mao_d": [
+    31,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    56
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/07": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    22,
+    30
+   ],
+   "mao_e": [
+    10,
+    49
+   ],
+   "mao_d": [
+    30,
+    49
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    25,
+    56
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "andar/ne/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    11,
+    50
+   ],
+   "mao_d": [
+    31,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    25,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "acenar/se/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    33,
+    45
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/02": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    36,
+    33
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    34,
+    34
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/04": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    33
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/05": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    34,
+    34
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/06": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    36,
+    33
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/07": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    34,
+    34
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "acenar/se/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    33
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    11,
+    46
+   ],
+   "mao_d": [
+    33,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/02": {
+   "chapeu": [
+    22,
+    20
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    11,
+    48
+   ],
+   "mao_d": [
+    33,
+    48
+   ],
+   "mochila": [
+    22,
+    47
+   ],
+   "peito": [
+    19,
+    47
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    11,
+    46
+   ],
+   "mao_d": [
+    33,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/04": {
+   "chapeu": [
+    22,
+    14
+   ],
+   "olhos": [
+    23,
+    28
+   ],
+   "mao_e": [
+    9,
+    32
+   ],
+   "mao_d": [
+    35,
+    32
+   ],
+   "mochila": [
+    22,
+    42
+   ],
+   "peito": [
+    19,
+    42
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/05": {
+   "chapeu": [
+    22,
+    12
+   ],
+   "olhos": [
+    23,
+    26
+   ],
+   "mao_e": [
+    9,
+    30
+   ],
+   "mao_d": [
+    35,
+    30
+   ],
+   "mochila": [
+    22,
+    40
+   ],
+   "peito": [
+    19,
+    40
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/06": {
+   "chapeu": [
+    22,
+    12
+   ],
+   "olhos": [
+    23,
+    26
+   ],
+   "mao_e": [
+    9,
+    30
+   ],
+   "mao_d": [
+    35,
+    30
+   ],
+   "mochila": [
+    22,
+    40
+   ],
+   "peito": [
+    19,
+    40
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/07": {
+   "chapeu": [
+    22,
+    14
+   ],
+   "olhos": [
+    23,
+    28
+   ],
+   "mao_e": [
+    9,
+    32
+   ],
+   "mao_d": [
+    35,
+    32
+   ],
+   "mochila": [
+    22,
+    42
+   ],
+   "peito": [
+    19,
+    42
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    9,
+    35
+   ],
+   "mao_d": [
+    35,
+    35
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/09": {
+   "chapeu": [
+    22,
+    20
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    11,
+    48
+   ],
+   "mao_d": [
+    33,
+    48
+   ],
+   "mochila": [
+    22,
+    47
+   ],
+   "peito": [
+    19,
+    47
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "celebrar/se/10": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    11,
+    46
+   ],
+   "mao_d": [
+    33,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/02": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/04": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/05": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "pensar/se/06": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    27,
+    42
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/01": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/02": {
+   "chapeu": [
+    22,
+    19
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/03": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/04": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    33,
+    44
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/05": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    23,
+    30
+   ],
+   "mao_e": [
+    12,
+    49
+   ],
+   "mao_d": [
+    34,
+    34
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "outra-vez/se/06": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    34,
+    36
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/01": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/02": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/03": {
+   "chapeu": [
+    22,
+    19
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/04": {
+   "chapeu": [
+    22,
+    19
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/05": {
+   "chapeu": [
+    22,
+    19
+   ],
+   "olhos": [
+    23,
+    33
+   ],
+   "mao_e": [
+    12,
+    51
+   ],
+   "mao_d": [
+    32,
+    51
+   ],
+   "mochila": [
+    22,
+    46
+   ],
+   "peito": [
+    19,
+    46
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "dormir/se/06": {
+   "chapeu": [
+    22,
+    18
+   ],
+   "olhos": [
+    23,
+    32
+   ],
+   "mao_e": [
+    12,
+    50
+   ],
+   "mao_d": [
+    32,
+    50
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "vestir/giro/01": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    10,
+    46
+   ],
+   "mao_d": [
+    34,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "vestir/giro/02": {
+   "chapeu": [
+    21,
+    16
+   ],
+   "olhos": [
+    20,
+    30
+   ],
+   "mao_e": [
+    33,
+    45
+   ],
+   "mao_d": [
+    9,
+    45
+   ],
+   "mochila": [
+    21,
+    44
+   ],
+   "peito": [
+    24,
+    44
+   ],
+   "pe_e": [
+    25,
+    58
+   ],
+   "pe_d": [
+    17,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "vestir/giro/03": {
+   "chapeu": [
+    21,
+    15
+   ],
+   "olhos": [
+    21,
+    29
+   ],
+   "mao_e": [
+    33,
+    44
+   ],
+   "mao_d": [
+    9,
+    44
+   ],
+   "mochila": [
+    21,
+    43
+   ],
+   "peito": [
+    24,
+    43
+   ],
+   "pe_e": [
+    25,
+    58
+   ],
+   "pe_d": [
+    17,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "vestir/giro/04": {
+   "chapeu": [
+    22,
+    16
+   ],
+   "olhos": [
+    22,
+    30
+   ],
+   "mao_e": [
+    10,
+    45
+   ],
+   "mao_d": [
+    34,
+    45
+   ],
+   "mochila": [
+    22,
+    44
+   ],
+   "peito": [
+    19,
+    44
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "vestir/giro/05": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    23,
+    31
+   ],
+   "mao_e": [
+    10,
+    46
+   ],
+   "mao_d": [
+    34,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "vestir/giro/06": {
+   "chapeu": [
+    21,
+    16
+   ],
+   "olhos": [
+    20,
+    30
+   ],
+   "mao_e": [
+    33,
+    45
+   ],
+   "mao_d": [
+    9,
+    45
+   ],
+   "mochila": [
+    21,
+    44
+   ],
+   "peito": [
+    24,
+    44
+   ],
+   "pe_e": [
+    25,
+    58
+   ],
+   "pe_d": [
+    17,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": false
+  },
+  "vestir/giro/07": {
+   "chapeu": [
+    21,
+    15
+   ],
+   "olhos": [
+    21,
+    29
+   ],
+   "mao_e": [
+    33,
+    44
+   ],
+   "mao_d": [
+    9,
+    44
+   ],
+   "mochila": [
+    21,
+    43
+   ],
+   "peito": [
+    24,
+    43
+   ],
+   "pe_e": [
+    25,
+    58
+   ],
+   "pe_d": [
+    17,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  },
+  "vestir/giro/08": {
+   "chapeu": [
+    22,
+    17
+   ],
+   "olhos": [
+    22,
+    31
+   ],
+   "mao_e": [
+    10,
+    46
+   ],
+   "mao_d": [
+    34,
+    46
+   ],
+   "mochila": [
+    22,
+    45
+   ],
+   "peito": [
+    19,
+    45
+   ],
+   "pe_e": [
+    18,
+    58
+   ],
+   "pe_d": [
+    26,
+    58
+   ],
+   "chao": [
+    22,
+    60
+   ],
+   "costas": true
+  }
+ },
+ "ordem_camadas": [
+  "corpo",
+  "padrao",
+  "cara",
+  "ver",
+  "cabelo",
+  "calcado",
+  "mochila",
+  "emblema",
+  "capuz",
+  "objeto",
+  "oculos",
+  "chapeu"
+ ],
+ "fatos": [
+  {
+   "id": "dinossauro",
+   "nome": "Dinossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#b5eaac",
+     "base": "#8fd18a",
+     "shade": "#68b072",
+     "dark": "#33603d"
+    },
+    "barriga": {
+     "light": "#fffdcb",
+     "base": "#f2f0b3",
+     "shade": "#cbb68a",
+     "dark": "#6f5c45"
+    },
+    "acento": {
+     "light": "#ffc682",
+     "base": "#f2a65a",
+     "shade": "#cb5e39",
+     "dark": "#6f2316"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-dinossauro.png"
+  },
+  {
+   "id": "lince",
+   "nome": "Lince",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffd9a4",
+     "base": "#e9b97e",
+     "shade": "#c47a5b",
+     "dark": "#6b372a"
+    },
+    "barriga": {
+     "light": "#fff4df",
+     "base": "#fbecd2",
+     "shade": "#d3b6a5",
+     "dark": "#735d55"
+    },
+    "acento": {
+     "light": "#967455",
+     "base": "#7c5537",
+     "shade": "#683225",
+     "dark": "#391410"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-lince.png"
+  },
+  {
+   "id": "lobo",
+   "nome": "Lobo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#c6d2dc",
+     "base": "#a9b2c3",
+     "shade": "#868fa4",
+     "dark": "#454b5a"
+    },
+    "barriga": {
+     "light": "#f9fcff",
+     "base": "#eef0f5",
+     "shade": "#bfc3ce",
+     "dark": "#646771"
+    },
+    "acento": {
+     "light": "#8b9aaa",
+     "base": "#6f7891",
+     "shade": "#565f7a",
+     "dark": "#2b3143"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-lobo.png"
+  },
+  {
+   "id": "golfinho",
+   "nome": "Golfinho",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#a5f1ff",
+     "base": "#7fc4e8",
+     "shade": "#5c99c3",
+     "dark": "#2b4f6b"
+    },
+    "barriga": {
+     "light": "#eefdff",
+     "base": "#e6f6fc",
+     "shade": "#b7cad4",
+     "dark": "#5f6c74"
+    },
+    "acento": {
+     "light": "#76c6de",
+     "base": "#4f93c4",
+     "shade": "#346fa5",
+     "dark": "#15385a"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-golfinho.png"
+  },
+  {
+   "id": "esquilo",
+   "nome": "Esquilo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#f2b47e",
+     "base": "#d98b53",
+     "shade": "#b64c35",
+     "dark": "#641b15"
+    },
+    "barriga": {
+     "light": "#ffeed6",
+     "base": "#fbe3c7",
+     "shade": "#d3ab9b",
+     "dark": "#73554f"
+    },
+    "acento": {
+     "light": "#c08559",
+     "base": "#a65f34",
+     "shade": "#8b2e1e",
+     "dark": "#4c0d0a"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-esquilo.png"
+  },
+  {
+   "id": "polvo",
+   "nome": "Polvo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#f1beff",
+     "base": "#c79be6",
+     "shade": "#9d75c1",
+     "dark": "#523a6a"
+    },
+    "barriga": {
+     "light": "#fcebff",
+     "base": "#f2e2fb",
+     "shade": "#c6b4d3",
+     "dark": "#695d73"
+    },
+    "acento": {
+     "light": "#c68fda",
+     "base": "#9a6cc0",
+     "shade": "#774fa1",
+     "dark": "#3d2558"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-polvo.png"
+  },
+  {
+   "id": "ourico",
+   "nome": "Ouriço",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#e2c3a1",
+     "base": "#c9a27e",
+     "shade": "#a96f5e",
+     "dark": "#5c342d"
+    },
+    "barriga": {
+     "light": "#fff2df",
+     "base": "#f6e4cf",
+     "shade": "#cfafa3",
+     "dark": "#715953"
+    },
+    "acento": {
+     "light": "#a38365",
+     "base": "#8a6446",
+     "shade": "#743f32",
+     "dark": "#3f1b16"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-ourico.png"
+  },
+  {
+   "id": "coelho",
+   "nome": "Coelho",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#fffbf6",
+     "base": "#f3eee8",
+     "shade": "#ccbfba",
+     "dark": "#706461"
+    },
+    "barriga": {
+     "light": "#ffffff",
+     "base": "#ffffff",
+     "shade": "#d6cecf",
+     "dark": "#756c6f"
+    },
+    "acento": {
+     "light": "#ffbec3",
+     "base": "#f6a5b4",
+     "shade": "#cf7d9b",
+     "dark": "#713d54"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-coelho.png"
+  },
+  {
+   "id": "gato",
+   "nome": "Gato",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#d3d8e2",
+     "base": "#b7b9c9",
+     "shade": "#9294a9",
+     "dark": "#4c4d5c"
+    },
+    "barriga": {
+     "light": "#fbfcff",
+     "base": "#f1f1f6",
+     "shade": "#c2c2cf",
+     "dark": "#656571"
+    },
+    "acento": {
+     "light": "#9aa2b0",
+     "base": "#7e8197",
+     "shade": "#63667f",
+     "dark": "#333545"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-gato.png"
+  },
+  {
+   "id": "cao",
+   "nome": "Cão",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#fce6c1",
+     "base": "#e3c79e",
+     "shade": "#bf9078",
+     "dark": "#68463c"
+    },
+    "barriga": {
+     "light": "#fff8ea",
+     "base": "#fbf1e0",
+     "shade": "#d3beb2",
+     "dark": "#73625c"
+    },
+    "acento": {
+     "light": "#be9a6e",
+     "base": "#a5794c",
+     "shade": "#8b4a34",
+     "dark": "#4c1f17"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-cao.png"
+  },
+  {
+   "id": "urso",
+   "nome": "Urso",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#d2aa85",
+     "base": "#b98762",
+     "shade": "#9b5646",
+     "dark": "#552520"
+    },
+    "barriga": {
+     "light": "#ffebd1",
+     "base": "#ecd2b6",
+     "shade": "#c69c8d",
+     "dark": "#6d4d47"
+    },
+    "acento": {
+     "light": "#98795d",
+     "base": "#7f5a3f",
+     "shade": "#6b382c",
+     "dark": "#3a1714"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-urso.png"
+  },
+  {
+   "id": "panda",
+   "nome": "Panda",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#fffffd",
+     "base": "#f5f5f2",
+     "shade": "#cecbc3",
+     "dark": "#716c66"
+    },
+    "barriga": {
+     "light": "#ffffff",
+     "base": "#ffffff",
+     "shade": "#d6cecf",
+     "dark": "#756c6f"
+    },
+    "acento": {
+     "light": "#5a5364",
+     "base": "#3d3a4a",
+     "shade": "#302d3e",
+     "dark": "#191722"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-panda.png"
+  },
+  {
+   "id": "pinguim",
+   "nome": "Pinguim",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#546270",
+     "base": "#3b4257",
+     "shade": "#2d3349",
+     "dark": "#161a28"
+    },
+    "barriga": {
+     "light": "#fffefa",
+     "base": "#f8f7f2",
+     "shade": "#d0cac3",
+     "dark": "#726b66"
+    },
+    "acento": {
+     "light": "#ffc374",
+     "base": "#f5a54a",
+     "shade": "#ce582a",
+     "dark": "#711f0d"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-pinguim.png"
+  },
+  {
+   "id": "leao",
+   "nome": "Leão",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffde92",
+     "base": "#f2c66d",
+     "shade": "#cb7e4a",
+     "dark": "#6f3720"
+    },
+    "barriga": {
+     "light": "#fff6db",
+     "base": "#fdf0cf",
+     "shade": "#d5b9a2",
+     "dark": "#745e53"
+    },
+    "acento": {
+     "light": "#f2b36b",
+     "base": "#d98a3d",
+     "shade": "#b64621",
+     "dark": "#641609"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-leao.png"
+  },
+  {
+   "id": "tigre",
+   "nome": "Tigre",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffc483",
+     "base": "#f4a55c",
+     "shade": "#cd5d3b",
+     "dark": "#702317"
+    },
+    "barriga": {
+     "light": "#fff6e8",
+     "base": "#fff3e2",
+     "shade": "#d6bfb3",
+     "dark": "#75625d"
+    },
+    "acento": {
+     "light": "#76574e",
+     "base": "#5c3b34",
+     "shade": "#4d2628",
+     "dark": "#2a1215"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-tigre.png"
+  },
+  {
+   "id": "elefante",
+   "nome": "Elefante",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#d6e4f0",
+     "base": "#b9c3d6",
+     "shade": "#929db4",
+     "dark": "#4b5262"
+    },
+    "barriga": {
+     "light": "#f4fbff",
+     "base": "#e8edf5",
+     "shade": "#bac1ce",
+     "dark": "#616671"
+    },
+    "acento": {
+     "light": "#ffced3",
+     "base": "#f6b9c5",
+     "shade": "#cf8fa7",
+     "dark": "#71485a"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-elefante.png"
+  },
+  {
+   "id": "camaleao",
+   "nome": "Camaleão",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#c5f6b0",
+     "base": "#9fdc8c",
+     "shade": "#6ab969",
+     "dark": "#336537"
+    },
+    "barriga": {
+     "light": "#fffec7",
+     "base": "#f5f3b0",
+     "shade": "#ceb787",
+     "dark": "#715c43"
+    },
+    "acento": {
+     "light": "#81c8a3",
+     "base": "#5fae8f",
+     "shade": "#45927f",
+     "dark": "#205047"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-camaleao.png"
+  },
+  {
+   "id": "dragao",
+   "nome": "Dragão",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#9fe6d5",
+     "base": "#7ccdc6",
+     "shade": "#5caaac",
+     "dark": "#2c5b5e"
+    },
+    "barriga": {
+     "light": "#fff0bd",
+     "base": "#fbe7a8",
+     "shade": "#d3a87f",
+     "dark": "#73523e"
+    },
+    "acento": {
+     "light": "#feaf98",
+     "base": "#e4826f",
+     "shade": "#c04e54",
+     "dark": "#69232c"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-dragao.png"
+  },
+  {
+   "id": "andorinha",
+   "nome": "Andorinha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#85b4ea",
+     "base": "#5d7ad0",
+     "shade": "#3f59af",
+     "dark": "#1b2a60"
+    },
+    "barriga": {
+     "light": "#fffbf5",
+     "base": "#fbf6ee",
+     "shade": "#d3c6bf",
+     "dark": "#736763"
+    },
+    "acento": {
+     "light": "#fea088",
+     "base": "#e46f5c",
+     "shade": "#c03c46",
+     "dark": "#691925"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-andorinha.png"
+  },
+  {
+   "id": "raposa",
+   "nome": "Raposa",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ffb176",
+     "base": "#f08a4b",
+     "shade": "#ca432c",
+     "dark": "#6e130e"
+    },
+    "barriga": {
+     "light": "#fff6e9",
+     "base": "#fff2e3",
+     "shade": "#d6beb4",
+     "dark": "#75615d"
+    },
+    "acento": {
+     "light": "#705f58",
+     "base": "#57443f",
+     "shade": "#493031",
+     "dark": "#28181a"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-raposa.png"
+  },
+  {
+   "id": "coruja",
+   "nome": "Coruja",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ceb290",
+     "base": "#b5926f",
+     "shade": "#986452",
+     "dark": "#532e28"
+    },
+    "barriga": {
+     "light": "#fff4de",
+     "base": "#f4e5cc",
+     "shade": "#cdb1a0",
+     "dark": "#705a52"
+    },
+    "acento": {
+     "light": "#ffe077",
+     "base": "#f2c94c",
+     "shade": "#cb782d",
+     "dark": "#6f320f"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-coruja.png"
+  },
+  {
+   "id": "tartaruga",
+   "nome": "Tartaruga",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#dafabd",
+     "base": "#b8e09a",
+     "shade": "#82bc75",
+     "dark": "#3e673a"
+    },
+    "barriga": {
+     "light": "#ffface",
+     "base": "#f6efb9",
+     "shade": "#cfb58f",
+     "dark": "#715c48"
+    },
+    "acento": {
+     "light": "#91ba83",
+     "base": "#6fa064",
+     "shade": "#4b864d",
+     "dark": "#244a29"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-tartaruga.png"
+  },
+  {
+   "id": "baleia",
+   "nome": "Baleia",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#96cef2",
+     "base": "#6f9ad8",
+     "shade": "#4f75b5",
+     "dark": "#243a63"
+    },
+    "barriga": {
+     "light": "#f1faff",
+     "base": "#e9f1fb",
+     "shade": "#bac4d3",
+     "dark": "#616873"
+    },
+    "acento": {
+     "light": "#c1f6ff",
+     "base": "#a9dcf5",
+     "shade": "#81afce",
+     "dark": "#3f5c71"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-baleia.png"
+  },
+  {
+   "id": "abelha",
+   "nome": "Abelha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ffe581",
+     "base": "#f9d55b",
+     "shade": "#d18539",
+     "dark": "#733916"
+    },
+    "barriga": {
+     "light": "#fff6cd",
+     "base": "#fff3bf",
+     "shade": "#d6b794",
+     "dark": "#755c4a"
+    },
+    "acento": {
+     "light": "#64585d",
+     "base": "#4a3f45",
+     "shade": "#3e323a",
+     "dark": "#221920"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-abelha.png"
+  },
+  {
+   "id": "girafa",
+   "nome": "Girafa",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ffe39f",
+     "base": "#f4cf7e",
+     "shade": "#cd8a5a",
+     "dark": "#703f29"
+    },
+    "barriga": {
+     "light": "#fff7e2",
+     "base": "#fdf2d8",
+     "shade": "#d5bdaa",
+     "dark": "#746157"
+    },
+    "acento": {
+     "light": "#dea973",
+     "base": "#c4834b",
+     "shade": "#a54930",
+     "dark": "#5a1b13"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-girafa.png"
+  },
+  {
+   "id": "lontra",
+   "nome": "Lontra",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#c09a7b",
+     "base": "#a7785a",
+     "shade": "#8c4c41",
+     "dark": "#4d211e"
+    },
+    "barriga": {
+     "light": "#ffefdb",
+     "base": "#f1dcc5",
+     "shade": "#caa79a",
+     "dark": "#6f544f"
+    },
+    "acento": {
+     "light": "#886853",
+     "base": "#6e4a37",
+     "shade": "#5c2d27",
+     "dark": "#331211"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-lontra.png"
+  },
+  {
+   "id": "zebra",
+   "nome": "Zebra",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#fffefb",
+     "base": "#f7f6f2",
+     "shade": "#cfc9c3",
+     "dark": "#726b66"
+    },
+    "barriga": {
+     "light": "#ffffff",
+     "base": "#ffffff",
+     "shade": "#d6cecf",
+     "dark": "#756c6f"
+    },
+    "acento": {
+     "light": "#5c5566",
+     "base": "#3f3c4c",
+     "shade": "#322f40",
+     "dark": "#1a1823"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-zebra.png"
+  },
+  {
+   "id": "ra",
+   "nome": "Rã",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#b6ec92",
+     "base": "#8fd36c",
+     "shade": "#57b14d",
+     "dark": "#246123"
+    },
+    "barriga": {
+     "light": "#fbffd4",
+     "base": "#f2f7c2",
+     "shade": "#bacf97",
+     "dark": "#5f724c"
+    },
+    "acento": {
+     "light": "#ffbfc5",
+     "base": "#f4a6b4",
+     "shade": "#cd7e9b",
+     "dark": "#703e54"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-ra.png"
+  },
+  {
+   "id": "foca",
+   "nome": "Foca",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#d4e1e8",
+     "base": "#b8c2cf",
+     "shade": "#929dae",
+     "dark": "#4b535f"
+    },
+    "barriga": {
+     "light": "#f9fdff",
+     "base": "#eef2f6",
+     "shade": "#bfc6cf",
+     "dark": "#646a71"
+    },
+    "acento": {
+     "light": "#a7b8c2",
+     "base": "#8b97a8",
+     "shade": "#6d798d",
+     "dark": "#383f4d"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-foca.png"
+  },
+  {
+   "id": "joaninha",
+   "nome": "Joaninha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ff9184",
+     "base": "#ef5f5b",
+     "shade": "#c93a53",
+     "dark": "#6e172d"
+    },
+    "barriga": {
+     "light": "#ffefeb",
+     "base": "#fde7e3",
+     "shade": "#d5b4b6",
+     "dark": "#745d61"
+    },
+    "acento": {
+     "light": "#5a4b60",
+     "base": "#3d3346",
+     "shade": "#30273b",
+     "dark": "#191420"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-joaninha.png"
+  },
+  {
+   "id": "lula",
+   "nome": "Lula",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ffc1cd",
+     "base": "#f6a9c0",
+     "shade": "#cf81a5",
+     "dark": "#713f5a"
+    },
+    "barriga": {
+     "light": "#ffedf1",
+     "base": "#fde6ee",
+     "shade": "#d5b7c6",
+     "dark": "#745f6b"
+    },
+    "acento": {
+     "light": "#faa1b4",
+     "base": "#e07a9b",
+     "shade": "#bc5889",
+     "dark": "#67294c"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-lula.png"
+  },
+  {
+   "id": "gaivota",
+   "nome": "Gaivota",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#fdfeff",
+     "base": "#f5f6f8",
+     "shade": "#c5c9d0",
+     "dark": "#676a72"
+    },
+    "barriga": {
+     "light": "#ffffff",
+     "base": "#ffffff",
+     "shade": "#d6cecf",
+     "dark": "#756c6f"
+    },
+    "acento": {
+     "light": "#bbcad2",
+     "base": "#9eaab9",
+     "shade": "#7d899b",
+     "dark": "#404855"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-gaivota.png"
+  },
+  {
+   "id": "lebre",
+   "nome": "Lebre",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#f0cca1",
+     "base": "#d6aa7c",
+     "shade": "#b4725b",
+     "dark": "#62342b"
+    },
+    "barriga": {
+     "light": "#fff2e1",
+     "base": "#f8e7d2",
+     "shade": "#d0b2a6",
+     "dark": "#725b55"
+    },
+    "acento": {
+     "light": "#685953",
+     "base": "#4e3f3a",
+     "shade": "#422d2d",
+     "dark": "#241617"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-lebre.png"
+  },
+  {
+   "id": "ovelha",
+   "nome": "Ovelha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#fffcf5",
+     "base": "#fbf7ee",
+     "shade": "#d3c7bf",
+     "dark": "#736863"
+    },
+    "barriga": {
+     "light": "#ffffff",
+     "base": "#ffffff",
+     "shade": "#d6cecf",
+     "dark": "#756c6f"
+    },
+    "acento": {
+     "light": "#867675",
+     "base": "#6c5b5b",
+     "shade": "#5b484b",
+     "dark": "#322528"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-ovelha.png"
+  },
+  {
+   "id": "formiga",
+   "nome": "Formiga",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#e29277",
+     "base": "#c8664f",
+     "shade": "#a83437",
+     "dark": "#5c151d"
+    },
+    "barriga": {
+     "light": "#ffe2cf",
+     "base": "#f4cdb9",
+     "shade": "#cd968f",
+     "dark": "#704948"
+    },
+    "acento": {
+     "light": "#75524a",
+     "base": "#5b3530",
+     "shade": "#4c2226",
+     "dark": "#2a1014"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-formiga.png"
+  },
+  {
+   "id": "toupeira",
+   "nome": "Toupeira",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#8c7c92",
+     "base": "#6e6178",
+     "shade": "#594c65",
+     "dark": "#2f2737"
+    },
+    "barriga": {
+     "light": "#f5edf8",
+     "base": "#d9d2de",
+     "shade": "#b2a8ba",
+     "dark": "#5f5866"
+    },
+    "acento": {
+     "light": "#ffb7c1",
+     "base": "#f39bb0",
+     "shade": "#cc7499",
+     "dark": "#703853"
+    }
+   },
+   "ficheiro": "fatos/avatar-fato-toupeira.png"
+  }
+ ],
+ "cores_fato": {
+  "menta": {
+   "light": "#c0f6d7",
+   "base": "#9fdcc0",
+   "shade": "#7ab9a5",
+   "dark": "#3d655b"
+  },
+  "ceu": {
+   "light": "#baedff",
+   "base": "#9cc8ee",
+   "shade": "#769dc8",
+   "dark": "#39516d"
+  },
+  "lilas": {
+   "light": "#ebc6ff",
+   "base": "#c6a8ec",
+   "shade": "#9c81c6",
+   "dark": "#51406d"
+  },
+  "pessego": {
+   "light": "#ffd1ab",
+   "base": "#f7b98f",
+   "shade": "#cf7a69",
+   "dark": "#723632"
+  },
+  "limao": {
+   "light": "#fff39c",
+   "base": "#f2e27a",
+   "shade": "#cb9a56",
+   "dark": "#6f4927"
+  },
+  "rosa": {
+   "light": "#ffc1d1",
+   "base": "#f5a9c4",
+   "shade": "#ce81a9",
+   "dark": "#713f5c"
+  },
+  "areia": {
+   "light": "#feedc8",
+   "base": "#e5cfa6",
+   "shade": "#c09980",
+   "dark": "#694b40"
+  },
+  "nuvem": {
+   "light": "#f9fcff",
+   "base": "#eef1f6",
+   "shade": "#bfc4cf",
+   "dark": "#646871"
+  }
+ },
+ "peles": {
+  "pele-1": {
+   "light": "#ffeddc",
+   "base": "#fde4d0",
+   "shade": "#d5ada3",
+   "dark": "#745753"
+  },
+  "pele-2": {
+   "light": "#ffdfbe",
+   "base": "#f4c9a4",
+   "shade": "#cd8e7c",
+   "dark": "#70433d"
+  },
+  "pele-3": {
+   "light": "#f8cb9d",
+   "base": "#dfa676",
+   "shade": "#bb6a55",
+   "dark": "#672e27"
+  },
+  "pele-4": {
+   "light": "#daaa7f",
+   "base": "#c0855a",
+   "shade": "#a1503e",
+   "dark": "#58201b"
+  },
+  "pele-5": {
+   "light": "#ac8260",
+   "base": "#93603f",
+   "shade": "#7b372a",
+   "dark": "#441512"
+  },
+  "pele-6": {
+   "light": "#805f4c",
+   "base": "#664231",
+   "shade": "#562722",
+   "dark": "#2f0f0f"
+  }
+ },
+ "cabelos": [
+  "franja",
+  "caracois",
+  "trancas",
+  "curto",
+  "rapado",
+  "lenco"
+ ],
+ "cores_cabelo": {
+  "castanho": "#6b4430",
+  "preto": "#33293f",
+  "ruivo": "#c4602f",
+  "loiro": "#e6b85a"
+ },
+ "cosmetica": {
+  "bone-reporter": {
+   "cat": "chapeu",
+   "nome": "Boné de repórter",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-bone-reporter-frente.png",
+    "costas": "chapeu-bone-reporter-costas.png"
+   }
+  },
+  "explorador": {
+   "cat": "chapeu",
+   "nome": "Chapéu de explorador",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-explorador-frente.png",
+    "costas": "chapeu-explorador-costas.png"
+   }
+  },
+  "coroa-papel": {
+   "cat": "chapeu",
+   "nome": "Coroa de papel",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-coroa-papel-frente.png",
+    "costas": "chapeu-coroa-papel-costas.png"
+   }
+  },
+  "capacete-obra": {
+   "cat": "chapeu",
+   "nome": "Capacete de obra",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-capacete-obra-frente.png",
+    "costas": "chapeu-capacete-obra-costas.png"
+   }
+  },
+  "gorro-la": {
+   "cat": "chapeu",
+   "nome": "Gorro de lã",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    15
+   ],
+   "ficheiros": {
+    "frente": "chapeu-gorro-la-frente.png",
+    "costas": "chapeu-gorro-la-costas.png"
+   }
+  },
+  "chapeu-palha": {
+   "cat": "chapeu",
+   "nome": "Chapéu de palha",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-chapeu-palha-frente.png",
+    "costas": "chapeu-chapeu-palha-costas.png"
+   }
+  },
+  "laco": {
+   "cat": "chapeu",
+   "nome": "Laço grande",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-laco-frente.png",
+    "costas": "chapeu-laco-costas.png"
+   }
+  },
+  "capacete-bicicleta": {
+   "cat": "chapeu",
+   "nome": "Capacete de bicicleta",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    13
+   ],
+   "ficheiros": {
+    "frente": "chapeu-capacete-bicicleta-frente.png",
+    "costas": "chapeu-capacete-bicicleta-costas.png"
+   }
+  },
+  "chapeu-festa": {
+   "cat": "chapeu",
+   "nome": "Chapéu da festa",
+   "anchor": "chapeu",
+   "pivot": [
+    11,
+    11
+   ],
+   "size": [
+    24,
+    16
+   ],
+   "ficheiros": {
+    "frente": "chapeu-chapeu-festa-frente.png",
+    "costas": "chapeu-chapeu-festa-costas.png"
+   }
+  },
+  "oculos-sol": {
+   "cat": "oculos",
+   "nome": "Óculos de sol",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "oculos-oculos-sol-frente.png"
+   }
+  },
+  "oculos-laboratorio": {
+   "cat": "oculos",
+   "nome": "Óculos de laboratório",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "oculos-oculos-laboratorio-frente.png"
+   }
+  },
+  "oculos-estrela": {
+   "cat": "oculos",
+   "nome": "Óculos estrela",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "oculos-oculos-estrela-frente.png"
+   }
+  },
+  "oculos-coloridos": {
+   "cat": "oculos",
+   "nome": "Óculos coloridos",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "oculos-oculos-coloridos-frente.png"
+   }
+  },
+  "ver-redondos": {
+   "cat": "ver",
+   "nome": "Óculos de ver redondos",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "ver-ver-redondos-frente.png"
+   }
+  },
+  "ver-retangulares": {
+   "cat": "ver",
+   "nome": "Óculos de ver retangulares",
+   "anchor": "olhos",
+   "pivot": [
+    8,
+    2
+   ],
+   "size": [
+    17,
+    6
+   ],
+   "ficheiros": {
+    "frente": "ver-ver-retangulares-frente.png"
+   }
+  },
+  "mochila-escolar": {
+   "cat": "mochila",
+   "nome": "Mochila escolar",
+   "anchor": "mochila",
+   "pivot": [
+    9,
+    9
+   ],
+   "size": [
+    19,
+    19
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-escolar-frente.png",
+    "costas": "mochila-mochila-escolar-costas.png"
+   }
+  },
+  "mochila-cartao-asas": {
+   "cat": "mochila",
+   "nome": "Mochila de cartão com asas",
+   "anchor": "mochila",
+   "pivot": [
+    13,
+    9
+   ],
+   "size": [
+    27,
+    19
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-cartao-asas-frente.png",
+    "costas": "mochila-mochila-cartao-asas-costas.png"
+   }
+  },
+  "mochila-livros": {
+   "cat": "mochila",
+   "nome": "Mochila de livros",
+   "anchor": "mochila",
+   "pivot": [
+    9,
+    9
+   ],
+   "size": [
+    19,
+    19
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-livros-frente.png",
+    "costas": "mochila-mochila-livros-costas.png"
+   }
+  },
+  "mochila-antena": {
+   "cat": "mochila",
+   "nome": "Mochila rádio de repórter",
+   "anchor": "mochila",
+   "pivot": [
+    9,
+    12
+   ],
+   "size": [
+    19,
+    22
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-antena-frente.png",
+    "costas": "mochila-mochila-antena-costas.png"
+   }
+  },
+  "mochila-estrelas": {
+   "cat": "mochila",
+   "nome": "Mochila das estrelas",
+   "anchor": "mochila",
+   "pivot": [
+    9,
+    9
+   ],
+   "size": [
+    19,
+    19
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-estrelas-frente.png",
+    "costas": "mochila-mochila-estrelas-costas.png"
+   }
+  },
+  "mochila-desporto": {
+   "cat": "mochila",
+   "nome": "Saco de desporto",
+   "anchor": "mochila",
+   "pivot": [
+    9,
+    9
+   ],
+   "size": [
+    19,
+    19
+   ],
+   "ficheiros": {
+    "frente": "mochila-mochila-desporto-frente.png",
+    "costas": "mochila-mochila-desporto-costas.png"
+   }
+  },
+  "microfone": {
+   "cat": "objeto",
+   "nome": "Microfone de repórter",
+   "anchor": "mao_d",
+   "pivot": [
+    3,
+    9
+   ],
+   "size": [
+    9,
+    13
+   ],
+   "ficheiros": {
+    "frente": "objeto-microfone-frente.png",
+    "costas": "objeto-microfone-costas.png"
+   }
+  },
+  "lupa": {
+   "cat": "objeto",
+   "nome": "Lupa",
+   "anchor": "mao_d",
+   "pivot": [
+    2,
+    10
+   ],
+   "size": [
+    12,
+    13
+   ],
+   "ficheiros": {
+    "frente": "objeto-lupa-frente.png",
+    "costas": "objeto-lupa-costas.png"
+   }
+  },
+  "tubo-ensaio": {
+   "cat": "objeto",
+   "nome": "Tubo de ensaio",
+   "anchor": "mao_d",
+   "pivot": [
+    3,
+    9
+   ],
+   "size": [
+    8,
+    13
+   ],
+   "ficheiros": {
+    "frente": "objeto-tubo-ensaio-frente.png",
+    "costas": "objeto-tubo-ensaio-costas.png"
+   }
+  },
+  "lapis-gigante": {
+   "cat": "objeto",
+   "nome": "Lápis gigante",
+   "anchor": "mao_d",
+   "pivot": [
+    3,
+    12
+   ],
+   "size": [
+    9,
+    18
+   ],
+   "ficheiros": {
+    "frente": "objeto-lapis-gigante-frente.png",
+    "costas": "objeto-lapis-gigante-costas.png"
+   }
+  },
+  "livro": {
+   "cat": "objeto",
+   "nome": "Livro",
+   "anchor": "mao_d",
+   "pivot": [
+    4,
+    7
+   ],
+   "size": [
+    11,
+    11
+   ],
+   "ficheiros": {
+    "frente": "objeto-livro-frente.png",
+    "costas": "objeto-livro-costas.png"
+   }
+  },
+  "regador": {
+   "cat": "objeto",
+   "nome": "Regador",
+   "anchor": "mao_d",
+   "pivot": [
+    4,
+    6
+   ],
+   "size": [
+    14,
+    11
+   ],
+   "ficheiros": {
+    "frente": "objeto-regador-frente.png",
+    "costas": "objeto-regador-costas.png"
+   }
+  },
+  "botas-chuva": {
+   "cat": "calcado",
+   "nome": "Botas de chuva",
+   "anchor": "pe",
+   "pivot": [
+    4,
+    4
+   ],
+   "size": [
+    9,
+    7
+   ],
+   "ficheiros": {
+    "frente": "calcado-botas-chuva-frente.png",
+    "costas": "calcado-botas-chuva-costas.png"
+   }
+  },
+  "tenis": {
+   "cat": "calcado",
+   "nome": "Ténis",
+   "anchor": "pe",
+   "pivot": [
+    4,
+    4
+   ],
+   "size": [
+    9,
+    7
+   ],
+   "ficheiros": {
+    "frente": "calcado-tenis-frente.png",
+    "costas": "calcado-tenis-costas.png"
+   }
+  },
+  "pantufas": {
+   "cat": "calcado",
+   "nome": "Pantufas",
+   "anchor": "pe",
+   "pivot": [
+    4,
+    4
+   ],
+   "size": [
+    9,
+    7
+   ],
+   "ficheiros": {
+    "frente": "calcado-pantufas-frente.png",
+    "costas": "calcado-pantufas-costas.png"
+   }
+  },
+  "botas-caminhada": {
+   "cat": "calcado",
+   "nome": "Botas de caminhada",
+   "anchor": "pe",
+   "pivot": [
+    4,
+    4
+   ],
+   "size": [
+    9,
+    7
+   ],
+   "ficheiros": {
+    "frente": "calcado-botas-caminhada-frente.png",
+    "costas": "calcado-botas-caminhada-costas.png"
+   }
+  }
+ },
+ "emblemas": [
+  {
+   "id": "noticia",
+   "nome": "A Notícia",
+   "cor": "#6f9ff0"
+  },
+  {
+   "id": "painel",
+   "nome": "O Painel",
+   "cor": "#7fc9a0"
+  },
+  {
+   "id": "revisao",
+   "nome": "Revisão",
+   "cor": "#f5a54a"
+  },
+  {
+   "id": "arquivo",
+   "nome": "O Arquivo",
+   "cor": "#c9a27e"
+  },
+  {
+   "id": "cartao",
+   "nome": "Cartão de Imprensa",
+   "cor": "#ef7b8f"
+  },
+  {
+   "id": "paginacao",
+   "nome": "Paginação",
+   "cor": "#9c7bf0"
+  },
+  {
+   "id": "fecho",
+   "nome": "Fecho de Edição",
+   "cor": "#f2c94c"
+  },
+  {
+   "id": "teclas",
+   "nome": "Teclas Mágicas",
+   "cor": "#6fd0d8"
+  },
+  {
+   "id": "encontra",
+   "nome": "Encontra no Texto",
+   "cor": "#8fd18a"
+  },
+  {
+   "id": "simulador",
+   "nome": "Simulador de Prova",
+   "cor": "#5f8fe0"
+  },
+  {
+   "id": "matematica",
+   "nome": "Matemática no Ecrã",
+   "cor": "#f08a6f"
+  },
+  {
+   "id": "maqueta",
+   "nome": "A Maqueta",
+   "cor": "#b5926f"
+  },
+  {
+   "id": "leitura",
+   "nome": "Biblioteca Viva",
+   "cor": "#c79be6"
+  }
+ ],
+ "padroes": [
+  "riscas",
+  "pintas",
+  "estrelas",
+  "xadrez",
+  "confetes"
+ ],
+ "colecoes": {
+  "atuais": {
+   "nome": "Animais de hoje",
+   "pasta": "fatos/",
+   "fatos": [
+    "dinossauro",
+    "lince",
+    "lobo",
+    "golfinho",
+    "esquilo",
+    "polvo",
+    "ourico",
+    "coelho",
+    "gato",
+    "cao",
+    "urso",
+    "panda",
+    "pinguim",
+    "leao",
+    "tigre",
+    "elefante",
+    "camaleao",
+    "dragao",
+    "andorinha",
+    "raposa",
+    "coruja",
+    "tartaruga",
+    "baleia",
+    "abelha",
+    "girafa",
+    "lontra",
+    "zebra",
+    "ra",
+    "foca",
+    "joaninha",
+    "lula",
+    "gaivota",
+    "lebre",
+    "ovelha",
+    "formiga",
+    "toupeira"
+   ]
+  },
+  "extintos": {
+   "nome": "Animais de antigamente",
+   "pasta": "fatos-extintos/",
+   "fatos": [
+    "tiranossauro",
+    "triceratopo",
+    "estegossauro",
+    "braquiossauro",
+    "anquilossauro",
+    "velociraptor",
+    "pterodactilo",
+    "parassaurolofo",
+    "espinossauro",
+    "lourinhanossauro",
+    "plesiossauro",
+    "mamute",
+    "dentes-de-sabre",
+    "dodo",
+    "gliptodonte",
+    "arqueopterix",
+    "titanoboa",
+    "hiena-cavernas",
+    "arau-gigante",
+    "meganeura",
+    "moa",
+    "ave-elefante",
+    "quaga",
+    "vaca-marinha",
+    "preguica-gigante",
+    "amonite",
+    "trilobite",
+    "meiolania",
+    "foca-monge",
+    "coruja-risonha",
+    "lagartixa-gigante",
+    "cabra-pireneus"
+   ],
+   "nota": "Opcional. O professor escolhe a coleção da turma (ou deixa o aluno escolher). As duas usam a mesma grelha, âncoras e cosmética."
+  }
+ },
+ "fatos_extintos": [
+  {
+   "id": "tiranossauro",
+   "nome": "Tiranossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffc78f",
+     "base": "#f4a96a",
+     "shade": "#cd6448",
+     "dark": "#70271e"
+    },
+    "barriga": {
+     "light": "#fff1d7",
+     "base": "#fbe8c8",
+     "shade": "#d3b09c",
+     "dark": "#73594f"
+    },
+    "acento": {
+     "light": "#e29667",
+     "base": "#c96a3c",
+     "shade": "#a92f22",
+     "dark": "#5c0b0a"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-tiranossauro.png",
+   "nota": null
+  },
+  {
+   "id": "triceratopo",
+   "nome": "Tricerátopo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#b2eaf2",
+     "base": "#8fc1d9",
+     "shade": "#6c99b6",
+     "dark": "#355064"
+    },
+    "barriga": {
+     "light": "#f2feff",
+     "base": "#e8f4f8",
+     "shade": "#b9c9d0",
+     "dark": "#606c72"
+    },
+    "acento": {
+     "light": "#ffb4ae",
+     "base": "#e98a8a",
+     "shade": "#c46679",
+     "dark": "#6b3041"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-triceratopo.png",
+   "nota": null
+  },
+  {
+   "id": "estegossauro",
+   "nome": "Estegossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#c9eebb",
+     "base": "#a7d49a",
+     "shade": "#76b276",
+     "dark": "#3b623e"
+    },
+    "barriga": {
+     "light": "#fffdd9",
+     "base": "#f2f0c4",
+     "shade": "#cbba99",
+     "dark": "#6f604e"
+    },
+    "acento": {
+     "light": "#ffc682",
+     "base": "#f2a65a",
+     "shade": "#cb5e39",
+     "dark": "#6f2316"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-estegossauro.png",
+   "nota": null
+  },
+  {
+   "id": "braquiossauro",
+   "nome": "Braquiossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#d5edff",
+     "base": "#b7c9e8",
+     "shade": "#8fa0c3",
+     "dark": "#48536b"
+    },
+    "barriga": {
+     "light": "#f5fbff",
+     "base": "#eef3fb",
+     "shade": "#bfc6d3",
+     "dark": "#636973"
+    },
+    "acento": {
+     "light": "#accee8",
+     "base": "#8aa2cf",
+     "shade": "#687eae",
+     "dark": "#33405f"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-braquiossauro.png",
+   "nota": null
+  },
+  {
+   "id": "anquilossauro",
+   "nome": "Anquilossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#e2d2b0",
+     "base": "#c9b48f",
+     "shade": "#a9846d",
+     "dark": "#5c4136"
+    },
+    "barriga": {
+     "light": "#fff8e7",
+     "base": "#f4ead6",
+     "shade": "#cdb8aa",
+     "dark": "#705f57"
+    },
+    "acento": {
+     "light": "#a89778",
+     "base": "#8f7a5a",
+     "shade": "#785543",
+     "dark": "#422820"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-anquilossauro.png",
+   "nota": null
+  },
+  {
+   "id": "velociraptor",
+   "nome": "Velociraptor",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#bfecc9",
+     "base": "#9fd3b0",
+     "shade": "#7bb196",
+     "dark": "#3e6152"
+    },
+    "barriga": {
+     "light": "#fbfff2",
+     "base": "#f3f8e8",
+     "shade": "#c3d0b9",
+     "dark": "#667260"
+    },
+    "acento": {
+     "light": "#89cbfa",
+     "base": "#5f8fe0",
+     "shade": "#4069bc",
+     "dark": "#1b3367"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-velociraptor.png",
+   "nota": null
+  },
+  {
+   "id": "pterodactilo",
+   "nome": "Pterodáctilo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#fad3ed",
+     "base": "#e0b4d8",
+     "shade": "#bc8db9",
+     "dark": "#674867"
+    },
+    "barriga": {
+     "light": "#fff5fb",
+     "base": "#f8ecf5",
+     "shade": "#d0bdce",
+     "dark": "#726371"
+    },
+    "acento": {
+     "light": "#cd9ad2",
+     "base": "#a87ab8",
+     "shade": "#865c9b",
+     "dark": "#462d55"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-pterodactilo.png",
+   "nota": "Réptil voador; não era dinossauro."
+  },
+  {
+   "id": "parassaurolofo",
+   "nome": "Parassaurolofo",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffe690",
+     "base": "#f2d16b",
+     "shade": "#cb8749",
+     "dark": "#6f3d1f"
+    },
+    "barriga": {
+     "light": "#fff9df",
+     "base": "#fff6d6",
+     "shade": "#d6bfa8",
+     "dark": "#756256"
+    },
+    "acento": {
+     "light": "#faa885",
+     "base": "#e07a5a",
+     "shade": "#bc3d3b",
+     "dark": "#67181e"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-parassaurolofo.png",
+   "nota": null
+  },
+  {
+   "id": "espinossauro",
+   "nome": "Espinossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#bbe0c1",
+     "base": "#9cc7a8",
+     "shade": "#79a78e",
+     "dark": "#3d5c4d"
+    },
+    "barriga": {
+     "light": "#f9fff2",
+     "base": "#eef6e6",
+     "shade": "#becfb8",
+     "dark": "#627160"
+    },
+    "acento": {
+     "light": "#fea088",
+     "base": "#e46f5c",
+     "shade": "#c03c46",
+     "dark": "#691925"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-espinossauro.png",
+   "nota": null
+  },
+  {
+   "id": "lourinhanossauro",
+   "nome": "Lourinhanossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#e6f2ae",
+     "base": "#c9d98a",
+     "shade": "#90b667",
+     "dark": "#466432"
+    },
+    "barriga": {
+     "light": "#fffedf",
+     "base": "#f6f4cf",
+     "shade": "#cfc0a3",
+     "dark": "#716353"
+    },
+    "acento": {
+     "light": "#97a869",
+     "base": "#7a8f4a",
+     "shade": "#517835",
+     "dark": "#254218"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-lourinhanossauro.png",
+   "nota": "Descoberto na Lourinhã, Portugal."
+  },
+  {
+   "id": "plesiossauro",
+   "nome": "Plesiossauro",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#a2e8d1",
+     "base": "#7fcfc0",
+     "shade": "#5eaea8",
+     "dark": "#2d5f5e"
+    },
+    "barriga": {
+     "light": "#f1fff9",
+     "base": "#e7f8f3",
+     "shade": "#b9d0cc",
+     "dark": "#607270"
+    },
+    "acento": {
+     "light": "#5fa895",
+     "base": "#3f8f86",
+     "shade": "#2b7878",
+     "dark": "#124042"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-plesiossauro.png",
+   "nota": "Réptil marinho; não era dinossauro."
+  },
+  {
+   "id": "mamute",
+   "nome": "Mamute",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#d0a785",
+     "base": "#b78462",
+     "shade": "#9a5446",
+     "dark": "#542420"
+    },
+    "barriga": {
+     "light": "#ffe8ce",
+     "base": "#e6c9ad",
+     "shade": "#c19486",
+     "dark": "#6a4943"
+    },
+    "acento": {
+     "light": "#ffced3",
+     "base": "#f6b9c5",
+     "shade": "#cf8fa7",
+     "dark": "#71485a"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-mamute.png",
+   "nota": null
+  },
+  {
+   "id": "dentes-de-sabre",
+   "nome": "Tigre-dentes-de-sabre",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#ffd99f",
+     "base": "#e8b878",
+     "shade": "#c37855",
+     "dark": "#6b3527"
+    },
+    "barriga": {
+     "light": "#fff4df",
+     "base": "#fbecd2",
+     "shade": "#d3b6a5",
+     "dark": "#735d55"
+    },
+    "acento": {
+     "light": "#c2996f",
+     "base": "#a8774c",
+     "shade": "#8d4834",
+     "dark": "#4d1d16"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-dentes-de-sabre.png",
+   "nota": null
+  },
+  {
+   "id": "dodo",
+   "nome": "Dodó",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#c6d4e2",
+     "base": "#a9b2c8",
+     "shade": "#858ea8",
+     "dark": "#444a5c"
+    },
+    "barriga": {
+     "light": "#f5faff",
+     "base": "#e4e8f0",
+     "shade": "#b7bcca",
+     "dark": "#5f646e"
+    },
+    "acento": {
+     "light": "#ffeea1",
+     "base": "#e8d37a",
+     "shade": "#c39057",
+     "dark": "#6b4428"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-dodo.png",
+   "nota": null
+  },
+  {
+   "id": "gliptodonte",
+   "nome": "Gliptodonte",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#e0c3a0",
+     "base": "#c7a27e",
+     "shade": "#a7705e",
+     "dark": "#5c342e"
+    },
+    "barriga": {
+     "light": "#fff3e2",
+     "base": "#f2e2cf",
+     "shade": "#cbafa3",
+     "dark": "#6f5954"
+    },
+    "acento": {
+     "light": "#a38365",
+     "base": "#8a6446",
+     "shade": "#743f32",
+     "dark": "#3f1b16"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-gliptodonte.png",
+   "nota": null
+  },
+  {
+   "id": "arqueopterix",
+   "nome": "Arqueoptérix",
+   "genero": "m",
+   "artigo": "o",
+   "rampa": {
+    "principal": {
+     "light": "#a1ded1",
+     "base": "#7fc4c0",
+     "shade": "#5fa1a5",
+     "dark": "#2e565a"
+    },
+    "barriga": {
+     "light": "#fffbeb",
+     "base": "#f5f0dc",
+     "shade": "#cebfaf",
+     "dark": "#71645a"
+    },
+    "acento": {
+     "light": "#fea088",
+     "base": "#e46f5c",
+     "shade": "#c03c46",
+     "dark": "#691925"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-arqueopterix.png",
+   "nota": null
+  },
+  {
+   "id": "titanoboa",
+   "nome": "Titanoboa",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#bfe8ac",
+     "base": "#9ccf8a",
+     "shade": "#6bae68",
+     "dark": "#335f36"
+    },
+    "barriga": {
+     "light": "#faffe0",
+     "base": "#eef5cf",
+     "shade": "#bacea3",
+     "dark": "#607154"
+    },
+    "acento": {
+     "light": "#80a878",
+     "base": "#5f8f5a",
+     "shade": "#437849",
+     "dark": "#204227"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-titanoboa.png",
+   "nota": null
+  },
+  {
+   "id": "hiena-cavernas",
+   "nome": "Hiena-das-cavernas",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#f2d9b1",
+     "base": "#d9b98e",
+     "shade": "#b6836b",
+     "dark": "#643e34"
+    },
+    "barriga": {
+     "light": "#fff6e5",
+     "base": "#f6ead6",
+     "shade": "#cfb7a9",
+     "dark": "#715e57"
+    },
+    "acento": {
+     "light": "#947862",
+     "base": "#7a5a46",
+     "shade": "#663b33",
+     "dark": "#381a18"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-hiena-cavernas.png",
+   "nota": null
+  },
+  {
+   "id": "arau-gigante",
+   "nome": "Arau-gigante",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#596b7c",
+     "base": "#3f4a62",
+     "shade": "#2f3952",
+     "dark": "#171d2d"
+    },
+    "barriga": {
+     "light": "#fffefa",
+     "base": "#f8f7f2",
+     "shade": "#d0cac3",
+     "dark": "#726b66"
+    },
+    "acento": {
+     "light": "#f8fbff",
+     "base": "#e8eaf0",
+     "shade": "#babeca",
+     "dark": "#61646e"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-arau-gigante.png",
+   "nota": "Chegou a viver nas costas da Península Ibérica."
+  },
+  {
+   "id": "meganeura",
+   "nome": "Meganeura",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#b2f0e1",
+     "base": "#8fd6d0",
+     "shade": "#6cb2b4",
+     "dark": "#355f62"
+    },
+    "barriga": {
+     "light": "#f1fffb",
+     "base": "#e9fbf8",
+     "shade": "#bad3d2",
+     "dark": "#617373"
+    },
+    "acento": {
+     "light": "#89cbfa",
+     "base": "#5f8fe0",
+     "shade": "#4069bc",
+     "dark": "#1b3367"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-meganeura.png",
+   "nota": "Libélula gigante, muito antes dos dinossauros."
+  },
+  {
+   "id": "moa",
+   "nome": "Moa",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#caaa89",
+     "base": "#b08a68",
+     "shade": "#945d4d",
+     "dark": "#512a24"
+    },
+    "barriga": {
+     "light": "#fff0dd",
+     "base": "#efdcc6",
+     "shade": "#c9a89c",
+     "dark": "#6e554f"
+    },
+    "acento": {
+     "light": "#ffe393",
+     "base": "#e8c46a",
+     "shade": "#c37f49",
+     "dark": "#6b3920"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-moa.png",
+   "nota": null
+  },
+  {
+   "id": "ave-elefante",
+   "nome": "Ave-elefante",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#e2c4de",
+     "base": "#c9a6c9",
+     "shade": "#a582a9",
+     "dark": "#59435c"
+    },
+    "barriga": {
+     "light": "#fff5fd",
+     "base": "#f4e8f4",
+     "shade": "#cbbacd",
+     "dark": "#6e6170"
+    },
+    "acento": {
+     "light": "#b28db8",
+     "base": "#8f6f9f",
+     "shade": "#725586",
+     "dark": "#3c2a49"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-ave-elefante.png",
+   "nota": null
+  },
+  {
+   "id": "quaga",
+   "nome": "Quaga",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#e2c19d",
+     "base": "#c9a07a",
+     "shade": "#a96d5a",
+     "dark": "#5c322b"
+    },
+    "barriga": {
+     "light": "#fff3e4",
+     "base": "#f6e6d4",
+     "shade": "#cfb2a8",
+     "dark": "#715b56"
+    },
+    "acento": {
+     "light": "#685953",
+     "base": "#4e3f3a",
+     "shade": "#422d2d",
+     "dark": "#241617"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-quaga.png",
+   "nota": null
+  },
+  {
+   "id": "vaca-marinha",
+   "nome": "Vaca-marinha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#bbc9d2",
+     "base": "#9fa9b8",
+     "shade": "#7e889b",
+     "dark": "#414855"
+    },
+    "barriga": {
+     "light": "#f7fcff",
+     "base": "#e6eaf0",
+     "shade": "#b8bfca",
+     "dark": "#60656e"
+    },
+    "acento": {
+     "light": "#8b9aa3",
+     "base": "#6f7a8a",
+     "shade": "#576174",
+     "dark": "#2c333f"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-vaca-marinha.png",
+   "nota": null
+  },
+  {
+   "id": "preguica-gigante",
+   "nome": "Preguiça-gigante",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#d2ba9b",
+     "base": "#b99b7a",
+     "shade": "#9b6d5c",
+     "dark": "#55342d"
+    },
+    "barriga": {
+     "light": "#fff2df",
+     "base": "#ead9c4",
+     "shade": "#c5a79a",
+     "dark": "#6c554f"
+    },
+    "acento": {
+     "light": "#846e5b",
+     "base": "#6b5240",
+     "shade": "#5a372f",
+     "dark": "#311917"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-preguica-gigante.png",
+   "nota": null
+  },
+  {
+   "id": "amonite",
+   "nome": "Amonite",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#ffd4bc",
+     "base": "#f2b9a0",
+     "shade": "#cb7f79",
+     "dark": "#6f3b3c"
+    },
+    "barriga": {
+     "light": "#fff0e7",
+     "base": "#fde8de",
+     "shade": "#d5b3b0",
+     "dark": "#745b5b"
+    },
+    "acento": {
+     "light": "#f2a684",
+     "base": "#d97a5a",
+     "shade": "#b63f3c",
+     "dark": "#64191d"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-amonite.png",
+   "nota": null
+  },
+  {
+   "id": "trilobite",
+   "nome": "Trilobite",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#d8c2e2",
+     "base": "#b5a4c9",
+     "shade": "#9181a9",
+     "dark": "#4c415c"
+    },
+    "barriga": {
+     "light": "#fbf4ff",
+     "base": "#ece6f4",
+     "shade": "#c0b8cd",
+     "dark": "#666070"
+    },
+    "acento": {
+     "light": "#937ca3",
+     "base": "#6f5f8a",
+     "shade": "#574874",
+     "dark": "#2d243f"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-trilobite.png",
+   "nota": null
+  },
+  {
+   "id": "meiolania",
+   "nome": "Meiolânia",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#d8f2bb",
+     "base": "#b8d89a",
+     "shade": "#85b576",
+     "dark": "#40633b"
+    },
+    "barriga": {
+     "light": "#fffcd5",
+     "base": "#f4f0c0",
+     "shade": "#cdb996",
+     "dark": "#705f4c"
+    },
+    "acento": {
+     "light": "#91b881",
+     "base": "#6f9f62",
+     "shade": "#498649",
+     "dark": "#234927"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-meiolania.png",
+   "nota": null
+  },
+  {
+   "id": "foca-monge",
+   "nome": "Foca-monge",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#cabcad",
+     "base": "#b0a090",
+     "shade": "#947a71",
+     "dark": "#513d3a"
+    },
+    "barriga": {
+     "light": "#fff9f0",
+     "base": "#ece4da",
+     "shade": "#c6b5ae",
+     "dark": "#6d5e5a"
+    },
+    "acento": {
+     "light": "#948675",
+     "base": "#7a6a5a",
+     "shade": "#664e45",
+     "dark": "#382623"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-foca-monge.png",
+   "nota": null
+  },
+  {
+   "id": "coruja-risonha",
+   "nome": "Coruja-risonha",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#f2c695",
+     "base": "#d9a26e",
+     "shade": "#b6674e",
+     "dark": "#642c23"
+    },
+    "barriga": {
+     "light": "#fff2dc",
+     "base": "#f8e7cc",
+     "shade": "#d0b1a0",
+     "dark": "#725a52"
+    },
+    "acento": {
+     "light": "#ffe077",
+     "base": "#f2c94c",
+     "shade": "#cb782d",
+     "dark": "#6f320f"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-coruja-risonha.png",
+   "nota": null
+  },
+  {
+   "id": "lagartixa-gigante",
+   "nome": "Lagartixa-gigante",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#dbd09e",
+     "base": "#c2b47c",
+     "shade": "#a3815d",
+     "dark": "#593f2d"
+    },
+    "barriga": {
+     "light": "#ffffe2",
+     "base": "#f2f2cf",
+     "shade": "#cbbfa3",
+     "dark": "#6f6454"
+    },
+    "acento": {
+     "light": "#8da869",
+     "base": "#6f8f4a",
+     "shade": "#487835",
+     "dark": "#204218"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-lagartixa-gigante.png",
+   "nota": "Lagartixa-gigante de Cabo Verde."
+  },
+  {
+   "id": "cabra-pireneus",
+   "nome": "Cabra-dos-Pirenéus",
+   "genero": "f",
+   "artigo": "a",
+   "rampa": {
+    "principal": {
+     "light": "#e2ccad",
+     "base": "#c9ad8c",
+     "shade": "#a97d6b",
+     "dark": "#5c3c35"
+    },
+    "barriga": {
+     "light": "#fff6e8",
+     "base": "#f4e8d8",
+     "shade": "#cdb6ab",
+     "dark": "#705d58"
+    },
+    "acento": {
+     "light": "#84705d",
+     "base": "#6b5442",
+     "shade": "#5a3931",
+     "dark": "#311a18"
+    }
+   },
+   "ficheiro": "fatos-extintos/avatar-fato-cabra-pireneus.png",
+   "nota": "Bucardo: vivia na Península Ibérica; extinto em 2000."
+  }
+ ]
+}

@@ -8,6 +8,7 @@ import { FAIXAS } from "../motor/tipos";
 import { Botao } from "../ui";
 import { PAGINAS } from "../textos/paginas";
 import { Rico, preencher } from "../textos/Rico";
+import { urlPixel } from "../aldeia/arte/pixel";
 
 const CHAVE_VISTO = "ecd.tutorial.visto.v1";
 export function tutorialVisto(): boolean {
@@ -23,6 +24,22 @@ export function marcarTutorialVisto() {
   } catch {
     /* nada */
   }
+}
+
+/** Aldeia Digital: casinhas em pixel do pacote de arte (camadas da fachada). Decorativa. */
+function IlustracaoAldeia() {
+  const casas: [string, string, string][] = [["pessego", "azul", "telha"], ["menta", "vermelha", "ardosia"]];
+  return (
+    <div aria-hidden="true" className="rounded-lg p-3 flex justify-center gap-1 overflow-hidden" style={{ background: "#cfe9f5", border: "1px solid var(--linha)" }}>
+      {casas.map(([p, o, t], k) => (
+        <span key={k} style={{ position: "relative", width: 74, height: 71 }}>
+          {[`mundo/casa/casa-paredes-${p}`, `mundo/casa/casa-porta-${o}`, `mundo/casa/casa-telhado-${t}`].map((c) => (
+            <img key={c} src={urlPixel(c)} alt="" width={74} height={71} style={{ position: "absolute", inset: 0, imageRendering: "pixelated" }} />
+          ))}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 /** Pequenas ilustrações (HTML, não imagens) para o passo "Treinar: cinco maneiras". Decorativas: aria-hidden. */
@@ -140,6 +157,7 @@ function passos(): { titulo: string; corpo: ReactNode }[] {
           <Mini titulo={T.maneiras.codigo.titulo} figura={<IlustracaoCodigo />}><Rico texto={T.maneiras.codigo.texto} /></Mini>
           <Mini titulo={T.maneiras.jogos.titulo} figura={<IlustracaoJogos />}><Rico texto={T.maneiras.jogos.texto} /></Mini>
           <Mini titulo={T.maneiras.seguranca.titulo} figura={<IlustracaoSeguranca />}><Rico texto={T.maneiras.seguranca.texto} /></Mini>
+          <Mini titulo={T.maneiras.aldeia.titulo} figura={<IlustracaoAldeia />}><Rico texto={T.maneiras.aldeia.texto} /></Mini>
         </div>
       ),
     },

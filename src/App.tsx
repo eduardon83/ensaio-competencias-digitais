@@ -16,13 +16,24 @@ import { Tutorial } from "./paginas/Tutorial";
 import { CartaoCarimbos } from "./paginas/CartaoCarimbos";
 import { JogoPagina, Jogos } from "./paginas/Jogos";
 import { Seguranca, SegurancaTema, SegurancaTeste } from "./paginas/Seguranca";
+import { Espera } from "./aldeia/arte/espera";
 
 // Backoffice de textos (temporário): carregado só quando se abre.
 const Backoffice = lazy(() => import("./paginas/Backoffice"));
+// Aldeia Digital: o jogo do aluno e as páginas do professor carregam à parte.
+const AldeiaApp = lazy(() => import("./aldeia/ecras/AldeiaApp"));
+const AldeiaInicio = lazy(() => import("./aldeia/ecras/AldeiaApp").then((m) => ({ default: m.AldeiaInicio })));
+const PainelAldeia = lazy(() => import("./aldeia/professor/Painel"));
+const EmailAldeia = lazy(() => import("./aldeia/professor/Documentos").then((m) => ({ default: m.EmailAldeia })));
+const TermosAldeia = lazy(() => import("./aldeia/professor/Documentos").then((m) => ({ default: m.Termos })));
+const TratamentoAldeia = lazy(() => import("./aldeia/professor/Documentos").then((m) => ({ default: m.Tratamento })));
+const espera = <Espera />;
 
 export function App() {
   return (
     <Routes>
+      <Route path="aldeia" element={<Suspense fallback={espera}><AldeiaInicio /></Suspense>} />
+      <Route path="aldeia/:codigo/*" element={<Suspense fallback={espera}><AldeiaApp /></Suspense>} />
       <Route element={<Layout />}>
         <Route index element={<Inicio />} />
         <Route path="treinar" element={<Treinar />} />
@@ -35,13 +46,17 @@ export function App() {
         <Route path="codigo/:codigo" element={<Codigo />} />
         <Route path="professor" element={<Professor />} />
         <Route path="professor/resultados" element={<ResultadosProfessor />} />
+        <Route path="professor/aldeia/painel" element={<Suspense fallback={espera}><PainelAldeia /></Suspense>} />
+        <Route path="professor/aldeia/email" element={<Suspense fallback={espera}><EmailAldeia /></Suspense>} />
+        <Route path="professor/aldeia/termos" element={<Suspense fallback={espera}><TermosAldeia /></Suspense>} />
+        <Route path="professor/aldeia/tratamento" element={<Suspense fallback={espera}><TratamentoAldeia /></Suspense>} />
         <Route path="tutorial" element={<Tutorial />} />
         <Route path="observatorio" element={<Observatorio />} />
         <Route path="resultados" element={<Resultados />} />
         <Route path="cartao" element={<CartaoCarimbos />} />
         <Route path="jogos" element={<Jogos />} />
         <Route path="jogos/:slug/:nivel" element={<JogoPagina />} />
-        <Route path="backoffice" element={<Suspense fallback={<p>A carregar…</p>}><Backoffice /></Suspense>} />
+        <Route path="backoffice" element={<Suspense fallback={espera}><Backoffice /></Suspense>} />
         <Route path="seguranca" element={<Seguranca />} />
         <Route path="seguranca/:tema" element={<SegurancaTema />} />
         <Route path="seguranca/:tema/teste/:nivel" element={<SegurancaTeste />} />
