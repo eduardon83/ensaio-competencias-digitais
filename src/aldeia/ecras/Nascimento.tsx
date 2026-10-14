@@ -160,7 +160,7 @@ export function Nascimento({ aparencia, nome, aoTerminar }: { aparencia: Aparenc
   useEffect(() => {
     const cx = caixa.current;
     if (!cx) return;
-    const ro = new ResizeObserver(() => setEscala(Math.max(2, Math.min(5, Math.floor(cx.clientWidth / SW)))));
+    const ro = new ResizeObserver(() => setEscala(Math.max(1, Math.min(5, Math.floor(cx.clientWidth / SW)))));
     ro.observe(cx);
     return () => ro.disconnect();
   }, []);
@@ -170,7 +170,7 @@ export function Nascimento({ aparencia, nome, aoTerminar }: { aparencia: Aparenc
     const c = tela.current;
     if (!r || !c) return;
     const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
-    const k = escala * dpr;
+    const k = Math.max(2, escala) * dpr;
     if (c.width !== SW * k) {
       c.width = SW * k;
       c.height = SH * k;
@@ -286,7 +286,7 @@ export function Nascimento({ aparencia, nome, aoTerminar }: { aparencia: Aparenc
   return (
     <div className="aldeia-nascimento">
       <div ref={caixa} className="aldeia-nascimento__palco">
-        <div className="aldeia-nascimento__moldura" style={{ width: SW * escala, height: SH * escala }}>
+        <div className="aldeia-nascimento__moldura" style={{ width: "100%", maxWidth: SW * Math.max(2, escala), aspectRatio: `${SW} / ${SH}` }}>
           <canvas
             ref={tela}
             role="img"
@@ -299,10 +299,10 @@ export function Nascimento({ aparencia, nome, aoTerminar }: { aparencia: Aparenc
                 tocar();
               }
             }}
-            style={{ width: SW * escala, height: SH * escala, imageRendering: "pixelated", cursor: fase === "espera" || fase === "toques" ? "pointer" : "default" }}
+            style={{ width: "100%", height: "100%", display: "block", imageRendering: "pixelated", cursor: fase === "espera" || fase === "toques" ? "pointer" : "default" }}
           />
           {fase !== "chegada" && fase !== "acenar" && (
-            <span className="aldeia-nascimento__etiqueta" style={{ left: (EX + 40) * escala, top: (EY + 2) * escala }}>
+            <span className="aldeia-nascimento__etiqueta" style={{ left: `${((EX + 40) / SW) * 100}%`, top: `${((EY + 2) / SH) * 100}%` }}>
               {preencherAluno(T.etiqueta, aluno)}
             </span>
           )}

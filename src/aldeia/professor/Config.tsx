@@ -190,7 +190,7 @@ export default function ConfigAldeia() {
           </label>
           {erro && <p className="m-0 font-bold" role="alert" style={{ color: "var(--errado)" }}>{erro}</p>}
           <div>
-            <Botao grande disabled={!termos || aCriar || identificacao.length === 0 || emailInvalido || !dataFim} onClick={() => void criar()}>
+            <Botao grande disabled={ligacao.estado === "indisponivel" || !termos || aCriar || identificacao.length === 0 || emailInvalido || !dataFim} onClick={() => void criar()}>
               {aCriar ? C().aCriar : C().criar}
             </Botao>
           </div>

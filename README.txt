@@ -191,7 +191,8 @@ Aldeia Digital no Worker (ver docs/aldeia-digital/SEGURANCA.md):
 - Email (opcional): npx wrangler secret put RESEND_CHAVE (chave só de envio, restrita ao domínio) e, no painel do Worker, as variáveis ALDEIA_REMETENTE (por exemplo "Aldeia Digital <aldeia@dominio>", com SPF, DKIM e DMARC verificados na Resend) e ALDEIA_RESPONDER.
 - Interruptor sem novo deploy: variável ALDEIA_ESTADO = aberta, so-leitura ou fechada (keep_vars mantém-na entre publicações). Teto de turmas ativas: ALDEIA_TETO (omissão 5000); teto de emails por dia: ALDEIA_EMAILS_DIA (omissão 2000).
 - Ambiente de testes separado: npx wrangler deploy --env testes.
-- Testar localmente: npm run build, npx wrangler dev --port 8787 --local (com .dev.vars) e node scripts/aldeia/testar-api.mjs http://127.0.0.1:8787 (31 verificações de rotas, chaves, tokens, bloqueios e prémios).
+- Testar localmente: npm run build, npx wrangler dev --port 8787 --local (com .dev.vars) e node scripts/aldeia/testar-api.mjs http://127.0.0.1:8787 (32 verificações de rotas, chaves, tokens, bloqueios e prémios). Depois, node scripts/aldeia/qa.mjs http://127.0.0.1:8787 (24 cenários no Chrome) e node scripts/aldeia/carga.mjs http://127.0.0.1:8787 1 32 6 (carga de uma turma). Resultados em docs/aldeia-digital/QA.md.
+- Limites por IP largos de propósito, porque uma escola inteira sai pelo mesmo IP: 900 pedidos por minuto, 10 turmas novas por hora, bloqueio de 15 minutos só depois de 40 códigos de turma ou 30 nomes errados em 10 minutos.
 - Arte: o pacote de ilustração vive em design/aldeia-digital; node scripts/aldeia/preparar-arte.mjs copia a versão nativa para public/aldeia e gera os manifestos; python scripts/aldeia/exportar-cena.py exporta a disposição do mapa.
 
 Passar a versão final para o código: exportar no backoffice e correr node scripts/importar-textos.mjs exportacao.json (trata os textos das páginas e da Aldeia Digital; as outras chaves são listadas para passar à mão). Depois o KV pode ser esvaziado. Depois pode fechar-se a edição ou retirar o backoffice.
@@ -208,6 +209,9 @@ Tecnologia: Vite, React 19, TypeScript, Tailwind CSS 4, React Router, dnd-kit, �
   npm run a11y         auditoria de acessibilidade (com npm run dev a correr); relatório em docs/AUDITORIA_A11Y.md
   node scripts/aldeia/percurso.mjs           percurso da Aldeia no navegador, com capturas e axe-core (com npm run dev a correr)
   node scripts/aldeia/percurso-premios.mjs   prémios, capítulo concluído, missão de cidadania e painel (modo local)
+  node scripts/aldeia/qa.mjs                 QA da Aldeia no Chrome contra o Worker local (teclado, sem rede, professor, axe, desempenho)
+  node scripts/aldeia/carga.mjs              teste de carga contra o Worker local (turmas, alunos, rondas)
+  node scripts/aldeia/capturas-ecd.mjs       capturas das atividades e do tutorial para os vídeos
   node scripts/recalibrar.mjs tentativa.csv   sugestões de recalibração a partir da folha de estatísticas
 
 

@@ -39,6 +39,7 @@ ok((await pedir("POST", "/turmas", { config: { ...config, extra: 1 }, termos: tr
 ok((await pedir("POST", "/turmas", "x", undefined, { tipo: "text/plain" })).estado === 400, "corpo que não é JSON: 400");
 ok((await pedir("POST", "/turmas", { config, termos: true, enchimento: "x".repeat(20000) })).estado === 400, "corpo acima de 16 kB: 400");
 ok((await pedir("PUT", "/turmas", {})).estado === 405, "método fora da lista: 405");
+ok((await pedir("GET", "/t/%E0%A4%A")).estado === 404, "código com \"%\" malformado: 404 (não 500)");
 const c = await pedir("POST", "/turmas", { config, termos: true });
 ok(c.estado === 201 && /^[A-Z0-9]{7}$/.test(c.d.turma) && /^[A-Z0-9]{13}$/.test(c.d.professor), "turma criada com código e código do professor");
 const turma = c.d.turma;
@@ -71,11 +72,11 @@ ok(vest.d.recusadas === 1, "vestir um item não ganho: recusado");
 const e2 = await pedir("POST", `/t/${turma}/entrar`, { nome: "RAPOSA corajosa", modo: "anonimo" });
 ok(e2.estado === 200 && e2.d.chave !== r1.d.chave, "entrar noutro computador dá chave nova");
 let bloq = false;
-for (let k = 0; k < 11; k++) {
+for (let k = 0; k < 31; k++) {
   const r = await pedir("POST", `/t/${turma}/entrar`, { nome: `Lince Veloz`, modo: "anonimo" }, undefined, { ip: "10.0.0.9" });
   if (r.estado === 429) bloq = true;
 }
-ok(bloq, "10 nomes errados no mesmo IP: bloqueio");
+ok(bloq, "30 nomes errados no mesmo IP: bloqueio");
 
 // Professor
 let p = await pedir("POST", "/professor/entrar", { codigo: c.d.professor });
@@ -96,8 +97,8 @@ p = await pedir("POST", "/professor/entrar", { codigo: c.d.professor });
 ok(p.estado === 401, "o código do professor deixa de servir depois de apagar");
 
 let quota = false;
-for (let k = 0; k < 6; k++) if ((await pedir("POST", "/turmas", { config, termos: true }, undefined, { ip: "10.0.0.5" })).estado === 429) quota = true;
-ok(quota, "mais de 5 turmas por hora no mesmo IP: recusado");
+for (let k = 0; k < 11; k++) if ((await pedir("POST", "/turmas", { config, termos: true }, undefined, { ip: "10.0.0.5" })).estado === 429) quota = true;
+ok(quota, "mais de 10 turmas por hora no mesmo IP: recusado");
 
 console.log(falhas ? `\n${falhas} falhas` : "\nTudo certo.");
 process.exit(falhas ? 1 : 0);

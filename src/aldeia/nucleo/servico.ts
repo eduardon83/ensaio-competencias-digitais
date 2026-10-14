@@ -143,11 +143,16 @@ export class ServicoTurma {
     return ok(this.vistaAluno(aluno, t, alunos));
   }
 
-  private async novaChave(aluno: Aluno): Promise<string> {
+  /** A chave e o resumo calculam-se antes de ler os alunos: nenhuma espera entre a verificação e a gravação. */
+  private async prepararChave(): Promise<{ chave: string; h: string }> {
     const chave = chaveAleatoria();
-    aluno.chaves.push({ h: await sha256(chave), em: this.relogio().toISOString() });
+    return { chave, h: await sha256(chave) };
+  }
+
+  private juntarChave(aluno: Aluno, c: { chave: string; h: string }): string {
+    aluno.chaves.push({ h: c.h, em: this.relogio().toISOString() });
     while (aluno.chaves.length > MAX_CHAVES) aluno.chaves.shift();
-    return chave;
+    return c.chave;
   }
 
   /** Primeira entrada: reserva o nome e o fato, cria a casa no lote livre mais baixo e devolve a chave deste navegador. */
@@ -159,6 +164,7 @@ export class ServicoTurma {
     const v = validarNome(p.nome, p.modo);
     if ("erro" in v) return falha("nome-invalido", v.erro);
     const normal = normalizarNome(v.nome);
+    const nova = await this.prepararChave();
     const alunos = await this.alunos();
     if (alunos.some((a) => a.nomeNormalizado === normal)) return falha("nome-existe");
     if (alunos.length >= t.config.lugares) {
@@ -177,7 +183,7 @@ export class ServicoTurma {
       aparencia: aparenciaInicial(p.fato), casa: casaInicial(lugar), interior: interiorInicial(),
       progresso: {}, recentes: [], treinos: 0, marcos: {}, chaves: [], entradas: [], ops: [], criadoEm: agora, vistoEm: agora, versao: 1,
     };
-    const chave = await this.novaChave(aluno);
+    const chave = this.juntarChave(aluno, nova);
     await this.a.guardar(`aluno:${aluno.id}`, aluno);
     alunos.push(aluno);
     return ok({ vista: this.vistaAluno(aluno, t, alunos), chave });
@@ -191,10 +197,11 @@ export class ServicoTurma {
     const v = validarNome(p.nome, p.modo);
     if ("erro" in v) return falha("nome-desconhecido");
     const normal = normalizarNome(v.nome);
+    const nova = await this.prepararChave();
     const alunos = await this.alunos();
     const aluno = alunos.find((a) => a.nomeNormalizado === normal);
     if (!aluno) return falha("nome-desconhecido");
-    const chave = await this.novaChave(aluno);
+    const chave = this.juntarChave(aluno, nova);
     aluno.entradas = [...aluno.entradas, this.relogio().toISOString()].slice(-10);
     await this.a.guardar(`aluno:${aluno.id}`, aluno);
     return ok({ vista: this.vistaAluno(aluno, t, alunos), chave });
@@ -212,9 +219,11 @@ export class ServicoTurma {
 
   /** "Sair deste computador": a chave deste navegador deixa de servir. */
   async sair(id: string, chave: string): Promise<void> {
-    const aluno = await this.autenticar(id, chave);
-    if (!aluno) return;
     const h = await sha256(chave);
+    if (!(await this.autenticar(id, chave))) return;
+    // Lido de novo depois das esperas: entre a leitura e a gravação só há acesso ao armazém.
+    const aluno = await this.a.obter<Aluno>(`aluno:${id}`);
+    if (!aluno) return;
     aluno.chaves = aluno.chaves.filter((c) => c.h !== h);
     await this.a.guardar(`aluno:${aluno.id}`, aluno);
   }

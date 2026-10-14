@@ -12,11 +12,12 @@
   },
   // Base KV "TEXTOS" (criada no painel da Cloudflare). O id não é secreto.
   "kv_namespaces": [{ "binding": "TEXTOS", "id": "a1c6457882e742e6ac65591c455cd860" }],
-  // Limites de pedidos por chave (sem estado guardado): backoffice 30/min por IP; Aldeia Digital 60/min por IP,
-  // 300 escritas/min por turma e 5 escritas em 10 s por aluno (o cliente agrupa as alterações).
+  // Limites de pedidos por chave (sem estado guardado): backoffice 30/min por IP; Aldeia Digital 900/min por IP,
+  // 300 escritas/min por turma e 5 escritas em 10 s por aluno (o cliente agrupa as alterações). O limite por IP é
+  // largo porque uma escola inteira sai pelo mesmo IP (NAT): os limites por turma e por aluno é que travam o abuso.
   "ratelimits": [
     { "name": "LIMITE_CHAVES", "namespace_id": "1001", "simple": { "limit": 30, "period": 60 } },
-    { "name": "LIMITE_ALDEIA", "namespace_id": "1002", "simple": { "limit": 60, "period": 60 } },
+    { "name": "LIMITE_ALDEIA", "namespace_id": "1002", "simple": { "limit": 900, "period": 60 } },
     { "name": "LIMITE_ALDEIA_TURMA", "namespace_id": "1003", "simple": { "limit": 300, "period": 60 } },
     { "name": "LIMITE_ALDEIA_ALUNO", "namespace_id": "1004", "simple": { "limit": 5, "period": 10 } }
   ],
@@ -41,7 +42,7 @@
       "kv_namespaces": [{ "binding": "TEXTOS", "id": "a1c6457882e742e6ac65591c455cd860" }],
       "ratelimits": [
         { "name": "LIMITE_CHAVES", "namespace_id": "2001", "simple": { "limit": 30, "period": 60 } },
-        { "name": "LIMITE_ALDEIA", "namespace_id": "2002", "simple": { "limit": 60, "period": 60 } },
+        { "name": "LIMITE_ALDEIA", "namespace_id": "2002", "simple": { "limit": 900, "period": 60 } },
         { "name": "LIMITE_ALDEIA_TURMA", "namespace_id": "2003", "simple": { "limit": 300, "period": 60 } },
         { "name": "LIMITE_ALDEIA_ALUNO", "namespace_id": "2004", "simple": { "limit": 5, "period": 10 } }
       ],

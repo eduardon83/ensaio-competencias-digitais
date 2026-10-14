@@ -22,6 +22,7 @@ Arquitetura, convenções e estado do código: @AGENTS.md (fonte de verdade téc
   - `SEGURANCA.md`: ameaças e controlos do Worker.
   - `design.md`: orientações de desenho para o agente de arte/UI; secção 17 = o que a aplicação faz de facto (base para vídeos).
   - `HISTORIA.md`: bíblia da história, personagens, tom e guiões dos vídeos (promocional, "Ver em 1 minuto", tutoriais).
+  - `QA.md`: relatório de testes e QA (como repetir, resultados, problemas corrigidos, revisão de segurança própria).
 
 ## Aldeia Digital em resumo
 

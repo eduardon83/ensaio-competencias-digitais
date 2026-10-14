@@ -24,7 +24,7 @@ Os ficheiros estáticos não mudam (cabeçalhos de `public/_headers`).
 - Proteção DDoS da Cloudflare na rede (automática).
 - Regras de **limite de pedidos na borda** (WAF) para `/api/aldeia/*`, antes de o Worker correr.
 - No Worker, bindings de limite (`ratelimits`, como `LIMITE_CHAVES`):
-  - por IP: 60 pedidos por minuto em `/api/aldeia/*`;
+  - por IP: 900 pedidos por minuto em `/api/aldeia/*` (revisto no QA: uma escola inteira sai pelo mesmo IP; 60 bloqueavam uma turma de 32);
   - por turma: 300 escritas por minuto (uma turma de 32 a jogar não chega lá);
   - por aluno: 1 escrita a cada 2 segundos (o cliente agrupa as alterações).
 - Corpo máximo: 16 kB. Só `application/json`. Métodos fora da lista: 405.
@@ -32,19 +32,19 @@ Os ficheiros estáticos não mudam (cabeçalhos de `public/_headers`).
 
 ### 2.2 Criação de turmas em massa
 - **Turnstile** (desafio invisível da Cloudflare) só no ecrã de criação de turma e de configuração do email. Nunca nos alunos. A confirmar na política de privacidade.
-- Por IP: 5 turmas por hora e 20 por dia.
+- Por IP: 10 turmas por hora e 40 por dia (revisto no QA: vários professores da mesma escola partilham o IP).
 - Teto global de turmas ativas (ex.: 5 000), configurável. Ao chegar a 80 %: alerta à Kendir. Ao chegar ao teto: novas criações recusadas com mensagem simpática.
 - Turma sem nenhum aluno em 14 dias: apagada automaticamente (alarme do Durable Object).
 
 ### 2.3 Adivinhar códigos de turma
 - 6 símbolos em 31 = cerca de 887 milhões de códigos; com 5 000 turmas ativas, 1 acerto em cerca de 177 000 tentativas.
-- Falhas por IP: 20 códigos errados em 10 minutos dá bloqueio de 15 minutos.
+- Falhas por IP: 40 códigos errados em 10 minutos dá bloqueio de 15 minutos (o carácter de verificação apanha antes os erros de escrita).
 - O carácter de verificação recusa erros de escrita sem consultar o armazenamento.
 - A resposta a um código inválido e a uma turma fechada tem o mesmo tempo e forma.
 
 ### 2.4 Adivinhar nomes (entrar no progresso de outro)
 - Fraqueza aceite pelo product owner: código + nome dá acesso. Mitigações:
-  - por IP e turma: 10 nomes errados em 10 minutos dá bloqueio de 15 minutos;
+  - por IP e turma: 30 nomes errados em 10 minutos dá bloqueio de 15 minutos (revisto no QA: 10 bloqueavam a turma inteira por engano);
   - a entrada noutro computador fica registada no aluno (data, sem IP) e aparece ao professor;
   - o aluno não pode apagar nada de forma irreversível sem o professor;
   - o professor pode “renovar” um aluno (invalida as chaves de dispositivo).

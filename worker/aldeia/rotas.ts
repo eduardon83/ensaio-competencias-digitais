@@ -62,7 +62,8 @@ export async function aldeia(req: Request, env: Env, url: URL): Promise<Response
   }
   if (!configurada || estado === "fechada") return erro("fechada", 503);
   if (!["GET", "POST"].includes(req.method)) return erro("metodo", 405, { allow: "GET, POST" });
-  if (req.method === "POST" && estado === "so-leitura") return erro("so-leitura", 503);
+  // Só leitura: ninguém escreve, todos veem (o professor continua a poder entrar no painel).
+  if (req.method === "POST" && estado === "so-leitura" && caminho !== "/api/aldeia/professor/entrar") return erro("so-leitura", 503);
 
   const ip = req.headers.get("cf-connecting-ip") ?? "desconhecido";
   if (env.LIMITE_ALDEIA && !(await env.LIMITE_ALDEIA.limit({ key: ip })).success) return erro("limite", 429, { "retry-after": "60" });
@@ -80,7 +81,7 @@ export async function aldeia(req: Request, env: Env, url: URL): Promise<Response
     if (!c || c.termos !== true) return erro("pedido", 400);
     const config = lerConfig(c.config) as ConfigTurma | null;
     if (!config) return erro("pedido", 400);
-    if (!(await guarda.quota(`criar:${ipH}`, [[5, 60 * MIN], [20, 24 * 60 * MIN]]))) return erro("limite", 429, { "retry-after": "3600" });
+    if (!(await guarda.quota(`criar:${ipH}`, [[10, 60 * MIN], [40, 24 * 60 * MIN]]))) return erro("limite", 429, { "retry-after": "3600" });
     if (!(await registo.reservar(Number(env.ALDEIA_TETO) || 5000))) return erro("teto", 503);
     for (let tentativa = 0; tentativa < 6; tentativa++) {
       const codigo = gerarCodigoTurma();
@@ -169,12 +170,18 @@ export async function aldeia(req: Request, env: Env, url: URL): Promise<Response
   // ── Alunos ─────────────────────────────────────────────────────────────────
   const m = /^\/api\/aldeia\/t\/([^/]+)(?:\/(alunos|entrar|eu|sair))?$/.exec(caminho);
   if (!m) return erro("rota", 404);
-  const codigo = codigoTurmaValido(decodeURIComponent(m[1]));
+  let codigo: string | null = null;
+  try {
+    codigo = codigoTurmaValido(decodeURIComponent(m[1]));
+  } catch {
+    // "%" malformado: igual a um código inválido.
+  }
   const parte = m[2] ?? "";
-  // Códigos inválidos e turmas inexistentes respondem igual (forma e tempo); 20 falhas em 10 minutos bloqueiam 15.
+  // Códigos inválidos e turmas inexistentes respondem igual (forma e tempo); 40 falhas em 10 minutos bloqueiam 15
+  // (por IP, e uma escola inteira partilha um IP; os erros de escrita já são apanhados pelo carácter de verificação).
   if (await guarda.bloqueado(`turma:${ipH}`)) return erro("bloqueado", 429, { "retry-after": "900" });
   const semTurma = async () => {
-    await guarda.falha(`turma:${ipH}`, 20, 10 * MIN, 15 * MIN);
+    await guarda.falha(`turma:${ipH}`, 40, 10 * MIN, 15 * MIN);
     await atraso(150);
     return erro("turma", 404);
   };
@@ -205,7 +212,7 @@ export async function aldeia(req: Request, env: Env, url: URL): Promise<Response
     const r = await objeto.entrar({ nome: c.nome, modo: c.modo as ModoIdentificacao });
     if (!r.ok) {
       if (r.erro === "turma" || r.erro === "fechada") return semTurma();
-      await guarda.falha(chaveFalhas, 10, 10 * MIN, 15 * MIN);
+      await guarda.falha(chaveFalhas, 30, 10 * MIN, 15 * MIN);
       await atraso(300);
       return erro("nome-desconhecido", 404);
     }
